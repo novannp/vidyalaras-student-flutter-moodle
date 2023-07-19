@@ -1,0 +1,99 @@
+import 'dart:io';
+
+import 'package:dartz/dartz.dart';
+import 'package:lms_pptik/src/data/models/chat_model.dart';
+
+import 'package:lms_pptik/src/data/models/conversation_model.dart';
+import 'package:lms_pptik/src/data/models/member_model.dart';
+import 'package:lms_pptik/src/data/models/message_model.dart';
+import 'package:lms_pptik/src/utils/exceptions.dart';
+
+import 'package:lms_pptik/src/utils/failures.dart';
+
+import '../../domain/repositories/chat_repository.dart';
+import '../../utils/helper/secure_storage/secure_storage.dart';
+
+import '../data_sources/chat_api.dart';
+
+class ChatRepositoryImpl implements ChatRepository {
+  final ChatApiImpl chatApiImpl;
+  final StorageHelper storage;
+
+  ChatRepositoryImpl(this.chatApiImpl, this.storage);
+
+  @override
+  Future<Either<Failure, List<ConversationModel>>> getConversations() async {
+    try {
+      final token = await storage.read('token');
+      final userId = await storage.read('userId');
+      final result =
+          await chatApiImpl.getConversations(token, int.parse(userId));
+      return Right(result);
+    } on SocketException {
+      return const Left(ConnectionFailure("Tidak ada koneksi internet"));
+    } on ServerException {
+      return const Left(ServerFailure("Terjadi kesalahan pada server"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ChatModel>> getConversationMessage(
+      int conversationId) async {
+    try {
+      final token = await storage.read('token');
+      final userId = await storage.read('userId');
+      final result = await chatApiImpl.getConversationMessage(
+          token, int.parse(userId), conversationId);
+      return Right(result);
+    } on SocketException {
+      return const Left(ConnectionFailure("Tidak ada koneksi internet"));
+    } on ServerException {
+      return const Left(ServerFailure("Terjadi kesalahan pada server"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, MemberModel>> getMemberInfo(int memberId) async {
+    try {
+      final token = await storage.read('token');
+      final userId = await storage.read('userId');
+      final result =
+          await chatApiImpl.getMemberInfo(token, int.parse(userId), memberId);
+      return Right(result);
+    } on SocketException {
+      return const Left(ConnectionFailure("Tidak ada koneksi internet"));
+    } on ServerException {
+      return const Left(ServerFailure("Terjadi kesalahan pada server"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Message>> sendInstantMessage(
+      int toUserId, String message) async {
+    try {
+      final token = await storage.read('token');
+      final result =
+          await chatApiImpl.sendInstantMessage(token, toUserId, message);
+      return Right(result);
+    } on SocketException {
+      return const Left(ConnectionFailure("Tidak ada koneksi internet"));
+    } on ServerException {
+      return const Left(ServerFailure("Terjadi kesalahan pada server"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> getUnreadMessageCount() async {
+    try {
+      final token = await storage.read('token');
+      final userId = await storage.read('userId');
+      final result = await chatApiImpl.getUnreadConversationCount(
+          token, int.parse(userId));
+      return Right(result);
+    } on SocketException {
+      return const Left(ConnectionFailure("Tidak ada koneksi internet"));
+    } on ServerException {
+      return const Left(ServerFailure("Terjadi kesalahan pada server"));
+    }
+  }
+}
