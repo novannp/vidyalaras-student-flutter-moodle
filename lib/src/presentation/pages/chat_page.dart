@@ -8,7 +8,7 @@ import 'package:lms_pptik/src/data/models/conversation_model.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 
 import '../../utils/function.dart';
-import '../blocs/bloc/chat_bloc.dart';
+import '../blocs/chat/chat_bloc.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});

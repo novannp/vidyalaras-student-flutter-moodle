@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
-import 'package:lms_pptik/src/presentation/blocs/bloc/chat_bloc.dart';
 import 'package:lms_pptik/src/utils/constant.dart';
 
 import '../../data/models/course_model.dart';
+import '../blocs/chat/chat_bloc.dart';
 import '../blocs/course/course_bloc.dart';
 import '../blocs/dropdown_course/dropdown_course_cubit.dart';
 import '../blocs/user/user_bloc.dart';
@@ -111,7 +111,9 @@ class _MainPageState extends State<DashboardPage> {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              GoRouter.of(context).pushNamed('notification');
+            },
             icon: const Badge(
                 child: Icon(
               Icons.notifications,

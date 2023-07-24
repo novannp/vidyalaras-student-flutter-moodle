@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:lms_pptik/src/data/data_sources/notification_api.dart';
 
 import 'package:lms_pptik/src/data/repositories/auth_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/badge_repository_impl.dart';
@@ -6,6 +7,7 @@ import 'package:lms_pptik/src/data/repositories/calendar_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/chat_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/course_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/user_repository_impl.dart';
+import 'package:lms_pptik/src/domain/repositories/notification_repository.dart';
 import 'package:lms_pptik/src/domain/usecase/auth/logout.dart';
 import 'package:lms_pptik/src/domain/usecase/badge/get_badge.dart';
 import 'package:lms_pptik/src/domain/usecase/badge/get_badge_image.dart';
@@ -21,11 +23,12 @@ import 'package:lms_pptik/src/domain/usecase/course/get_filtered_course.dart';
 import 'package:lms_pptik/src/domain/usecase/course/get_materi.dart';
 import 'package:lms_pptik/src/domain/usecase/course/get_recent_course.dart';
 import 'package:lms_pptik/src/domain/usecase/course/search_course.dart';
+import 'package:lms_pptik/src/domain/usecase/notification/get_notifications.dart';
 import 'package:lms_pptik/src/domain/usecase/user/get_current_user.dart';
 import 'package:lms_pptik/src/domain/usecase/auth/login.dart';
 import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/badge/badge_bloc.dart';
-import 'package:lms_pptik/src/presentation/blocs/bloc/chat_bloc.dart';
+import 'package:lms_pptik/src/presentation/blocs/bloc/notification_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/calendar/calendar_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/cubit/dark_mode_cubit.dart';
@@ -39,6 +42,7 @@ import 'src/data/data_sources/calendar_api.dart';
 import 'src/data/data_sources/chat_api.dart';
 import 'src/data/data_sources/course_api.dart';
 import 'src/data/data_sources/user_api.dart';
+import 'src/presentation/blocs/chat/chat_bloc.dart';
 import 'src/utils/helper/http_helper/http_helper.dart';
 import 'src/utils/helper/secure_storage/secure_storage.dart';
 
@@ -65,6 +69,7 @@ void init() {
   locator.registerFactory(() => SendInstantMessageBloc(locator()));
   locator.registerFactory(() => AuthLogoutBloc(locator()));
   locator.registerFactory(() => GetUnreadMessageCountBloc(locator()));
+  locator.registerFactory(() => GetNotificationsBloc(locator()));
 
   //USECASE
   // AUTH
@@ -96,6 +101,9 @@ void init() {
   locator.registerFactory(() => SendInstantMessage(locator()));
   locator.registerFactory(() => GetUnreadMessageCount(locator()));
 
+  // NOTIFICATION
+  locator.registerFactory(() => GetNotifications(locator()));
+
   // REPOSITORIES
   locator.registerLazySingleton(() => AuthRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(() => UserRepositoryImpl(locator(), locator()));
@@ -106,6 +114,8 @@ void init() {
   locator
       .registerLazySingleton(() => CourseRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(() => ChatRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton(
+      () => NotificationRepositoryImpl(locator(), locator()));
 
   // API
   locator.registerLazySingleton(() => AuthApiImpl(locator()));
@@ -114,6 +124,8 @@ void init() {
   locator.registerLazySingleton(() => CalendarApiImpl(locator()));
   locator.registerLazySingleton(() => CourseApiImpl(locator()));
   locator.registerLazySingleton(() => ChatApiImpl(locator()));
+  locator.registerLazySingleton(() => NotificationApiImpl(locator()));
+
   // HTTP
   locator.registerLazySingleton(() => HttpHelper.client);
 

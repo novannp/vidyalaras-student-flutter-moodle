@@ -10,6 +10,7 @@ import '../data/models/course_model.dart';
 import '../presentation/pages/chat_detail.dart';
 import '../presentation/pages/login_page.dart';
 import '../presentation/pages/main_page.dart';
+import '../presentation/pages/notification_page.dart';
 import '../presentation/pages/splash_page.dart';
 
 class AppRoutes {
@@ -37,84 +38,91 @@ class AppRoutes {
                   child: LoginPage(),
                 );
               },
+            ),
+            GoRoute(
+              path: 'main',
+              name: 'main',
+              pageBuilder: (context, state) {
+                return const MaterialPage(child: MainPage());
+              },
               routes: [
                 GoRoute(
-                  path: 'main',
-                  name: 'main',
+                  path: 'search',
+                  name: 'search',
                   pageBuilder: (context, state) {
-                    return const MaterialPage(child: MainPage());
+                    return const MaterialPage(
+                      child: SearchPage(),
+                    );
                   },
-                  routes: [
-                    GoRoute(
-                      path: 'search',
-                      name: 'search',
-                      pageBuilder: (context, state) {
-                        return const MaterialPage(
-                          child: SearchPage(),
-                        );
-                      },
-                    ),
-                    GoRoute(
-                        path: 'chat',
-                        name: 'chat',
+                ),
+                GoRoute(
+                  path: 'notification',
+                  name: 'notification',
+                  pageBuilder: (context, state) {
+                    return const MaterialPage(
+                      child: NotificationPage(),
+                    );
+                  },
+                ),
+                GoRoute(
+                    path: 'chat',
+                    name: 'chat',
+                    pageBuilder: (context, state) {
+                      return const MaterialPage(
+                        child: ChatPage(),
+                      );
+                    },
+                    routes: [
+                      GoRoute(
+                        path: 'chat_detail',
+                        name: 'chat_detail',
                         pageBuilder: (context, state) {
-                          return const MaterialPage(
-                            child: ChatPage(),
-                          );
-                        },
-                        routes: [
-                          GoRoute(
-                            path: 'chat_detail',
-                            name: 'chat_detail',
-                            pageBuilder: (context, state) {
-                              final param = state.extra as Map;
-                              return MaterialPage(
-                                child: ChatDetailPage(
-                                  conversationId: param['conversationId'],
-                                  memberId: param['memberId'],
-                                ),
-                              );
-                            },
-                          ),
-                        ]),
-                    GoRoute(
-                      path: 'settings',
-                      name: 'settings',
-                      pageBuilder: (context, state) {
-                        return const MaterialPage(
-                          child: SettingsPage(),
-                        );
-                      },
-                    ),
-                    GoRoute(
-                        path: 'course_detail',
-                        name: 'course_detail',
-                        pageBuilder: (context, state) {
-                          final course = state.extra as CourseModel;
+                          final param = state.extra as Map;
                           return MaterialPage(
-                            child: CourseDetailPage(course: course),
+                            child: ChatDetailPage(
+                              conversationId: param['conversationId'],
+                              memberId: param['memberId'],
+                            ),
                           );
                         },
-                        routes: [
-                          GoRoute(
-                            path: 'materi_detail',
-                            name: 'materi_detail',
-                            pageBuilder: (context, state) {
-                              final materis = state.extra as Map;
+                      ),
+                    ]),
+                GoRoute(
+                  path: 'settings',
+                  name: 'settings',
+                  pageBuilder: (context, state) {
+                    return const MaterialPage(
+                      child: SettingsPage(),
+                    );
+                  },
+                ),
+                GoRoute(
+                    path: 'course_detail',
+                    name: 'course_detail',
+                    pageBuilder: (context, state) {
+                      final course = state.extra as CourseModel;
+                      return MaterialPage(
+                        child: CourseDetailPage(course: course),
+                      );
+                    },
+                    routes: [
+                      GoRoute(
+                        path: 'materi_detail',
+                        name: 'materi_detail',
+                        pageBuilder: (context, state) {
+                          final materis = state.extra as Map;
 
-                              return MaterialPage(
-                                child: MateriDetailPage(
-                                  materis: materis['materi'],
-                                  selectedIndex: materis['selectedIndex'],
-                                ),
-                              );
-                            },
-                          ),
-                        ])
-                  ],
-                )
+                          return MaterialPage(
+                            child: MateriDetailPage(
+                              materis: materis['materi'],
+                              selectedIndex: materis['selectedIndex'],
+                            ),
+                          );
+                        },
+                      ),
+                    ])
               ],
-            ),
+            )
           ]),
     ],
   );

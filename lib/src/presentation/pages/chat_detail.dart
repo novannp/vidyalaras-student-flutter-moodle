@@ -12,7 +12,7 @@ import 'package:lms_pptik/src/utils/function.dart';
 
 import '../../data/models/conversation_model.dart';
 import '../../data/models/message_model.dart';
-import '../blocs/bloc/chat_bloc.dart';
+import '../blocs/chat/chat_bloc.dart';
 import '../components/bubble_chat.dart';
 
 class ChatDetailPage extends StatefulWidget {
