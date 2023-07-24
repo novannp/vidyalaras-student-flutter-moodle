@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/badge/badge_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/bloc/notification_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:lms_pptik/src/presentation/blocs/cubit/dark_mode_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/dropdown_course/dropdown_course_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/user/user_bloc.dart';
+import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
 import 'package:lms_pptik/src/utils/observer.dart';
 import 'app.dart';
 import 'injection.dart' as di;
@@ -18,6 +20,13 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   di.init();
+  di.locator<NotificationPlugin>().init();
+  di
+      .locator<NotificationPlugin>()
+      .flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()!
+      .requestPermission();
   Bloc.observer = MyGlobalObserver();
   runApp(
     MultiBlocProvider(

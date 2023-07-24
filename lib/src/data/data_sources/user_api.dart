@@ -16,9 +16,6 @@ class UserApiImpl implements UserApi {
   UserApiImpl(this.client);
   @override
   Future<UserModel> getUser(String username, String token) async {
-    String baseUrl =
-        "https://lms.pptik.id/webservice/rest/server.php/?wstoken=$token&wsfunction=core_user_get_users_by_field&moodlewsrestformat=json&field=username&values[]=$username";
-
     Uri url = Uri.https(Endpoints.baseUrl, Endpoints.rest, {
       'wstoken': token,
       'wsfunction': 'core_user_get_users_by_field',

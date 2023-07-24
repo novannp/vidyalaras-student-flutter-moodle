@@ -90,7 +90,7 @@ class ChatApiImpl implements ChatApi {
       }.map((key, value) => MapEntry(key, value.toString())),
     );
     final response = await client.get(url);
-    final response2 = await client.get(url2);
+    await client.get(url2);
     if (response.statusCode == 200) {
       final result = jsonDecode(response.body);
 

@@ -50,6 +50,7 @@ dependencies:
   syncfusion_flutter_calendar: ^22.1.38
   html_unescape: ^2.0.0
   flutter_html: ^3.0.0-beta.2
+  flutter_local_notifications: ^15.1.0+1
 
 dev_dependencies:
   flutter_test:

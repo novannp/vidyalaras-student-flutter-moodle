@@ -35,6 +35,7 @@ import 'package:lms_pptik/src/presentation/blocs/cubit/dark_mode_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/dropdown_course/dropdown_course_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/user/user_bloc.dart';
+import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
 
 import 'src/data/data_sources/auth_api.dart';
 import 'src/data/data_sources/badge_api.dart';
@@ -106,7 +107,8 @@ void init() {
 
   // REPOSITORIES
   locator.registerLazySingleton(() => AuthRepositoryImpl(locator(), locator()));
-  locator.registerLazySingleton(() => UserRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton(
+      () => UserRepositoryImpl(locator(), locator(), locator()));
   locator
       .registerLazySingleton(() => BadgeRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(
@@ -131,4 +133,7 @@ void init() {
 
   // STORAGE
   locator.registerLazySingleton(() => StorageHelper());
+
+  // Notification PLugin
+  locator.registerLazySingleton(() => NotificationPlugin());
 }

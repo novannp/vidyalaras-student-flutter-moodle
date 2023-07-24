@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:lms_pptik/src/data/models/user_model.dart';
 
 import 'package:lms_pptik/src/utils/failures.dart';
+import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
 
 import '../../domain/repositories/user_repository.dart';
 import '../../utils/exceptions.dart';
@@ -14,7 +15,8 @@ import '../data_sources/user_api.dart';
 class UserRepositoryImpl implements UserRepository {
   final UserApiImpl userApi;
   final StorageHelper storage;
-  UserRepositoryImpl(this.userApi, this.storage);
+  final NotificationPlugin notificationPlugin;
+  UserRepositoryImpl(this.userApi, this.storage, this.notificationPlugin);
 
   @override
   Future<Either<Failure, UserModel>> getUser() async {
@@ -22,7 +24,7 @@ class UserRepositoryImpl implements UserRepository {
       final token = await storage.read('token');
       final username = await storage.read('username');
       final user = await userApi.getUser(username, token);
-
+      notificationPlugin.showWelcomeNotification(user.name!);
       await storage.write('userId', user.id.toString());
       return Right(user);
     } on SocketException {
