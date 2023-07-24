@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:lms_pptik/src/domain/usecase/user/get_current_user.dart';
+import 'package:lms_pptik/src/domain/usecase/user/user.dart';
 
 import '../../../data/models/user_model.dart';
 

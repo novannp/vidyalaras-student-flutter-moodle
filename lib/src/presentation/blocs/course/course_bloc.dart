@@ -1,14 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:lms_pptik/src/domain/usecase/course/add_course_to_favourite.dart';
-import 'package:lms_pptik/src/domain/usecase/course/get_enrolled_user.dart';
 import 'package:lms_pptik/src/utils/helper/debounce.dart';
 
 import '../../../data/models/course_model.dart';
-import '../../../domain/usecase/course/get_filtered_course.dart';
-import '../../../domain/usecase/course/get_materi.dart';
-import '../../../domain/usecase/course/get_recent_course.dart';
-import '../../../domain/usecase/course/search_course.dart';
+import '../../../domain/usecase/course/course.dart';
 
 part 'course_event.dart';
 part 'course_state.dart';

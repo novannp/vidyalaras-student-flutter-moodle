@@ -1,11 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:lms_pptik/src/domain/usecase/chat/get_conversations.dart';
 
-import '../../../domain/usecase/chat/get_conversation_message.dart';
-import '../../../domain/usecase/chat/get_member_info.dart';
-import '../../../domain/usecase/chat/get_unread_message_count.dart';
-import '../../../domain/usecase/chat/send_instant_message.dart';
+import '../../../domain/usecase/chat/chat.dart';
 
 part 'chat_event.dart';
 part 'chat_state.dart';

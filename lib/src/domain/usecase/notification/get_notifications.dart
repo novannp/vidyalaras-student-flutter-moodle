@@ -1,8 +1,4 @@
-import 'package:dartz/dartz.dart';
-
-import '../../../data/models/notification_model.dart';
-import '../../../utils/failures.dart';
-import '../../repositories/notification_repository.dart';
+part of 'notification.dart';
 
 class GetNotifications {
   final NotificationRepositoryImpl _notificationRepositoryImpl;

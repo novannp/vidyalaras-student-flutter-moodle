@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../domain/usecase/notification/get_notifications.dart';
+import '../../../domain/usecase/notification/notification.dart';
 
 part 'notification_event.dart';
 part 'notification_state.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../domain/usecase/calendar/get_all_event.dart';
+import '../../../domain/usecase/calendar/calendar.dart';
 
 part 'calendar_event.dart';
 part 'calendar_state.dart';

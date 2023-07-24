@@ -1,9 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:lms_pptik/src/domain/usecase/badge/get_badge.dart';
 
 import '../../../data/models/badge_model.dart';
-import '../../../domain/usecase/badge/get_badge_image.dart';
+import '../../../domain/usecase/badge/badge.dart';
 
 part 'badge_event.dart';
 part 'badge_state.dart';

@@ -1,8 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:lms_pptik/src/data/models/course_model.dart';
-import 'package:lms_pptik/src/data/repositories/course_repository_impl.dart';
-
-import '../../../utils/failures.dart';
+part of 'course.dart';
 
 class GetRecentCourse {
   final CourseRepositoryImpl courseRepositoryImpl;

@@ -1,8 +1,4 @@
-import 'package:dartz/dartz.dart';
-
-import '../../../data/models/badge_model.dart';
-import '../../../data/repositories/badge_repository_impl.dart';
-import '../../../utils/failures.dart';
+part of 'badge.dart';
 
 class GetBadge {
   final BadgeRepositoryImpl _badgeRepository;

@@ -1,7 +1,4 @@
-import 'package:dartz/dartz.dart';
-
-import '../../../data/repositories/chat_repository_impl.dart';
-import '../../../utils/failures.dart';
+part of 'chat.dart';
 
 class GetUnreadMessageCount {
   final ChatRepositoryImpl chatRepositoryImpl;

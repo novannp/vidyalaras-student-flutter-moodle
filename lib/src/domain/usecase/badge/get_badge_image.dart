@@ -1,6 +1,4 @@
-import 'package:lms_pptik/src/data/repositories/badge_repository_impl.dart';
-
-import '../../../data/models/badge_model.dart';
+part of 'badge.dart';
 
 class GetBadgeImage {
   final BadgeRepositoryImpl _badgeRepository;

@@ -1,8 +1,4 @@
-import 'package:dartz/dartz.dart';
-
-import '../../../data/models/course_model.dart';
-import '../../../data/repositories/course_repository_impl.dart';
-import '../../../utils/failures.dart';
+part of 'course.dart';
 
 class GetFilteredCourse {
   final CourseRepositoryImpl courseRepositoryImpl;

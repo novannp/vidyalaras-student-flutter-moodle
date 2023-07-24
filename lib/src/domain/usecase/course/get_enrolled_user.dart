@@ -1,8 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:lms_pptik/src/data/repositories/course_repository_impl.dart';
-
-import '../../../data/models/user_model.dart';
-import '../../../utils/failures.dart';
+part of 'course.dart';
 
 class GetEnrolledUser {
   final CourseRepositoryImpl _courseRepositoryImpl;

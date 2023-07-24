@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:lms_pptik/src/domain/usecase/auth/login.dart';
 
-import '../../../domain/usecase/auth/logout.dart';
+import '../../../domain/usecase/auth/auth.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

@@ -1,7 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:lms_pptik/src/data/repositories/auth_repository_impl.dart';
-
-import '../../../utils/failures.dart';
+part of 'auth.dart';
 
 class Login {
   final AuthRepositoryImpl authRepositoryImpl;
