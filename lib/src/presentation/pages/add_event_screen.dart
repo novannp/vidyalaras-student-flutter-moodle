@@ -146,7 +146,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                     }),
               ),
               TextFormField(
-                controller: _minutesCtrl_,
+                controller: _minutesCtrl,
                 enabled: _eventDuration == EventDuration.inMinutes,
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.timer_outlined),
