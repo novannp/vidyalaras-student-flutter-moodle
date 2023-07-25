@@ -5,11 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lms_pptik/src/data/models/materi_model.dart';
 import 'package:lms_pptik/src/data/models/user_model.dart';
+import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
 
 import '../../data/models/course_model.dart';
 import '../blocs/course/course_bloc.dart';
-import '../components/course_card.dart';
 
 class CourseDetailPage extends StatefulWidget {
   const CourseDetailPage({super.key, required this.course});
@@ -23,6 +23,7 @@ class CourseDetailPage extends StatefulWidget {
 class _CourseDetailPageState extends State<CourseDetailPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+
   @override
   initState() {
     _tabController = TabController(length: 4, vsync: this);
@@ -48,13 +49,194 @@ class _CourseDetailPageState extends State<CourseDetailPage>
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.course.fullname!.decodeHtml()),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                showDragHandle: true,
+                context: context,
+                builder: (context) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primaryContainer,
+                              ),
+                              child: const Icon(Icons.school, size: 40),
+                            ),
+                            const SizedBox(width: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.course.fullname!.decodeHtml(),
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
+                                Chip(
+                                  label: Text(widget.course.coursecategory!),
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  labelStyle: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      height: 8,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: LinearProgressIndicator(
+                                          value: widget.course.progress! / 100,
+                                          backgroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .primaryContainer
+                                              .withOpacity(0.5),
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Text(
+                                      '${widget.course.progress!.toStringAsFixed(0)}%',
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          'Tanggal Mulai Kursus',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          widget.course.startdate!.toDate(),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          'Pengajar',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        BlocBuilder<GetEnrolledUserBloc, CourseState>(
+                          builder: (context, state) {
+                            return state.maybeWhen(loaded: (data) {
+                              data as List<UserModel>;
+                              return ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage:
+                                      NetworkImage(data[0].avatar!),
+                                ),
+                                title: Text(
+                                  data[0].name!.decodeHtml(),
+                                ),
+                                subtitle: Text(data[0].email!),
+                                trailing: IconButton.filledTonal(
+                                  onPressed: () {
+                                    GoRouter.of(context).pushNamed(
+                                      'chat_detail',
+                                      extra: {
+                                        'memberId': data[0].id,
+                                      },
+                                    );
+                                  },
+                                  icon: Icon(Icons.message_rounded),
+                                ),
+                              );
+                            }, orElse: () {
+                              return const SizedBox();
+                            });
+                          },
+                        )
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+            icon: Icon(Icons.info_outline),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             const SizedBox(height: 20),
-            CourseCard(course: widget.course),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                  ),
+                  child: const Icon(Icons.school),
+                ),
+                const SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.course.fullname!.decodeHtml(),
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          height: 8,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: LinearProgressIndicator(
+                              value: widget.course.progress! / 100,
+                              backgroundColor: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer
+                                  .withOpacity(0.5),
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          '${widget.course.progress!.toStringAsFixed(0)}%',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
             const SizedBox(height: 20),
             SizedBox(
               child: TabBar(

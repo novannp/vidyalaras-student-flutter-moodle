@@ -18,6 +18,7 @@ import '../components/bubble_chat.dart';
 class ChatDetailPage extends StatefulWidget {
   const ChatDetailPage(
       {super.key, this.conversationId, required this.memberId});
+
   final int? conversationId;
   final int memberId;
 
@@ -64,7 +65,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   void dispose() {
     _messageController.dispose();
     _scrollController.dispose();
-    timer.cancel();
+    if (widget.conversationId != null) {
+      timer.cancel();
+    }
     super.dispose();
   }
 
@@ -144,10 +147,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 }, orElse: () {
                   return 'User';
                 }),
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(color: Colors.white),
+                style: Theme.of(context).textTheme.titleMedium!,
               ),
               subtitle: state.maybeWhen(loaded: (data) {
                 data as MemberModel;
@@ -157,10 +157,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                       : data.isonline!
                           ? 'Online'
                           : 'Offline',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall!
-                      .copyWith(color: Colors.white),
+                  style: Theme.of(context).textTheme.titleSmall!,
                 );
               }, orElse: () {
                 return const SizedBox();
