@@ -14,6 +14,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
   late final TextEditingController _descCtrl;
   late final TextEditingController _startDateCtrl;
   late final TextEditingController _endDateCtrl;
+  late final TextEditingController _minutesCtrl;
+  late final TextEditingController _repeatWeekCtrl;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -26,6 +28,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
     _descCtrl = TextEditingController();
     _startDateCtrl = TextEditingController();
     _endDateCtrl = TextEditingController();
+    _minutesCtrl = TextEditingController();
+    _repeatWeekCtrl = TextEditingController();
     super.initState();
   }
 
@@ -35,6 +39,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
     _descCtrl.dispose();
     _startDateCtrl.dispose();
     _endDateCtrl.dispose();
+    _minutesCtrl.dispose();
+    _repeatWeekCtrl.dispose();
     super.dispose();
   }
 
@@ -52,6 +58,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
+                controller: _titleCtrl,
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.edit_calendar_outlined),
                     contentPadding: EdgeInsets.zero,
@@ -60,6 +67,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
               ),
               const SizedBox(height: 14),
               TextFormField(
+                controller: _startDateCtrl,
                 onTap: () {
                   showDatePicker(
                     context: context,
@@ -106,6 +114,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                     }),
               ),
               TextFormField(
+                controller: _endDateCtrl,
                 enabled: _eventDuration == EventDuration.untilWhen,
                 onTap: () {
                   showDatePicker(
@@ -137,6 +146,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                     }),
               ),
               TextFormField(
+                controller: _minutesCtrl_,
                 enabled: _eventDuration == EventDuration.inMinutes,
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.timer_outlined),
@@ -159,6 +169,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                     }),
               ),
               TextFormField(
+                controller: _repeatWeekCtrl,
                 enabled: _isRepeated,
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.timer_outlined),
@@ -170,6 +181,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
               SizedBox(
                 height: 200,
                 child: TextFormField(
+                  controller: _descCtrl,
                   maxLines: null,
                   decoration: const InputDecoration(
                       contentPadding:
