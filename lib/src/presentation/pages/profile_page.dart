@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
 
+import '../../utils/constant.dart';
 import '../blocs/user/user_bloc.dart';
 import '../components/course_card.dart';
 
@@ -276,22 +277,20 @@ class ProfilePage extends StatelessWidget {
                       showAboutDialog(
                         context: context,
                         applicationName: 'LMS PPTIK',
-                        applicationVersion: '1.0.0',
+                        applicationVersion: version,
                         children: [
                           const Text(
                             'LMS PPTIK adalah platform pembelajaran untuk membantu proses belajar mengajar',
                           )
                         ],
-                        applicationIcon: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.blue.shade900,
-                          ),
-                          child: const Icon(
-                            Icons.school_rounded,
-                            size: 30,
-                            color: Colors.white,
+                        applicationIcon: Card(
+                          elevation: 0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(
+                              'assets/img/app_icon.png',
+                              height: 30,
+                            ),
                           ),
                         ),
                       );

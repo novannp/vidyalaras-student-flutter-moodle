@@ -34,14 +34,9 @@ class _SplashPageState extends State<SplashPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Spacer(),
-            Icon(
-              Icons.school_rounded,
-              size: 40,
-              color: Colors.blue.shade900,
-            ),
-            const Text(
-              "LMS PPTIK",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Image.asset(
+              'assets/img/app_icon.png',
+              height: 80,
             ),
             const Spacer(),
             const Padding(
