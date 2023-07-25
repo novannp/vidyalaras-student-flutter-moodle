@@ -46,27 +46,19 @@ void main() {
         BlocProvider(create: (context) => di.locator<GetEnrolledUserBloc>()),
         BlocProvider(
             create: (context) => di.locator<AddCourseToFavouriteBloc>()),
+        BlocProvider(create: (context) => di.locator<GetConversationsBloc>()),
         BlocProvider(
-          create: (context) => di.locator<GetConversationsBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => di.locator<GetConversationMessageBloc>(),
-        ),
+            create: (context) => di.locator<GetConversationMessageBloc>()),
         BlocProvider(
           create: (context) => di.locator<GetMemberInfoBloc>(),
         ),
-        BlocProvider(
-          create: (context) => di.locator<SendInstantMessageBloc>(),
-        ),
+        BlocProvider(create: (context) => di.locator<SendInstantMessageBloc>()),
         BlocProvider(
           create: (context) => di.locator<AuthLogoutBloc>(),
         ),
         BlocProvider(
-          create: (context) => di.locator<GetUnreadMessageCountBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => di.locator<GetNotificationsBloc>(),
-        ),
+            create: (context) => di.locator<GetUnreadMessageCountBloc>()),
+        BlocProvider(create: (context) => di.locator<GetNotificationsBloc>()),
       ],
       child: const LmsPPTIK(),
     ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/presentation/blocs/calendar/calendar_bloc.dart';
+import 'package:lms_pptik/src/presentation/pages/add_event_screen.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../data/models/event_model.dart';
@@ -80,8 +81,20 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    fullscreenDialog: true,
+                    builder: (context) {
+                      return AddEventScreen();
+                    }));
+          },
+          label: const Text('Tambahkan Acara'),
+          icon: const Icon(Icons.add_alert_outlined)),
       appBar: AppBar(
-        title: const Text('Calendar Page'),
+        title: const Text('Kalender'),
       ),
       body: BlocBuilder<GetEventBloc, CalendarState>(
         builder: (context, state) {
