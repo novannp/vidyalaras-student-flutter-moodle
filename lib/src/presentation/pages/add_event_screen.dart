@@ -15,6 +15,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
   late final TextEditingController _startDateCtrl;
   late final TextEditingController _endDateCtrl;
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   EventDuration _eventDuration = EventDuration.withoutDuration;
   bool _isRepeated = false;
 
@@ -44,144 +46,147 @@ class _AddEventScreenState extends State<AddEventScreen> {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.edit_calendar_outlined),
-                  contentPadding: EdgeInsets.zero,
-                  hintText: 'Masukkan judul acara',
-                  labelText: 'Judul Acara'),
-            ),
-            const SizedBox(height: 14),
-            TextFormField(
-              onTap: () {
-                showDatePicker(
-                  context: context,
-                  firstDate: DateTime(2022),
-                  initialDate: DateTime.now(),
-                  lastDate: DateTime(2100),
-                ).then((value) {
-                  showTimePicker(
-                      context: context, initialTime: TimeOfDay.now());
-                });
-              },
-              readOnly: true,
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.edit_calendar_outlined),
-                  contentPadding: EdgeInsets.zero,
-                  hintText: 'Masukkan Tanggal',
-                  labelText: 'Tanggal Mulai'),
-            ),
-            const SizedBox(height: 14),
-            const Text(
-              'Durasi',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            ListTile(
-              title: const Text('Tanpa Durasi'),
-              trailing: Radio(
-                  value: EventDuration.withoutDuration,
-                  groupValue: _eventDuration,
-                  onChanged: (value) {
-                    setState(() {
-                      _eventDuration = value!;
-                    });
-                  }),
-            ),
-            ListTile(
-              title: const Text('Sampai dengan'),
-              trailing: Radio(
-                  value: EventDuration.untilWhen,
-                  groupValue: _eventDuration,
-                  onChanged: (value) {
-                    setState(() {
-                      _eventDuration = value!;
-                    });
-                  }),
-            ),
-            TextFormField(
-              enabled: _eventDuration == EventDuration.untilWhen,
-              onTap: () {
-                showDatePicker(
-                  context: context,
-                  firstDate: DateTime(2022),
-                  initialDate: DateTime.now(),
-                  lastDate: DateTime(2100),
-                ).then((value) {
-                  showTimePicker(
-                      context: context, initialTime: TimeOfDay.now());
-                });
-              },
-              readOnly: true,
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.edit_calendar_outlined),
-                  contentPadding: EdgeInsets.zero,
-                  hintText: 'Masukkan Tanggal',
-                  labelText: 'Tanggal Akhir'),
-            ),
-            ListTile(
-              title: const Text('Durasi dalam menit'),
-              trailing: Radio(
-                  value: EventDuration.inMinutes,
-                  groupValue: _eventDuration,
-                  onChanged: (value) {
-                    setState(() {
-                      _eventDuration = value!;
-                    });
-                  }),
-            ),
-            TextFormField(
-              enabled: _eventDuration == EventDuration.inMinutes,
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.timer_outlined),
-                  contentPadding: EdgeInsets.zero,
-                  hintText: 'Masukkan durasi',
-                  labelText: 'Durasi dalam menit'),
-            ),
-            const SizedBox(height: 14),
-            ListTile(
-              title: const Text(
-                'Ulangi',
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.edit_calendar_outlined),
+                    contentPadding: EdgeInsets.zero,
+                    hintText: 'Masukkan judul acara',
+                    labelText: 'Judul Acara'),
+              ),
+              const SizedBox(height: 14),
+              TextFormField(
+                onTap: () {
+                  showDatePicker(
+                    context: context,
+                    firstDate: DateTime(2022),
+                    initialDate: DateTime.now(),
+                    lastDate: DateTime(2100),
+                  ).then((value) {
+                    showTimePicker(
+                        context: context, initialTime: TimeOfDay.now());
+                  });
+                },
+                readOnly: true,
+                decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.edit_calendar_outlined),
+                    contentPadding: EdgeInsets.zero,
+                    hintText: 'Masukkan Tanggal',
+                    labelText: 'Tanggal Mulai'),
+              ),
+              const SizedBox(height: 14),
+              const Text(
+                'Durasi',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-              trailing: Switch(
-                  value: _isRepeated,
-                  onChanged: (value) {
-                    setState(() {
-                      _isRepeated = value;
-                    });
-                  }),
-            ),
-            TextFormField(
-              enabled: _isRepeated,
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.timer_outlined),
-                  contentPadding: EdgeInsets.zero,
-                  hintText: 'Masukkan jumlah kali',
-                  labelText: 'Ulangi setiap berapa minggu'),
-            ),
-            const SizedBox(height: 14),
-            SizedBox(
-              height: 200,
-              child: TextFormField(
-                maxLines: null,
+              ListTile(
+                title: const Text('Tanpa Durasi'),
+                trailing: Radio(
+                    value: EventDuration.withoutDuration,
+                    groupValue: _eventDuration,
+                    onChanged: (value) {
+                      setState(() {
+                        _eventDuration = value!;
+                      });
+                    }),
+              ),
+              ListTile(
+                title: const Text('Sampai dengan'),
+                trailing: Radio(
+                    value: EventDuration.untilWhen,
+                    groupValue: _eventDuration,
+                    onChanged: (value) {
+                      setState(() {
+                        _eventDuration = value!;
+                      });
+                    }),
+              ),
+              TextFormField(
+                enabled: _eventDuration == EventDuration.untilWhen,
+                onTap: () {
+                  showDatePicker(
+                    context: context,
+                    firstDate: DateTime(2022),
+                    initialDate: DateTime.now(),
+                    lastDate: DateTime(2100),
+                  ).then((value) {
+                    showTimePicker(
+                        context: context, initialTime: TimeOfDay.now());
+                  });
+                },
+                readOnly: true,
                 decoration: const InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    hintText: 'Tambahkan deskripsi',
-                    labelText: 'Deskripsi'),
+                    prefixIcon: Icon(Icons.edit_calendar_outlined),
+                    contentPadding: EdgeInsets.zero,
+                    hintText: 'Masukkan Tanggal',
+                    labelText: 'Tanggal Akhir'),
               ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: FilledButton(
-                child: const Text('Simpan'),
-                onPressed: () {},
+              ListTile(
+                title: const Text('Durasi dalam menit'),
+                trailing: Radio(
+                    value: EventDuration.inMinutes,
+                    groupValue: _eventDuration,
+                    onChanged: (value) {
+                      setState(() {
+                        _eventDuration = value!;
+                      });
+                    }),
               ),
-            )
-          ],
+              TextFormField(
+                enabled: _eventDuration == EventDuration.inMinutes,
+                decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.timer_outlined),
+                    contentPadding: EdgeInsets.zero,
+                    hintText: 'Masukkan durasi',
+                    labelText: 'Durasi dalam menit'),
+              ),
+              const SizedBox(height: 14),
+              ListTile(
+                title: const Text(
+                  'Ulangi',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                trailing: Switch(
+                    value: _isRepeated,
+                    onChanged: (value) {
+                      setState(() {
+                        _isRepeated = value;
+                      });
+                    }),
+              ),
+              TextFormField(
+                enabled: _isRepeated,
+                decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.timer_outlined),
+                    contentPadding: EdgeInsets.zero,
+                    hintText: 'Masukkan jumlah kali',
+                    labelText: 'Ulangi setiap berapa minggu'),
+              ),
+              const SizedBox(height: 14),
+              SizedBox(
+                height: 200,
+                child: TextFormField(
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      hintText: 'Tambahkan deskripsi',
+                      labelText: 'Deskripsi'),
+                ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: FilledButton(
+                  child: const Text('Simpan'),
+                  onPressed: () {},
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
