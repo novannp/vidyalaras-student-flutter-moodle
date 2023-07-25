@@ -15,6 +15,7 @@ class LmsPPTIK extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           themeMode: state ? ThemeMode.dark : ThemeMode.light,
           theme: FlexThemeData.light(
+            appBarBackground: Colors.white,
             fontFamily: 'NotoSans',
             colors: const FlexSchemeColor(
               primary: Color(0xff00296b),
