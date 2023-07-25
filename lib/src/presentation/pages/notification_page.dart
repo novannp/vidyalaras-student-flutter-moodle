@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:lms_pptik/src/data/models/notification_model.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
-import 'package:lms_pptik/src/presentation/blocs/bloc/notification_bloc.dart';
+
+import '../blocs/notification/notification_bloc.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -25,6 +26,14 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
+          icon: const Icon(
+            Icons.mark_chat_read,
+            size: 20,
+          ),
+          onPressed: () {},
+          label: const Text('Tandai sudah dibaca')),
       appBar: AppBar(
         title: const Text('Notifikasi'),
       ),
@@ -60,7 +69,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                   ),
                                 ),
                                 body: SingleChildScrollView(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: Column(
                                     children: [
                                       ListTile(
@@ -102,6 +112,15 @@ class _NotificationPageState extends State<NotificationPage> {
                     notifications[index].timecreated!.toDate(),
                     style: const TextStyle(fontSize: 12),
                   ),
+                  trailing: notifications[index].timeread == null
+                      ? Container(
+                          width: 10,
+                          height: 10,
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.secondary,
+                              shape: BoxShape.circle),
+                        )
+                      : null,
                 );
               });
         }, loading: () {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
+import 'package:lms_pptik/src/presentation/blocs/notification/notification_bloc.dart';
 import 'package:lms_pptik/src/utils/constant.dart';
 
 import '../../data/models/course_model.dart';
@@ -22,7 +23,10 @@ class DashboardPage extends StatefulWidget {
 
 class _MainPageState extends State<DashboardPage> {
   late final Timer _timer;
+
   int _previousMessageCount = 0;
+  int _previousNotificationCount = 0;
+
   final List _items = [
     {
       'text': 'Semua Kelas',
@@ -45,6 +49,7 @@ class _MainPageState extends State<DashboardPage> {
       'value': 'hidden',
     },
   ];
+
   @override
   void initState() {
     Future.microtask(() {
@@ -59,6 +64,8 @@ class _MainPageState extends State<DashboardPage> {
     _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
       BlocProvider.of<GetUnreadMessageCountBloc>(context)
           .add(const ChatEvent.getUnreadMessageCount());
+      BlocProvider.of<GetNotificationCountBloc>(context)
+          .add(const NotificationEvent.getNotificationCount());
     });
     super.initState();
   }
@@ -114,11 +121,36 @@ class _MainPageState extends State<DashboardPage> {
             onPressed: () {
               GoRouter.of(context).pushNamed('notification');
             },
-            icon: const Badge(
-                child: Icon(
-              Icons.notifications,
-              size: 20,
-            )),
+            icon: BlocBuilder<GetNotificationCountBloc, NotificationState>(
+              builder: (context, state) {
+                return Badge(
+                    isLabelVisible: state.maybeWhen(
+                      loaded: (data) {
+                        data as int;
+                        _previousNotificationCount = data;
+                        return data > 0;
+                      },
+                      orElse: () {
+                        return _previousNotificationCount != 0;
+                      },
+                    ),
+                    label: Text(
+                      state.maybeWhen(
+                        loaded: (data) {
+                          data as int;
+                          return data.toString();
+                        },
+                        orElse: () {
+                          return _previousNotificationCount.toString();
+                        },
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.notifications,
+                      size: 20,
+                    ));
+              },
+            ),
           ),
         ],
         leadingWidth: 60,

@@ -11,7 +11,6 @@ import 'package:lms_pptik/src/domain/repositories/notification_repository.dart';
 
 import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/badge/badge_bloc.dart';
-import 'package:lms_pptik/src/presentation/blocs/bloc/notification_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/calendar/calendar_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/cubit/dark_mode_cubit.dart';
@@ -26,6 +25,7 @@ import 'src/data/data_sources/calendar_api.dart';
 import 'src/data/data_sources/chat_api.dart';
 import 'src/data/data_sources/course_api.dart';
 import 'src/data/data_sources/user_api.dart';
+import 'src/data/repositories/notification_repository_impl.dart';
 import 'src/domain/usecase/auth/auth.dart';
 import 'src/domain/usecase/badge/badge.dart';
 import 'src/domain/usecase/calendar/calendar.dart';
@@ -34,10 +34,12 @@ import 'src/domain/usecase/course/course.dart';
 import 'src/domain/usecase/notification/notification.dart';
 import 'src/domain/usecase/user/user.dart';
 import 'src/presentation/blocs/chat/chat_bloc.dart';
+import 'src/presentation/blocs/notification/notification_bloc.dart';
 import 'src/utils/helper/http_helper/http_helper.dart';
 import 'src/utils/helper/secure_storage/secure_storage.dart';
 
 final locator = GetIt.instance;
+
 void init() {
   // BLOC
   locator.registerFactory(() => DarkModeCubit(locator()));
@@ -61,6 +63,7 @@ void init() {
   locator.registerFactory(() => AuthLogoutBloc(locator()));
   locator.registerFactory(() => GetUnreadMessageCountBloc(locator()));
   locator.registerFactory(() => GetNotificationsBloc(locator()));
+  locator.registerFactory(() => GetNotificationCountBloc(locator()));
 
   //USECASE
   // AUTH
@@ -94,6 +97,7 @@ void init() {
 
   // NOTIFICATION
   locator.registerFactory(() => GetNotifications(locator()));
+  locator.registerFactory(() => GetNotificationCount(locator()));
 
   // REPOSITORIES
   locator.registerLazySingleton(() => AuthRepositoryImpl(locator(), locator()));

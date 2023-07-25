@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/badge/badge_bloc.dart';
-import 'package:lms_pptik/src/presentation/blocs/bloc/notification_bloc.dart';
+
 import 'package:lms_pptik/src/presentation/blocs/calendar/calendar_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/cubit/dark_mode_cubit.dart';
@@ -15,6 +15,7 @@ import 'package:lms_pptik/src/utils/observer.dart';
 import 'app.dart';
 import 'injection.dart' as di;
 import 'src/presentation/blocs/chat/chat_bloc.dart';
+import 'src/presentation/blocs/notification/notification_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,6 +60,8 @@ void main() {
         BlocProvider(
             create: (context) => di.locator<GetUnreadMessageCountBloc>()),
         BlocProvider(create: (context) => di.locator<GetNotificationsBloc>()),
+        BlocProvider(
+            create: (context) => di.locator<GetNotificationCountBloc>()),
       ],
       child: const LmsPPTIK(),
     ),

@@ -131,7 +131,9 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       ListTile(
-                        onTap: () {},
+                        onTap: () {
+                          context.read<MainIndexCubit>().changeIndex(2);
+                        },
                         leading: Container(
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(

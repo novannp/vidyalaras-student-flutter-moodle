@@ -10,25 +10,6 @@ import '../../utils/failures.dart';
 
 abstract class NotificationRepository {
   Future<Either<Failure, List<NotificationModel>>> getNotifications();
-}
 
-class NotificationRepositoryImpl implements NotificationRepository {
-  final NotificationApiImpl notificationApiImpl;
-  final StorageHelper storageHelper;
-
-  NotificationRepositoryImpl(this.notificationApiImpl, this.storageHelper);
-  @override
-  Future<Either<Failure, List<NotificationModel>>> getNotifications() async {
-    try {
-      final token = await storageHelper.read('token');
-      final userId = await storageHelper.read('userId');
-      final notifications =
-          await notificationApiImpl.getNotifications(token, userId);
-      return Right(notifications);
-    } on ServerException {
-      return const Left(ServerFailure('Gagal mendapatkan notifikasi'));
-    } on SocketException {
-      return const Left(ServerFailure('Tidak ada koneksi internet'));
-    }
-  }
+  Future<Either<Failure, int>> getNotificationCount();
 }
