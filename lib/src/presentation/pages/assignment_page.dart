@@ -228,19 +228,48 @@ class _AssignmentPageState extends State<AssignmentPage> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            for (Plugins plugin in submissionFiles)
-                              for (Fileareas filearea in plugin.fileareas!)
-                                if (filearea.files!.isNotEmpty)
-                                  for (File file in filearea.files!)
-                                    ListTile(
-                                      onTap: () {},
-                                      title: Text(file.filename!),
-                                      subtitle:
-                                          Text(file.filesize!.formatFileSize()),
-                                      leading: const Icon(Icons.file_copy),
-                                    )
-                                else
-                                  const Text('Tidak ada file submission'),
+                            // for (Plugins plugin in submissionFiles)
+                            //   for (Fileareas filearea in plugin.fileareas!)
+                            //     if (filearea.files!.isNotEmpty)
+                            //       for (File file in filearea.files!)
+                            //         ListTile(
+                            //           onTap: () {},
+                            //           title: Text(file.filename!),
+                            //           subtitle:
+                            //               Text(file.filesize!.formatFileSize()),
+                            //           leading: const Icon(Icons.file_copy),
+                            //         )
+                            //     else
+                            //       const Text('Tidak ada file submission'),
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: submissionFiles
+                                  .expand((plugin) => plugin.fileareas!)
+                                  .where(
+                                      (filearea) => filearea.files!.isNotEmpty)
+                                  .map<int>(
+                                      (filearea) => filearea.files!.length)
+                                  .reduce((value, element) => value + element),
+                              itemBuilder: (context, index) {
+                                Plugins plugin = submissionFiles[index ~/ 2];
+                                Fileareas filearea =
+                                    plugin.fileareas![index % 2];
+                                if (filearea.files!.isNotEmpty) {
+                                  File file = filearea.files![0];
+                                  return ListTile(
+                                    onTap: () {},
+                                    title: Text(file.filename!),
+                                    subtitle:
+                                        Text(file.filesize!.formatFileSize()),
+                                    leading: const Icon(Icons.file_copy),
+                                  );
+                                } else {
+                                  return const Text(
+                                      'Tidak ada file submission');
+                                }
+                              },
+                            ),
                             const SizedBox(height: 10),
                             const Text(
                               'Komentar Submission',
