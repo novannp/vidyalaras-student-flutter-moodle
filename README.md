@@ -13,22 +13,23 @@ Note : Android Only, iOS not supported yet.
 
 1. Clone this repository to your local
 
-   git clone https://github.com/novannp/lms_pptik_flutter.git
+   `git clone https://github.com/novannp/lms_pptik_flutter.git`
 
 2. Change directory to your local
 
-   cd ./lms_pptik_flutter
+   `cd ./lms_pptik_flutter`
 
 3. Get Dependencies of project
-   flutter pub get
+
+   `flutter pub get`
 
 4. Run Project
 
-   flutter run
+   `flutter run`
 
 5. Build Project
 
-   flutter build apk
+   `flutter build apk`
 
-For help getting started with Fluttecumentation](https://docs.flutter.dev/), which offers tutorials,
+For help getting started with Flutter Documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
