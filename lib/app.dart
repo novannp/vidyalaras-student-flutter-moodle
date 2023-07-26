@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/cubit/dark_mode_cubit.dart';
 import 'package:lms_pptik/src/utils/app_routes.dart';
+import 'package:syncfusion_localizations/syncfusion_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class LmsPPTIK extends StatelessWidget {
   const LmsPPTIK({super.key});
@@ -12,6 +14,13 @@ class LmsPPTIK extends StatelessWidget {
     return BlocBuilder<DarkModeCubit, bool>(
       builder: (context, state) {
         return MaterialApp.router(
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            SfGlobalLocalizations.delegate
+          ],
+          supportedLocales: const [Locale('id')],
+          locale: const Locale('id'),
           debugShowCheckedModeBanner: false,
           themeMode: state ? ThemeMode.dark : ThemeMode.light,
           theme: FlexThemeData.light(

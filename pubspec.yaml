@@ -55,6 +55,8 @@ dependencies:
   flutter_file_downloader: ^1.1.2
   open_file: ^3.3.2
   permission_handler: ^10.4.3
+  syncfusion_localizations: ^22.1.39
+  flutter_localization: ^0.1.13
 
 dev_dependencies:
   flutter_test:
