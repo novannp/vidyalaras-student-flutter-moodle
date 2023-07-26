@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lms_pptik/src/data/models/assignment_model.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
-import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
 
 import '../../data/models/submission_status_model.dart';
 import '../../utils/helper/function_helper/function_helper.dart';
-import '../../utils/helper/secure_storage/secure_storage.dart';
 import '../blocs/mod_assign/mod_assign_bloc.dart';
-import 'package:lms_pptik/injection.dart' as di;
 
 class AssignmentPage extends StatefulWidget {
   const AssignmentPage({super.key, required this.courseId});
@@ -130,6 +126,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
                     fontSize: 18,
                   ),
                 ),
+                const Divider(),
                 BlocBuilder<GetSubmissionStatusBloc, ModAssignState>(
                     builder: (context, state) {
                   return state.maybeWhen(
@@ -145,9 +142,9 @@ class _AssignmentPageState extends State<AssignmentPage> {
                         submissionStatus as SubmissionStatusModel;
                         Lastattempt lastattempt = submissionStatus.lastattempt!;
                         List<Plugins> submissionFiles = submissionStatus
-                                ?.lastattempt?.submission?.plugins
+                                .lastattempt?.submission?.plugins
                                 ?.where((element) => element.type == 'file')
-                                ?.toList() ??
+                                .toList() ??
                             [];
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,8 +186,13 @@ class _AssignmentPageState extends State<AssignmentPage> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            Text(lastattempt.submission!.timecreated!
-                                .toDateAndTime()),
+                            for (Plugins plugin in submissionFiles)
+                              for (Fileareas filearea in plugin.fileareas!)
+                                if (filearea.files!.isNotEmpty)
+                                  for (File file in filearea.files!)
+                                    Text(file.timemodified!.toDateAndTime())
+                                else
+                                  const Text('-'),
                             const SizedBox(height: 10),
                             const Text(
                               'Terakhir diubah',
@@ -199,8 +201,9 @@ class _AssignmentPageState extends State<AssignmentPage> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            Text(lastattempt.submission!.timemodified!
-                                .toDateAndTime()),
+                            Text(lastattempt.submission?.timemodified
+                                    ?.toDateAndTime() ??
+                                '-'),
                             const SizedBox(height: 10),
                             const Text(
                               'File Submission',
@@ -214,7 +217,12 @@ class _AssignmentPageState extends State<AssignmentPage> {
                                 if (filearea.files!.isNotEmpty)
                                   for (File file in filearea.files!)
                                     ListTile(
-                                      onTap: () {},
+                                      onTap: () {
+                                        FunctionHelper.downloadFileHandler(
+                                            context,
+                                            file.filename!,
+                                            file.fileurl!);
+                                      },
                                       title: Text(file.filename!),
                                       subtitle:
                                           Text(file.filesize!.formatFileSize()),
@@ -258,13 +266,43 @@ class _AssignmentPageState extends State<AssignmentPage> {
                             //   },
                             // ),
                             const SizedBox(height: 10),
+                            const Divider(),
                             const Text(
-                              'Komentar Submission',
+                              'Feedback',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Nilai'),
+                              trailing: Text(submissionStatus
+                                      .feedback?.gradefordisplay
+                                      ?.decodeHtml() ??
+                                  '-'),
+                            ),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Dinilai pada'),
+                              trailing: Text(submissionStatus
+                                      .feedback?.gradeddate
+                                      ?.toDateAndTime() ??
+                                  '-'),
+                            ),
+                            const Text(
+                              'Komentar',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                               ),
-                            )
+                            ),
+                            for (Plugins plugin
+                                in submissionStatus.feedback?.plugins ?? [])
+                              for (Editorfields comment
+                                  in plugin.editorfields ?? [])
+                                Html(data: comment.text ?? '-'),
+                            const SizedBox(height: 10),
                           ],
                         );
                       },
