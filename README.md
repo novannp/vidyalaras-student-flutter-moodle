@@ -1,16 +1,32 @@
-# lms_pptik
+# LMS PPTIK
 
-A new Flutter project.
+![logo](https://github.com/novannp/lms_pptik_flutter/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
 
-## Getting Started
+LMS atau Learning Management System PPTIK adalah platform pembelajaran untuk membantu proses belajar mengajar yang
+terintegrasi dengan https://lms.pptik.id.
 
-This project is a starting point for a Flutter application.
+Note : Android Only, iOS not supported yet.
 
-A few resources to get you started if this is your first Flutter project:
+**How to build?**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Clone this repository to your local
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
+   git clone https://github.com/novannp/lms_pptik_flutter.git
+
+2. Change directory to your local
+
+   cd ./lms_pptik_flutter
+
+3. Get Dependencies of project
+   flutter pub get
+
+4. Run Project
+
+   flutter run
+
+5. Build Project
+
+   flutter build apk
+
+For help getting started with Fluttecumentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
