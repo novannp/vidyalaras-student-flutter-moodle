@@ -9,6 +9,7 @@ import 'package:lms_pptik/src/extensions/string_extension.dart';
 import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
 
 import '../../data/models/submission_status_model.dart';
+import '../../utils/helper/function_helper/function_helper.dart';
 import '../../utils/helper/secure_storage/secure_storage.dart';
 import '../blocs/mod_assign/mod_assign_bloc.dart';
 import 'package:lms_pptik/injection.dart' as di;
@@ -110,31 +111,9 @@ class _AssignmentPageState extends State<AssignmentPage> {
                     return ListTile(
                       trailing: Text(e.filesize!.formatFileSize()),
                       subtitle: Text(e.timemodified!.toDateAndTime()),
-                      onTap: () async {
-                        final notif = di.locator<NotificationPlugin>();
-                        final storage = di.locator<StorageHelper>();
-                        final token = await storage.read('token');
-                        final url = '${e.fileurl!}?token=$token';
-                        FileDownloader.downloadFile(
-                            url: url,
-                            name: '${e.filename}',
-                            onProgress: (fileName, progress) async {
-                              notif.showDownloadProgressNotification(
-                                fileName!,
-                                progress.toInt(),
-                              );
-                            },
-                            onDownloadCompleted: (path) {
-                              notif.cancelNotification(20);
-                              notif.downloadCompleted(path);
-                            },
-                            onDownloadError: (error) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text('Download error: $error')));
-                            }).then((file) {
-                          debugPrint('file path: ${file?.path}');
-                        });
+                      onTap: () {
+                        FunctionHelper.downloadFileHandler(
+                            context, e.filename!, e.fileurl!);
                       },
                       leading: SvgPicture.network(
                           'https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg',
@@ -166,9 +145,10 @@ class _AssignmentPageState extends State<AssignmentPage> {
                         submissionStatus as SubmissionStatusModel;
                         Lastattempt lastattempt = submissionStatus.lastattempt!;
                         List<Plugins> submissionFiles = submissionStatus
-                            .lastattempt!.submission!.plugins!
-                            .where((element) => element.type == 'file')
-                            .toList();
+                                ?.lastattempt?.submission?.plugins
+                                ?.where((element) => element.type == 'file')
+                                ?.toList() ??
+                            [];
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -181,7 +161,8 @@ class _AssignmentPageState extends State<AssignmentPage> {
                             ),
                             Chip(
                                 label: Text(
-                              lastattempt.submission!.status!.decodeHtml(),
+                              lastattempt.submission?.status?.decodeHtml() ??
+                                  'Belum submit',
                               style: const TextStyle(
                                 color: Colors.white,
                               ),
@@ -228,48 +209,54 @@ class _AssignmentPageState extends State<AssignmentPage> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            // for (Plugins plugin in submissionFiles)
-                            //   for (Fileareas filearea in plugin.fileareas!)
-                            //     if (filearea.files!.isNotEmpty)
-                            //       for (File file in filearea.files!)
-                            //         ListTile(
-                            //           onTap: () {},
-                            //           title: Text(file.filename!),
-                            //           subtitle:
-                            //               Text(file.filesize!.formatFileSize()),
-                            //           leading: const Icon(Icons.file_copy),
-                            //         )
-                            //     else
-                            //       const Text('Tidak ada file submission'),
-                            ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: submissionFiles
-                                  .expand((plugin) => plugin.fileareas!)
-                                  .where(
-                                      (filearea) => filearea.files!.isNotEmpty)
-                                  .map<int>(
-                                      (filearea) => filearea.files!.length)
-                                  .reduce((value, element) => value + element),
-                              itemBuilder: (context, index) {
-                                Plugins plugin = submissionFiles[index ~/ 2];
-                                Fileareas filearea =
-                                    plugin.fileareas![index % 2];
-                                if (filearea.files!.isNotEmpty) {
-                                  File file = filearea.files![0];
-                                  return ListTile(
-                                    onTap: () {},
-                                    title: Text(file.filename!),
-                                    subtitle:
-                                        Text(file.filesize!.formatFileSize()),
-                                    leading: const Icon(Icons.file_copy),
-                                  );
-                                } else {
-                                  return const Text(
-                                      'Tidak ada file submission');
-                                }
-                              },
-                            ),
+                            for (Plugins plugin in submissionFiles)
+                              for (Fileareas filearea in plugin.fileareas!)
+                                if (filearea.files!.isNotEmpty)
+                                  for (File file in filearea.files!)
+                                    ListTile(
+                                      onTap: () {},
+                                      title: Text(file.filename!),
+                                      subtitle:
+                                          Text(file.filesize!.formatFileSize()),
+                                      leading: const Icon(Icons.file_copy),
+                                    )
+                                else
+                                  const Text('Tidak ada file submission'),
+                            // ListView.builder(
+                            //   shrinkWrap: true,
+                            //   physics: const NeverScrollableScrollPhysics(),
+                            //   itemCount: submissionFiles
+                            //           .expand(
+                            //               (plugin) => plugin.fileareas ?? [])
+                            //           .where((filearea) =>
+                            //               filearea.files != null &&
+                            //               filearea.files!.isNotEmpty)
+                            //           .map<int>(
+                            //               (filearea) => filearea.files!.length)
+                            //           .fold(
+                            //               0,
+                            //               (value, element) =>
+                            //                   value! + element) ??
+                            //       0,
+                            //   itemBuilder: (context, index) {
+                            //     Plugins plugin = submissionFiles[index ~/ 2];
+                            //     Fileareas filearea =
+                            //         plugin.fileareas![index % 2];
+                            //     if (filearea.files!.isNotEmpty) {
+                            //       File file = filearea.files![0];
+                            //       return ListTile(
+                            //         onTap: () {},
+                            //         title: Text(file.filename!),
+                            //         subtitle:
+                            //             Text(file.filesize!.formatFileSize()),
+                            //         leading: const Icon(Icons.file_copy),
+                            //       );
+                            //     } else {
+                            //       return const Text(
+                            //           'Tidak ada file submission');
+                            //     }
+                            //   },
+                            // ),
                             const SizedBox(height: 10),
                             const Text(
                               'Komentar Submission',
