@@ -62,6 +62,7 @@ void main() {
         BlocProvider(create: (context) => di.locator<GetNotificationsBloc>()),
         BlocProvider(
             create: (context) => di.locator<GetNotificationCountBloc>()),
+        BlocProvider(create: (context) => di.locator<GetUserGradeBloc>()),
       ],
       child: const LmsPPTIK(),
     ),

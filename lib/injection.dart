@@ -7,8 +7,6 @@ import 'package:lms_pptik/src/data/repositories/calendar_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/chat_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/course_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/user_repository_impl.dart';
-import 'package:lms_pptik/src/domain/repositories/notification_repository.dart';
-
 import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/badge/badge_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/calendar/calendar_bloc.dart';
@@ -51,6 +49,7 @@ void init() {
   locator.registerFactory(() => GetEventBloc(locator()));
   locator.registerFactory(() => GetRecentCourseBloc(locator()));
   locator.registerFactory(() => GetFilteredCourseBloc(locator()));
+  locator.registerFactory(() => GetUserGradeBloc(locator()));
   locator.registerFactory(() => DropdownCourseCubit());
   locator.registerFactory(() => SearchCourseBloc(locator()));
   locator.registerFactory(() => GetEnrolledUserBloc(locator()));
@@ -87,6 +86,7 @@ void init() {
   locator.registerFactory(() => GetEnrolledUser(locator()));
   locator.registerFactory(() => GetMateri(locator()));
   locator.registerFactory(() => AddCourseToFavourite(locator()));
+  locator.registerFactory(() => GetUserGrade(locator()));
 
   // CHAT
   locator.registerFactory(() => GetConversations(locator()));

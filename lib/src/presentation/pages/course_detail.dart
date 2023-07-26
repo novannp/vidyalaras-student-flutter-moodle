@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lms_pptik/src/data/models/materi_model.dart';
 import 'package:lms_pptik/src/data/models/user_model.dart';
@@ -9,6 +10,7 @@ import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
 
 import '../../data/models/course_model.dart';
+import '../../data/models/user_grade_model.dart';
 import '../blocs/course/course_bloc.dart';
 
 class CourseDetailPage extends StatefulWidget {
@@ -34,6 +36,9 @@ class _CourseDetailPageState extends State<CourseDetailPage>
       context
           .read<GetEnrolledUserBloc>()
           .add(CourseEvent.getEnrolledUser(widget.course.id!));
+      context
+          .read<GetUserGradeBloc>()
+          .add(CourseEvent.getUserGrade(widget.course.id!));
     });
     super.initState();
   }
@@ -90,7 +95,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  labelStyle: TextStyle(
+                                  labelStyle: const TextStyle(
                                     fontSize: 12,
                                   ),
                                 ),
@@ -131,7 +136,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                           ],
                         ),
                         const SizedBox(height: 20),
-                        Text(
+                        const Text(
                           'Tanggal Mulai Kursus',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
@@ -139,7 +144,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                           widget.course.startdate!.toDate(),
                         ),
                         const SizedBox(height: 10),
-                        Text(
+                        const Text(
                           'Pengajar',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
@@ -165,7 +170,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                                       },
                                     );
                                   },
-                                  icon: Icon(Icons.message_rounded),
+                                  icon: const Icon(Icons.message_rounded),
                                 ),
                               );
                             }, orElse: () {
@@ -179,7 +184,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                 },
               );
             },
-            icon: Icon(Icons.info_outline),
+            icon: const Icon(Icons.info_outline),
           )
         ],
       ),
@@ -265,7 +270,99 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                   buildMateriList(),
                   buildEnrolledUser(),
                   const Text('Kompetensi'),
-                  const Text('Nilai'),
+                  BlocBuilder<GetUserGradeBloc, CourseState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(error: (error) {
+                        return Center(
+                          child: Text(error),
+                        );
+                      }, loading: () {
+                        return const Center(child: CircularProgressIndicator());
+                      }, loaded: (userGradeList) {
+                        userGradeList as List<UserGradeModel>;
+                        return ListView.builder(
+                            itemCount: userGradeList[0].gradeitems!.length,
+                            itemBuilder: (context, index) {
+                              final userGrade =
+                                  userGradeList[0].gradeitems![index];
+                              return ExpansionTile(
+                                leading: userGrade.itemmodule == 'workshop'
+                                    ? Container(
+                                        padding: EdgeInsets.all(6),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondaryContainer,
+                                        ),
+                                        child: Icon(Icons.refresh))
+                                    : userGrade.itemmodule == 'assign'
+                                        ? Container(
+                                            padding: EdgeInsets.all(6),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: Colors.pinkAccent,
+                                            ),
+                                            child: Icon(
+                                              Icons.book,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        : userGrade.itemmodule == 'lesson'
+                                            ? Container(
+                                                padding: EdgeInsets.all(6),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primaryContainer,
+                                                ),
+                                                child: Icon(Icons.book_rounded))
+                                            : Container(
+                                                padding: EdgeInsets.all(6),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .errorContainer,
+                                                ),
+                                                child:
+                                                    Icon(Icons.quiz_outlined)),
+                                title: Text(userGrade.itemname ?? 'Tanpa nama'),
+                                children: [
+                                  ListTile(
+                                    title: Text('Nilai'),
+                                    trailing:
+                                        Text('${userGrade.graderaw ?? '-'}'),
+                                  ),
+                                  ListTile(
+                                    title: Text('Rentang'),
+                                    trailing: Text(
+                                        '${userGrade.grademin ?? '0'} - ${userGrade.grademax ?? '0'}'),
+                                  ),
+                                  ListTile(
+                                    title: Text('Persentase'),
+                                    trailing: Text(
+                                        userGrade.percentageformatted ?? '-'),
+                                  ),
+                                  Text(
+                                    "Feedback",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Html(data: userGrade.feedback ?? '-'),
+                                ],
+                              );
+                            });
+                      }, orElse: () {
+                        return const SizedBox();
+                      });
+                    },
+                  ),
                 ],
               ),
             ),

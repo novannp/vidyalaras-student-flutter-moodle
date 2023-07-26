@@ -24,6 +24,7 @@ mixin _$CourseEvent {
     required TResult Function(int courseId) getMateri,
     required TResult Function(int courseId) getEnrolledUser,
     required TResult Function(CourseModel course) addCourseToFavorite,
+    required TResult Function(int courseId) getUserGrade,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +35,7 @@ mixin _$CourseEvent {
     TResult? Function(int courseId)? getMateri,
     TResult? Function(int courseId)? getEnrolledUser,
     TResult? Function(CourseModel course)? addCourseToFavorite,
+    TResult? Function(int courseId)? getUserGrade,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +46,7 @@ mixin _$CourseEvent {
     TResult Function(int courseId)? getMateri,
     TResult Function(int courseId)? getEnrolledUser,
     TResult Function(CourseModel course)? addCourseToFavorite,
+    TResult Function(int courseId)? getUserGrade,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +58,7 @@ mixin _$CourseEvent {
     required TResult Function(_GetMateri value) getMateri,
     required TResult Function(_GetEnrolledUser value) getEnrolledUser,
     required TResult Function(_AddCourseToFavorite value) addCourseToFavorite,
+    required TResult Function(_GetUserGrade value) getUserGrade,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +69,7 @@ mixin _$CourseEvent {
     TResult? Function(_GetMateri value)? getMateri,
     TResult? Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult? Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult? Function(_GetUserGrade value)? getUserGrade,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +80,7 @@ mixin _$CourseEvent {
     TResult Function(_GetMateri value)? getMateri,
     TResult Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult Function(_GetUserGrade value)? getUserGrade,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,6 +148,7 @@ class _$_GetRecentCourse implements _GetRecentCourse {
     required TResult Function(int courseId) getMateri,
     required TResult Function(int courseId) getEnrolledUser,
     required TResult Function(CourseModel course) addCourseToFavorite,
+    required TResult Function(int courseId) getUserGrade,
   }) {
     return getRecentCourse();
   }
@@ -155,6 +162,7 @@ class _$_GetRecentCourse implements _GetRecentCourse {
     TResult? Function(int courseId)? getMateri,
     TResult? Function(int courseId)? getEnrolledUser,
     TResult? Function(CourseModel course)? addCourseToFavorite,
+    TResult? Function(int courseId)? getUserGrade,
   }) {
     return getRecentCourse?.call();
   }
@@ -168,6 +176,7 @@ class _$_GetRecentCourse implements _GetRecentCourse {
     TResult Function(int courseId)? getMateri,
     TResult Function(int courseId)? getEnrolledUser,
     TResult Function(CourseModel course)? addCourseToFavorite,
+    TResult Function(int courseId)? getUserGrade,
     required TResult orElse(),
   }) {
     if (getRecentCourse != null) {
@@ -185,6 +194,7 @@ class _$_GetRecentCourse implements _GetRecentCourse {
     required TResult Function(_GetMateri value) getMateri,
     required TResult Function(_GetEnrolledUser value) getEnrolledUser,
     required TResult Function(_AddCourseToFavorite value) addCourseToFavorite,
+    required TResult Function(_GetUserGrade value) getUserGrade,
   }) {
     return getRecentCourse(this);
   }
@@ -198,6 +208,7 @@ class _$_GetRecentCourse implements _GetRecentCourse {
     TResult? Function(_GetMateri value)? getMateri,
     TResult? Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult? Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult? Function(_GetUserGrade value)? getUserGrade,
   }) {
     return getRecentCourse?.call(this);
   }
@@ -211,6 +222,7 @@ class _$_GetRecentCourse implements _GetRecentCourse {
     TResult Function(_GetMateri value)? getMateri,
     TResult Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult Function(_GetUserGrade value)? getUserGrade,
     required TResult orElse(),
   }) {
     if (getRecentCourse != null) {
@@ -296,6 +308,7 @@ class _$_GetFilteredCourse implements _GetFilteredCourse {
     required TResult Function(int courseId) getMateri,
     required TResult Function(int courseId) getEnrolledUser,
     required TResult Function(CourseModel course) addCourseToFavorite,
+    required TResult Function(int courseId) getUserGrade,
   }) {
     return getFilteredCourse(category);
   }
@@ -309,6 +322,7 @@ class _$_GetFilteredCourse implements _GetFilteredCourse {
     TResult? Function(int courseId)? getMateri,
     TResult? Function(int courseId)? getEnrolledUser,
     TResult? Function(CourseModel course)? addCourseToFavorite,
+    TResult? Function(int courseId)? getUserGrade,
   }) {
     return getFilteredCourse?.call(category);
   }
@@ -322,6 +336,7 @@ class _$_GetFilteredCourse implements _GetFilteredCourse {
     TResult Function(int courseId)? getMateri,
     TResult Function(int courseId)? getEnrolledUser,
     TResult Function(CourseModel course)? addCourseToFavorite,
+    TResult Function(int courseId)? getUserGrade,
     required TResult orElse(),
   }) {
     if (getFilteredCourse != null) {
@@ -339,6 +354,7 @@ class _$_GetFilteredCourse implements _GetFilteredCourse {
     required TResult Function(_GetMateri value) getMateri,
     required TResult Function(_GetEnrolledUser value) getEnrolledUser,
     required TResult Function(_AddCourseToFavorite value) addCourseToFavorite,
+    required TResult Function(_GetUserGrade value) getUserGrade,
   }) {
     return getFilteredCourse(this);
   }
@@ -352,6 +368,7 @@ class _$_GetFilteredCourse implements _GetFilteredCourse {
     TResult? Function(_GetMateri value)? getMateri,
     TResult? Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult? Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult? Function(_GetUserGrade value)? getUserGrade,
   }) {
     return getFilteredCourse?.call(this);
   }
@@ -365,6 +382,7 @@ class _$_GetFilteredCourse implements _GetFilteredCourse {
     TResult Function(_GetMateri value)? getMateri,
     TResult Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult Function(_GetUserGrade value)? getUserGrade,
     required TResult orElse(),
   }) {
     if (getFilteredCourse != null) {
@@ -454,6 +472,7 @@ class _$_SearchCourse implements _SearchCourse {
     required TResult Function(int courseId) getMateri,
     required TResult Function(int courseId) getEnrolledUser,
     required TResult Function(CourseModel course) addCourseToFavorite,
+    required TResult Function(int courseId) getUserGrade,
   }) {
     return searchCourse(query);
   }
@@ -467,6 +486,7 @@ class _$_SearchCourse implements _SearchCourse {
     TResult? Function(int courseId)? getMateri,
     TResult? Function(int courseId)? getEnrolledUser,
     TResult? Function(CourseModel course)? addCourseToFavorite,
+    TResult? Function(int courseId)? getUserGrade,
   }) {
     return searchCourse?.call(query);
   }
@@ -480,6 +500,7 @@ class _$_SearchCourse implements _SearchCourse {
     TResult Function(int courseId)? getMateri,
     TResult Function(int courseId)? getEnrolledUser,
     TResult Function(CourseModel course)? addCourseToFavorite,
+    TResult Function(int courseId)? getUserGrade,
     required TResult orElse(),
   }) {
     if (searchCourse != null) {
@@ -497,6 +518,7 @@ class _$_SearchCourse implements _SearchCourse {
     required TResult Function(_GetMateri value) getMateri,
     required TResult Function(_GetEnrolledUser value) getEnrolledUser,
     required TResult Function(_AddCourseToFavorite value) addCourseToFavorite,
+    required TResult Function(_GetUserGrade value) getUserGrade,
   }) {
     return searchCourse(this);
   }
@@ -510,6 +532,7 @@ class _$_SearchCourse implements _SearchCourse {
     TResult? Function(_GetMateri value)? getMateri,
     TResult? Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult? Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult? Function(_GetUserGrade value)? getUserGrade,
   }) {
     return searchCourse?.call(this);
   }
@@ -523,6 +546,7 @@ class _$_SearchCourse implements _SearchCourse {
     TResult Function(_GetMateri value)? getMateri,
     TResult Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult Function(_GetUserGrade value)? getUserGrade,
     required TResult orElse(),
   }) {
     if (searchCourse != null) {
@@ -612,6 +636,7 @@ class _$_GetMateri implements _GetMateri {
     required TResult Function(int courseId) getMateri,
     required TResult Function(int courseId) getEnrolledUser,
     required TResult Function(CourseModel course) addCourseToFavorite,
+    required TResult Function(int courseId) getUserGrade,
   }) {
     return getMateri(courseId);
   }
@@ -625,6 +650,7 @@ class _$_GetMateri implements _GetMateri {
     TResult? Function(int courseId)? getMateri,
     TResult? Function(int courseId)? getEnrolledUser,
     TResult? Function(CourseModel course)? addCourseToFavorite,
+    TResult? Function(int courseId)? getUserGrade,
   }) {
     return getMateri?.call(courseId);
   }
@@ -638,6 +664,7 @@ class _$_GetMateri implements _GetMateri {
     TResult Function(int courseId)? getMateri,
     TResult Function(int courseId)? getEnrolledUser,
     TResult Function(CourseModel course)? addCourseToFavorite,
+    TResult Function(int courseId)? getUserGrade,
     required TResult orElse(),
   }) {
     if (getMateri != null) {
@@ -655,6 +682,7 @@ class _$_GetMateri implements _GetMateri {
     required TResult Function(_GetMateri value) getMateri,
     required TResult Function(_GetEnrolledUser value) getEnrolledUser,
     required TResult Function(_AddCourseToFavorite value) addCourseToFavorite,
+    required TResult Function(_GetUserGrade value) getUserGrade,
   }) {
     return getMateri(this);
   }
@@ -668,6 +696,7 @@ class _$_GetMateri implements _GetMateri {
     TResult? Function(_GetMateri value)? getMateri,
     TResult? Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult? Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult? Function(_GetUserGrade value)? getUserGrade,
   }) {
     return getMateri?.call(this);
   }
@@ -681,6 +710,7 @@ class _$_GetMateri implements _GetMateri {
     TResult Function(_GetMateri value)? getMateri,
     TResult Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult Function(_GetUserGrade value)? getUserGrade,
     required TResult orElse(),
   }) {
     if (getMateri != null) {
@@ -770,6 +800,7 @@ class _$_GetEnrolledUser implements _GetEnrolledUser {
     required TResult Function(int courseId) getMateri,
     required TResult Function(int courseId) getEnrolledUser,
     required TResult Function(CourseModel course) addCourseToFavorite,
+    required TResult Function(int courseId) getUserGrade,
   }) {
     return getEnrolledUser(courseId);
   }
@@ -783,6 +814,7 @@ class _$_GetEnrolledUser implements _GetEnrolledUser {
     TResult? Function(int courseId)? getMateri,
     TResult? Function(int courseId)? getEnrolledUser,
     TResult? Function(CourseModel course)? addCourseToFavorite,
+    TResult? Function(int courseId)? getUserGrade,
   }) {
     return getEnrolledUser?.call(courseId);
   }
@@ -796,6 +828,7 @@ class _$_GetEnrolledUser implements _GetEnrolledUser {
     TResult Function(int courseId)? getMateri,
     TResult Function(int courseId)? getEnrolledUser,
     TResult Function(CourseModel course)? addCourseToFavorite,
+    TResult Function(int courseId)? getUserGrade,
     required TResult orElse(),
   }) {
     if (getEnrolledUser != null) {
@@ -813,6 +846,7 @@ class _$_GetEnrolledUser implements _GetEnrolledUser {
     required TResult Function(_GetMateri value) getMateri,
     required TResult Function(_GetEnrolledUser value) getEnrolledUser,
     required TResult Function(_AddCourseToFavorite value) addCourseToFavorite,
+    required TResult Function(_GetUserGrade value) getUserGrade,
   }) {
     return getEnrolledUser(this);
   }
@@ -826,6 +860,7 @@ class _$_GetEnrolledUser implements _GetEnrolledUser {
     TResult? Function(_GetMateri value)? getMateri,
     TResult? Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult? Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult? Function(_GetUserGrade value)? getUserGrade,
   }) {
     return getEnrolledUser?.call(this);
   }
@@ -839,6 +874,7 @@ class _$_GetEnrolledUser implements _GetEnrolledUser {
     TResult Function(_GetMateri value)? getMateri,
     TResult Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult Function(_GetUserGrade value)? getUserGrade,
     required TResult orElse(),
   }) {
     if (getEnrolledUser != null) {
@@ -928,6 +964,7 @@ class _$_AddCourseToFavorite implements _AddCourseToFavorite {
     required TResult Function(int courseId) getMateri,
     required TResult Function(int courseId) getEnrolledUser,
     required TResult Function(CourseModel course) addCourseToFavorite,
+    required TResult Function(int courseId) getUserGrade,
   }) {
     return addCourseToFavorite(course);
   }
@@ -941,6 +978,7 @@ class _$_AddCourseToFavorite implements _AddCourseToFavorite {
     TResult? Function(int courseId)? getMateri,
     TResult? Function(int courseId)? getEnrolledUser,
     TResult? Function(CourseModel course)? addCourseToFavorite,
+    TResult? Function(int courseId)? getUserGrade,
   }) {
     return addCourseToFavorite?.call(course);
   }
@@ -954,6 +992,7 @@ class _$_AddCourseToFavorite implements _AddCourseToFavorite {
     TResult Function(int courseId)? getMateri,
     TResult Function(int courseId)? getEnrolledUser,
     TResult Function(CourseModel course)? addCourseToFavorite,
+    TResult Function(int courseId)? getUserGrade,
     required TResult orElse(),
   }) {
     if (addCourseToFavorite != null) {
@@ -971,6 +1010,7 @@ class _$_AddCourseToFavorite implements _AddCourseToFavorite {
     required TResult Function(_GetMateri value) getMateri,
     required TResult Function(_GetEnrolledUser value) getEnrolledUser,
     required TResult Function(_AddCourseToFavorite value) addCourseToFavorite,
+    required TResult Function(_GetUserGrade value) getUserGrade,
   }) {
     return addCourseToFavorite(this);
   }
@@ -984,6 +1024,7 @@ class _$_AddCourseToFavorite implements _AddCourseToFavorite {
     TResult? Function(_GetMateri value)? getMateri,
     TResult? Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult? Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult? Function(_GetUserGrade value)? getUserGrade,
   }) {
     return addCourseToFavorite?.call(this);
   }
@@ -997,6 +1038,7 @@ class _$_AddCourseToFavorite implements _AddCourseToFavorite {
     TResult Function(_GetMateri value)? getMateri,
     TResult Function(_GetEnrolledUser value)? getEnrolledUser,
     TResult Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult Function(_GetUserGrade value)? getUserGrade,
     required TResult orElse(),
   }) {
     if (addCourseToFavorite != null) {
@@ -1013,6 +1055,170 @@ abstract class _AddCourseToFavorite implements CourseEvent {
   CourseModel get course;
   @JsonKey(ignore: true)
   _$$_AddCourseToFavoriteCopyWith<_$_AddCourseToFavorite> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GetUserGradeCopyWith<$Res> {
+  factory _$$_GetUserGradeCopyWith(
+          _$_GetUserGrade value, $Res Function(_$_GetUserGrade) then) =
+      __$$_GetUserGradeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int courseId});
+}
+
+/// @nodoc
+class __$$_GetUserGradeCopyWithImpl<$Res>
+    extends _$CourseEventCopyWithImpl<$Res, _$_GetUserGrade>
+    implements _$$_GetUserGradeCopyWith<$Res> {
+  __$$_GetUserGradeCopyWithImpl(
+      _$_GetUserGrade _value, $Res Function(_$_GetUserGrade) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? courseId = null,
+  }) {
+    return _then(_$_GetUserGrade(
+      null == courseId
+          ? _value.courseId
+          : courseId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetUserGrade implements _GetUserGrade {
+  const _$_GetUserGrade(this.courseId);
+
+  @override
+  final int courseId;
+
+  @override
+  String toString() {
+    return 'CourseEvent.getUserGrade(courseId: $courseId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetUserGrade &&
+            (identical(other.courseId, courseId) ||
+                other.courseId == courseId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, courseId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetUserGradeCopyWith<_$_GetUserGrade> get copyWith =>
+      __$$_GetUserGradeCopyWithImpl<_$_GetUserGrade>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getRecentCourse,
+    required TResult Function(String category) getFilteredCourse,
+    required TResult Function(String query) searchCourse,
+    required TResult Function(int courseId) getMateri,
+    required TResult Function(int courseId) getEnrolledUser,
+    required TResult Function(CourseModel course) addCourseToFavorite,
+    required TResult Function(int courseId) getUserGrade,
+  }) {
+    return getUserGrade(courseId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getRecentCourse,
+    TResult? Function(String category)? getFilteredCourse,
+    TResult? Function(String query)? searchCourse,
+    TResult? Function(int courseId)? getMateri,
+    TResult? Function(int courseId)? getEnrolledUser,
+    TResult? Function(CourseModel course)? addCourseToFavorite,
+    TResult? Function(int courseId)? getUserGrade,
+  }) {
+    return getUserGrade?.call(courseId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getRecentCourse,
+    TResult Function(String category)? getFilteredCourse,
+    TResult Function(String query)? searchCourse,
+    TResult Function(int courseId)? getMateri,
+    TResult Function(int courseId)? getEnrolledUser,
+    TResult Function(CourseModel course)? addCourseToFavorite,
+    TResult Function(int courseId)? getUserGrade,
+    required TResult orElse(),
+  }) {
+    if (getUserGrade != null) {
+      return getUserGrade(courseId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetRecentCourse value) getRecentCourse,
+    required TResult Function(_GetFilteredCourse value) getFilteredCourse,
+    required TResult Function(_SearchCourse value) searchCourse,
+    required TResult Function(_GetMateri value) getMateri,
+    required TResult Function(_GetEnrolledUser value) getEnrolledUser,
+    required TResult Function(_AddCourseToFavorite value) addCourseToFavorite,
+    required TResult Function(_GetUserGrade value) getUserGrade,
+  }) {
+    return getUserGrade(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetRecentCourse value)? getRecentCourse,
+    TResult? Function(_GetFilteredCourse value)? getFilteredCourse,
+    TResult? Function(_SearchCourse value)? searchCourse,
+    TResult? Function(_GetMateri value)? getMateri,
+    TResult? Function(_GetEnrolledUser value)? getEnrolledUser,
+    TResult? Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult? Function(_GetUserGrade value)? getUserGrade,
+  }) {
+    return getUserGrade?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetRecentCourse value)? getRecentCourse,
+    TResult Function(_GetFilteredCourse value)? getFilteredCourse,
+    TResult Function(_SearchCourse value)? searchCourse,
+    TResult Function(_GetMateri value)? getMateri,
+    TResult Function(_GetEnrolledUser value)? getEnrolledUser,
+    TResult Function(_AddCourseToFavorite value)? addCourseToFavorite,
+    TResult Function(_GetUserGrade value)? getUserGrade,
+    required TResult orElse(),
+  }) {
+    if (getUserGrade != null) {
+      return getUserGrade(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetUserGrade implements CourseEvent {
+  const factory _GetUserGrade(final int courseId) = _$_GetUserGrade;
+
+  int get courseId;
+  @JsonKey(ignore: true)
+  _$$_GetUserGradeCopyWith<_$_GetUserGrade> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

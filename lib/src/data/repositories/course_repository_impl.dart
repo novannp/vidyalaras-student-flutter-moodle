@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:lms_pptik/src/data/models/course_model.dart';
 import 'package:lms_pptik/src/data/models/materi_model.dart';
+import 'package:lms_pptik/src/data/models/user_grade_model.dart';
 import 'package:lms_pptik/src/data/models/user_model.dart';
 import 'package:lms_pptik/src/domain/repositories/course_repository.dart';
 import 'package:lms_pptik/src/utils/exceptions.dart';
@@ -14,7 +15,9 @@ import '../data_sources/course_api.dart';
 class CourseRepositoryImpl implements CourseRepository {
   final CourseApiImpl courseApiImpl;
   final StorageHelper storage;
+
   CourseRepositoryImpl(this.courseApiImpl, this.storage);
+
   @override
   Future<Either<Failure, List<CourseModel>>> getRecentCourse() async {
     try {
@@ -86,6 +89,22 @@ class CourseRepositoryImpl implements CourseRepository {
     try {
       final token = await storage.read('token');
       final result = await courseApiImpl.addCourseToFavorite(token, course);
+      return Right(result);
+    } on SocketException {
+      return const Left(ConnectionFailure("Tidak ada koneksi internet"));
+    } on ServerException {
+      return const Left(ServerFailure("Terjadi kesalahan pada server"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<UserGradeModel>>> getUserGrade(
+      int courseId) async {
+    try {
+      final token = await storage.read('token');
+      final userId = await storage.read('userId');
+      final result =
+          await courseApiImpl.getUserGrade(token, courseId, int.parse(userId));
       return Right(result);
     } on SocketException {
       return const Left(ConnectionFailure("Tidak ada koneksi internet"));

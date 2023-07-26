@@ -6,11 +6,14 @@ import '../../../data/models/course_model.dart';
 import '../../../domain/usecase/course/course.dart';
 
 part 'course_event.dart';
+
 part 'course_state.dart';
+
 part 'course_bloc.freezed.dart';
 
 class GetRecentCourseBloc extends Bloc<CourseEvent, CourseState> {
   final GetRecentCourse _getRecentCourse;
+
   GetRecentCourseBloc(this._getRecentCourse)
       : super(const CourseState.initial()) {
     on<CourseEvent>((event, emit) async {
@@ -28,6 +31,7 @@ class GetRecentCourseBloc extends Bloc<CourseEvent, CourseState> {
 
 class GetFilteredCourseBloc extends Bloc<CourseEvent, CourseState> {
   final GetFilteredCourse _getFilteredCourse;
+
   GetFilteredCourseBloc(this._getFilteredCourse)
       : super(const CourseState.initial()) {
     on<CourseEvent>((event, emit) async {
@@ -107,6 +111,7 @@ class GetEnrolledUserBloc extends Bloc<CourseEvent, CourseState> {
 
 class AddCourseToFavouriteBloc extends Bloc<CourseEvent, CourseState> {
   final AddCourseToFavourite _addCourseToFavourite;
+
   AddCourseToFavouriteBloc(this._addCourseToFavourite)
       : super(const CourseState.initial()) {
     on<CourseEvent>((event, emit) async {
@@ -119,6 +124,25 @@ class AddCourseToFavouriteBloc extends Bloc<CourseEvent, CourseState> {
           emit(const CourseState.loadedWithoutData());
         });
       });
+    });
+  }
+}
+
+class GetUserGradeBloc extends Bloc<CourseEvent, CourseState> {
+  final GetUserGrade _getUserGrade;
+
+  GetUserGradeBloc(this._getUserGrade) : super(const CourseState.initial()) {
+    on<CourseEvent>((event, emit) async {
+      await event.whenOrNull(
+        getUserGrade: (courseId) async {
+          emit(const CourseState.loading());
+          final result = await _getUserGrade.execute(courseId);
+          result.fold(
+            (failure) => emit(CourseState.error(failure.message)),
+            (data) => emit(CourseState.loaded(data)),
+          );
+        },
+      );
     });
   }
 }
