@@ -1,6 +1,8 @@
 # LMS PPTIK
 
-![logo](https://github.com/novannp/lms_pptik_flutter/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+<p align="center">
+   <img src="https://github.com/novannp/lms_pptik_flutter/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png">
+</p>
 
 LMS atau Learning Management System PPTIK adalah platform pembelajaran untuk membantu proses belajar mengajar yang
 terintegrasi dengan https://lms.pptik.id.
