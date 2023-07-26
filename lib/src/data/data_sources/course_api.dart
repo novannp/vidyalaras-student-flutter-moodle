@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -139,6 +140,8 @@ class CourseApiImpl implements CourseApi {
 
     if (response.statusCode == 200) {
       final result = json.decode(response.body) as List;
+
+      print(result);
       if (result.isEmpty) {
         return <UserModel>[];
       }

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -467,6 +468,17 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                                 user[index].email ?? '',
                                 style: Theme.of(context).textTheme.titleSmall,
                               ),
+                              Text(
+                                user[index].roles![0].shortname == 'student'
+                                    ? 'Student'
+                                    : 'Teacher',
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
+                              for (Group group in user[index].groups!)
+                                Text(
+                                  group.name ?? '-',
+                                  style: Theme.of(context).textTheme.titleSmall,
+                                )
                             ],
                           ),
                           actions: [
