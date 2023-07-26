@@ -51,6 +51,10 @@ dependencies:
   html_unescape: ^2.0.0
   flutter_html: ^3.0.0-beta.2
   flutter_local_notifications: ^15.1.0+1
+  url_launcher: ^6.1.12
+  flutter_file_downloader: ^1.1.2
+  open_file: ^3.3.2
+  permission_handler: ^10.4.3
 
 dev_dependencies:
   flutter_test:

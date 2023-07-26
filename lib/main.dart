@@ -11,10 +11,12 @@ import 'package:lms_pptik/src/presentation/blocs/dropdown_course/dropdown_course
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/user/user_bloc.dart';
 import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
-import 'package:lms_pptik/src/utils/observer.dart';
+
+// import 'package:lms_pptik/src/utils/observer.dart';
 import 'app.dart';
 import 'injection.dart' as di;
 import 'src/presentation/blocs/chat/chat_bloc.dart';
+import 'src/presentation/blocs/mod_assign/mod_assign_bloc.dart';
 import 'src/presentation/blocs/notification/notification_bloc.dart';
 
 void main() {
@@ -28,7 +30,7 @@ void main() {
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()!
       .requestPermission();
-  Bloc.observer = MyGlobalObserver();
+  // Bloc.observer = MyGlobalObserver();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -63,6 +65,8 @@ void main() {
         BlocProvider(
             create: (context) => di.locator<GetNotificationCountBloc>()),
         BlocProvider(create: (context) => di.locator<GetUserGradeBloc>()),
+        BlocProvider(create: (context) => di.locator<GetAssignmentListBloc>()),
+        BlocProvider(create: (context) => di.locator<GetSubmissionStatusBloc>())
       ],
       child: const LmsPPTIK(),
     ),

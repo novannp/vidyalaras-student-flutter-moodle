@@ -3,10 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:lms_pptik/src/presentation/pages/chat_page.dart';
 import 'package:lms_pptik/src/presentation/pages/course_detail.dart';
 import 'package:lms_pptik/src/presentation/pages/materi_detail_page.dart';
+import 'package:lms_pptik/src/presentation/pages/permission_page.dart';
 import 'package:lms_pptik/src/presentation/pages/search_page.dart';
 import 'package:lms_pptik/src/presentation/pages/settings_page.dart';
 
 import '../data/models/course_model.dart';
+import '../presentation/pages/assignment_page.dart';
 import '../presentation/pages/chat_detail.dart';
 import '../presentation/pages/login_page.dart';
 import '../presentation/pages/main_page.dart';
@@ -36,6 +38,15 @@ class AppRoutes {
               pageBuilder: (context, state) {
                 return const MaterialPage(
                   child: LoginPage(),
+                );
+              },
+            ),
+            GoRoute(
+              path: 'permission',
+              name: 'permission',
+              pageBuilder: (context, state) {
+                return const MaterialPage(
+                  child: PermissionPage(),
                 );
               },
             ),
@@ -74,18 +85,30 @@ class AppRoutes {
                     },
                     routes: [
                       GoRoute(
-                        path: 'chat_detail',
-                        name: 'chat_detail',
-                        pageBuilder: (context, state) {
-                          final param = state.extra as Map;
-                          return MaterialPage(
-                            child: ChatDetailPage(
-                              conversationId: param['conversationId'],
-                              memberId: param['memberId'],
-                            ),
-                          );
-                        },
-                      ),
+                          path: 'chat_detail',
+                          name: 'chat_detail',
+                          pageBuilder: (context, state) {
+                            final param = state.extra as Map;
+                            return MaterialPage(
+                              child: ChatDetailPage(
+                                conversationId: param['conversationId'],
+                                memberId: param['memberId'],
+                              ),
+                            );
+                          },
+                          routes: [
+                            GoRoute(
+                                path: 'assignment',
+                                name: 'assignment',
+                                pageBuilder: (context, state) {
+                                  final courseId = state.extra as int;
+                                  return MaterialPage(
+                                    child: AssignmentPage(
+                                      courseId: courseId,
+                                    ),
+                                  );
+                                })
+                          ]),
                     ]),
                 GoRoute(
                   path: 'settings',

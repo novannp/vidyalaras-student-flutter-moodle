@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:lms_pptik/src/data/data_sources/mod_assign_api.dart';
 import 'package:lms_pptik/src/data/data_sources/notification_api.dart';
 
 import 'package:lms_pptik/src/data/repositories/auth_repository_impl.dart';
@@ -6,6 +7,7 @@ import 'package:lms_pptik/src/data/repositories/badge_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/calendar_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/chat_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/course_repository_impl.dart';
+import 'package:lms_pptik/src/data/repositories/mod_assign_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/user_repository_impl.dart';
 import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/badge/badge_bloc.dart';
@@ -29,9 +31,11 @@ import 'src/domain/usecase/badge/badge.dart';
 import 'src/domain/usecase/calendar/calendar.dart';
 import 'src/domain/usecase/chat/chat.dart';
 import 'src/domain/usecase/course/course.dart';
+import 'src/domain/usecase/mod_assign/mod_assign.dart';
 import 'src/domain/usecase/notification/notification.dart';
 import 'src/domain/usecase/user/user.dart';
 import 'src/presentation/blocs/chat/chat_bloc.dart';
+import 'src/presentation/blocs/mod_assign/mod_assign_bloc.dart';
 import 'src/presentation/blocs/notification/notification_bloc.dart';
 import 'src/utils/helper/http_helper/http_helper.dart';
 import 'src/utils/helper/secure_storage/secure_storage.dart';
@@ -63,6 +67,8 @@ void init() {
   locator.registerFactory(() => GetUnreadMessageCountBloc(locator()));
   locator.registerFactory(() => GetNotificationsBloc(locator()));
   locator.registerFactory(() => GetNotificationCountBloc(locator()));
+  locator.registerFactory(() => GetAssignmentListBloc(locator()));
+  locator.registerFactory(() => GetSubmissionStatusBloc(locator()));
 
   //USECASE
   // AUTH
@@ -99,6 +105,10 @@ void init() {
   locator.registerFactory(() => GetNotifications(locator()));
   locator.registerFactory(() => GetNotificationCount(locator()));
 
+  // MOD ASSIGN
+  locator.registerFactory(() => GetAssignmentList(locator()));
+  locator.registerFactory(() => GetSubmissionStatus(locator()));
+
   // REPOSITORIES
   locator.registerLazySingleton(() => AuthRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(
@@ -112,6 +122,8 @@ void init() {
   locator.registerLazySingleton(() => ChatRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(
       () => NotificationRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton(
+      () => ModAssignRepositoryImpl(locator(), locator()));
 
   // API
   locator.registerLazySingleton(() => AuthApiImpl(locator()));
@@ -121,6 +133,7 @@ void init() {
   locator.registerLazySingleton(() => CourseApiImpl(locator()));
   locator.registerLazySingleton(() => ChatApiImpl(locator()));
   locator.registerLazySingleton(() => NotificationApiImpl(locator()));
+  locator.registerLazySingleton(() => ModAssignApiImpl(locator()));
 
   // HTTP
   locator.registerLazySingleton(() => HttpHelper.client);

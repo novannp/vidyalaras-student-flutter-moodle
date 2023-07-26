@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../utils/constant.dart';
 import '../../utils/helper/secure_storage/secure_storage.dart';
@@ -15,13 +16,18 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 2), () async {
-      StorageHelper().read('token').then((value) {
-        if (value != null) {
-          GoRouter.of(context).pushReplacementNamed('main');
-        } else {
-          GoRouter.of(context).pushReplacementNamed('login');
-        }
-      });
+      if (await Permission.manageExternalStorage.isDenied ||
+          await Permission.mediaLibrary.isDenied) {
+        GoRouter.of(context).pushReplacementNamed('permission');
+      } else {
+        StorageHelper().read('token').then((value) {
+          if (value != null) {
+            GoRouter.of(context).pushReplacementNamed('main');
+          } else {
+            GoRouter.of(context).pushReplacementNamed('login');
+          }
+        });
+      }
     });
     super.initState();
   }
