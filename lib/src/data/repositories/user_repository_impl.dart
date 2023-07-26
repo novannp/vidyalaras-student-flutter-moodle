@@ -16,6 +16,7 @@ class UserRepositoryImpl implements UserRepository {
   final UserApiImpl userApi;
   final StorageHelper storage;
   final NotificationPlugin notificationPlugin;
+
   UserRepositoryImpl(this.userApi, this.storage, this.notificationPlugin);
 
   @override
@@ -23,7 +24,7 @@ class UserRepositoryImpl implements UserRepository {
     try {
       final token = await storage.read('token');
       final username = await storage.read('username');
-      final user = await userApi.getUser(username, token);
+      final user = await userApi.getUser(username.replaceAll(' ', ''), token);
       notificationPlugin.showWelcomeNotification(user.name!);
       await storage.write('userId', user.id.toString());
       return Right(user);
