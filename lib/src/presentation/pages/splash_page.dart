@@ -18,6 +18,7 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(const Duration(seconds: 2), () async {
       if (await Permission.manageExternalStorage.isDenied ||
           await Permission.mediaLibrary.isDenied) {
+        if (!mounted) return;
         GoRouter.of(context).pushReplacementNamed('permission');
       } else {
         StorageHelper().read('token').then((value) {

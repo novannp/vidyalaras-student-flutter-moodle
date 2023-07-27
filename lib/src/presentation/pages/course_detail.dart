@@ -10,7 +10,7 @@ import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
 
 import '../../data/models/course_model.dart';
-import '../../data/models/user_grade_model.dart';
+import '../../data/models/user_grade_model/usergrade.dart';
 import '../blocs/course/course_bloc.dart';
 
 class CourseDetailPage extends StatefulWidget {

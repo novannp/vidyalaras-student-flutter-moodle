@@ -5,7 +5,7 @@ class SendInstantMessage {
 
   SendInstantMessage(this._chatRepositoryImpl);
 
-  Future<Either<Failure, Message>> execute(
+  Future<Either<Failure, SendMessageModel>> execute(
       {required String message, required int receiverId}) async {
     return await _chatRepositoryImpl.sendInstantMessage(receiverId, message);
   }

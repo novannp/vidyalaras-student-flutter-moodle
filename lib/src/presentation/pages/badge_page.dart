@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lms_pptik/src/data/models/badge_model.dart';
+import 'package:lms_pptik/src/data/models/badge_model/badge_model.dart';
 
 import '../../utils/helper/secure_storage/secure_storage.dart';
 import '../blocs/badge/badge_bloc.dart';

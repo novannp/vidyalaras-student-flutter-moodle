@@ -88,7 +88,7 @@ class _CalendarPageState extends State<CalendarPage> {
                 MaterialPageRoute(
                     fullscreenDialog: true,
                     builder: (context) {
-                      return AddEventScreen();
+                      return const AddEventScreen();
                     }));
           },
           label: const Text('Tambahkan Acara'),

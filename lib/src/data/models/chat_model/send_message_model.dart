@@ -1,4 +1,4 @@
-class Message {
+class SendMessageModel {
   final int msgid;
   final String text;
   final int timecreated;
@@ -6,7 +6,7 @@ class Message {
   final int useridfrom;
   final bool candeletemessagesforallusers;
 
-  Message({
+  SendMessageModel({
     required this.msgid,
     required this.text,
     required this.timecreated,
@@ -15,7 +15,8 @@ class Message {
     required this.candeletemessagesforallusers,
   });
 
-  factory Message.fromJson(Map<String, dynamic> json) => Message(
+  factory SendMessageModel.fromJson(Map<String, dynamic> json) =>
+      SendMessageModel(
         msgid: json["msgid"],
         text: json["text"],
         timecreated: json["timecreated"],

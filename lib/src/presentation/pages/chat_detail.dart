@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:lms_pptik/src/data/models/chat_model.dart';
+import 'package:lms_pptik/src/data/models/chat_model/send_message_model.dart';
 import 'package:lms_pptik/src/data/models/member_model.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/presentation/blocs/user/user_bloc.dart';
 import 'package:lms_pptik/src/utils/function.dart';
 
-import '../../data/models/conversation_model.dart';
-import '../../data/models/message_model.dart';
+import '../../data/models/chat_model/chat_model.dart';
+import '../../data/models/chat_model/message.dart';
 import '../blocs/chat/chat_bloc.dart';
 import '../components/bubble_chat.dart';
 
@@ -29,7 +29,7 @@ class ChatDetailPage extends StatefulWidget {
 class _ChatDetailPageState extends State<ChatDetailPage> {
   late ScrollController _scrollController;
   late TextEditingController _messageController;
-  List<Messages>? _messages = [];
+  List<Message>? _messages = [];
 
   late Timer timer;
 
@@ -174,7 +174,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   return state.maybeWhen(
                     loaded: (data) {
                       data as ChatModel;
-                      _messages = data.messages as List<Messages>;
+                      _messages = data.messages as List<Message>;
                       if (data.messages!.isEmpty) {
                         const Center(
                           child: Text('Belum ada pesan'),
@@ -240,6 +240,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   final showDateSection = previousMessage == null ||
                       !isSameDay(message.timecreated!.toDateTime(),
                           previousMessage.timecreated!.toDateTime());
+
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -308,31 +309,35 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
             ),
           ),
           BlocConsumer<SendInstantMessageBloc, ChatState>(
-              listener: (context, state) {
-            state.whenOrNull(loaded: (message) {
-              message as Message;
-              context.read<GetConversationMessageBloc>().add(
-                    ChatEvent.getConversationMessage(
-                      message.conversationid,
-                    ),
-                  );
-            });
-          }, builder: (context, state) {
-            return IconButton(
-              onPressed: _messageController.text.isEmpty
-                  ? null
-                  : () {
-                      context.read<SendInstantMessageBloc>().add(
-                            ChatEvent.sendInstantMessage(
-                              widget.memberId,
-                              _messageController.text,
-                            ),
-                          );
-                      _messageController.clear();
-                    },
-              icon: const Icon(Icons.send),
-            );
-          }),
+            listener: (context, state) {
+              state.whenOrNull(
+                loaded: (message) {
+                  message as SendMessageModel;
+                  context.read<GetConversationMessageBloc>().add(
+                        ChatEvent.getConversationMessage(
+                          message.conversationid,
+                        ),
+                      );
+                },
+              );
+            },
+            builder: (context, state) {
+              return IconButton(
+                onPressed: _messageController.text.isEmpty
+                    ? null
+                    : () {
+                        BlocProvider.of<SendInstantMessageBloc>(context).add(
+                          ChatEvent.sendInstantMessage(
+                            widget.memberId,
+                            _messageController.text,
+                          ),
+                        );
+                        _messageController.clear();
+                      },
+                icon: const Icon(Icons.send),
+              );
+            },
+          ),
         ],
       ),
     );

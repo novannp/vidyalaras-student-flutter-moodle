@@ -24,129 +24,129 @@ class AppRoutes {
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
-          path: splash,
-          name: 'splash',
-          pageBuilder: (context, state) {
-            return const MaterialPage(
-              child: SplashPage(),
-            );
-          },
-          routes: [
-            GoRoute(
-              path: 'login',
-              name: 'login',
+        path: splash,
+        name: 'splash',
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: SplashPage(),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/login',
+        name: 'login',
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: LoginPage(),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/permission',
+        name: 'permission',
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: PermissionPage(),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/main',
+        name: 'main',
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: MainPage());
+        },
+        routes: [
+          GoRoute(
+            path: 'search',
+            name: 'search',
+            pageBuilder: (context, state) {
+              return const MaterialPage(
+                child: SearchPage(),
+              );
+            },
+          ),
+          GoRoute(
+            path: 'notification',
+            name: 'notification',
+            pageBuilder: (context, state) {
+              return const MaterialPage(
+                child: NotificationPage(),
+              );
+            },
+          ),
+          GoRoute(
+              path: 'chat',
+              name: 'chat',
               pageBuilder: (context, state) {
                 return const MaterialPage(
-                  child: LoginPage(),
+                  child: ChatPage(),
                 );
-              },
-            ),
-            GoRoute(
-              path: 'permission',
-              name: 'permission',
-              pageBuilder: (context, state) {
-                return const MaterialPage(
-                  child: PermissionPage(),
-                );
-              },
-            ),
-            GoRoute(
-              path: 'main',
-              name: 'main',
-              pageBuilder: (context, state) {
-                return const MaterialPage(child: MainPage());
               },
               routes: [
                 GoRoute(
-                  path: 'search',
-                  name: 'search',
-                  pageBuilder: (context, state) {
-                    return const MaterialPage(
-                      child: SearchPage(),
-                    );
-                  },
-                ),
-                GoRoute(
-                  path: 'notification',
-                  name: 'notification',
-                  pageBuilder: (context, state) {
-                    return const MaterialPage(
-                      child: NotificationPage(),
-                    );
-                  },
-                ),
-                GoRoute(
-                    path: 'chat',
-                    name: 'chat',
+                    path: 'chat_detail',
+                    name: 'chat_detail',
                     pageBuilder: (context, state) {
-                      return const MaterialPage(
-                        child: ChatPage(),
+                      final param = state.extra as Map;
+                      return MaterialPage(
+                        child: ChatDetailPage(
+                          conversationId: param['conversationId'],
+                          memberId: param['memberId'],
+                        ),
                       );
                     },
                     routes: [
                       GoRoute(
-                          path: 'chat_detail',
-                          name: 'chat_detail',
+                          path: 'assignment',
+                          name: 'assignment',
                           pageBuilder: (context, state) {
-                            final param = state.extra as Map;
+                            final courseId = state.extra as int;
                             return MaterialPage(
-                              child: ChatDetailPage(
-                                conversationId: param['conversationId'],
-                                memberId: param['memberId'],
+                              child: AssignmentPage(
+                                courseId: courseId,
                               ),
                             );
-                          },
-                          routes: [
-                            GoRoute(
-                                path: 'assignment',
-                                name: 'assignment',
-                                pageBuilder: (context, state) {
-                                  final courseId = state.extra as int;
-                                  return MaterialPage(
-                                    child: AssignmentPage(
-                                      courseId: courseId,
-                                    ),
-                                  );
-                                })
-                          ]),
+                          })
                     ]),
-                GoRoute(
-                  path: 'settings',
-                  name: 'settings',
-                  pageBuilder: (context, state) {
-                    return const MaterialPage(
-                      child: SettingsPage(),
-                    );
-                  },
-                ),
-                GoRoute(
-                    path: 'course_detail',
-                    name: 'course_detail',
-                    pageBuilder: (context, state) {
-                      final course = state.extra as CourseModel;
-                      return MaterialPage(
-                        child: CourseDetailPage(course: course),
-                      );
-                    },
-                    routes: [
-                      GoRoute(
-                        path: 'materi_detail',
-                        name: 'materi_detail',
-                        pageBuilder: (context, state) {
-                          final materis = state.extra as Map;
+              ]),
+          GoRoute(
+            path: 'settings',
+            name: 'settings',
+            pageBuilder: (context, state) {
+              return const MaterialPage(
+                child: SettingsPage(),
+              );
+            },
+          ),
+          GoRoute(
+            path: 'course_detail',
+            name: 'course_detail',
+            pageBuilder: (context, state) {
+              final course = state.extra as CourseModel;
+              return MaterialPage(
+                child: CourseDetailPage(course: course),
+              );
+            },
+            routes: [
+              GoRoute(
+                path: 'materi_detail',
+                name: 'materi_detail',
+                pageBuilder: (context, state) {
+                  final materis = state.extra as Map;
 
-                          return MaterialPage(
-                            child: MateriDetailPage(
-                              materis: materis['materi'],
-                              selectedIndex: materis['selectedIndex'],
-                            ),
-                          );
-                        },
-                      ),
-                    ])
-              ],
-            )
-          ]),
+                  return MaterialPage(
+                    child: MateriDetailPage(
+                      materis: materis['materi'],
+                      selectedIndex: materis['selectedIndex'],
+                    ),
+                  );
+                },
+              ),
+            ],
+          )
+        ],
+      )
     ],
   );
 }

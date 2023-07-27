@@ -78,7 +78,7 @@ class NotificationPlugin {
 
   Future<void> downloadCompleted(String path) async {
     AndroidNotificationDetails androidNotificationDetails =
-        AndroidNotificationDetails(
+        const AndroidNotificationDetails(
       '21',
       'Download',
       visibility: NotificationVisibility.public,
@@ -91,7 +91,7 @@ class NotificationPlugin {
     await flutterLocalNotificationsPlugin.show(
       21,
       'Download Selesai',
-      '$path',
+      path,
       NotificationDetails(
         android: androidNotificationDetails,
       ),

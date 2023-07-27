@@ -145,7 +145,7 @@ class _MainPageState extends State<DashboardPage> {
                         },
                       ),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.notifications,
                       size: 20,
                     ));

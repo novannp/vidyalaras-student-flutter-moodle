@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 
-import '../../data/models/badge_model.dart';
+import '../../data/models/badge_model/badge_model.dart';
 import '../../utils/failures.dart';
 
 abstract class BadgeRepository {

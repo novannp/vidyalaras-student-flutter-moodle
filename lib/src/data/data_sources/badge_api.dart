@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 import 'package:lms_pptik/src/utils/exceptions.dart';
 
 import '../../utils/endpoints.dart';
-import '../models/badge_model.dart';
+import '../models/badge_model/badge_model.dart';
 
 abstract class BadgeApi {
   Future<List<BadgeModel>> getBadge(String token);

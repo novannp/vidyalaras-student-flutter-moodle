@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:lms_pptik/src/data/models/badge_model.dart';
+import 'package:lms_pptik/src/data/models/badge_model/badge_model.dart';
 import 'package:lms_pptik/src/utils/failures.dart';
 
 import '../../domain/repositories/badge_repository.dart';

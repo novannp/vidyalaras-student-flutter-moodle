@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../data/models/badge_model.dart';
+import '../../../data/models/badge_model/badge_model.dart';
 import '../../../domain/usecase/badge/badge.dart';
 
 part 'badge_event.dart';

@@ -1,11 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:lms_pptik/src/data/models/chat_model.dart';
-
-import 'package:lms_pptik/src/data/models/conversation_model.dart';
 import 'package:lms_pptik/src/data/models/member_model.dart';
-import 'package:lms_pptik/src/data/models/message_model.dart';
 import 'package:lms_pptik/src/utils/exceptions.dart';
 
 import 'package:lms_pptik/src/utils/failures.dart';
@@ -14,6 +10,9 @@ import '../../domain/repositories/chat_repository.dart';
 import '../../utils/helper/secure_storage/secure_storage.dart';
 
 import '../data_sources/chat_api.dart';
+import '../models/chat_model/chat_model.dart';
+import '../models/chat_model/send_message_model.dart';
+import '../models/conversation_model/conversation.dart';
 
 class ChatRepositoryImpl implements ChatRepository {
   final ChatApiImpl chatApiImpl;
@@ -68,7 +67,7 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
-  Future<Either<Failure, Message>> sendInstantMessage(
+  Future<Either<Failure, SendMessageModel>> sendInstantMessage(
       int toUserId, String message) async {
     try {
       final token = await storage.read('token');

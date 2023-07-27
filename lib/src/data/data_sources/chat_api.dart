@@ -5,10 +5,10 @@ import 'package:http/http.dart';
 
 import '../../utils/endpoints.dart';
 import '../../utils/exceptions.dart';
-import '../models/chat_model.dart';
-import '../models/conversation_model.dart';
+import '../models/chat_model/chat_model.dart';
+import '../models/chat_model/send_message_model.dart';
+import '../models/conversation_model/conversation.dart';
 import '../models/member_model.dart';
-import '../models/message_model.dart';
 
 abstract class ChatApi {
   Future<List<ConversationModel>> getConversations(
@@ -22,9 +22,8 @@ abstract class ChatApi {
     int conversationId,
   );
 
-  Future<Messages> sendMessage();
   Future<int> getUnreadConversationCount(String token, int userId);
-  Future<Message> sendInstantMessage(
+  Future<SendMessageModel> sendInstantMessage(
       String token, int toUserId, String message);
   Future<MemberModel> getMemberInfo(
       String token, int referenceUserId, int memberId);
@@ -126,7 +125,7 @@ class ChatApiImpl implements ChatApi {
   }
 
   @override
-  Future<Message> sendInstantMessage(
+  Future<SendMessageModel> sendInstantMessage(
       String token, int toUserId, String message) async {
     Uri url = Uri.https(
       Endpoints.baseUrl,
@@ -143,17 +142,12 @@ class ChatApiImpl implements ChatApi {
     final response = await client.post(url);
     if (response.statusCode == 200) {
       final result = jsonDecode(response.body) as List;
-      final message = Message.fromJson(result[0]);
+      final message = SendMessageModel.fromJson(result[0]);
+      message.toString();
       return message;
     } else {
       throw ServerException();
     }
-  }
-
-  @override
-  Future<Messages> sendMessage() {
-    // TODO: implement sendMessage
-    throw UnimplementedError();
   }
 
   @override

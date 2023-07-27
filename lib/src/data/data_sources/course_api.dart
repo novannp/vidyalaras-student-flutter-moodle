@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:lms_pptik/src/utils/exceptions.dart';
@@ -8,7 +6,7 @@ import 'package:lms_pptik/src/utils/exceptions.dart';
 import '../../utils/endpoints.dart';
 import '../models/course_model.dart';
 import '../models/materi_model.dart';
-import '../models/user_grade_model.dart';
+import '../models/user_grade_model/usergrade.dart';
 import '../models/user_model.dart';
 
 abstract class CourseApi {
@@ -141,7 +139,6 @@ class CourseApiImpl implements CourseApi {
     if (response.statusCode == 200) {
       final result = json.decode(response.body) as List;
 
-      print(result);
       if (result.isEmpty) {
         return <UserModel>[];
       }

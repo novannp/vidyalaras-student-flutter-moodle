@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:lms_pptik/src/data/models/assignment_model.dart';
 import 'package:lms_pptik/src/data/models/submission_status_model.dart';
 import 'package:lms_pptik/src/domain/repositories/mod_assign_repository.dart';
 import 'package:lms_pptik/src/utils/exceptions.dart';
@@ -9,6 +8,7 @@ import 'package:lms_pptik/src/utils/failures.dart';
 
 import '../../utils/helper/secure_storage/secure_storage.dart';
 import '../data_sources/mod_assign_api.dart';
+import '../models/assignment/assignment.dart';
 
 class ModAssignRepositoryImpl implements ModAssignRepository {
   final ModAssignApiImpl modAssignApiImpl;

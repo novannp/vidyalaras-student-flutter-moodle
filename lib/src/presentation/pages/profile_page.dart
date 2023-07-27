@@ -213,7 +213,7 @@ class ProfilePage extends StatelessWidget {
                               builder: (context) {
                                 Future.delayed(const Duration(seconds: 1), () {
                                   GoRouter.of(context).pop();
-                                  GoRouter.of(context).replaceNamed('login');
+                                  context.pushReplacement('/login');
                                 });
                                 return const SuccessDialog();
                               });

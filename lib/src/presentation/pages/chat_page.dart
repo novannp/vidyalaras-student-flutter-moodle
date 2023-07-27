@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lms_pptik/src/data/models/conversation_model.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 
+import '../../data/models/conversation_model/conversation.dart';
 import '../../utils/function.dart';
 import '../blocs/chat/chat_bloc.dart';
 
