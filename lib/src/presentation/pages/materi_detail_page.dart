@@ -80,8 +80,12 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 physics: const BouncingScrollPhysics(),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Html(data: widget.materis[index].summary),
+                    widget.materis[index].summary != null
+                        ? Html(data: widget.materis[index].summary)
+                        : const SizedBox(),
                     buildModTile(index),
                   ],
                 ),
@@ -114,6 +118,26 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                   mod.name!,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
+              ),
+            );
+          case 'lesson':
+            return ListTile(
+              onTap: () {},
+              leading: mod.modicon != null
+                  ? SizedBox(
+                      height: 40,
+                      width: 40,
+                      child: SvgPicture.asset(
+                        'assets/img/file.svg',
+                        colorFilter: const ColorFilter.mode(
+                          Colors.blue,
+                          BlendMode.srcIn,
+                        ),
+                      ))
+                  : const Icon(Icons.file_copy, size: 40),
+              title: Text(
+                mod.name!,
+                style: Theme.of(context).textTheme.labelMedium,
               ),
             );
           case 'resource':
