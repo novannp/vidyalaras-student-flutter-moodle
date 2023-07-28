@@ -43,6 +43,7 @@ class Modules {
   final String? name;
   final int? instance;
   final int? contextid;
+  final String? description;
   final int? visible;
   final bool? uservisible;
   final int? visibleoncoursepage;
@@ -67,6 +68,7 @@ class Modules {
     this.name,
     this.instance,
     this.contextid,
+    this.description,
     this.visible,
     this.uservisible,
     this.visibleoncoursepage,
@@ -90,6 +92,7 @@ class Modules {
         name = json['name'] as String?,
         instance = json['instance'] as int?,
         contextid = json['contextid'] as int?,
+        description = json['description'] as String?,
         visible = json['visible'] as int?,
         uservisible = json['uservisible'] as bool?,
         visibleoncoursepage = json['visibleoncoursepage'] as int?,

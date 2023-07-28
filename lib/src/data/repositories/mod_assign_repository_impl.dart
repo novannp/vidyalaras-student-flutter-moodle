@@ -7,7 +7,7 @@ import 'package:lms_pptik/src/utils/exceptions.dart';
 import 'package:lms_pptik/src/utils/failures.dart';
 
 import '../../utils/helper/secure_storage/secure_storage.dart';
-import '../data_sources/mod_assign_api.dart';
+import '../data_sources/mod_apis/mod_apis.dart';
 import '../models/assignment/assignment.dart';
 
 class ModAssignRepositoryImpl implements ModAssignRepository {

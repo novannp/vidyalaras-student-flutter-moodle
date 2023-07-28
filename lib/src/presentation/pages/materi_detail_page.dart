@@ -113,17 +113,24 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
         final mod = widget.materis[index].modules![i];
         switch (mod.modname) {
           case 'assign':
-            return ListTile(
-              onTap: () {},
-              leading: const Icon(
-                Icons.assignment,
-                size: 40,
-                color: Colors.amber,
-              ),
-              title: Text(
-                mod.name!.decodeHtml(),
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
+            return Column(
+              children: [
+                ListTile(
+                  onTap: () {},
+                  leading: const Icon(
+                    Icons.assignment,
+                    size: 40,
+                    color: Colors.amber,
+                  ),
+                  title: Text(
+                    mod.name!.decodeHtml(),
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                ),
+                mod.description != null
+                    ? Html(data: mod.description!)
+                    : const SizedBox()
+              ],
             );
           case 'forum':
             return Container(
@@ -150,12 +157,10 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                   ? SizedBox(
                       height: 40,
                       width: 40,
-                      child: SvgPicture.asset(
-                        'assets/img/file.svg',
-                        colorFilter: const ColorFilter.mode(
-                          Colors.blue,
-                          BlendMode.srcIn,
-                        ),
+                      child: Icon(
+                        Icons.play_lesson,
+                        size: 40,
+                        color: Colors.indigo,
                       ))
                   : const Icon(Icons.file_copy, size: 40),
               title: Text(
@@ -186,74 +191,81 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
               ),
             );
           case 'quiz':
-            return Card(
-              child: InkWell(
-                onTap: mod.uservisible! == true ? () {} : null,
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 8),
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.task,
-                            size: 40,
-                            color: Colors.cyan,
-                          ),
-                          const SizedBox(width: 10),
-                          Text(
-                            mod.name!.decodeHtml(),
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                          const Spacer(),
-                          if (mod.uservisible! == true)
-                            const SizedBox()
-                          else
-                            const Icon(Icons.lock, color: Colors.red),
-                        ],
+            return Column(
+              children: [
+                Card(
+                  child: InkWell(
+                    onTap: mod.uservisible! == true ? () {} : null,
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      const SizedBox(height: 10),
-                      Column(
+                      child: Column(
                         children: [
-                          if (mod.dates!.isNotEmpty)
-                            for (DateModel date in mod.dates!)
-                              Row(
-                                children: [
-                                  const Icon(Icons.calendar_month, size: 20),
-                                  Text.rich(
-                                    TextSpan(
-                                      text: date.label!,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium!
-                                          .copyWith(
-                                              fontWeight: FontWeight.w600),
-                                      children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.task,
+                                size: 40,
+                                color: Colors.cyan,
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                mod.name!.decodeHtml(),
+                                style: Theme.of(context).textTheme.labelMedium,
+                              ),
+                              const Spacer(),
+                              if (mod.uservisible! == true)
+                                const SizedBox()
+                              else
+                                const Icon(Icons.lock, color: Colors.red),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Column(
+                            children: [
+                              if (mod.dates!.isNotEmpty)
+                                for (DateModel date in mod.dates!)
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.calendar_month,
+                                          size: 20),
+                                      Text.rich(
                                         TextSpan(
+                                          text: date.label!,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .labelMedium,
-                                          text: DateTime
-                                                  .fromMillisecondsSinceEpoch(
-                                                      date.timestamp! * 1000)
-                                              .toString()
-                                              .formatDate(),
-                                        )
-                                      ],
-                                    ),
+                                              .labelMedium!
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w600),
+                                          children: [
+                                            TextSpan(
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelMedium,
+                                              text: DateTime
+                                                      .fromMillisecondsSinceEpoch(
+                                                          date.timestamp! *
+                                                              1000)
+                                                  .toString()
+                                                  .formatDate(),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                            ],
+                          )
                         ],
-                      )
-                    ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                if (mod.description != null) Html(data: mod.description)
+              ],
             );
           case 'label':
             return Container(

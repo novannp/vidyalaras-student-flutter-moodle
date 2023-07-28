@@ -1,5 +1,4 @@
 import 'package:get_it/get_it.dart';
-import 'package:lms_pptik/src/data/data_sources/mod_assign_api.dart';
 import 'package:lms_pptik/src/data/data_sources/notification_api.dart';
 
 import 'package:lms_pptik/src/data/repositories/auth_repository_impl.dart';
@@ -24,6 +23,7 @@ import 'src/data/data_sources/badge_api.dart';
 import 'src/data/data_sources/calendar_api.dart';
 import 'src/data/data_sources/chat_api.dart';
 import 'src/data/data_sources/course_api.dart';
+import 'src/data/data_sources/mod_apis/mod_apis.dart';
 import 'src/data/data_sources/user_api.dart';
 import 'src/data/repositories/notification_repository_impl.dart';
 import 'src/domain/usecase/auth/auth.dart';
