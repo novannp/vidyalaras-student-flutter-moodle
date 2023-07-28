@@ -86,15 +86,17 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                     widget.materis[index].summary != null
                         ? Html(data: widget.materis[index].summary)
                         : const SizedBox(),
-                    const Text(
-                      'Modul',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                    ExpansionTile(
+                      title: const Text(
+                        'Modul',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
+                      children: [buildModTile(index)],
                     ),
                     const SizedBox(height: 10),
-                    buildModTile(index),
                   ],
                 ),
               ),
@@ -264,9 +266,9 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                     ),
                   ),
                 ),
-                if (mod.description != null) Html(data: mod.description),
                 if (mod.availabilityinfo != null)
-                  Html(data: mod.availabilityinfo)
+                  Html(data: mod.availabilityinfo),
+                if (mod.description != null) Html(data: mod.description),
               ],
             );
           case 'label':
