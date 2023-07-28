@@ -6,6 +6,7 @@ import 'package:lms_pptik/src/extensions/string_extension.dart';
 class MateriDetailPage extends StatefulWidget {
   const MateriDetailPage(
       {super.key, required this.materis, required this.selectedIndex});
+
   final int selectedIndex;
   final List<MateriModel> materis;
 
@@ -16,6 +17,7 @@ class MateriDetailPage extends StatefulWidget {
 class _MateriDetailPageState extends State<MateriDetailPage> {
   late PageController _pageController;
   int _currentIndex = 0;
+
   @override
   void initState() {
     _pageController = PageController(initialPage: widget.selectedIndex);
@@ -83,15 +85,15 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
     );
   }
 
-  ListView buildModTile(int index) {
+  Widget buildModTile(int index) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: widget.materis[index].modules!.length - 1,
+      itemCount: widget.materis[index].modules!.length,
       itemBuilder: (context, i) {
         final mod = widget.materis[index].modules![i];
-        switch (mod.modplural) {
-          case 'Forums':
+        switch (mod.modname) {
+          case 'forum':
             return Container(
               decoration: BoxDecoration(
                 border: Border.all(
@@ -100,6 +102,7 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
+                onTap: () {},
                 leading: const Icon(Icons.forum, size: 40),
                 title: Text(
                   mod.name!,
@@ -107,7 +110,7 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                 ),
               ),
             );
-          case 'Quizzes':
+          case 'quiz':
             return Container(
               margin: const EdgeInsets.only(bottom: 8),
               decoration: BoxDecoration(
@@ -191,7 +194,7 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                 ],
               ),
             );
-          case 'Labels':
+          case 'label':
             return Container(
               margin: const EdgeInsets.only(bottom: 8),
               padding: const EdgeInsets.all(8),
@@ -225,7 +228,7 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                 ],
               ),
             );
-          case 'Workshops':
+          case 'workshop':
             return Container(
               padding: const EdgeInsets.only(top: 8),
               margin: const EdgeInsets.only(bottom: 8),
