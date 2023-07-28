@@ -96,13 +96,27 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
   }
 
   Widget buildModTile(int index) {
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, i) => const Divider(),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: widget.materis[index].modules!.length,
       itemBuilder: (context, i) {
         final mod = widget.materis[index].modules![i];
         switch (mod.modname) {
+          case 'assign':
+            return ListTile(
+              onTap: () {},
+              leading: const Icon(
+                Icons.assignment,
+                size: 40,
+                color: Colors.amber,
+              ),
+              title: Text(
+                mod.name!,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+            );
           case 'forum':
             return Container(
               decoration: BoxDecoration(
@@ -216,30 +230,33 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                             ),
                           ],
                         ),
-                        Row(
-                          children: [
-                            const Icon(Icons.calendar_month, size: 20),
-                            Text.rich(
-                              TextSpan(
-                                text: 'Ditutup: ',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium!
-                                    .copyWith(fontWeight: FontWeight.w600),
-                                children: [
-                                  TextSpan(
-                                    style:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    text: DateTime.fromMillisecondsSinceEpoch(
-                                            mod.dates![1]['timestamp']! * 1000)
-                                        .toString()
-                                        .formatDate(),
-                                  )
-                                ],
+                        if (mod.dates!.length > 1)
+                          Row(
+                            children: [
+                              const Icon(Icons.calendar_month, size: 20),
+                              Text.rich(
+                                TextSpan(
+                                  text: 'Ditutup: ',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium!
+                                      .copyWith(fontWeight: FontWeight.w600),
+                                  children: [
+                                    TextSpan(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelMedium,
+                                      text: DateTime.fromMillisecondsSinceEpoch(
+                                              mod.dates![1]['timestamp']! *
+                                                  1000)
+                                          .toString()
+                                          .formatDate(),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        )
+                            ],
+                          )
                       ],
                     ),
                   )
