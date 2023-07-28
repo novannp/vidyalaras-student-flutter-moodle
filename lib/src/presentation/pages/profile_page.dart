@@ -89,7 +89,20 @@ class ProfilePage extends StatelessWidget {
                   child: Column(
                     children: [
                       ListTile(
-                        onTap: () {},
+                        onTap: () {
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            useSafeArea: true,
+                            context: context,
+                            transitionAnimationController: AnimationController(
+                              vsync: Navigator.of(context),
+                              duration: const Duration(milliseconds: 300),
+                            ),
+                            builder: (context) {
+                              return const MyProfileScreen();
+                            },
+                          );
+                        },
                         leading: Container(
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
@@ -97,12 +110,12 @@ class ProfilePage extends StatelessWidget {
                             color: Colors.indigo,
                           ),
                           child: const Icon(
-                            Icons.manage_accounts,
+                            Icons.person,
                             color: Colors.white,
                             size: 20,
                           ),
                         ),
-                        title: const Text('Edit Profil'),
+                        title: const Text('Profil Saya'),
                         trailing: const Icon(
                           Icons.arrow_forward_ios,
                           size: 12,
@@ -322,6 +335,170 @@ class ProfilePage extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+}
+
+class MyProfileScreen extends StatelessWidget {
+  const MyProfileScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<GetCurrentUserBloc, UserState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: CircleAvatar(
+                  radius: 40,
+                  backgroundImage: state.maybeWhen(
+                    loading: () {
+                      return null;
+                    },
+                    loaded: (user) {
+                      return NetworkImage(user.avatar!);
+                    },
+                    orElse: () {
+                      return null;
+                    },
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Center(
+                child: Text(
+                  state.maybeWhen(
+                    loading: () {
+                      return "User";
+                    },
+                    loaded: (user) {
+                      return user.name!;
+                    },
+                    orElse: () {
+                      return "User";
+                    },
+                  ),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Profil',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Card(
+                color: Colors.grey.shade100,
+                elevation: 0,
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: const Text(
+                        'Nama pengguna',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      subtitle: Text(
+                        state.maybeWhen(
+                          loading: () {
+                            return "User";
+                          },
+                          loaded: (user) {
+                            return user.username!;
+                          },
+                          orElse: () {
+                            return "User";
+                          },
+                        ),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    const Divider(),
+                    ListTile(
+                      title: const Text(
+                        'Nama lengkap',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      subtitle: Text(
+                        state.maybeWhen(
+                          loading: () {
+                            return "User";
+                          },
+                          loaded: (user) {
+                            return user.name!;
+                          },
+                          orElse: () {
+                            return "User";
+                          },
+                        ),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    const Divider(),
+                    ListTile(
+                      title: const Text(
+                        'Email',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      subtitle: Text(
+                        state.maybeWhen(
+                          loading: () {
+                            return "User";
+                          },
+                          loaded: (user) {
+                            return user.email!;
+                          },
+                          orElse: () {
+                            return "User";
+                          },
+                        ),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    const Divider(),
+                    ListTile(
+                      title: const Text(
+                        'Role',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      subtitle: Text(
+                        state.maybeWhen(
+                          loading: () {
+                            return "User";
+                          },
+                          loaded: (user) {
+                            return user.roles?[0].name ?? "-";
+                          },
+                          orElse: () {
+                            return "User";
+                          },
+                        ),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }
