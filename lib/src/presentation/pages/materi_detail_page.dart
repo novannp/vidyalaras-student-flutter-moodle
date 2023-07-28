@@ -121,7 +121,7 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                 color: Colors.amber,
               ),
               title: Text(
-                mod.name!,
+                mod.name!.decodeHtml(),
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             );
@@ -135,9 +135,10 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
               ),
               child: ListTile(
                 onTap: () {},
-                leading: const Icon(Icons.forum, size: 40),
+                leading:
+                    const Icon(Icons.forum, size: 40, color: Colors.orange),
                 title: Text(
-                  mod.name!,
+                  mod.name!.decodeHtml(),
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),
@@ -158,7 +159,7 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                       ))
                   : const Icon(Icons.file_copy, size: 40),
               title: Text(
-                mod.name!,
+                mod.name!.decodeHtml(),
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             );
@@ -180,95 +181,78 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                       child: SvgPicture.asset('assets/img/file.svg'))
                   : const Icon(Icons.file_copy, size: 40),
               title: Text(
-                mod.name!,
+                mod.name!.decodeHtml(),
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             );
           case 'quiz':
-            return Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey.shade100,
-                ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: const Icon(Icons.check_circle, size: 40),
-                    title: Text(
-                      mod.name!,
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
+            return Card(
+              child: InkWell(
+                onTap: mod.uservisible! == true ? () {} : null,
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      border: Border.all(
-                        color: Colors.grey.shade100,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.task,
+                            size: 40,
+                            color: Colors.cyan,
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            mod.name!.decodeHtml(),
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                          const Spacer(),
+                          if (mod.uservisible! == true)
+                            const SizedBox()
+                          else
+                            const Icon(Icons.lock, color: Colors.red),
+                        ],
                       ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(Icons.calendar_month, size: 20),
-                            Text.rich(
-                              TextSpan(
-                                text: 'Dibuka: ',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium!
-                                    .copyWith(fontWeight: FontWeight.w600),
+                      const SizedBox(height: 10),
+                      Column(
+                        children: [
+                          if (mod.dates!.isNotEmpty)
+                            for (DateModel date in mod.dates!)
+                              Row(
                                 children: [
-                                  TextSpan(
-                                    style:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    text: DateTime.fromMillisecondsSinceEpoch(
-                                            mod.dates![0]['timestamp']! * 1000)
-                                        .toString()
-                                        .formatDate(),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        if (mod.dates!.length > 1)
-                          Row(
-                            children: [
-                              const Icon(Icons.calendar_month, size: 20),
-                              Text.rich(
-                                TextSpan(
-                                  text: 'Ditutup: ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelMedium!
-                                      .copyWith(fontWeight: FontWeight.w600),
-                                  children: [
+                                  const Icon(Icons.calendar_month, size: 20),
+                                  Text.rich(
                                     TextSpan(
+                                      text: date.label!,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .labelMedium,
-                                      text: DateTime.fromMillisecondsSinceEpoch(
-                                              mod.dates![1]['timestamp']! *
-                                                  1000)
-                                          .toString()
-                                          .formatDate(),
-                                    )
-                                  ],
-                                ),
+                                          .labelMedium!
+                                          .copyWith(
+                                              fontWeight: FontWeight.w600),
+                                      children: [
+                                        TextSpan(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelMedium,
+                                          text: DateTime
+                                                  .fromMillisecondsSinceEpoch(
+                                                      date.timestamp! * 1000)
+                                              .toString()
+                                              .formatDate(),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          )
-                      ],
-                    ),
-                  )
-                ],
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               ),
             );
           case 'label':
@@ -285,7 +269,7 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    mod.name!,
+                    mod.name!.decodeHtml(),
                     style: Theme.of(context)
                         .textTheme
                         .labelMedium!
@@ -321,9 +305,18 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
               child: Column(
                 children: [
                   ListTile(
-                    leading: const Icon(Icons.work, size: 40),
+                    onTap: () {
+                      log(mod.uservisible!.toString());
+                    },
+                    leading: Icon(
+                      Icons.people_alt_rounded,
+                      size: 40,
+                      color: mod.uservisible! == true
+                          ? Colors.red.shade400
+                          : Colors.grey,
+                    ),
                     title: Text(
-                      mod.name!,
+                      mod.name!.decodeHtml(),
                       style: Theme.of(context).textTheme.labelMedium,
                     ),
                     trailing: !mod.completiondata!['uservisible']
@@ -345,118 +338,55 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                   ),
                   const SizedBox(height: 8),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: !mod.completiondata!['uservisible']
-                          ? Colors.grey.shade200
-                          : Colors.white,
-                      border: Border.all(
-                        color: Colors.grey.shade100,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: !mod.completiondata!['uservisible']
+                            ? Colors.grey.shade200
+                            : Colors.white,
+                        border: Border.all(
+                          color: Colors.grey.shade100,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(Icons.calendar_month, size: 20),
-                            Text.rich(
-                              TextSpan(
-                                text: 'Pengiriman dibuka: ',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium!
-                                    .copyWith(fontWeight: FontWeight.w600),
-                                children: [
-                                  TextSpan(
-                                    style:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    text: DateTime.fromMillisecondsSinceEpoch(
-                                            mod.dates![0]['timestamp']! * 1000)
-                                        .toString()
-                                        .formatDate(),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Icon(Icons.calendar_month, size: 20),
-                            Text.rich(
-                              TextSpan(
-                                text: 'Pengiriman ditutup: ',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium!
-                                    .copyWith(fontWeight: FontWeight.w600),
-                                children: [
-                                  TextSpan(
-                                    style:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    text: DateTime.fromMillisecondsSinceEpoch(
-                                            mod.dates![1]['timestamp']! * 1000)
-                                        .toString()
-                                        .formatDate(),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Icon(Icons.calendar_month, size: 20),
-                            Text.rich(
-                              TextSpan(
-                                text: 'Penilaian dibuka: ',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium!
-                                    .copyWith(fontWeight: FontWeight.w600),
-                                children: [
-                                  TextSpan(
-                                    style:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    text: DateTime.fromMillisecondsSinceEpoch(
-                                            mod.dates![1]['timestamp']! * 1000)
-                                        .toString()
-                                        .formatDate(),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Icon(Icons.calendar_month, size: 20),
-                            Text.rich(
-                              TextSpan(
-                                text: 'Penilaian ditutup: ',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium!
-                                    .copyWith(fontWeight: FontWeight.w600),
-                                children: [
-                                  TextSpan(
-                                    style:
-                                        Theme.of(context).textTheme.labelMedium,
-                                    text: DateTime.fromMillisecondsSinceEpoch(
-                                            mod.dates![1]['timestamp']! * 1000)
-                                        .toString()
-                                        .formatDate(),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
+                      child: mod.dates!.isNotEmpty
+                          ? Column(
+                              children: [
+                                if (mod.dates!.isNotEmpty)
+                                  for (DateModel date in mod.dates!)
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.calendar_month,
+                                            size: 20),
+                                        Text.rich(
+                                          TextSpan(
+                                            text: date.label!,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelMedium!
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                            children: [
+                                              TextSpan(
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelMedium,
+                                                text: DateTime
+                                                        .fromMillisecondsSinceEpoch(
+                                                            date.timestamp! *
+                                                                1000)
+                                                    .toString()
+                                                    .formatDate(),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                              ],
+                            )
+                          : const SizedBox())
                 ],
               ),
             );

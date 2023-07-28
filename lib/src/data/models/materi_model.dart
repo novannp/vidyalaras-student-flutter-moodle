@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'content.dart';
 
 class MateriModel {
@@ -59,7 +57,7 @@ class Modules {
   final bool? noviewlink;
   final int? completion;
   final Map<String, dynamic>? completiondata;
-  final List<dynamic>? dates;
+  final List<DateModel>? dates;
   final List<Content>? contents;
 
   Modules(
@@ -106,8 +104,24 @@ class Modules {
         noviewlink = json['noviewlink'] as bool?,
         completion = json['completion'] as int?,
         completiondata = json['completiondata'] as Map<String, dynamic>?,
-        dates = json['dates'] as List?,
+        dates = (json['dates'] as List?)
+            ?.map((e) => DateModel.fromJson(e))
+            .toList(),
         contents = (json['contents'] as List?)
             ?.map((dynamic e) => Content.fromJson(e as Map<String, dynamic>))
             .toList();
+}
+
+class DateModel {
+  final String? label;
+  final int? timestamp;
+
+  DateModel({
+    this.label,
+    this.timestamp,
+  });
+
+  DateModel.fromJson(Map<String, dynamic> json)
+      : label = json['label'] as String?,
+        timestamp = json['timestamp'] as int?;
 }
