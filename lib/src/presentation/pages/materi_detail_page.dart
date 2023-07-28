@@ -264,7 +264,9 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                     ),
                   ),
                 ),
-                if (mod.description != null) Html(data: mod.description)
+                if (mod.description != null) Html(data: mod.description),
+                if (mod.availabilityinfo != null)
+                  Html(data: mod.availabilityinfo)
               ],
             );
           case 'label':

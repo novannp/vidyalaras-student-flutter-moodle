@@ -51,6 +51,7 @@ class Modules {
   final String? modname;
   final String? modplural;
   final dynamic availability;
+  final String? availabilityinfo;
   final int? indent;
   final String? onclick;
   final dynamic afterlink;
@@ -76,6 +77,7 @@ class Modules {
     this.modname,
     this.modplural,
     this.availability,
+    this.availabilityinfo,
     this.indent,
     this.onclick,
     this.afterlink,
@@ -100,6 +102,7 @@ class Modules {
         modname = json['modname'] as String?,
         modplural = json['modplural'] as String?,
         availability = json['availability'],
+        availabilityinfo = json['availabilityinfo'] as String?,
         indent = json['indent'] as int?,
         onclick = json['onclick'] as String?,
         afterlink = json['afterlink'],
