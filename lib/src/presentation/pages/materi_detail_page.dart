@@ -1,7 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lms_pptik/src/data/models/materi_model.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
+
+import '../../utils/helper/function_helper/function_helper.dart';
 
 class MateriDetailPage extends StatefulWidget {
   const MateriDetailPage(
@@ -108,6 +114,28 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                   mod.name!,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
+              ),
+            );
+          case 'resource':
+            return ListTile(
+              onTap: () {
+                FunctionHelper.downloadFileHandler(
+                    context,
+                    mod.contents?[0].filename ?? '',
+                    (mod.contents?[0].fileurl ?? '')
+                        .replaceAll('?forcedownload=1', ''));
+              },
+              trailing: Text(
+                  '${mod.contents![0].filesize?.formatFileSize() ?? '-'} '),
+              leading: mod.modicon != null
+                  ? SizedBox(
+                      height: 40,
+                      width: 40,
+                      child: SvgPicture.asset('assets/img/file.svg'))
+                  : const Icon(Icons.file_copy, size: 40),
+              title: Text(
+                mod.name!,
+                style: Theme.of(context).textTheme.labelMedium,
               ),
             );
           case 'quiz':
