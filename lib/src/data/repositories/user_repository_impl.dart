@@ -32,8 +32,19 @@ class UserRepositoryImpl implements UserRepository {
       return const Left(ConnectionFailure('Tidak ada koneksi internet'));
     } on NotFoundException {
       return const Left(ServerFailure('User tidak ditemukan'));
-    } catch (e) {
-      return const Left(ServerFailure('Terjadi kesalahan'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> updatePicture(int itemId) async {
+    try {
+      final token = await storage.read('token');
+      final result = await userApi.updatePicture(token, itemId);
+      return Right(result);
+    } on SocketException {
+      return const Left(ConnectionFailure('Tidak ada koneksi internet'));
+    } on ServerException {
+      return const Left(ServerFailure('Tidak dapat mengupload file'));
     }
   }
 }

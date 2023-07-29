@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:lms_pptik/src/domain/usecase/user/update_picture.dart';
 import 'package:lms_pptik/src/domain/usecase/user/user.dart';
 
 import '../../../data/models/user_model.dart';
@@ -16,6 +17,24 @@ class GetCurrentUserBloc extends Bloc<UserEvent, UserState> {
         getCurrenctUser: () async {
           emit(const UserState.loading());
           final result = await _getCurrentUser();
+          result.fold(
+            (l) => emit(UserState.error(l.message)),
+            (r) => emit(UserState.loaded(r)),
+          );
+        },
+      );
+    });
+  }
+}
+
+class UpdatePictureBloc extends Bloc<UserEvent, UserState> {
+  final UpdatePicture _updatePicture;
+  UpdatePictureBloc(this._updatePicture) : super(const UserState.initial()) {
+    on<UserEvent>((event, emit) async {
+      await event.whenOrNull(
+        updatePicture: (itemId) async {
+          emit(const UserState.loading());
+          final result = await _updatePicture.execute(itemId);
           result.fold(
             (l) => emit(UserState.error(l.message)),
             (r) => emit(UserState.loaded(r)),

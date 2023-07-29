@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
 
+import '../../data/models/user_model.dart';
 import '../../utils/constant.dart';
 import '../blocs/user/user_bloc.dart';
 import '../components/course_card.dart';
@@ -38,6 +40,7 @@ class ProfilePage extends StatelessWidget {
                             return null;
                           },
                           loaded: (user) {
+                            user as UserModel;
                             return NetworkImage(user.avatar!);
                           },
                           orElse: () {
@@ -55,6 +58,7 @@ class ProfilePage extends StatelessWidget {
                                 return "User";
                               },
                               loaded: (user) {
+                                user as UserModel;
                                 return user.name!;
                               },
                               orElse: () {
@@ -72,6 +76,7 @@ class ProfilePage extends StatelessWidget {
                                 return 'Username | Email';
                               },
                               loaded: (user) {
+                                user as UserModel;
                                 return '${user.username} | ${user.email}';
                               },
                               orElse: () {
@@ -92,6 +97,7 @@ class ProfilePage extends StatelessWidget {
                         onTap: () {
                           showModalBottomSheet(
                             isScrollControlled: true,
+                            showDragHandle: true,
                             useSafeArea: true,
                             context: context,
                             transitionAnimationController: AnimationController(
@@ -339,8 +345,39 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
-class MyProfileScreen extends StatelessWidget {
+class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({super.key});
+
+  @override
+  State<MyProfileScreen> createState() => _MyProfileScreenState();
+}
+
+class _MyProfileScreenState extends State<MyProfileScreen> {
+  Future<XFile?> pickImage() async {
+    final ImagePicker _picker = ImagePicker();
+    XFile? pickedFile;
+
+    try {
+      pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    } catch (e) {
+      print('Error picking image: $e');
+    }
+
+    return pickedFile;
+  }
+
+  Future<XFile?> captureImage() async {
+    final ImagePicker _picker = ImagePicker();
+    XFile? pickedFile;
+
+    try {
+      pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    } catch (e) {
+      print('Error picking image: $e');
+    }
+
+    return pickedFile;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -350,21 +387,68 @@ class MyProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Center(
-                child: CircleAvatar(
-                  radius: 40,
-                  backgroundImage: state.maybeWhen(
-                    loading: () {
-                      return null;
-                    },
-                    loaded: (user) {
-                      return NetworkImage(user.avatar!);
-                    },
-                    orElse: () {
-                      return null;
-                    },
-                  ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 40,
+                      backgroundImage: state.maybeWhen(
+                        loading: () {
+                          return null;
+                        },
+                        loaded: (user) {
+                          user as UserModel;
+                          return NetworkImage(user.avatar!);
+                        },
+                        orElse: () {
+                          return null;
+                        },
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const SizedBox(height: 20),
+                                    ListTile(
+                                      onTap: () async {
+                                        pickImage().then((value) {});
+                                      },
+                                      leading: const Icon(Icons.image),
+                                      title: Text('Pilih dari galeri'),
+                                    ),
+                                    ListTile(
+                                      onTap: () {
+                                        captureImage();
+                                      },
+                                      leading: const Icon(Icons.camera),
+                                      title: Text('Ambil foto'),
+                                    ),
+                                  ],
+                                );
+                              });
+                        },
+                        child: const CircleAvatar(
+                          radius: 14,
+                          child: Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                            size: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 10),
@@ -375,6 +459,7 @@ class MyProfileScreen extends StatelessWidget {
                       return "User";
                     },
                     loaded: (user) {
+                      user as UserModel;
                       return user.name!;
                     },
                     orElse: () {
@@ -412,6 +497,7 @@ class MyProfileScreen extends StatelessWidget {
                             return "User";
                           },
                           loaded: (user) {
+                            user as UserModel;
                             return user.username!;
                           },
                           orElse: () {
@@ -435,6 +521,7 @@ class MyProfileScreen extends StatelessWidget {
                             return "User";
                           },
                           loaded: (user) {
+                            user as UserModel;
                             return user.name!;
                           },
                           orElse: () {
@@ -458,6 +545,7 @@ class MyProfileScreen extends StatelessWidget {
                             return "User";
                           },
                           loaded: (user) {
+                            user as UserModel;
                             return user.email!;
                           },
                           orElse: () {
@@ -481,7 +569,8 @@ class MyProfileScreen extends StatelessWidget {
                             return "User";
                           },
                           loaded: (user) {
-                            return user.roles?[0].name ?? "-";
+                            user as UserModel;
+                            return user.roles?[0].shortname ?? "-";
                           },
                           orElse: () {
                             return "User";

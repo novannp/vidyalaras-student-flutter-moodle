@@ -1,14 +1,17 @@
 import 'package:get_it/get_it.dart';
 import 'package:lms_pptik/src/data/data_sources/notification_api.dart';
+import 'package:lms_pptik/src/data/data_sources/upload_api.dart';
 
 import 'package:lms_pptik/src/data/repositories/auth_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/badge_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/calendar_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/chat_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/course_repository_impl.dart';
+import 'package:lms_pptik/src/data/repositories/upload_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/user_repository_impl.dart';
 import 'package:lms_pptik/src/domain/usecase/chat/delete_conversations.dart';
 import 'package:lms_pptik/src/domain/usecase/mods/mod_resource/mod_resource.dart';
+import 'package:lms_pptik/src/domain/usecase/user/update_picture.dart';
 import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/badge/badge_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/calendar/calendar_bloc.dart';
@@ -17,6 +20,7 @@ import 'package:lms_pptik/src/presentation/blocs/cubit/dark_mode_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/dropdown_course/dropdown_course_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/mods/mod_resource/mod_resource_bloc.dart';
+import 'package:lms_pptik/src/presentation/blocs/upload/upload_file_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/user/user_bloc.dart';
 import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
 
@@ -36,6 +40,7 @@ import 'src/domain/usecase/chat/chat.dart';
 import 'src/domain/usecase/course/course.dart';
 import 'src/domain/usecase/mods/mod_assign/mod_assign.dart';
 import 'src/domain/usecase/notification/notification.dart';
+import 'src/domain/usecase/upload/upload_file.dart';
 import 'src/domain/usecase/user/user.dart';
 import 'src/presentation/blocs/chat/chat_bloc.dart';
 import 'src/presentation/blocs/mods/mod_assign/mod_assign_bloc.dart';
@@ -75,7 +80,8 @@ void init() {
   locator.registerFactory(() => GetSubmissionStatusBloc(locator()));
   locator.registerFactory(() => GetResourceByCourseBloc(locator()));
   locator.registerFactory(() => ViewResourceBloc(locator()));
-
+  locator.registerFactory(() => UploadFileBloc(locator()));
+  locator.registerFactory(() => UpdatePictureBloc(locator()));
   //USECASE
   // AUTH
   locator.registerFactory(() => Login(locator()));
@@ -83,6 +89,7 @@ void init() {
 
   //USER
   locator.registerFactory(() => GetCurrentUser(locator()));
+  locator.registerFactory(() => UpdatePicture(locator()));
 
   // BADGE
   locator.registerFactory(() => GetBadge(locator()));
@@ -120,6 +127,9 @@ void init() {
   locator.registerFactory(() => GetResourceByCourse(locator()));
   locator.registerFactory(() => ViewResource(locator()));
 
+  // UPLOAD
+  locator.registerFactory(() => UploadFile(locator()));
+
   // REPOSITORIES
   locator.registerLazySingleton(() => AuthRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(
@@ -137,6 +147,8 @@ void init() {
       () => ModAssignRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(
       () => ModResourceRepositoryImpl(locator(), locator()));
+  locator
+      .registerLazySingleton(() => UploadRepositoryImpl(locator(), locator()));
 
   // API
   locator.registerLazySingleton(() => AuthApiImpl(locator()));
@@ -148,6 +160,8 @@ void init() {
   locator.registerLazySingleton(() => NotificationApiImpl(locator()));
   locator.registerLazySingleton(() => ModAssignApiImpl(locator()));
   locator.registerLazySingleton(() => ModResourceApiImpl(locator()));
+  locator.registerLazySingleton(() => UploadApiImpl(locator()));
+
   // HTTP
   locator.registerLazySingleton(() => HttpHelper.client);
 

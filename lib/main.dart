@@ -10,6 +10,7 @@ import 'package:lms_pptik/src/presentation/blocs/cubit/dark_mode_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/dropdown_course/dropdown_course_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/mods/mod_resource/mod_resource_bloc.dart';
+import 'package:lms_pptik/src/presentation/blocs/upload/upload_file_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/user/user_bloc.dart';
 import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
 
@@ -57,7 +58,7 @@ void main() {
           create: (context) => di.locator<GetMemberInfoBloc>(),
         ),
         BlocProvider(create: (context) => di.locator<SendInstantMessageBloc>()),
-        BlocProvider(create: (context)=>di.locator<DeleteConversationBloc>()),
+        BlocProvider(create: (context) => di.locator<DeleteConversationBloc>()),
         BlocProvider(
           create: (context) => di.locator<AuthLogoutBloc>(),
         ),
@@ -73,6 +74,8 @@ void main() {
         BlocProvider(
             create: (context) => di.locator<GetResourceByCourseBloc>()),
         BlocProvider(create: (context) => di.locator<ViewResourceBloc>()),
+        BlocProvider(create: (context) => di.locator<UploadFileBloc>()),
+        BlocProvider(create: (context) => di.locator<UpdatePictureBloc>()),
       ],
       child: const LmsPPTIK(),
     ),

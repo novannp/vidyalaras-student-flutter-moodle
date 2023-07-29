@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lms_pptik/src/data/models/user_model.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
 import 'package:lms_pptik/src/presentation/blocs/notification/notification_bloc.dart';
 import 'package:lms_pptik/src/utils/constant.dart';
@@ -162,6 +163,7 @@ class _MainPageState extends State<DashboardPage> {
               },
               loading: () => const Text('Loading...'),
               loaded: (user) {
+                user as UserModel;
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -202,6 +204,7 @@ class _MainPageState extends State<DashboardPage> {
                 child: CircleAvatar(),
               ),
               loaded: (user) {
+                user as UserModel;
                 return Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: CircleAvatar(

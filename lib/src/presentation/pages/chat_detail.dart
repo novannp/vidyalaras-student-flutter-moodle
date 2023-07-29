@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:lms_pptik/src/data/models/chat_model/send_message_model.dart';
 import 'package:lms_pptik/src/data/models/member_model.dart';
+import 'package:lms_pptik/src/data/models/user_model.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/presentation/blocs/user/user_bloc.dart';
 import 'package:lms_pptik/src/presentation/components/snackbar.dart';
@@ -107,7 +108,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                                   context.pop();
                                   context.pop();
                                   showSnackbar(context, "Berhasil dihapus");
-                                  context.read<GetConversationsBloc>().add(const ChatEvent.getConversations());
+                                  context
+                                      .read<GetConversationsBloc>()
+                                      .add(const ChatEvent.getConversations());
                                 });
                               },
                               builder: (context, state) {
@@ -278,6 +281,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                           date: message.timecreated!.toHoursString(),
                           isReceiver: message.useridfrom !=
                               state.maybeWhen(loaded: (data) {
+                                data as UserModel;
                                 data;
                                 return data.id;
                               }, orElse: () {

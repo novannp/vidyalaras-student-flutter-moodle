@@ -28,7 +28,8 @@ abstract class ChatApi {
   Future<MemberModel> getMemberInfo(
       String token, int referenceUserId, int memberId);
 
-  Future deleteConversation(String token, int userId, List<int> conversationIds);
+  Future deleteConversation(
+      String token, int userId, List<int> conversationIds);
 }
 
 class ChatApiImpl implements ChatApi {
@@ -180,7 +181,8 @@ class ChatApiImpl implements ChatApi {
   }
 
   @override
-  Future deleteConversation(String token, int userId, List<int> conversationIds) async{
+  Future deleteConversation(
+      String token, int userId, List<int> conversationIds) async {
     Uri url = Uri.https(
       Endpoints.baseUrl,
       Endpoints.rest,
@@ -189,16 +191,13 @@ class ChatApiImpl implements ChatApi {
         "wsfunction": "core_message_delete_conversations_by_id",
         "moodlewsrestformat": "json",
         "userid": userId,
-        "conversationids[0]": conversationIds[0] ,
+        "conversationids[0]": conversationIds[0],
       }.map(
-            (key, value) => MapEntry(key, value.toString()),
+        (key, value) => MapEntry(key, value.toString()),
       ),
     );
 
-    print("URL = $url");
-
     final response = await client.get(url);
-    print("RESPONSE ${response.body}");
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -206,6 +205,4 @@ class ChatApiImpl implements ChatApi {
       // throw ServerException();
     }
   }
-
-
 }

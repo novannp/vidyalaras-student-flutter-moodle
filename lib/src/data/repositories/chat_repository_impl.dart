@@ -97,11 +97,13 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> deleteConversations(List<int> conversationIds)async {
+  Future<Either<Failure, bool>> deleteConversations(
+      List<int> conversationIds) async {
     try {
       final token = await storage.read('token');
       final userId = await storage.read('userId');
-      final result = await chatApiImpl.deleteConversation(token, int.parse(userId), conversationIds);
+      final result = await chatApiImpl.deleteConversation(
+          token, int.parse(userId), conversationIds);
       return const Right(true);
     } on SocketException {
       return const Left(ConnectionFailure("Tidak ada koneksi internet"));
@@ -110,5 +112,4 @@ class ChatRepositoryImpl implements ChatRepository {
     }
     throw UnimplementedError();
   }
-
 }
