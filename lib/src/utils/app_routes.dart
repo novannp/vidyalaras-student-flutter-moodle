@@ -4,6 +4,7 @@ import 'package:lms_pptik/src/presentation/pages/chat_page.dart';
 import 'package:lms_pptik/src/presentation/pages/course_detail.dart';
 import 'package:lms_pptik/src/presentation/pages/materi_detail_page.dart';
 import 'package:lms_pptik/src/presentation/pages/permission_page.dart';
+import 'package:lms_pptik/src/presentation/pages/resource_page.dart';
 import 'package:lms_pptik/src/presentation/pages/search_page.dart';
 import 'package:lms_pptik/src/presentation/pages/settings_page.dart';
 
@@ -105,6 +106,17 @@ class AppRoutes {
                             return MaterialPage(
                               child: AssignmentPage(
                                 courseId: courseId,
+                              ),
+                            );
+                          }),
+                      GoRoute(
+                          path: 'resource',
+                          name: 'resource',
+                          pageBuilder: (context, state) {
+                            final course = state.extra as CourseModel;
+                            return MaterialPage(
+                              child: ResourcePage(
+                                course: course,
                               ),
                             );
                           })

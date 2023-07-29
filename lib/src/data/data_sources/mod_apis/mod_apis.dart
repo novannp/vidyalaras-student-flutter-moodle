@@ -6,4 +6,6 @@ import 'package:lms_pptik/src/utils/endpoints.dart';
 
 import '../../../utils/exceptions.dart';
 import '../../models/assignment/assignment.dart';
+import '../../models/resource_model/resource.dart';
 part 'mod_assign_api.dart';
+part 'mod_resource_api.dart';

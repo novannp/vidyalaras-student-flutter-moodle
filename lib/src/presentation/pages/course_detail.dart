@@ -68,6 +68,17 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                       leading: const Icon(Icons.book, color: Colors.pink),
                       title: const Text('Assignment'),
                     ),
+                    ListTile(
+                      onTap: () {
+                        GoRouter.of(context)
+                            .pushNamed('resource', extra: widget.course);
+                      },
+                      leading: const Icon(
+                        Icons.file_copy_rounded,
+                        color: Colors.lightGreen,
+                      ),
+                      title: const Text('File'),
+                    ),
                     const ListTile(
                       leading: Icon(
                         Icons.people,
@@ -86,13 +97,6 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                       leading: Icon(Icons.quiz_outlined,
                           color: Colors.deepPurpleAccent),
                       title: Text('Kuis'),
-                    ),
-                    const ListTile(
-                      leading: Icon(
-                        Icons.file_copy_rounded,
-                        color: Colors.lightGreen,
-                      ),
-                      title: Text('Sumber Daya'),
                     ),
                     const ListTile(
                       leading: Icon(

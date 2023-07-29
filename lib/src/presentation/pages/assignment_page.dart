@@ -8,7 +8,8 @@ import 'package:lms_pptik/src/extensions/string_extension.dart';
 import '../../data/models/assignment/assignment.dart';
 import '../../data/models/submission_status_model.dart';
 import '../../utils/helper/function_helper/function_helper.dart';
-import '../blocs/mod_assign/mod_assign_bloc.dart';
+import '../blocs/mods/mod_assign/mod_assign_bloc.dart';
+import '../blocs/mods/mod_state.dart';
 
 class AssignmentPage extends StatefulWidget {
   const AssignmentPage({super.key, required this.courseId});
@@ -36,7 +37,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
       appBar: AppBar(
         title: const Text('Daftar Tugas'),
       ),
-      body: BlocBuilder<GetAssignmentListBloc, ModAssignState>(
+      body: BlocBuilder<GetAssignmentListBloc, ModState>(
         builder: (context, state) {
           return state.maybeWhen(
             loading: () => const Center(
@@ -127,7 +128,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
                   ),
                 ),
                 const Divider(),
-                BlocBuilder<GetSubmissionStatusBloc, ModAssignState>(
+                BlocBuilder<GetSubmissionStatusBloc, ModState>(
                     builder: (context, state) {
                   return state.maybeWhen(
                       loading: () => const Center(

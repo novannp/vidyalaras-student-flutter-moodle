@@ -17,6 +17,7 @@ class LmsPPTIK extends StatelessWidget {
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
             SfGlobalLocalizations.delegate
           ],
           supportedLocales: const [Locale('id')],
