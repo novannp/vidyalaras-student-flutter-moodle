@@ -107,68 +107,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                                   top: 20, left: 20, right: 20),
                               child: Wrap(
                                 children: [
-                                  BlocConsumer<SetConversationsFavoriteBloc,
-                                      ChatState>(
-                                    listener: (context, state) {
-                                      state.whenOrNull(loaded: (status){
-                                        Navigator.of(context).pop();
-                                        showSnackbar(
-                                            context, "Berhasil ditambahkan ke favorite");
-                                        context.read<GetConversationBetweenUserBloc>().add(
-                                            ChatEvent.getConversationBetweenUser(widget.memberId));
-                                      });
-                                    },
-                                    builder: (context, state) {
-                                      return ListTile(
-                                        leading: data.isfavourite!
-                                            ? const Icon(
-                                                Icons.favorite,
-                                                color: Colors.pink,
-                                              )
-                                            : const Icon(Icons.favorite),
-                                        title:
-                                            const Text('Tambahkan ke favorit'),
-                                        onTap: () {
-                                          context
-                                              .read<
-                                                  SetConversationsFavoriteBloc>()
-                                              .add(ChatEvent
-                                                  .setConversationFavorite(
-                                                      data.id!));
-                                        },
-                                      );
-                                    },
-                                  ),
-                                  BlocConsumer<DeleteConversationBloc,
-                                      ChatState>(
-                                    listener: (context, state) {
-                                      state.whenOrNull(loaded: (message) {
-                                        Navigator.of(context).pop();
-                                        Navigator.of(context).pop();
-                                        showSnackbar(
-                                            context, "Berhasil dihapus");
-                                        context
-                                            .read<GetConversationsBloc>()
-                                            .add(const ChatEvent
-                                                .getConversations());
-                                      });
-                                    },
-                                    builder: (context, state) {
-                                      return ListTile(
-                                        leading: const Icon(Icons.delete),
-                                        title: const Text('Hapus Percakapan'),
-                                        onTap: () {
-                                          context
-                                              .read<DeleteConversationBloc>()
-                                              .add(
-                                                ChatEvent.deleteConversation(
-                                                  data.id!,
-                                                ),
-                                              );
-                                        },
-                                      );
-                                    },
-                                  ),
+                                  _favoriteOption(data),
+                                  _removeOption(data),
                                   const ListTile(
                                     leading: Icon(Icons.block),
                                     title: Text('Blokir'),
@@ -287,6 +227,111 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
           ],
         ),
       ),
+    );
+  }
+
+  MultiBlocListener _favoriteOption(ConversationModel data) {
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<SetConversationsFavoriteBloc, ChatState>(
+          listener: (context, state) {
+            state.whenOrNull(loaded: (status) {
+              context.pop();
+              showSnackbar(
+                context,
+                "Berhasil ditambahkan ke favorite",
+              );
+              context
+                  .read<GetConversationBetweenUserBloc>()
+                  .add(ChatEvent.getConversationBetweenUser(widget.memberId));
+            });
+          },
+        ),
+        BlocListener<UnsetConversationsFavoriteBloc, ChatState>(
+          listener: (context, state) {
+            state.whenOrNull(loaded: (status) {
+              context.pop();
+              showSnackbar(
+                context,
+                "Berhasil dihapus dari favorite",
+              );
+              context
+                  .read<GetConversationBetweenUserBloc>()
+                  .add(ChatEvent.getConversationBetweenUser(widget.memberId));
+            });
+          },
+        ),
+      ],
+      child: ListTile(
+        leading: data.isfavourite!
+            ? const Icon(
+                Icons.favorite,
+                color: Colors.pink,
+              )
+            : const Icon(Icons.favorite),
+        title: Text(
+            data.isfavourite! ? "Hapus dari favorit" : 'Tambahkan ke favorit'),
+        onTap: () {
+          print(data.isfavourite!);
+          if (data.isfavourite!) {
+            print("UNSET");
+            context
+                .read<UnsetConversationsFavoriteBloc>()
+                .add(ChatEvent.unsetConversationFavorite(data.id!));
+          } else {
+            context
+                .read<SetConversationsFavoriteBloc>()
+                .add(ChatEvent.setConversationFavorite(data.id!));
+          }
+        },
+      ),
+    );
+
+  }
+
+  BlocConsumer<DeleteConversationBloc, ChatState> _removeOption(
+      ConversationModel data) {
+    return BlocConsumer<DeleteConversationBloc, ChatState>(
+      listener: (context, state) {
+        state.whenOrNull(loaded: (message) {
+          Navigator.of(context).pop();
+          Navigator.of(context).pop();
+          GoRouter.of(context).pushReplacementNamed('chat');
+          showSnackbar(context, "Berhasil dihapus");
+          context
+              .read<GetConversationsBloc>()
+              .add(const ChatEvent.getConversations());
+        });
+      },
+      builder: (context, state) {
+        return ListTile(
+          leading: const Icon(Icons.delete),
+          title: const Text('Hapus Percakapan'),
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                      title: const Text("Yakin menghapus percakapan ini?"),
+                      actions: [
+                        OutlinedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("Kembali")),
+                        ElevatedButton(
+                            onPressed: () {
+                              context.read<DeleteConversationBloc>().add(
+                                    ChatEvent.deleteConversation(
+                                      data.id!,
+                                    ),
+                                  );
+                            },
+                            child: const Text("Hapus"))
+                      ],
+                    ));
+          },
+        );
+      },
     );
   }
 

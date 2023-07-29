@@ -71,6 +71,7 @@ void init() {
   locator.registerFactory(() => GetMemberInfoBloc(locator()));
   locator.registerFactory(() => SendInstantMessageBloc(locator()));
   locator.registerFactory(() => SetConversationsFavoriteBloc(locator()));
+  locator.registerFactory(() => UnsetConversationsFavoriteBloc(locator()));
   locator.registerFactory(() => GetConversationBetweenUserBloc(locator()));
   locator.registerFactory(() => DeleteConversationBloc(locator()));
   locator.registerFactory(() => AuthLogoutBloc(locator()));
@@ -115,6 +116,7 @@ void init() {
   locator.registerFactory(() => SendInstantMessage(locator()));
   locator.registerFactory(() => GetUnreadMessageCount(locator()));
   locator.registerFactory(() => SetConversationsFavorite(locator()));
+  locator.registerFactory(() => UnsetConversationsFavorite(locator()));
   locator.registerFactory(() => GetConversationsBetweenUser(locator()));
   locator.registerFactory(() => DeleteConversation(locator()));
 

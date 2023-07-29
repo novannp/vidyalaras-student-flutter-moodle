@@ -125,6 +125,20 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
+  Future<Either<Failure, bool>> unsetFavoriteConversations(int conversations)async {
+    try {
+      final token = await storage.read('token');
+      final userId = await storage.read('userId');
+      final result = await chatApiImpl.unsetConversationFavorite(token, int.parse(userId), conversations);
+      return Right(result);
+    } on SocketException {
+      return const Left(ConnectionFailure("Tidak ada koneksi internet"));
+    } on ServerException {
+      return const Left(ServerFailure("Terjadi kesalahan pada server"));
+    }
+  }
+
+  @override
   Future<Either<Failure, ConversationModel>> getConversationsBetweenUser(int otheruserid)async {
     try {
       final token = await storage.read('token');
@@ -137,5 +151,9 @@ class ChatRepositoryImpl implements ChatRepository {
       return const Left(ServerFailure("Terjadi kesalahan pada server"));
     }
   }
+
+
+
+
 
 }

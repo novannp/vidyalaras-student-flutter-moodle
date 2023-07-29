@@ -34,6 +34,8 @@ abstract class ChatApi {
 
   Future setConversationFavorite(
       String token, int userId, int conversations);
+  Future unsetConversationFavorite(
+      String token, int userId, int conversations);
 
   Future deleteConversation(
       String token, int userId, int conversationIds);
@@ -229,6 +231,8 @@ class ChatApiImpl implements ChatApi {
       ),
     );
 
+    print(url);
+
     final response = await client.get(url);
     print(response.body);
     if (response.statusCode == 200) {
@@ -265,6 +269,32 @@ class ChatApiImpl implements ChatApi {
       return data;
     } else {
       throw ServerException();
+    }
+  }
+
+  @override
+  Future unsetConversationFavorite(String token, int userId, int conversations) async{
+    Uri url = Uri.https(
+      Endpoints.baseUrl,
+      Endpoints.rest,
+      {
+        "wstoken": token,
+        "wsfunction": "core_message_unset_favourite_conversations",
+        "moodlewsrestformat": "json",
+        "userid": userId,
+        "conversations[0]": conversations,
+      }.map(
+            (key, value) => MapEntry(key, value.toString()),
+      ),
+    );
+    print(url);
+
+    final response = await client.get(url);
+    print(response.body);
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 

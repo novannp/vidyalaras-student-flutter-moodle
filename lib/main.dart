@@ -60,6 +60,7 @@ void main() {
         BlocProvider(create: (context) => di.locator<SendInstantMessageBloc>()),
         BlocProvider(create: (context) => di.locator<GetConversationBetweenUserBloc>()),
         BlocProvider(create: (context) => di.locator<SetConversationsFavoriteBloc>()),
+        BlocProvider(create: (context) => di.locator<UnsetConversationsFavoriteBloc>()),
         BlocProvider(create: (context)=>di.locator<DeleteConversationBloc>()),
         BlocProvider(
           create: (context) => di.locator<AuthLogoutBloc>(),

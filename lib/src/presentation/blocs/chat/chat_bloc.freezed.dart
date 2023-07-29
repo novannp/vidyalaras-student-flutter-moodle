@@ -25,6 +25,7 @@ mixin _$ChatEvent {
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
     required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversations) unsetConversationFavorite,
     required TResult Function(int conversationIds) deleteConversation,
     required TResult Function(int otherUserId) getConversationBetweenUser,
   }) =>
@@ -38,6 +39,7 @@ mixin _$ChatEvent {
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
     TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversations)? unsetConversationFavorite,
     TResult? Function(int conversationIds)? deleteConversation,
     TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) =>
@@ -51,6 +53,7 @@ mixin _$ChatEvent {
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
     TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversations)? unsetConversationFavorite,
     TResult Function(int conversationIds)? deleteConversation,
     TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
@@ -68,6 +71,8 @@ mixin _$ChatEvent {
         getUnreadMessageCount,
     required TResult Function(_SetFavoriteConversations value)
         setConversationFavorite,
+    required TResult Function(_UnsetFavoriteConversations value)
+        unsetConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
     required TResult Function(_GetConversationBetweenUser value)
         getConversationBetweenUser,
@@ -82,6 +87,8 @@ mixin _$ChatEvent {
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult? Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
     TResult? Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -96,6 +103,8 @@ mixin _$ChatEvent {
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
     TResult Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -166,6 +175,7 @@ class _$_GetConversations implements _GetConversations {
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
     required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversations) unsetConversationFavorite,
     required TResult Function(int conversationIds) deleteConversation,
     required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
@@ -182,6 +192,7 @@ class _$_GetConversations implements _GetConversations {
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
     TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversations)? unsetConversationFavorite,
     TResult? Function(int conversationIds)? deleteConversation,
     TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
@@ -198,6 +209,7 @@ class _$_GetConversations implements _GetConversations {
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
     TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversations)? unsetConversationFavorite,
     TResult Function(int conversationIds)? deleteConversation,
     TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
@@ -221,6 +233,8 @@ class _$_GetConversations implements _GetConversations {
         getUnreadMessageCount,
     required TResult Function(_SetFavoriteConversations value)
         setConversationFavorite,
+    required TResult Function(_UnsetFavoriteConversations value)
+        unsetConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
     required TResult Function(_GetConversationBetweenUser value)
         getConversationBetweenUser,
@@ -238,6 +252,8 @@ class _$_GetConversations implements _GetConversations {
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult? Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
     TResult? Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -255,6 +271,8 @@ class _$_GetConversations implements _GetConversations {
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
     TResult Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -344,6 +362,7 @@ class _$_GetConversationMessage implements _GetConversationMessage {
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
     required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversations) unsetConversationFavorite,
     required TResult Function(int conversationIds) deleteConversation,
     required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
@@ -360,6 +379,7 @@ class _$_GetConversationMessage implements _GetConversationMessage {
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
     TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversations)? unsetConversationFavorite,
     TResult? Function(int conversationIds)? deleteConversation,
     TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
@@ -376,6 +396,7 @@ class _$_GetConversationMessage implements _GetConversationMessage {
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
     TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversations)? unsetConversationFavorite,
     TResult Function(int conversationIds)? deleteConversation,
     TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
@@ -399,6 +420,8 @@ class _$_GetConversationMessage implements _GetConversationMessage {
         getUnreadMessageCount,
     required TResult Function(_SetFavoriteConversations value)
         setConversationFavorite,
+    required TResult Function(_UnsetFavoriteConversations value)
+        unsetConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
     required TResult Function(_GetConversationBetweenUser value)
         getConversationBetweenUser,
@@ -416,6 +439,8 @@ class _$_GetConversationMessage implements _GetConversationMessage {
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult? Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
     TResult? Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -433,6 +458,8 @@ class _$_GetConversationMessage implements _GetConversationMessage {
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
     TResult Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -527,6 +554,7 @@ class _$_GetMemberInfo implements _GetMemberInfo {
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
     required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversations) unsetConversationFavorite,
     required TResult Function(int conversationIds) deleteConversation,
     required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
@@ -543,6 +571,7 @@ class _$_GetMemberInfo implements _GetMemberInfo {
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
     TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversations)? unsetConversationFavorite,
     TResult? Function(int conversationIds)? deleteConversation,
     TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
@@ -559,6 +588,7 @@ class _$_GetMemberInfo implements _GetMemberInfo {
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
     TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversations)? unsetConversationFavorite,
     TResult Function(int conversationIds)? deleteConversation,
     TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
@@ -582,6 +612,8 @@ class _$_GetMemberInfo implements _GetMemberInfo {
         getUnreadMessageCount,
     required TResult Function(_SetFavoriteConversations value)
         setConversationFavorite,
+    required TResult Function(_UnsetFavoriteConversations value)
+        unsetConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
     required TResult Function(_GetConversationBetweenUser value)
         getConversationBetweenUser,
@@ -599,6 +631,8 @@ class _$_GetMemberInfo implements _GetMemberInfo {
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult? Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
     TResult? Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -616,6 +650,8 @@ class _$_GetMemberInfo implements _GetMemberInfo {
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
     TResult Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -718,6 +754,7 @@ class _$_SendInstantMessage implements _SendInstantMessage {
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
     required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversations) unsetConversationFavorite,
     required TResult Function(int conversationIds) deleteConversation,
     required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
@@ -734,6 +771,7 @@ class _$_SendInstantMessage implements _SendInstantMessage {
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
     TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversations)? unsetConversationFavorite,
     TResult? Function(int conversationIds)? deleteConversation,
     TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
@@ -750,6 +788,7 @@ class _$_SendInstantMessage implements _SendInstantMessage {
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
     TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversations)? unsetConversationFavorite,
     TResult Function(int conversationIds)? deleteConversation,
     TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
@@ -773,6 +812,8 @@ class _$_SendInstantMessage implements _SendInstantMessage {
         getUnreadMessageCount,
     required TResult Function(_SetFavoriteConversations value)
         setConversationFavorite,
+    required TResult Function(_UnsetFavoriteConversations value)
+        unsetConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
     required TResult Function(_GetConversationBetweenUser value)
         getConversationBetweenUser,
@@ -790,6 +831,8 @@ class _$_SendInstantMessage implements _SendInstantMessage {
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult? Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
     TResult? Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -807,6 +850,8 @@ class _$_SendInstantMessage implements _SendInstantMessage {
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
     TResult Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -875,6 +920,7 @@ class _$_ResetMessage implements _ResetMessage {
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
     required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversations) unsetConversationFavorite,
     required TResult Function(int conversationIds) deleteConversation,
     required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
@@ -891,6 +937,7 @@ class _$_ResetMessage implements _ResetMessage {
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
     TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversations)? unsetConversationFavorite,
     TResult? Function(int conversationIds)? deleteConversation,
     TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
@@ -907,6 +954,7 @@ class _$_ResetMessage implements _ResetMessage {
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
     TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversations)? unsetConversationFavorite,
     TResult Function(int conversationIds)? deleteConversation,
     TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
@@ -930,6 +978,8 @@ class _$_ResetMessage implements _ResetMessage {
         getUnreadMessageCount,
     required TResult Function(_SetFavoriteConversations value)
         setConversationFavorite,
+    required TResult Function(_UnsetFavoriteConversations value)
+        unsetConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
     required TResult Function(_GetConversationBetweenUser value)
         getConversationBetweenUser,
@@ -947,6 +997,8 @@ class _$_ResetMessage implements _ResetMessage {
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult? Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
     TResult? Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -964,6 +1016,8 @@ class _$_ResetMessage implements _ResetMessage {
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
     TResult Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -1025,6 +1079,7 @@ class _$_GetUnreadMessageCount implements _GetUnreadMessageCount {
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
     required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversations) unsetConversationFavorite,
     required TResult Function(int conversationIds) deleteConversation,
     required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
@@ -1041,6 +1096,7 @@ class _$_GetUnreadMessageCount implements _GetUnreadMessageCount {
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
     TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversations)? unsetConversationFavorite,
     TResult? Function(int conversationIds)? deleteConversation,
     TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
@@ -1057,6 +1113,7 @@ class _$_GetUnreadMessageCount implements _GetUnreadMessageCount {
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
     TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversations)? unsetConversationFavorite,
     TResult Function(int conversationIds)? deleteConversation,
     TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
@@ -1080,6 +1137,8 @@ class _$_GetUnreadMessageCount implements _GetUnreadMessageCount {
         getUnreadMessageCount,
     required TResult Function(_SetFavoriteConversations value)
         setConversationFavorite,
+    required TResult Function(_UnsetFavoriteConversations value)
+        unsetConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
     required TResult Function(_GetConversationBetweenUser value)
         getConversationBetweenUser,
@@ -1097,6 +1156,8 @@ class _$_GetUnreadMessageCount implements _GetUnreadMessageCount {
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult? Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
     TResult? Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -1114,6 +1175,8 @@ class _$_GetUnreadMessageCount implements _GetUnreadMessageCount {
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
     TResult Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -1204,6 +1267,7 @@ class _$_SetFavoriteConversations implements _SetFavoriteConversations {
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
     required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversations) unsetConversationFavorite,
     required TResult Function(int conversationIds) deleteConversation,
     required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
@@ -1220,6 +1284,7 @@ class _$_SetFavoriteConversations implements _SetFavoriteConversations {
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
     TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversations)? unsetConversationFavorite,
     TResult? Function(int conversationIds)? deleteConversation,
     TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
@@ -1236,6 +1301,7 @@ class _$_SetFavoriteConversations implements _SetFavoriteConversations {
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
     TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversations)? unsetConversationFavorite,
     TResult Function(int conversationIds)? deleteConversation,
     TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
@@ -1259,6 +1325,8 @@ class _$_SetFavoriteConversations implements _SetFavoriteConversations {
         getUnreadMessageCount,
     required TResult Function(_SetFavoriteConversations value)
         setConversationFavorite,
+    required TResult Function(_UnsetFavoriteConversations value)
+        unsetConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
     required TResult Function(_GetConversationBetweenUser value)
         getConversationBetweenUser,
@@ -1276,6 +1344,8 @@ class _$_SetFavoriteConversations implements _SetFavoriteConversations {
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult? Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
     TResult? Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -1293,6 +1363,8 @@ class _$_SetFavoriteConversations implements _SetFavoriteConversations {
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
     TResult Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -1312,6 +1384,201 @@ abstract class _SetFavoriteConversations implements ChatEvent {
   int get conversations;
   @JsonKey(ignore: true)
   _$$_SetFavoriteConversationsCopyWith<_$_SetFavoriteConversations>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UnsetFavoriteConversationsCopyWith<$Res> {
+  factory _$$_UnsetFavoriteConversationsCopyWith(
+          _$_UnsetFavoriteConversations value,
+          $Res Function(_$_UnsetFavoriteConversations) then) =
+      __$$_UnsetFavoriteConversationsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int conversations});
+}
+
+/// @nodoc
+class __$$_UnsetFavoriteConversationsCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$_UnsetFavoriteConversations>
+    implements _$$_UnsetFavoriteConversationsCopyWith<$Res> {
+  __$$_UnsetFavoriteConversationsCopyWithImpl(
+      _$_UnsetFavoriteConversations _value,
+      $Res Function(_$_UnsetFavoriteConversations) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? conversations = null,
+  }) {
+    return _then(_$_UnsetFavoriteConversations(
+      null == conversations
+          ? _value.conversations
+          : conversations // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UnsetFavoriteConversations implements _UnsetFavoriteConversations {
+  const _$_UnsetFavoriteConversations(this.conversations);
+
+  @override
+  final int conversations;
+
+  @override
+  String toString() {
+    return 'ChatEvent.unsetConversationFavorite(conversations: $conversations)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UnsetFavoriteConversations &&
+            (identical(other.conversations, conversations) ||
+                other.conversations == conversations));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, conversations);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UnsetFavoriteConversationsCopyWith<_$_UnsetFavoriteConversations>
+      get copyWith => __$$_UnsetFavoriteConversationsCopyWithImpl<
+          _$_UnsetFavoriteConversations>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getConversations,
+    required TResult Function(int conversationId) getConversationMessage,
+    required TResult Function(int memberId) getMemberInfo,
+    required TResult Function(int toUserId, String message) sendInstantMessage,
+    required TResult Function() resetMessage,
+    required TResult Function() getUnreadMessageCount,
+    required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversations) unsetConversationFavorite,
+    required TResult Function(int conversationIds) deleteConversation,
+    required TResult Function(int otherUserId) getConversationBetweenUser,
+  }) {
+    return unsetConversationFavorite(conversations);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getConversations,
+    TResult? Function(int conversationId)? getConversationMessage,
+    TResult? Function(int memberId)? getMemberInfo,
+    TResult? Function(int toUserId, String message)? sendInstantMessage,
+    TResult? Function()? resetMessage,
+    TResult? Function()? getUnreadMessageCount,
+    TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversations)? unsetConversationFavorite,
+    TResult? Function(int conversationIds)? deleteConversation,
+    TResult? Function(int otherUserId)? getConversationBetweenUser,
+  }) {
+    return unsetConversationFavorite?.call(conversations);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getConversations,
+    TResult Function(int conversationId)? getConversationMessage,
+    TResult Function(int memberId)? getMemberInfo,
+    TResult Function(int toUserId, String message)? sendInstantMessage,
+    TResult Function()? resetMessage,
+    TResult Function()? getUnreadMessageCount,
+    TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversations)? unsetConversationFavorite,
+    TResult Function(int conversationIds)? deleteConversation,
+    TResult Function(int otherUserId)? getConversationBetweenUser,
+    required TResult orElse(),
+  }) {
+    if (unsetConversationFavorite != null) {
+      return unsetConversationFavorite(conversations);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetConversations value) getConversations,
+    required TResult Function(_GetConversationMessage value)
+        getConversationMessage,
+    required TResult Function(_GetMemberInfo value) getMemberInfo,
+    required TResult Function(_SendInstantMessage value) sendInstantMessage,
+    required TResult Function(_ResetMessage value) resetMessage,
+    required TResult Function(_GetUnreadMessageCount value)
+        getUnreadMessageCount,
+    required TResult Function(_SetFavoriteConversations value)
+        setConversationFavorite,
+    required TResult Function(_UnsetFavoriteConversations value)
+        unsetConversationFavorite,
+    required TResult Function(_DeleteConversation value) deleteConversation,
+    required TResult Function(_GetConversationBetweenUser value)
+        getConversationBetweenUser,
+  }) {
+    return unsetConversationFavorite(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetConversations value)? getConversations,
+    TResult? Function(_GetConversationMessage value)? getConversationMessage,
+    TResult? Function(_GetMemberInfo value)? getMemberInfo,
+    TResult? Function(_SendInstantMessage value)? sendInstantMessage,
+    TResult? Function(_ResetMessage value)? resetMessage,
+    TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult? Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
+    TResult? Function(_DeleteConversation value)? deleteConversation,
+    TResult? Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
+  }) {
+    return unsetConversationFavorite?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetConversations value)? getConversations,
+    TResult Function(_GetConversationMessage value)? getConversationMessage,
+    TResult Function(_GetMemberInfo value)? getMemberInfo,
+    TResult Function(_SendInstantMessage value)? sendInstantMessage,
+    TResult Function(_ResetMessage value)? resetMessage,
+    TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
+    TResult Function(_DeleteConversation value)? deleteConversation,
+    TResult Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
+    required TResult orElse(),
+  }) {
+    if (unsetConversationFavorite != null) {
+      return unsetConversationFavorite(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UnsetFavoriteConversations implements ChatEvent {
+  const factory _UnsetFavoriteConversations(final int conversations) =
+      _$_UnsetFavoriteConversations;
+
+  int get conversations;
+  @JsonKey(ignore: true)
+  _$$_UnsetFavoriteConversationsCopyWith<_$_UnsetFavoriteConversations>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1388,6 +1655,7 @@ class _$_DeleteConversation implements _DeleteConversation {
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
     required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversations) unsetConversationFavorite,
     required TResult Function(int conversationIds) deleteConversation,
     required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
@@ -1404,6 +1672,7 @@ class _$_DeleteConversation implements _DeleteConversation {
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
     TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversations)? unsetConversationFavorite,
     TResult? Function(int conversationIds)? deleteConversation,
     TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
@@ -1420,6 +1689,7 @@ class _$_DeleteConversation implements _DeleteConversation {
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
     TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversations)? unsetConversationFavorite,
     TResult Function(int conversationIds)? deleteConversation,
     TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
@@ -1443,6 +1713,8 @@ class _$_DeleteConversation implements _DeleteConversation {
         getUnreadMessageCount,
     required TResult Function(_SetFavoriteConversations value)
         setConversationFavorite,
+    required TResult Function(_UnsetFavoriteConversations value)
+        unsetConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
     required TResult Function(_GetConversationBetweenUser value)
         getConversationBetweenUser,
@@ -1460,6 +1732,8 @@ class _$_DeleteConversation implements _DeleteConversation {
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult? Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
     TResult? Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -1477,6 +1751,8 @@ class _$_DeleteConversation implements _DeleteConversation {
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
     TResult Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -1574,6 +1850,7 @@ class _$_GetConversationBetweenUser implements _GetConversationBetweenUser {
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
     required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversations) unsetConversationFavorite,
     required TResult Function(int conversationIds) deleteConversation,
     required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
@@ -1590,6 +1867,7 @@ class _$_GetConversationBetweenUser implements _GetConversationBetweenUser {
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
     TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversations)? unsetConversationFavorite,
     TResult? Function(int conversationIds)? deleteConversation,
     TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
@@ -1606,6 +1884,7 @@ class _$_GetConversationBetweenUser implements _GetConversationBetweenUser {
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
     TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversations)? unsetConversationFavorite,
     TResult Function(int conversationIds)? deleteConversation,
     TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
@@ -1629,6 +1908,8 @@ class _$_GetConversationBetweenUser implements _GetConversationBetweenUser {
         getUnreadMessageCount,
     required TResult Function(_SetFavoriteConversations value)
         setConversationFavorite,
+    required TResult Function(_UnsetFavoriteConversations value)
+        unsetConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
     required TResult Function(_GetConversationBetweenUser value)
         getConversationBetweenUser,
@@ -1646,6 +1927,8 @@ class _$_GetConversationBetweenUser implements _GetConversationBetweenUser {
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult? Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
     TResult? Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,
@@ -1663,6 +1946,8 @@ class _$_GetConversationBetweenUser implements _GetConversationBetweenUser {
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
     TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult Function(_UnsetFavoriteConversations value)?
+        unsetConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
     TResult Function(_GetConversationBetweenUser value)?
         getConversationBetweenUser,

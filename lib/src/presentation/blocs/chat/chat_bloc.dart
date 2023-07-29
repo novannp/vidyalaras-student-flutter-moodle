@@ -128,6 +128,23 @@ class SetConversationsFavoriteBloc extends Bloc<ChatEvent, ChatState> {
     });
   }
 }
+class UnsetConversationsFavoriteBloc extends Bloc<ChatEvent, ChatState> {
+  final UnsetConversationsFavorite _unsetConversationsFavorite;
+
+  UnsetConversationsFavoriteBloc(this._unsetConversationsFavorite)
+      : super(const ChatState.initial()) {
+    on<ChatEvent>((event, emit) async {
+      await event.whenOrNull(unsetConversationFavorite: (conversations) async {
+        emit(const ChatState.loading());
+        final result = await _unsetConversationsFavorite.execute(conversations);
+        result.fold(
+              (failure) => emit(ChatState.error(failure.message)),
+              (status) => emit(ChatState.loaded(status)),
+        );
+      });
+    });
+  }
+}
 
 class DeleteConversationBloc extends Bloc<ChatEvent, ChatState> {
   final DeleteConversation _deleteConversation;

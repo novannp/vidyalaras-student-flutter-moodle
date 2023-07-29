@@ -15,6 +15,7 @@ abstract class ChatRepository {
       int toUserId, String message);
   Future<Either<Failure, int>> getUnreadMessageCount();
   Future<Either<Failure, bool>> setFavoriteConversations(int conversations);
+  Future<Either<Failure, bool>> unsetFavoriteConversations(int conversations);
   Future<Either<Failure, ConversationModel>> getConversationsBetweenUser(int otheruserid);
   Future<Either<Failure, bool>> deleteConversations(int conversationIds);
 }
