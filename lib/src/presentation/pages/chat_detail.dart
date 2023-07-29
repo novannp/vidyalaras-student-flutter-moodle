@@ -8,6 +8,7 @@ import 'package:lms_pptik/src/data/models/chat_model/send_message_model.dart';
 import 'package:lms_pptik/src/data/models/member_model.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/presentation/blocs/user/user_bloc.dart';
+import 'package:lms_pptik/src/presentation/components/snackbar.dart';
 import 'package:lms_pptik/src/utils/function.dart';
 
 import '../../data/models/chat_model/chat_model.dart';
@@ -90,23 +91,44 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                         const BoxConstraints(maxHeight: 400, minHeight: 100),
                     context: context,
                     builder: (context) {
-                      return const Padding(
-                        padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                      return Padding(
+                        padding:
+                            const EdgeInsets.only(top: 20, left: 20, right: 20),
                         child: Wrap(
                           children: [
                             ListTile(
-                              leading: Icon(Icons.favorite),
-                              title: Text('Tambahkan ke favorit'),
+                              leading: const Icon(Icons.favorite),
+                              title: const Text('Tambahkan ke favorit'),
+                              onTap: () {},
                             ),
-                            ListTile(
-                              leading: Icon(Icons.delete),
-                              title: Text('Hapus Percakapan'),
+                            BlocConsumer<DeleteConversationBloc, ChatState>(
+                              listener: (context, state) {
+                                state.whenOrNull(loaded: (message) {
+                                  context.pop();
+                                  context.pop();
+                                  showSnackbar(context, "Berhasil dihapus");
+                                  context.read<GetConversationsBloc>().add(const ChatEvent.getConversations());
+                                });
+                              },
+                              builder: (context, state) {
+                                return ListTile(
+                                  leading: const Icon(Icons.delete),
+                                  title: const Text('Hapus Percakapan'),
+                                  onTap: () {
+                                    context.read<DeleteConversationBloc>().add(
+                                          ChatEvent.deleteConversation(
+                                            [widget.conversationId!],
+                                          ),
+                                        );
+                                  },
+                                );
+                              },
                             ),
-                            ListTile(
+                            const ListTile(
                               leading: Icon(Icons.block),
                               title: Text('Blokir'),
                             ),
-                            ListTile(
+                            const ListTile(
                               leading: Icon(Icons.person_add),
                               title: Text('Tambahkan ke kontak'),
                             ),

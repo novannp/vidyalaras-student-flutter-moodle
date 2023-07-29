@@ -56,6 +56,7 @@ void main() {
           create: (context) => di.locator<GetMemberInfoBloc>(),
         ),
         BlocProvider(create: (context) => di.locator<SendInstantMessageBloc>()),
+        BlocProvider(create: (context)=>di.locator<DeleteConversationBloc>()),
         BlocProvider(
           create: (context) => di.locator<AuthLogoutBloc>(),
         ),

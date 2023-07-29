@@ -14,4 +14,5 @@ abstract class ChatRepository {
   Future<Either<Failure, SendMessageModel>> sendInstantMessage(
       int toUserId, String message);
   Future<Either<Failure, int>> getUnreadMessageCount();
+  Future<Either<Failure, bool>> deleteConversations(List<int> conversationIds);
 }

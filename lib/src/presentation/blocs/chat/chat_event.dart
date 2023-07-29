@@ -10,4 +10,5 @@ class ChatEvent with _$ChatEvent {
       _SendInstantMessage;
   const factory ChatEvent.resetMessage() = _ResetMessage;
   const factory ChatEvent.getUnreadMessageCount() = _GetUnreadMessageCount;
+  const factory ChatEvent.deleteConversation(List<int> conversationIds) = _DeleteConversation;
 }

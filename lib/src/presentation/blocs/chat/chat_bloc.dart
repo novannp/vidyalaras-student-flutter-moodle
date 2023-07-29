@@ -1,10 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:lms_pptik/src/domain/usecase/chat/delete_conversations.dart';
 
 import '../../../domain/usecase/chat/chat.dart';
 
 part 'chat_event.dart';
+
 part 'chat_state.dart';
+
 part 'chat_bloc.freezed.dart';
 
 class GetConversationsBloc extends Bloc<ChatEvent, ChatState> {
@@ -105,6 +108,24 @@ class GetUnreadMessageCountBloc extends Bloc<ChatEvent, ChatState> {
           );
         },
       );
+    });
+  }
+}
+
+class DeleteConversationBloc extends Bloc<ChatEvent, ChatState> {
+  final DeleteConversation _deleteConversation;
+
+  DeleteConversationBloc(this._deleteConversation)
+      : super(const ChatState.initial()) {
+    on<ChatEvent>((event, emit) async {
+      await event.whenOrNull(deleteConversation: (conversationIds) async {
+        emit(const ChatState.loading());
+        final result = await _deleteConversation.execute(conversationIds);
+        result.fold(
+          (failure) => emit(ChatState.error(failure.message)),
+          (status) => emit(ChatState.loaded(status)),
+        );
+      });
     });
   }
 }
