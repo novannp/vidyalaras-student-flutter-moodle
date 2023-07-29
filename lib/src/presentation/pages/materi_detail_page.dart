@@ -1,11 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lms_pptik/src/data/models/materi_model.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
+import 'package:lms_pptik/src/presentation/blocs/mods/mod_resource/mod_resource_bloc.dart';
 
 import '../../utils/helper/function_helper/function_helper.dart';
 
@@ -132,7 +134,43 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                   ),
                   mod.description != null
                       ? Html(data: mod.description!)
-                      : const SizedBox()
+                      : const SizedBox(),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(right: 20, left: 20, bottom: 10),
+                    child: Column(
+                      children: [
+                        if (mod.dates!.isNotEmpty)
+                          for (DateModel date in mod.dates!)
+                            Row(
+                              children: [
+                                const Icon(Icons.calendar_month, size: 20),
+                                Text.rich(
+                                  TextSpan(
+                                    text: date.label!,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium!
+                                        .copyWith(fontWeight: FontWeight.w600),
+                                    children: [
+                                      TextSpan(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium,
+                                        text:
+                                            DateTime.fromMillisecondsSinceEpoch(
+                                                    date.timestamp! * 1000)
+                                                .toString()
+                                                .formatDate(),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             );
@@ -167,30 +205,38 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
               ),
             );
           case 'resource':
-            return Card(
-              child: ListTile(
-                subtitle: Text(
-                    '${mod.contents![0].filesize?.formatFileSize() ?? '-'} '),
-                trailing: IconButton.filled(
-                    onPressed: () {
-                      FunctionHelper.downloadFileHandler(
-                          context,
-                          mod.contents?[0].filename ?? '',
-                          (mod.contents?[0].fileurl ?? '')
-                              .replaceAll('?forcedownload=1', ''));
-                    },
-                    icon: const Icon(Icons.download)),
-                leading: mod.modicon != null
-                    ? SizedBox(
-                        height: 40,
-                        width: 40,
-                        child: SvgPicture.asset('assets/img/file.svg'))
-                    : const Icon(Icons.file_copy, size: 40),
-                title: Text(
-                  mod.name!.decodeHtml(),
-                ),
-              ),
-            );
+            return ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: mod.contents!.length,
+                itemBuilder: (context, index) {
+                  final content = mod.contents![index];
+                  return Card(
+                    child: ListTile(
+                      subtitle:
+                          Text('${content.filesize?.formatFileSize() ?? '-'} '),
+                      trailing: IconButton.filled(
+                          onPressed: () {
+                            // context.read<ViewResourceBloc>().add(ModResourceEvent.viewResource(mod.c));
+                            FunctionHelper.downloadFileHandler(
+                                context,
+                                content.filename ?? '',
+                                (content.fileurl ?? '')
+                                    .replaceAll('?forcedownload=1', ''));
+                          },
+                          icon: const Icon(Icons.download)),
+                      leading: mod.modicon != null
+                          ? SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: SvgPicture.asset('assets/img/file.svg'))
+                          : const Icon(Icons.file_copy, size: 40),
+                      title: Text(
+                        mod.name!.decodeHtml(),
+                      ),
+                    ),
+                  );
+                });
           case 'quiz':
             return Column(
               children: [
@@ -205,25 +251,19 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                       ),
                       child: Column(
                         children: [
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.task,
-                                size: 40,
-                                color: Colors.cyan,
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                mod.name!.decodeHtml(),
-                              ),
-                              const Spacer(),
-                              if (mod.uservisible! == true)
-                                const SizedBox()
-                              else
-                                const Icon(Icons.lock, color: Colors.red),
-                            ],
+                          ListTile(
+                            trailing: mod.uservisible! == true
+                                ? const SizedBox()
+                                : const Icon(Icons.lock, color: Colors.red),
+                            leading: const Icon(
+                              Icons.task,
+                              size: 40,
+                              color: Colors.cyan,
+                            ),
+                            title: Text(
+                              mod.name!.decodeHtml(),
+                            ),
                           ),
-                          const SizedBox(height: 10),
                           Column(
                             children: [
                               if (mod.dates!.isNotEmpty)
