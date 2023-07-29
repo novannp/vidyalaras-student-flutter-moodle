@@ -13,6 +13,7 @@ import 'package:lms_pptik/src/presentation/components/snackbar.dart';
 
 import '../../data/models/chat_model/chat_model.dart';
 import '../../data/models/chat_model/message.dart';
+import '../../data/models/user_model.dart';
 import '../../utils/helper/function_helper/function_helper.dart';
 import '../blocs/chat/chat_bloc.dart';
 import '../components/bubble_chat.dart';
@@ -96,7 +97,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   data as ConversationModel;
                   return IconButton(
                     onPressed: () {
-                      print(data.isfavourite!);
                       showModalBottomSheet(
                           constraints: const BoxConstraints(
                               maxHeight: 400, minHeight: 100),
@@ -329,7 +329,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                           date: message.timecreated!.toHoursString(),
                           isReceiver: message.useridfrom !=
                               state.maybeWhen(loaded: (data) {
-                                data;
+                                data as UserModel;
                                 return data.id;
                               }, orElse: () {
                                 return 0;

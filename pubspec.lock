@@ -301,10 +301,10 @@ packages:
     dependency: "direct main"
     description:
       name: flex_color_scheme
-      sha256: "5be124fa61821a684c0628ca5f687a8512db06738f784516278688eb727a3ef1"
+      sha256: "659cf59bd5ccaa1e7de9384342be8b666ff10b108ed57a7fd46c122fb8bf6aca"
       url: "https://pub.dev"
     source: hosted
-    version: "7.1.2"
+    version: "7.2.0"
   flex_seed_scheme:
     dependency: transitive
     description:
@@ -505,10 +505,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: b33a88c67816312597e5e0f5906c5139a0b9bd9bb137346e872c788da7af8ea0
+      sha256: edbceb4c06758652fc9d12e58edb371cd977011b032e298dae0eb357167baad2
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.3"
+    version: "9.1.1"
   graphs:
     dependency: transitive
     description:
@@ -625,10 +625,10 @@ packages:
     dependency: "direct main"
     description:
       name: intl
-      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      sha256: a3715e3bc90294e971cb7dc063fbf3cd9ee0ebf8604ffeafabd9e6f16abbdbe6
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.1"
+    version: "0.18.0"
   io:
     dependency: transitive
     description:
@@ -833,10 +833,10 @@ packages:
     dependency: transitive
     description:
       name: plugin_platform_interface
-      sha256: "6a2128648c854906c53fa8e33986fc0247a1116122f9534dd20e3ab9e16a32bc"
+      sha256: "43798d895c929056255600343db8f049921cbec94d31ec87f1dc5c16c01935dd"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   pool:
     dependency: transitive
     description:
@@ -1006,34 +1006,34 @@ packages:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_calendar
-      sha256: "16cb06e72285c64e2c71de077d93212da5b1d881112b4f36467b21a7070938e0"
+      sha256: d0be325e67ecef3b51cebe03411ab48fabd192e2846aeefa43f6936bf4fadd5f
       url: "https://pub.dev"
     source: hosted
-    version: "22.1.38"
+    version: "22.2.5"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
-      sha256: "83e0937c1d747003e7d2514d093a28101953737a155ad7a1465006a95aa78cd4"
+      sha256: "3fe847b9bbf6814b5324e43b1afbf6121e81960e3e0474c9f4ea627678fd4305"
       url: "https://pub.dev"
     source: hosted
-    version: "22.1.39"
+    version: "22.2.5"
   syncfusion_flutter_datepicker:
     dependency: transitive
     description:
       name: syncfusion_flutter_datepicker
-      sha256: "8f88fff35280339b1cf03cd205d9804dd0496903f316862b0a393739fa2fd22e"
+      sha256: "2927d7128b4e41864880ecfab3e767c350e7f077fdcf456b8f57f877290739bf"
       url: "https://pub.dev"
     source: hosted
-    version: "22.1.38"
+    version: "22.2.5"
   syncfusion_localizations:
     dependency: "direct main"
     description:
       name: syncfusion_localizations
-      sha256: "787d742c624d327f3c3baf081fa59c3cb8f1894e3864bc8357ae0951a7f64d13"
+      sha256: "8d8e9226fc0f4d161d16fe6455d3a69ceb63cf019ba8e77c53542dabe6a7bc7a"
       url: "https://pub.dev"
     source: hosted
-    version: "22.1.39"
+    version: "22.2.5"
   term_glyph:
     dependency: transitive
     description:

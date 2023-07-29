@@ -81,7 +81,7 @@ class ProfilePage extends StatelessWidget {
                               },
                               loaded: (user) {
                                 user as UserModel;
-                                return '${user.username} | ${user.email}';
+                                return '${user.email}';
                               },
                               orElse: () {
                                 return 'Username | Email';
