@@ -1,26 +1,26 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:lms_pptik/src/domain/usecase/mod_assign/mod_assign.dart';
+
+import '../../../../domain/usecase/mods/mod_assign/mod_assign.dart';
+import '../mod_state.dart';
 
 part 'mod_assign_event.dart';
 
-part 'mod_assign_state.dart';
-
 part 'mod_assign_bloc.freezed.dart';
 
-class GetAssignmentListBloc extends Bloc<ModAssignEvent, ModAssignState> {
+class GetAssignmentListBloc extends Bloc<ModAssignEvent, ModState> {
   final GetAssignmentList _getAssignmentList;
 
   GetAssignmentListBloc(this._getAssignmentList)
-      : super(const ModAssignState.initial()) {
+      : super(const ModState.initial()) {
     on<ModAssignEvent>((event, emit) async {
       await event.whenOrNull(
         getAssignmentList: (courseId) async {
-          emit(const ModAssignState.loading());
+          emit(const ModState.loading());
           final assignmentList = await _getAssignmentList.execute(courseId);
           assignmentList.fold(
-            (failure) => emit(ModAssignState.error(failure.message)),
-            (assignmentList) => emit(ModAssignState.loaded(assignmentList)),
+            (failure) => emit(ModState.error(failure.message)),
+            (assignmentList) => emit(ModState.loaded(assignmentList)),
           );
         },
       );
@@ -28,19 +28,19 @@ class GetAssignmentListBloc extends Bloc<ModAssignEvent, ModAssignState> {
   }
 }
 
-class GetSubmissionStatusBloc extends Bloc<ModAssignEvent, ModAssignState> {
+class GetSubmissionStatusBloc extends Bloc<ModAssignEvent, ModState> {
   final GetSubmissionStatus _getSubmissionStatus;
 
   GetSubmissionStatusBloc(this._getSubmissionStatus)
-      : super(const ModAssignState.initial()) {
+      : super(const ModState.initial()) {
     on<ModAssignEvent>((event, emit) async {
       await event.whenOrNull(
         getSubmissionStatus: (assignId) async {
-          emit(const ModAssignState.loading());
+          emit(const ModState.loading());
           final assignmentList = await _getSubmissionStatus.execute(assignId);
           assignmentList.fold(
-            (failure) => emit(ModAssignState.error(failure.message)),
-            (assignmentList) => emit(ModAssignState.loaded(assignmentList)),
+            (failure) => emit(ModState.error(failure.message)),
+            (assignmentList) => emit(ModState.loaded(assignmentList)),
           );
         },
       );

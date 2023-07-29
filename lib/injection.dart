@@ -6,9 +6,9 @@ import 'package:lms_pptik/src/data/repositories/badge_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/calendar_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/chat_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/course_repository_impl.dart';
-import 'package:lms_pptik/src/data/repositories/mod_assign_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/user_repository_impl.dart';
 import 'package:lms_pptik/src/domain/usecase/chat/delete_conversations.dart';
+import 'package:lms_pptik/src/domain/usecase/mods/mod_resource/mod_resource.dart';
 import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/badge/badge_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/calendar/calendar_bloc.dart';
@@ -16,6 +16,7 @@ import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/cubit/dark_mode_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/dropdown_course/dropdown_course_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
+import 'package:lms_pptik/src/presentation/blocs/mods/mod_resource/mod_resource_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/user/user_bloc.dart';
 import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
 
@@ -26,17 +27,18 @@ import 'src/data/data_sources/chat_api.dart';
 import 'src/data/data_sources/course_api.dart';
 import 'src/data/data_sources/mod_apis/mod_apis.dart';
 import 'src/data/data_sources/user_api.dart';
+import 'src/data/repositories/mods/mods.dart';
 import 'src/data/repositories/notification_repository_impl.dart';
 import 'src/domain/usecase/auth/auth.dart';
 import 'src/domain/usecase/badge/badge.dart';
 import 'src/domain/usecase/calendar/calendar.dart';
 import 'src/domain/usecase/chat/chat.dart';
 import 'src/domain/usecase/course/course.dart';
-import 'src/domain/usecase/mod_assign/mod_assign.dart';
+import 'src/domain/usecase/mods/mod_assign/mod_assign.dart';
 import 'src/domain/usecase/notification/notification.dart';
 import 'src/domain/usecase/user/user.dart';
 import 'src/presentation/blocs/chat/chat_bloc.dart';
-import 'src/presentation/blocs/mod_assign/mod_assign_bloc.dart';
+import 'src/presentation/blocs/mods/mod_assign/mod_assign_bloc.dart';
 import 'src/presentation/blocs/notification/notification_bloc.dart';
 import 'src/utils/helper/http_helper/http_helper.dart';
 import 'src/utils/helper/secure_storage/secure_storage.dart';
@@ -71,6 +73,8 @@ void init() {
   locator.registerFactory(() => GetNotificationCountBloc(locator()));
   locator.registerFactory(() => GetAssignmentListBloc(locator()));
   locator.registerFactory(() => GetSubmissionStatusBloc(locator()));
+  locator.registerFactory(() => GetResourceByCourseBloc(locator()));
+  locator.registerFactory(() => ViewResourceBloc(locator()));
 
   //USECASE
   // AUTH
@@ -112,6 +116,10 @@ void init() {
   locator.registerFactory(() => GetAssignmentList(locator()));
   locator.registerFactory(() => GetSubmissionStatus(locator()));
 
+  // MOD RESOURCE
+  locator.registerFactory(() => GetResourceByCourse(locator()));
+  locator.registerFactory(() => ViewResource(locator()));
+
   // REPOSITORIES
   locator.registerLazySingleton(() => AuthRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(
@@ -127,6 +135,8 @@ void init() {
       () => NotificationRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(
       () => ModAssignRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton(
+      () => ModResourceRepositoryImpl(locator(), locator()));
 
   // API
   locator.registerLazySingleton(() => AuthApiImpl(locator()));
@@ -137,7 +147,7 @@ void init() {
   locator.registerLazySingleton(() => ChatApiImpl(locator()));
   locator.registerLazySingleton(() => NotificationApiImpl(locator()));
   locator.registerLazySingleton(() => ModAssignApiImpl(locator()));
-
+  locator.registerLazySingleton(() => ModResourceApiImpl(locator()));
   // HTTP
   locator.registerLazySingleton(() => HttpHelper.client);
 

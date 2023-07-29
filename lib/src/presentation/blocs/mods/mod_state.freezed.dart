@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'mod_assign_bloc.dart';
+part of 'mod_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,343 +15,12 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$ModAssignEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int courseId) getAssignmentList,
-    required TResult Function(int assignId) getSubmissionStatus,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int courseId)? getAssignmentList,
-    TResult? Function(int assignId)? getSubmissionStatus,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int courseId)? getAssignmentList,
-    TResult Function(int assignId)? getSubmissionStatus,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetAssignmentList value) getAssignmentList,
-    required TResult Function(_GetSubmissionStatus value) getSubmissionStatus,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetAssignmentList value)? getAssignmentList,
-    TResult? Function(_GetSubmissionStatus value)? getSubmissionStatus,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetAssignmentList value)? getAssignmentList,
-    TResult Function(_GetSubmissionStatus value)? getSubmissionStatus,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ModAssignEventCopyWith<$Res> {
-  factory $ModAssignEventCopyWith(
-          ModAssignEvent value, $Res Function(ModAssignEvent) then) =
-      _$ModAssignEventCopyWithImpl<$Res, ModAssignEvent>;
-}
-
-/// @nodoc
-class _$ModAssignEventCopyWithImpl<$Res, $Val extends ModAssignEvent>
-    implements $ModAssignEventCopyWith<$Res> {
-  _$ModAssignEventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$_GetAssignmentListCopyWith<$Res> {
-  factory _$$_GetAssignmentListCopyWith(_$_GetAssignmentList value,
-          $Res Function(_$_GetAssignmentList) then) =
-      __$$_GetAssignmentListCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int courseId});
-}
-
-/// @nodoc
-class __$$_GetAssignmentListCopyWithImpl<$Res>
-    extends _$ModAssignEventCopyWithImpl<$Res, _$_GetAssignmentList>
-    implements _$$_GetAssignmentListCopyWith<$Res> {
-  __$$_GetAssignmentListCopyWithImpl(
-      _$_GetAssignmentList _value, $Res Function(_$_GetAssignmentList) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? courseId = null,
-  }) {
-    return _then(_$_GetAssignmentList(
-      null == courseId
-          ? _value.courseId
-          : courseId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_GetAssignmentList implements _GetAssignmentList {
-  const _$_GetAssignmentList(this.courseId);
-
-  @override
-  final int courseId;
-
-  @override
-  String toString() {
-    return 'ModAssignEvent.getAssignmentList(courseId: $courseId)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_GetAssignmentList &&
-            (identical(other.courseId, courseId) ||
-                other.courseId == courseId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, courseId);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_GetAssignmentListCopyWith<_$_GetAssignmentList> get copyWith =>
-      __$$_GetAssignmentListCopyWithImpl<_$_GetAssignmentList>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int courseId) getAssignmentList,
-    required TResult Function(int assignId) getSubmissionStatus,
-  }) {
-    return getAssignmentList(courseId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int courseId)? getAssignmentList,
-    TResult? Function(int assignId)? getSubmissionStatus,
-  }) {
-    return getAssignmentList?.call(courseId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int courseId)? getAssignmentList,
-    TResult Function(int assignId)? getSubmissionStatus,
-    required TResult orElse(),
-  }) {
-    if (getAssignmentList != null) {
-      return getAssignmentList(courseId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetAssignmentList value) getAssignmentList,
-    required TResult Function(_GetSubmissionStatus value) getSubmissionStatus,
-  }) {
-    return getAssignmentList(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetAssignmentList value)? getAssignmentList,
-    TResult? Function(_GetSubmissionStatus value)? getSubmissionStatus,
-  }) {
-    return getAssignmentList?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetAssignmentList value)? getAssignmentList,
-    TResult Function(_GetSubmissionStatus value)? getSubmissionStatus,
-    required TResult orElse(),
-  }) {
-    if (getAssignmentList != null) {
-      return getAssignmentList(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _GetAssignmentList implements ModAssignEvent {
-  const factory _GetAssignmentList(final int courseId) = _$_GetAssignmentList;
-
-  int get courseId;
-  @JsonKey(ignore: true)
-  _$$_GetAssignmentListCopyWith<_$_GetAssignmentList> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_GetSubmissionStatusCopyWith<$Res> {
-  factory _$$_GetSubmissionStatusCopyWith(_$_GetSubmissionStatus value,
-          $Res Function(_$_GetSubmissionStatus) then) =
-      __$$_GetSubmissionStatusCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int assignId});
-}
-
-/// @nodoc
-class __$$_GetSubmissionStatusCopyWithImpl<$Res>
-    extends _$ModAssignEventCopyWithImpl<$Res, _$_GetSubmissionStatus>
-    implements _$$_GetSubmissionStatusCopyWith<$Res> {
-  __$$_GetSubmissionStatusCopyWithImpl(_$_GetSubmissionStatus _value,
-      $Res Function(_$_GetSubmissionStatus) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? assignId = null,
-  }) {
-    return _then(_$_GetSubmissionStatus(
-      null == assignId
-          ? _value.assignId
-          : assignId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_GetSubmissionStatus implements _GetSubmissionStatus {
-  const _$_GetSubmissionStatus(this.assignId);
-
-  @override
-  final int assignId;
-
-  @override
-  String toString() {
-    return 'ModAssignEvent.getSubmissionStatus(assignId: $assignId)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_GetSubmissionStatus &&
-            (identical(other.assignId, assignId) ||
-                other.assignId == assignId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, assignId);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_GetSubmissionStatusCopyWith<_$_GetSubmissionStatus> get copyWith =>
-      __$$_GetSubmissionStatusCopyWithImpl<_$_GetSubmissionStatus>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(int courseId) getAssignmentList,
-    required TResult Function(int assignId) getSubmissionStatus,
-  }) {
-    return getSubmissionStatus(assignId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int courseId)? getAssignmentList,
-    TResult? Function(int assignId)? getSubmissionStatus,
-  }) {
-    return getSubmissionStatus?.call(assignId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int courseId)? getAssignmentList,
-    TResult Function(int assignId)? getSubmissionStatus,
-    required TResult orElse(),
-  }) {
-    if (getSubmissionStatus != null) {
-      return getSubmissionStatus(assignId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetAssignmentList value) getAssignmentList,
-    required TResult Function(_GetSubmissionStatus value) getSubmissionStatus,
-  }) {
-    return getSubmissionStatus(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetAssignmentList value)? getAssignmentList,
-    TResult? Function(_GetSubmissionStatus value)? getSubmissionStatus,
-  }) {
-    return getSubmissionStatus?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetAssignmentList value)? getAssignmentList,
-    TResult Function(_GetSubmissionStatus value)? getSubmissionStatus,
-    required TResult orElse(),
-  }) {
-    if (getSubmissionStatus != null) {
-      return getSubmissionStatus(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _GetSubmissionStatus implements ModAssignEvent {
-  const factory _GetSubmissionStatus(final int assignId) =
-      _$_GetSubmissionStatus;
-
-  int get assignId;
-  @JsonKey(ignore: true)
-  _$$_GetSubmissionStatusCopyWith<_$_GetSubmissionStatus> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$ModAssignState {
+mixin _$ModState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Object assignments) loaded,
+    required TResult Function(Object data) loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -359,7 +28,7 @@ mixin _$ModAssignState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Object assignments)? loaded,
+    TResult? Function(Object data)? loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -367,7 +36,7 @@ mixin _$ModAssignState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Object assignments)? loaded,
+    TResult Function(Object data)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -400,16 +69,15 @@ mixin _$ModAssignState {
 }
 
 /// @nodoc
-abstract class $ModAssignStateCopyWith<$Res> {
-  factory $ModAssignStateCopyWith(
-          ModAssignState value, $Res Function(ModAssignState) then) =
-      _$ModAssignStateCopyWithImpl<$Res, ModAssignState>;
+abstract class $ModStateCopyWith<$Res> {
+  factory $ModStateCopyWith(ModState value, $Res Function(ModState) then) =
+      _$ModStateCopyWithImpl<$Res, ModState>;
 }
 
 /// @nodoc
-class _$ModAssignStateCopyWithImpl<$Res, $Val extends ModAssignState>
-    implements $ModAssignStateCopyWith<$Res> {
-  _$ModAssignStateCopyWithImpl(this._value, this._then);
+class _$ModStateCopyWithImpl<$Res, $Val extends ModState>
+    implements $ModStateCopyWith<$Res> {
+  _$ModStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -426,7 +94,7 @@ abstract class _$$_InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitialCopyWithImpl<$Res>
-    extends _$ModAssignStateCopyWithImpl<$Res, _$_Initial>
+    extends _$ModStateCopyWithImpl<$Res, _$_Initial>
     implements _$$_InitialCopyWith<$Res> {
   __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
       : super(_value, _then);
@@ -439,7 +107,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'ModAssignState.initial()';
+    return 'ModState.initial()';
   }
 
   @override
@@ -456,7 +124,7 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Object assignments) loaded,
+    required TResult Function(Object data) loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -467,7 +135,7 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Object assignments)? loaded,
+    TResult? Function(Object data)? loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -478,7 +146,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Object assignments)? loaded,
+    TResult Function(Object data)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -526,7 +194,7 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements ModAssignState {
+abstract class _Initial implements ModState {
   const factory _Initial() = _$_Initial;
 }
 
@@ -539,7 +207,7 @@ abstract class _$$_LoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadingCopyWithImpl<$Res>
-    extends _$ModAssignStateCopyWithImpl<$Res, _$_Loading>
+    extends _$ModStateCopyWithImpl<$Res, _$_Loading>
     implements _$$_LoadingCopyWith<$Res> {
   __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
       : super(_value, _then);
@@ -552,7 +220,7 @@ class _$_Loading implements _Loading {
 
   @override
   String toString() {
-    return 'ModAssignState.loading()';
+    return 'ModState.loading()';
   }
 
   @override
@@ -569,7 +237,7 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Object assignments) loaded,
+    required TResult Function(Object data) loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -580,7 +248,7 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Object assignments)? loaded,
+    TResult? Function(Object data)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -591,7 +259,7 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Object assignments)? loaded,
+    TResult Function(Object data)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -639,7 +307,7 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements ModAssignState {
+abstract class _Loading implements ModState {
   const factory _Loading() = _$_Loading;
 }
 
@@ -648,12 +316,12 @@ abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({Object assignments});
+  $Res call({Object data});
 }
 
 /// @nodoc
 class __$$_LoadedCopyWithImpl<$Res>
-    extends _$ModAssignStateCopyWithImpl<$Res, _$_Loaded>
+    extends _$ModStateCopyWithImpl<$Res, _$_Loaded>
     implements _$$_LoadedCopyWith<$Res> {
   __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
       : super(_value, _then);
@@ -661,10 +329,10 @@ class __$$_LoadedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? assignments = null,
+    Object? data = null,
   }) {
     return _then(_$_Loaded(
-      null == assignments ? _value.assignments : assignments,
+      null == data ? _value.data : data,
     ));
   }
 }
@@ -672,14 +340,14 @@ class __$$_LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded(this.assignments);
+  const _$_Loaded(this.data);
 
   @override
-  final Object assignments;
+  final Object data;
 
   @override
   String toString() {
-    return 'ModAssignState.loaded(assignments: $assignments)';
+    return 'ModState.loaded(data: $data)';
   }
 
   @override
@@ -687,13 +355,12 @@ class _$_Loaded implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loaded &&
-            const DeepCollectionEquality()
-                .equals(other.assignments, assignments));
+            const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(assignments));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
   @JsonKey(ignore: true)
   @override
@@ -706,10 +373,10 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Object assignments) loaded,
+    required TResult Function(Object data) loaded,
     required TResult Function(String message) error,
   }) {
-    return loaded(assignments);
+    return loaded(data);
   }
 
   @override
@@ -717,10 +384,10 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Object assignments)? loaded,
+    TResult? Function(Object data)? loaded,
     TResult? Function(String message)? error,
   }) {
-    return loaded?.call(assignments);
+    return loaded?.call(data);
   }
 
   @override
@@ -728,12 +395,12 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Object assignments)? loaded,
+    TResult Function(Object data)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(assignments);
+      return loaded(data);
     }
     return orElse();
   }
@@ -776,10 +443,10 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements ModAssignState {
-  const factory _Loaded(final Object assignments) = _$_Loaded;
+abstract class _Loaded implements ModState {
+  const factory _Loaded(final Object data) = _$_Loaded;
 
-  Object get assignments;
+  Object get data;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -795,7 +462,7 @@ abstract class _$$_ErrorCopyWith<$Res> {
 
 /// @nodoc
 class __$$_ErrorCopyWithImpl<$Res>
-    extends _$ModAssignStateCopyWithImpl<$Res, _$_Error>
+    extends _$ModStateCopyWithImpl<$Res, _$_Error>
     implements _$$_ErrorCopyWith<$Res> {
   __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
       : super(_value, _then);
@@ -824,7 +491,7 @@ class _$_Error implements _Error {
 
   @override
   String toString() {
-    return 'ModAssignState.error(message: $message)';
+    return 'ModState.error(message: $message)';
   }
 
   @override
@@ -849,7 +516,7 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Object assignments) loaded,
+    required TResult Function(Object data) loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -860,7 +527,7 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Object assignments)? loaded,
+    TResult? Function(Object data)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -871,7 +538,7 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Object assignments)? loaded,
+    TResult Function(Object data)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -919,7 +586,7 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements ModAssignState {
+abstract class _Error implements ModState {
   const factory _Error(final String message) = _$_Error;
 
   String get message;

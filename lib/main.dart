@@ -9,6 +9,7 @@ import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/cubit/dark_mode_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/dropdown_course/dropdown_course_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
+import 'package:lms_pptik/src/presentation/blocs/mods/mod_resource/mod_resource_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/user/user_bloc.dart';
 import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
 
@@ -16,7 +17,7 @@ import 'package:lms_pptik/src/utils/observer.dart';
 import 'app.dart';
 import 'injection.dart' as di;
 import 'src/presentation/blocs/chat/chat_bloc.dart';
-import 'src/presentation/blocs/mod_assign/mod_assign_bloc.dart';
+import 'src/presentation/blocs/mods/mod_assign/mod_assign_bloc.dart';
 import 'src/presentation/blocs/notification/notification_bloc.dart';
 
 void main() {
@@ -67,7 +68,11 @@ void main() {
             create: (context) => di.locator<GetNotificationCountBloc>()),
         BlocProvider(create: (context) => di.locator<GetUserGradeBloc>()),
         BlocProvider(create: (context) => di.locator<GetAssignmentListBloc>()),
-        BlocProvider(create: (context) => di.locator<GetSubmissionStatusBloc>())
+        BlocProvider(
+            create: (context) => di.locator<GetSubmissionStatusBloc>()),
+        BlocProvider(
+            create: (context) => di.locator<GetResourceByCourseBloc>()),
+        BlocProvider(create: (context) => di.locator<ViewResourceBloc>()),
       ],
       child: const LmsPPTIK(),
     ),
