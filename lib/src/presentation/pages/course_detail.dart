@@ -213,27 +213,38 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                           builder: (context, state) {
                             return state.maybeWhen(loaded: (data) {
                               data as List<UserModel>;
-                              return ListTile(
-                                leading: CircleAvatar(
-                                  backgroundImage:
-                                      NetworkImage(data[0].avatar!),
-                                ),
-                                title: Text(
-                                  data[0].name!.decodeHtml(),
-                                ),
-                                subtitle: Text(data[0].email!),
-                                trailing: IconButton.filledTonal(
-                                  onPressed: () {
-                                    GoRouter.of(context).pushNamed(
-                                      'chat_detail',
-                                      extra: {
-                                        'memberId': data[0].id,
-                                      },
+                              final teachers = data.where((element) {
+                                return element.roles!.any((role) =>
+                                    role.shortname == 'editingteacher');
+                              }).toList();
+                              return ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: teachers.length,
+                                  itemBuilder: (context, index) {
+                                    final teacher = teachers[index];
+                                    return ListTile(
+                                      leading: CircleAvatar(
+                                        backgroundImage:
+                                            NetworkImage(teacher.avatar!),
+                                      ),
+                                      title: Text(
+                                        teacher.name!.decodeHtml(),
+                                      ),
+                                      subtitle: Text(teacher.email!),
+                                      trailing: IconButton.filledTonal(
+                                        onPressed: () {
+                                          GoRouter.of(context).pushNamed(
+                                            'chat_detail',
+                                            extra: {
+                                              'memberId': teacher.id,
+                                            },
+                                          );
+                                        },
+                                        icon: const Icon(Icons.message_rounded),
+                                      ),
                                     );
-                                  },
-                                  icon: const Icon(Icons.message_rounded),
-                                ),
-                              );
+                                  });
                             }, orElse: () {
                               return const SizedBox();
                             });
