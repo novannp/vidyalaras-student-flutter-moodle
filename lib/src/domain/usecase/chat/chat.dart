@@ -11,3 +11,6 @@ part 'get_conversations.dart';
 part 'get_member_info.dart';
 part 'get_unread_message_count.dart';
 part 'send_instant_message.dart';
+part 'delete_conversations.dart';
+part 'set_conversations_favorite.dart';
+part 'get_conversations_between_user.dart';

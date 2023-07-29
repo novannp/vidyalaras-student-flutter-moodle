@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
+import 'package:lms_pptik/src/utils/helper/function_helper/function_helper.dart';
 
 import '../../data/models/conversation_model/conversation.dart';
-import '../../utils/function.dart';
 import '../blocs/chat/chat_bloc.dart';
 
 class ChatPage extends StatefulWidget {
@@ -124,7 +124,7 @@ class _ChatPageState extends State<ChatPage>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        isSameDay(
+                        FunctionHelper.isSameDay(
                                 conversation.messages![0].timecreated!
                                     .toDateTime(),
                                 DateTime.now())
@@ -180,7 +180,7 @@ class _ChatPageState extends State<ChatPage>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        isSameDay(
+                        FunctionHelper.isSameDay(
                                 conversation.messages![0].timecreated!
                                     .toDateTime(),
                                 DateTime.now())
@@ -238,7 +238,7 @@ class _ChatPageState extends State<ChatPage>
                     data: conversation.messages![0].text!,
                   ),
                   trailing: Text(
-                    isSameDay(
+                    FunctionHelper.isSameDay(
                             conversation.messages![0].timecreated!.toDateTime(),
                             DateTime.now())
                         ? conversation.messages![0].timecreated!.toHoursString()

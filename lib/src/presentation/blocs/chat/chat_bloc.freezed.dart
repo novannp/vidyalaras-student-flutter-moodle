@@ -24,7 +24,9 @@ mixin _$ChatEvent {
     required TResult Function(int toUserId, String message) sendInstantMessage,
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
-    required TResult Function(List<int> conversationIds) deleteConversation,
+    required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversationIds) deleteConversation,
+    required TResult Function(int otherUserId) getConversationBetweenUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,7 +37,9 @@ mixin _$ChatEvent {
     TResult? Function(int toUserId, String message)? sendInstantMessage,
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
-    TResult? Function(List<int> conversationIds)? deleteConversation,
+    TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversationIds)? deleteConversation,
+    TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -46,7 +50,9 @@ mixin _$ChatEvent {
     TResult Function(int toUserId, String message)? sendInstantMessage,
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
-    TResult Function(List<int> conversationIds)? deleteConversation,
+    TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversationIds)? deleteConversation,
+    TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -60,7 +66,11 @@ mixin _$ChatEvent {
     required TResult Function(_ResetMessage value) resetMessage,
     required TResult Function(_GetUnreadMessageCount value)
         getUnreadMessageCount,
+    required TResult Function(_SetFavoriteConversations value)
+        setConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
+    required TResult Function(_GetConversationBetweenUser value)
+        getConversationBetweenUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,7 +81,10 @@ mixin _$ChatEvent {
     TResult? Function(_SendInstantMessage value)? sendInstantMessage,
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
+    TResult? Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -82,7 +95,10 @@ mixin _$ChatEvent {
     TResult Function(_SendInstantMessage value)? sendInstantMessage,
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
+    TResult Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -149,7 +165,9 @@ class _$_GetConversations implements _GetConversations {
     required TResult Function(int toUserId, String message) sendInstantMessage,
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
-    required TResult Function(List<int> conversationIds) deleteConversation,
+    required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversationIds) deleteConversation,
+    required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
     return getConversations();
   }
@@ -163,7 +181,9 @@ class _$_GetConversations implements _GetConversations {
     TResult? Function(int toUserId, String message)? sendInstantMessage,
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
-    TResult? Function(List<int> conversationIds)? deleteConversation,
+    TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversationIds)? deleteConversation,
+    TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
     return getConversations?.call();
   }
@@ -177,7 +197,9 @@ class _$_GetConversations implements _GetConversations {
     TResult Function(int toUserId, String message)? sendInstantMessage,
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
-    TResult Function(List<int> conversationIds)? deleteConversation,
+    TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversationIds)? deleteConversation,
+    TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (getConversations != null) {
@@ -197,7 +219,11 @@ class _$_GetConversations implements _GetConversations {
     required TResult Function(_ResetMessage value) resetMessage,
     required TResult Function(_GetUnreadMessageCount value)
         getUnreadMessageCount,
+    required TResult Function(_SetFavoriteConversations value)
+        setConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
+    required TResult Function(_GetConversationBetweenUser value)
+        getConversationBetweenUser,
   }) {
     return getConversations(this);
   }
@@ -211,7 +237,10 @@ class _$_GetConversations implements _GetConversations {
     TResult? Function(_SendInstantMessage value)? sendInstantMessage,
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
+    TResult? Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
   }) {
     return getConversations?.call(this);
   }
@@ -225,7 +254,10 @@ class _$_GetConversations implements _GetConversations {
     TResult Function(_SendInstantMessage value)? sendInstantMessage,
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
+    TResult Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (getConversations != null) {
@@ -311,7 +343,9 @@ class _$_GetConversationMessage implements _GetConversationMessage {
     required TResult Function(int toUserId, String message) sendInstantMessage,
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
-    required TResult Function(List<int> conversationIds) deleteConversation,
+    required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversationIds) deleteConversation,
+    required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
     return getConversationMessage(conversationId);
   }
@@ -325,7 +359,9 @@ class _$_GetConversationMessage implements _GetConversationMessage {
     TResult? Function(int toUserId, String message)? sendInstantMessage,
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
-    TResult? Function(List<int> conversationIds)? deleteConversation,
+    TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversationIds)? deleteConversation,
+    TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
     return getConversationMessage?.call(conversationId);
   }
@@ -339,7 +375,9 @@ class _$_GetConversationMessage implements _GetConversationMessage {
     TResult Function(int toUserId, String message)? sendInstantMessage,
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
-    TResult Function(List<int> conversationIds)? deleteConversation,
+    TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversationIds)? deleteConversation,
+    TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (getConversationMessage != null) {
@@ -359,7 +397,11 @@ class _$_GetConversationMessage implements _GetConversationMessage {
     required TResult Function(_ResetMessage value) resetMessage,
     required TResult Function(_GetUnreadMessageCount value)
         getUnreadMessageCount,
+    required TResult Function(_SetFavoriteConversations value)
+        setConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
+    required TResult Function(_GetConversationBetweenUser value)
+        getConversationBetweenUser,
   }) {
     return getConversationMessage(this);
   }
@@ -373,7 +415,10 @@ class _$_GetConversationMessage implements _GetConversationMessage {
     TResult? Function(_SendInstantMessage value)? sendInstantMessage,
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
+    TResult? Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
   }) {
     return getConversationMessage?.call(this);
   }
@@ -387,7 +432,10 @@ class _$_GetConversationMessage implements _GetConversationMessage {
     TResult Function(_SendInstantMessage value)? sendInstantMessage,
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
+    TResult Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (getConversationMessage != null) {
@@ -478,7 +526,9 @@ class _$_GetMemberInfo implements _GetMemberInfo {
     required TResult Function(int toUserId, String message) sendInstantMessage,
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
-    required TResult Function(List<int> conversationIds) deleteConversation,
+    required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversationIds) deleteConversation,
+    required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
     return getMemberInfo(memberId);
   }
@@ -492,7 +542,9 @@ class _$_GetMemberInfo implements _GetMemberInfo {
     TResult? Function(int toUserId, String message)? sendInstantMessage,
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
-    TResult? Function(List<int> conversationIds)? deleteConversation,
+    TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversationIds)? deleteConversation,
+    TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
     return getMemberInfo?.call(memberId);
   }
@@ -506,7 +558,9 @@ class _$_GetMemberInfo implements _GetMemberInfo {
     TResult Function(int toUserId, String message)? sendInstantMessage,
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
-    TResult Function(List<int> conversationIds)? deleteConversation,
+    TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversationIds)? deleteConversation,
+    TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (getMemberInfo != null) {
@@ -526,7 +580,11 @@ class _$_GetMemberInfo implements _GetMemberInfo {
     required TResult Function(_ResetMessage value) resetMessage,
     required TResult Function(_GetUnreadMessageCount value)
         getUnreadMessageCount,
+    required TResult Function(_SetFavoriteConversations value)
+        setConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
+    required TResult Function(_GetConversationBetweenUser value)
+        getConversationBetweenUser,
   }) {
     return getMemberInfo(this);
   }
@@ -540,7 +598,10 @@ class _$_GetMemberInfo implements _GetMemberInfo {
     TResult? Function(_SendInstantMessage value)? sendInstantMessage,
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
+    TResult? Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
   }) {
     return getMemberInfo?.call(this);
   }
@@ -554,7 +615,10 @@ class _$_GetMemberInfo implements _GetMemberInfo {
     TResult Function(_SendInstantMessage value)? sendInstantMessage,
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
+    TResult Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (getMemberInfo != null) {
@@ -653,7 +717,9 @@ class _$_SendInstantMessage implements _SendInstantMessage {
     required TResult Function(int toUserId, String message) sendInstantMessage,
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
-    required TResult Function(List<int> conversationIds) deleteConversation,
+    required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversationIds) deleteConversation,
+    required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
     return sendInstantMessage(toUserId, message);
   }
@@ -667,7 +733,9 @@ class _$_SendInstantMessage implements _SendInstantMessage {
     TResult? Function(int toUserId, String message)? sendInstantMessage,
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
-    TResult? Function(List<int> conversationIds)? deleteConversation,
+    TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversationIds)? deleteConversation,
+    TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
     return sendInstantMessage?.call(toUserId, message);
   }
@@ -681,7 +749,9 @@ class _$_SendInstantMessage implements _SendInstantMessage {
     TResult Function(int toUserId, String message)? sendInstantMessage,
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
-    TResult Function(List<int> conversationIds)? deleteConversation,
+    TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversationIds)? deleteConversation,
+    TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (sendInstantMessage != null) {
@@ -701,7 +771,11 @@ class _$_SendInstantMessage implements _SendInstantMessage {
     required TResult Function(_ResetMessage value) resetMessage,
     required TResult Function(_GetUnreadMessageCount value)
         getUnreadMessageCount,
+    required TResult Function(_SetFavoriteConversations value)
+        setConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
+    required TResult Function(_GetConversationBetweenUser value)
+        getConversationBetweenUser,
   }) {
     return sendInstantMessage(this);
   }
@@ -715,7 +789,10 @@ class _$_SendInstantMessage implements _SendInstantMessage {
     TResult? Function(_SendInstantMessage value)? sendInstantMessage,
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
+    TResult? Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
   }) {
     return sendInstantMessage?.call(this);
   }
@@ -729,7 +806,10 @@ class _$_SendInstantMessage implements _SendInstantMessage {
     TResult Function(_SendInstantMessage value)? sendInstantMessage,
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
+    TResult Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (sendInstantMessage != null) {
@@ -794,7 +874,9 @@ class _$_ResetMessage implements _ResetMessage {
     required TResult Function(int toUserId, String message) sendInstantMessage,
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
-    required TResult Function(List<int> conversationIds) deleteConversation,
+    required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversationIds) deleteConversation,
+    required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
     return resetMessage();
   }
@@ -808,7 +890,9 @@ class _$_ResetMessage implements _ResetMessage {
     TResult? Function(int toUserId, String message)? sendInstantMessage,
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
-    TResult? Function(List<int> conversationIds)? deleteConversation,
+    TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversationIds)? deleteConversation,
+    TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
     return resetMessage?.call();
   }
@@ -822,7 +906,9 @@ class _$_ResetMessage implements _ResetMessage {
     TResult Function(int toUserId, String message)? sendInstantMessage,
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
-    TResult Function(List<int> conversationIds)? deleteConversation,
+    TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversationIds)? deleteConversation,
+    TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (resetMessage != null) {
@@ -842,7 +928,11 @@ class _$_ResetMessage implements _ResetMessage {
     required TResult Function(_ResetMessage value) resetMessage,
     required TResult Function(_GetUnreadMessageCount value)
         getUnreadMessageCount,
+    required TResult Function(_SetFavoriteConversations value)
+        setConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
+    required TResult Function(_GetConversationBetweenUser value)
+        getConversationBetweenUser,
   }) {
     return resetMessage(this);
   }
@@ -856,7 +946,10 @@ class _$_ResetMessage implements _ResetMessage {
     TResult? Function(_SendInstantMessage value)? sendInstantMessage,
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
+    TResult? Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
   }) {
     return resetMessage?.call(this);
   }
@@ -870,7 +963,10 @@ class _$_ResetMessage implements _ResetMessage {
     TResult Function(_SendInstantMessage value)? sendInstantMessage,
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
+    TResult Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (resetMessage != null) {
@@ -928,7 +1024,9 @@ class _$_GetUnreadMessageCount implements _GetUnreadMessageCount {
     required TResult Function(int toUserId, String message) sendInstantMessage,
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
-    required TResult Function(List<int> conversationIds) deleteConversation,
+    required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversationIds) deleteConversation,
+    required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
     return getUnreadMessageCount();
   }
@@ -942,7 +1040,9 @@ class _$_GetUnreadMessageCount implements _GetUnreadMessageCount {
     TResult? Function(int toUserId, String message)? sendInstantMessage,
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
-    TResult? Function(List<int> conversationIds)? deleteConversation,
+    TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversationIds)? deleteConversation,
+    TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
     return getUnreadMessageCount?.call();
   }
@@ -956,7 +1056,9 @@ class _$_GetUnreadMessageCount implements _GetUnreadMessageCount {
     TResult Function(int toUserId, String message)? sendInstantMessage,
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
-    TResult Function(List<int> conversationIds)? deleteConversation,
+    TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversationIds)? deleteConversation,
+    TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (getUnreadMessageCount != null) {
@@ -976,7 +1078,11 @@ class _$_GetUnreadMessageCount implements _GetUnreadMessageCount {
     required TResult Function(_ResetMessage value) resetMessage,
     required TResult Function(_GetUnreadMessageCount value)
         getUnreadMessageCount,
+    required TResult Function(_SetFavoriteConversations value)
+        setConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
+    required TResult Function(_GetConversationBetweenUser value)
+        getConversationBetweenUser,
   }) {
     return getUnreadMessageCount(this);
   }
@@ -990,7 +1096,10 @@ class _$_GetUnreadMessageCount implements _GetUnreadMessageCount {
     TResult? Function(_SendInstantMessage value)? sendInstantMessage,
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
+    TResult? Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
   }) {
     return getUnreadMessageCount?.call(this);
   }
@@ -1004,7 +1113,10 @@ class _$_GetUnreadMessageCount implements _GetUnreadMessageCount {
     TResult Function(_SendInstantMessage value)? sendInstantMessage,
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
+    TResult Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (getUnreadMessageCount != null) {
@@ -1019,12 +1131,197 @@ abstract class _GetUnreadMessageCount implements ChatEvent {
 }
 
 /// @nodoc
+abstract class _$$_SetFavoriteConversationsCopyWith<$Res> {
+  factory _$$_SetFavoriteConversationsCopyWith(
+          _$_SetFavoriteConversations value,
+          $Res Function(_$_SetFavoriteConversations) then) =
+      __$$_SetFavoriteConversationsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int conversations});
+}
+
+/// @nodoc
+class __$$_SetFavoriteConversationsCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$_SetFavoriteConversations>
+    implements _$$_SetFavoriteConversationsCopyWith<$Res> {
+  __$$_SetFavoriteConversationsCopyWithImpl(_$_SetFavoriteConversations _value,
+      $Res Function(_$_SetFavoriteConversations) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? conversations = null,
+  }) {
+    return _then(_$_SetFavoriteConversations(
+      null == conversations
+          ? _value.conversations
+          : conversations // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetFavoriteConversations implements _SetFavoriteConversations {
+  const _$_SetFavoriteConversations(this.conversations);
+
+  @override
+  final int conversations;
+
+  @override
+  String toString() {
+    return 'ChatEvent.setConversationFavorite(conversations: $conversations)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetFavoriteConversations &&
+            (identical(other.conversations, conversations) ||
+                other.conversations == conversations));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, conversations);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetFavoriteConversationsCopyWith<_$_SetFavoriteConversations>
+      get copyWith => __$$_SetFavoriteConversationsCopyWithImpl<
+          _$_SetFavoriteConversations>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getConversations,
+    required TResult Function(int conversationId) getConversationMessage,
+    required TResult Function(int memberId) getMemberInfo,
+    required TResult Function(int toUserId, String message) sendInstantMessage,
+    required TResult Function() resetMessage,
+    required TResult Function() getUnreadMessageCount,
+    required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversationIds) deleteConversation,
+    required TResult Function(int otherUserId) getConversationBetweenUser,
+  }) {
+    return setConversationFavorite(conversations);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getConversations,
+    TResult? Function(int conversationId)? getConversationMessage,
+    TResult? Function(int memberId)? getMemberInfo,
+    TResult? Function(int toUserId, String message)? sendInstantMessage,
+    TResult? Function()? resetMessage,
+    TResult? Function()? getUnreadMessageCount,
+    TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversationIds)? deleteConversation,
+    TResult? Function(int otherUserId)? getConversationBetweenUser,
+  }) {
+    return setConversationFavorite?.call(conversations);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getConversations,
+    TResult Function(int conversationId)? getConversationMessage,
+    TResult Function(int memberId)? getMemberInfo,
+    TResult Function(int toUserId, String message)? sendInstantMessage,
+    TResult Function()? resetMessage,
+    TResult Function()? getUnreadMessageCount,
+    TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversationIds)? deleteConversation,
+    TResult Function(int otherUserId)? getConversationBetweenUser,
+    required TResult orElse(),
+  }) {
+    if (setConversationFavorite != null) {
+      return setConversationFavorite(conversations);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetConversations value) getConversations,
+    required TResult Function(_GetConversationMessage value)
+        getConversationMessage,
+    required TResult Function(_GetMemberInfo value) getMemberInfo,
+    required TResult Function(_SendInstantMessage value) sendInstantMessage,
+    required TResult Function(_ResetMessage value) resetMessage,
+    required TResult Function(_GetUnreadMessageCount value)
+        getUnreadMessageCount,
+    required TResult Function(_SetFavoriteConversations value)
+        setConversationFavorite,
+    required TResult Function(_DeleteConversation value) deleteConversation,
+    required TResult Function(_GetConversationBetweenUser value)
+        getConversationBetweenUser,
+  }) {
+    return setConversationFavorite(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetConversations value)? getConversations,
+    TResult? Function(_GetConversationMessage value)? getConversationMessage,
+    TResult? Function(_GetMemberInfo value)? getMemberInfo,
+    TResult? Function(_SendInstantMessage value)? sendInstantMessage,
+    TResult? Function(_ResetMessage value)? resetMessage,
+    TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult? Function(_DeleteConversation value)? deleteConversation,
+    TResult? Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
+  }) {
+    return setConversationFavorite?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetConversations value)? getConversations,
+    TResult Function(_GetConversationMessage value)? getConversationMessage,
+    TResult Function(_GetMemberInfo value)? getMemberInfo,
+    TResult Function(_SendInstantMessage value)? sendInstantMessage,
+    TResult Function(_ResetMessage value)? resetMessage,
+    TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult Function(_DeleteConversation value)? deleteConversation,
+    TResult Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
+    required TResult orElse(),
+  }) {
+    if (setConversationFavorite != null) {
+      return setConversationFavorite(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetFavoriteConversations implements ChatEvent {
+  const factory _SetFavoriteConversations(final int conversations) =
+      _$_SetFavoriteConversations;
+
+  int get conversations;
+  @JsonKey(ignore: true)
+  _$$_SetFavoriteConversationsCopyWith<_$_SetFavoriteConversations>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$_DeleteConversationCopyWith<$Res> {
   factory _$$_DeleteConversationCopyWith(_$_DeleteConversation value,
           $Res Function(_$_DeleteConversation) then) =
       __$$_DeleteConversationCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<int> conversationIds});
+  $Res call({int conversationIds});
 }
 
 /// @nodoc
@@ -1042,9 +1339,9 @@ class __$$_DeleteConversationCopyWithImpl<$Res>
   }) {
     return _then(_$_DeleteConversation(
       null == conversationIds
-          ? _value._conversationIds
+          ? _value.conversationIds
           : conversationIds // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as int,
     ));
   }
 }
@@ -1052,16 +1349,10 @@ class __$$_DeleteConversationCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_DeleteConversation implements _DeleteConversation {
-  const _$_DeleteConversation(final List<int> conversationIds)
-      : _conversationIds = conversationIds;
+  const _$_DeleteConversation(this.conversationIds);
 
-  final List<int> _conversationIds;
   @override
-  List<int> get conversationIds {
-    if (_conversationIds is EqualUnmodifiableListView) return _conversationIds;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_conversationIds);
-  }
+  final int conversationIds;
 
   @override
   String toString() {
@@ -1073,13 +1364,12 @@ class _$_DeleteConversation implements _DeleteConversation {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DeleteConversation &&
-            const DeepCollectionEquality()
-                .equals(other._conversationIds, _conversationIds));
+            (identical(other.conversationIds, conversationIds) ||
+                other.conversationIds == conversationIds));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_conversationIds));
+  int get hashCode => Object.hash(runtimeType, conversationIds);
 
   @JsonKey(ignore: true)
   @override
@@ -1097,7 +1387,9 @@ class _$_DeleteConversation implements _DeleteConversation {
     required TResult Function(int toUserId, String message) sendInstantMessage,
     required TResult Function() resetMessage,
     required TResult Function() getUnreadMessageCount,
-    required TResult Function(List<int> conversationIds) deleteConversation,
+    required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversationIds) deleteConversation,
+    required TResult Function(int otherUserId) getConversationBetweenUser,
   }) {
     return deleteConversation(conversationIds);
   }
@@ -1111,7 +1403,9 @@ class _$_DeleteConversation implements _DeleteConversation {
     TResult? Function(int toUserId, String message)? sendInstantMessage,
     TResult? Function()? resetMessage,
     TResult? Function()? getUnreadMessageCount,
-    TResult? Function(List<int> conversationIds)? deleteConversation,
+    TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversationIds)? deleteConversation,
+    TResult? Function(int otherUserId)? getConversationBetweenUser,
   }) {
     return deleteConversation?.call(conversationIds);
   }
@@ -1125,7 +1419,9 @@ class _$_DeleteConversation implements _DeleteConversation {
     TResult Function(int toUserId, String message)? sendInstantMessage,
     TResult Function()? resetMessage,
     TResult Function()? getUnreadMessageCount,
-    TResult Function(List<int> conversationIds)? deleteConversation,
+    TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversationIds)? deleteConversation,
+    TResult Function(int otherUserId)? getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (deleteConversation != null) {
@@ -1145,7 +1441,11 @@ class _$_DeleteConversation implements _DeleteConversation {
     required TResult Function(_ResetMessage value) resetMessage,
     required TResult Function(_GetUnreadMessageCount value)
         getUnreadMessageCount,
+    required TResult Function(_SetFavoriteConversations value)
+        setConversationFavorite,
     required TResult Function(_DeleteConversation value) deleteConversation,
+    required TResult Function(_GetConversationBetweenUser value)
+        getConversationBetweenUser,
   }) {
     return deleteConversation(this);
   }
@@ -1159,7 +1459,10 @@ class _$_DeleteConversation implements _DeleteConversation {
     TResult? Function(_SendInstantMessage value)? sendInstantMessage,
     TResult? Function(_ResetMessage value)? resetMessage,
     TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult? Function(_DeleteConversation value)? deleteConversation,
+    TResult? Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
   }) {
     return deleteConversation?.call(this);
   }
@@ -1173,7 +1476,10 @@ class _$_DeleteConversation implements _DeleteConversation {
     TResult Function(_SendInstantMessage value)? sendInstantMessage,
     TResult Function(_ResetMessage value)? resetMessage,
     TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
     TResult Function(_DeleteConversation value)? deleteConversation,
+    TResult Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
     required TResult orElse(),
   }) {
     if (deleteConversation != null) {
@@ -1184,13 +1490,199 @@ class _$_DeleteConversation implements _DeleteConversation {
 }
 
 abstract class _DeleteConversation implements ChatEvent {
-  const factory _DeleteConversation(final List<int> conversationIds) =
+  const factory _DeleteConversation(final int conversationIds) =
       _$_DeleteConversation;
 
-  List<int> get conversationIds;
+  int get conversationIds;
   @JsonKey(ignore: true)
   _$$_DeleteConversationCopyWith<_$_DeleteConversation> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GetConversationBetweenUserCopyWith<$Res> {
+  factory _$$_GetConversationBetweenUserCopyWith(
+          _$_GetConversationBetweenUser value,
+          $Res Function(_$_GetConversationBetweenUser) then) =
+      __$$_GetConversationBetweenUserCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int otherUserId});
+}
+
+/// @nodoc
+class __$$_GetConversationBetweenUserCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$_GetConversationBetweenUser>
+    implements _$$_GetConversationBetweenUserCopyWith<$Res> {
+  __$$_GetConversationBetweenUserCopyWithImpl(
+      _$_GetConversationBetweenUser _value,
+      $Res Function(_$_GetConversationBetweenUser) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? otherUserId = null,
+  }) {
+    return _then(_$_GetConversationBetweenUser(
+      null == otherUserId
+          ? _value.otherUserId
+          : otherUserId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetConversationBetweenUser implements _GetConversationBetweenUser {
+  const _$_GetConversationBetweenUser(this.otherUserId);
+
+  @override
+  final int otherUserId;
+
+  @override
+  String toString() {
+    return 'ChatEvent.getConversationBetweenUser(otherUserId: $otherUserId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetConversationBetweenUser &&
+            (identical(other.otherUserId, otherUserId) ||
+                other.otherUserId == otherUserId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, otherUserId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetConversationBetweenUserCopyWith<_$_GetConversationBetweenUser>
+      get copyWith => __$$_GetConversationBetweenUserCopyWithImpl<
+          _$_GetConversationBetweenUser>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getConversations,
+    required TResult Function(int conversationId) getConversationMessage,
+    required TResult Function(int memberId) getMemberInfo,
+    required TResult Function(int toUserId, String message) sendInstantMessage,
+    required TResult Function() resetMessage,
+    required TResult Function() getUnreadMessageCount,
+    required TResult Function(int conversations) setConversationFavorite,
+    required TResult Function(int conversationIds) deleteConversation,
+    required TResult Function(int otherUserId) getConversationBetweenUser,
+  }) {
+    return getConversationBetweenUser(otherUserId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getConversations,
+    TResult? Function(int conversationId)? getConversationMessage,
+    TResult? Function(int memberId)? getMemberInfo,
+    TResult? Function(int toUserId, String message)? sendInstantMessage,
+    TResult? Function()? resetMessage,
+    TResult? Function()? getUnreadMessageCount,
+    TResult? Function(int conversations)? setConversationFavorite,
+    TResult? Function(int conversationIds)? deleteConversation,
+    TResult? Function(int otherUserId)? getConversationBetweenUser,
+  }) {
+    return getConversationBetweenUser?.call(otherUserId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getConversations,
+    TResult Function(int conversationId)? getConversationMessage,
+    TResult Function(int memberId)? getMemberInfo,
+    TResult Function(int toUserId, String message)? sendInstantMessage,
+    TResult Function()? resetMessage,
+    TResult Function()? getUnreadMessageCount,
+    TResult Function(int conversations)? setConversationFavorite,
+    TResult Function(int conversationIds)? deleteConversation,
+    TResult Function(int otherUserId)? getConversationBetweenUser,
+    required TResult orElse(),
+  }) {
+    if (getConversationBetweenUser != null) {
+      return getConversationBetweenUser(otherUserId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetConversations value) getConversations,
+    required TResult Function(_GetConversationMessage value)
+        getConversationMessage,
+    required TResult Function(_GetMemberInfo value) getMemberInfo,
+    required TResult Function(_SendInstantMessage value) sendInstantMessage,
+    required TResult Function(_ResetMessage value) resetMessage,
+    required TResult Function(_GetUnreadMessageCount value)
+        getUnreadMessageCount,
+    required TResult Function(_SetFavoriteConversations value)
+        setConversationFavorite,
+    required TResult Function(_DeleteConversation value) deleteConversation,
+    required TResult Function(_GetConversationBetweenUser value)
+        getConversationBetweenUser,
+  }) {
+    return getConversationBetweenUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetConversations value)? getConversations,
+    TResult? Function(_GetConversationMessage value)? getConversationMessage,
+    TResult? Function(_GetMemberInfo value)? getMemberInfo,
+    TResult? Function(_SendInstantMessage value)? sendInstantMessage,
+    TResult? Function(_ResetMessage value)? resetMessage,
+    TResult? Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult? Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult? Function(_DeleteConversation value)? deleteConversation,
+    TResult? Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
+  }) {
+    return getConversationBetweenUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetConversations value)? getConversations,
+    TResult Function(_GetConversationMessage value)? getConversationMessage,
+    TResult Function(_GetMemberInfo value)? getMemberInfo,
+    TResult Function(_SendInstantMessage value)? sendInstantMessage,
+    TResult Function(_ResetMessage value)? resetMessage,
+    TResult Function(_GetUnreadMessageCount value)? getUnreadMessageCount,
+    TResult Function(_SetFavoriteConversations value)? setConversationFavorite,
+    TResult Function(_DeleteConversation value)? deleteConversation,
+    TResult Function(_GetConversationBetweenUser value)?
+        getConversationBetweenUser,
+    required TResult orElse(),
+  }) {
+    if (getConversationBetweenUser != null) {
+      return getConversationBetweenUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetConversationBetweenUser implements ChatEvent {
+  const factory _GetConversationBetweenUser(final int otherUserId) =
+      _$_GetConversationBetweenUser;
+
+  int get otherUserId;
+  @JsonKey(ignore: true)
+  _$$_GetConversationBetweenUserCopyWith<_$_GetConversationBetweenUser>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

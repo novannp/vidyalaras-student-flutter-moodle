@@ -23,12 +23,20 @@ abstract class ChatApi {
   );
 
   Future<int> getUnreadConversationCount(String token, int userId);
+
   Future<SendMessageModel> sendInstantMessage(
       String token, int toUserId, String message);
+
   Future<MemberModel> getMemberInfo(
       String token, int referenceUserId, int memberId);
 
-  Future deleteConversation(String token, int userId, List<int> conversationIds);
+  Future<ConversationModel> getConversationsBetweenUser(String token, int userId, int otheruserid);
+
+  Future setConversationFavorite(
+      String token, int userId, int conversations);
+
+  Future deleteConversation(
+      String token, int userId, int conversationIds);
 }
 
 class ChatApiImpl implements ChatApi {
@@ -180,7 +188,8 @@ class ChatApiImpl implements ChatApi {
   }
 
   @override
-  Future deleteConversation(String token, int userId, List<int> conversationIds) async{
+  Future deleteConversation(
+      String token, int userId, int conversationIds) async {
     Uri url = Uri.https(
       Endpoints.baseUrl,
       Endpoints.rest,
@@ -189,23 +198,74 @@ class ChatApiImpl implements ChatApi {
         "wsfunction": "core_message_delete_conversations_by_id",
         "moodlewsrestformat": "json",
         "userid": userId,
-        "conversationids[0]": conversationIds[0] ,
+        "conversationids[0]": conversationIds,
+      }.map(
+        (key, value) => MapEntry(key, value.toString()),
+      ),
+    );
+
+    final response = await client.get(url);
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  Future setConversationFavorite(
+      String token, int userId, int conversations)async {
+    Uri url = Uri.https(
+      Endpoints.baseUrl,
+      Endpoints.rest,
+      {
+        "wstoken": token,
+        "wsfunction": "core_message_set_favourite_conversations",
+        "moodlewsrestformat": "json",
+        "userid": userId,
+        "conversations[0]": conversations,
+      }.map(
+        (key, value) => MapEntry(key, value.toString()),
+      ),
+    );
+
+    final response = await client.get(url);
+    print(response.body);
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  Future<ConversationModel> getConversationsBetweenUser(String token, int userId, int otheruserid)async {
+    Uri url = Uri.https(
+      Endpoints.baseUrl,
+      Endpoints.rest,
+      {
+        "wstoken": token,
+        "wsfunction": "core_message_get_conversation_between_users",
+        "moodlewsrestformat": "json",
+        "userid": userId,
+        "otheruserid": otheruserid,
+        "includecontactrequests": 0,
+        "includeprivacyinfo" : 0,
       }.map(
             (key, value) => MapEntry(key, value.toString()),
       ),
     );
 
-    print("URL = $url");
-
     final response = await client.get(url);
-    print("RESPONSE ${response.body}");
-    if (response.statusCode == 200) {
-      return true;
+    print(response.body);
+    final message = jsonDecode(response.body)['message'];
+    if (message != "Conversation does not exist") {
+      final ConversationModel data = ConversationModel.fromJson(jsonDecode(response.body));
+      print(data);
+      return data;
     } else {
-      return false;
-      // throw ServerException();
+      throw ServerException();
     }
   }
-
 
 }

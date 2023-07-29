@@ -7,7 +7,6 @@ import 'package:lms_pptik/src/data/repositories/calendar_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/chat_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/course_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/user_repository_impl.dart';
-import 'package:lms_pptik/src/domain/usecase/chat/delete_conversations.dart';
 import 'package:lms_pptik/src/domain/usecase/mods/mod_resource/mod_resource.dart';
 import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/badge/badge_bloc.dart';
@@ -66,6 +65,8 @@ void init() {
   locator.registerFactory(() => GetConversationMessageBloc(locator()));
   locator.registerFactory(() => GetMemberInfoBloc(locator()));
   locator.registerFactory(() => SendInstantMessageBloc(locator()));
+  locator.registerFactory(() => SetConversationsFavoriteBloc(locator()));
+  locator.registerFactory(() => GetConversationBetweenUserBloc(locator()));
   locator.registerFactory(() => DeleteConversationBloc(locator()));
   locator.registerFactory(() => AuthLogoutBloc(locator()));
   locator.registerFactory(() => GetUnreadMessageCountBloc(locator()));
@@ -106,6 +107,8 @@ void init() {
   locator.registerFactory(() => GetMemberInfo(locator()));
   locator.registerFactory(() => SendInstantMessage(locator()));
   locator.registerFactory(() => GetUnreadMessageCount(locator()));
+  locator.registerFactory(() => SetConversationsFavorite(locator()));
+  locator.registerFactory(() => GetConversationsBetweenUser(locator()));
   locator.registerFactory(() => DeleteConversation(locator()));
 
   // NOTIFICATION

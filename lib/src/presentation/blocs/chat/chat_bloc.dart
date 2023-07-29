@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:lms_pptik/src/domain/usecase/chat/delete_conversations.dart';
 
 import '../../../domain/usecase/chat/chat.dart';
 
@@ -112,6 +111,24 @@ class GetUnreadMessageCountBloc extends Bloc<ChatEvent, ChatState> {
   }
 }
 
+class SetConversationsFavoriteBloc extends Bloc<ChatEvent, ChatState> {
+  final SetConversationsFavorite _setConversationsFavorite;
+
+  SetConversationsFavoriteBloc(this._setConversationsFavorite)
+      : super(const ChatState.initial()) {
+    on<ChatEvent>((event, emit) async {
+      await event.whenOrNull(setConversationFavorite: (conversations) async {
+        emit(const ChatState.loading());
+        final result = await _setConversationsFavorite.execute(conversations);
+        result.fold(
+              (failure) => emit(ChatState.error(failure.message)),
+              (status) => emit(ChatState.loaded(status)),
+        );
+      });
+    });
+  }
+}
+
 class DeleteConversationBloc extends Bloc<ChatEvent, ChatState> {
   final DeleteConversation _deleteConversation;
 
@@ -124,6 +141,24 @@ class DeleteConversationBloc extends Bloc<ChatEvent, ChatState> {
         result.fold(
           (failure) => emit(ChatState.error(failure.message)),
           (status) => emit(ChatState.loaded(status)),
+        );
+      });
+    });
+  }
+}
+
+class GetConversationBetweenUserBloc extends Bloc<ChatEvent, ChatState> {
+  final GetConversationsBetweenUser _getConversationsBetweenUser;
+
+  GetConversationBetweenUserBloc(this._getConversationsBetweenUser)
+      : super(const ChatState.initial()) {
+    on<ChatEvent>((event, emit) async {
+      await event.whenOrNull(getConversationBetweenUser: (otherUserId) async {
+        emit(const ChatState.loading());
+        final result = await _getConversationsBetweenUser.execute(otherUserId);
+        result.fold(
+          (failure) => emit(ChatState.error(failure.message)),
+          (data) => emit(ChatState.loaded(data)),
         );
       });
     });
