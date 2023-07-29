@@ -614,7 +614,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               ),
               const SizedBox(height: 10),
               Card(
-                color: Colors.grey.shade100,
                 elevation: 0,
                 child: Column(
                   children: [
