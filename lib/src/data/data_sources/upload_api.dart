@@ -6,7 +6,7 @@ import 'package:http/http.dart';
 import 'package:lms_pptik/src/data/models/item_model.dart';
 
 abstract class UploadApi {
-  Future<List<ItemModel>> uploadFile(String token, File filePath);
+  Future<List<ItemModel>> uploadFile(String token, List<File> files);
 }
 
 class UploadApiImpl implements UploadApi {
@@ -15,17 +15,19 @@ class UploadApiImpl implements UploadApi {
   UploadApiImpl(this.client);
 
   @override
-  Future<List<ItemModel>> uploadFile(String token, File file) async {
+  Future<List<ItemModel>> uploadFile(String token, List<File> files) async {
     Uri url =
         Uri.parse('https://lms.pptik.id/webservice/upload.php?token=$token');
     final request = MultipartRequest('POST', url);
-    final httpFile = MultipartFile(
-      'file',
-      file.readAsBytes().asStream(),
-      file.lengthSync(),
-      filename: file.path.split('/').last,
-    );
-    request.files.add(httpFile);
+    for (File file in files) {
+      final httpFile = MultipartFile(
+        'file',
+        file.readAsBytes().asStream(),
+        file.lengthSync(),
+        filename: file.path.split('/').last,
+      );
+      request.files.add(httpFile);
+    }
     final response = await request.send();
 
     // Get response data from Server

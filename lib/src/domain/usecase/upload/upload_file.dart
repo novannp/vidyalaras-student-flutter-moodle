@@ -10,7 +10,7 @@ class UploadFile {
 
   UploadFile(this.uploadRepositoryImpl);
 
-  Future<Either<Failure, List<ItemModel>>> execute(File file) async {
-    return await uploadRepositoryImpl.uploadFile(file);
+  Future<Either<Failure, List<ItemModel>>> execute(List<File> files) async {
+    return await uploadRepositoryImpl.uploadFile(files);
   }
 }

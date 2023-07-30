@@ -482,7 +482,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                               context
                                                   .read<UploadFileBloc>()
                                                   .add(UploadFileEvent
-                                                      .uploadFile(file));
+                                                      .uploadFile([file]));
                                             }
                                           });
                                         },
@@ -490,76 +490,19 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                         title: const Text('Pilih dari galeri'),
                                       ),
                                     ),
-                                    MultiBlocListener(
-                                      listeners: [
-                                        BlocListener<UploadFileBloc,
-                                            UploadFileState>(
-                                          listener: (context, state) {
-                                            state.whenOrNull(
-                                              loading: () {
-                                                showDialog(
-                                                    barrierDismissible: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return const AlertDialog(
-                                                        content: Text(
-                                                            'Sedang mengunggah foto...'),
-                                                      );
-                                                    });
-                                              },
-                                              loaded: (data) {
-                                                context
-                                                    .read<UpdatePictureBloc>()
-                                                    .add(
-                                                        UserEvent.updatePicture(
-                                                            data[0].itemid!));
-                                              },
-                                            );
-                                          },
-                                        ),
-                                        BlocListener<UpdatePictureBloc,
-                                            UserState>(
-                                          listener: (context, state) {
-                                            state.whenOrNull(
-                                              loading: () {
-                                                showDialog(
-                                                    barrierDismissible: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return const AlertDialog(
-                                                        content: Text(
-                                                            'Menyimpan perubahan....'),
-                                                      );
-                                                    });
-                                              },
-                                              loaded: (data) {
-                                                Navigator.pop(context);
-                                                context
-                                                    .read<GetCurrentUserBloc>()
-                                                    .add(const UserEvent
-                                                        .getCurrenctUser());
-                                                Navigator.pop(context);
-                                                Navigator.of(context).pop();
-                                              },
-                                            );
-                                          },
-                                        )
-                                      ],
-                                      child: ListTile(
-                                        onTap: () async {
-                                          captureImage().then((value) {
-                                            if (value != null) {
-                                              File file = File(value.path);
-                                              context
-                                                  .read<UploadFileBloc>()
-                                                  .add(UploadFileEvent
-                                                      .uploadFile(file));
-                                            }
-                                          });
-                                        },
-                                        leading: const Icon(Icons.camera),
-                                        title: const Text('Buka kamera'),
-                                      ),
+                                    ListTile(
+                                      onTap: () async {
+                                        captureImage().then((value) {
+                                          if (value != null) {
+                                            File file = File(value.path);
+                                            context.read<UploadFileBloc>().add(
+                                                UploadFileEvent.uploadFile(
+                                                    [file]));
+                                          }
+                                        });
+                                      },
+                                      leading: const Icon(Icons.camera),
+                                      title: const Text('Buka kamera'),
                                     ),
                                   ],
                                 );
