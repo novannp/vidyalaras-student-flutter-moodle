@@ -12,6 +12,7 @@ import '../../data/models/course_model.dart';
 import '../../data/models/materi_model/materi_model.dart';
 import '../../data/models/user_grade_model/user_grade_model.dart';
 import '../blocs/course/course_bloc.dart';
+import '../blocs/mods/mod_assign/mod_assign_bloc.dart';
 
 class CourseDetailPage extends StatefulWidget {
   const CourseDetailPage({super.key, required this.course});
@@ -39,6 +40,9 @@ class _CourseDetailPageState extends State<CourseDetailPage>
       context
           .read<GetUserGradeBloc>()
           .add(CourseEvent.getUserGrade(widget.course.id!));
+      context
+          .read<GetAssignmentListBloc>()
+          .add(ModAssignEvent.getAssignmentList(widget.course.id!));
     });
     super.initState();
   }

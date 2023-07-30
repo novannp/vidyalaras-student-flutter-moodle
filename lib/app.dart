@@ -41,6 +41,7 @@ class LmsPPTIK extends StatelessWidget {
             surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
             blendLevel: 7,
             subThemesData: const FlexSubThemesData(
+              chipRadius: 20,
               outlinedButtonRadius: 10,
               filledButtonRadius: 10,
               blendOnLevel: 10,
@@ -69,6 +70,8 @@ class LmsPPTIK extends StatelessWidget {
             surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
             blendLevel: 13,
             subThemesData: const FlexSubThemesData(
+              chipRadius: 20,
+              outlinedButtonRadius: 10,
               blendOnLevel: 20,
               useTextTheme: true,
             ),

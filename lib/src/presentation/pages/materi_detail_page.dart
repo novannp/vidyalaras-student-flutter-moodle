@@ -1,16 +1,21 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:lms_pptik/src/data/models/materi_model/content.dart';
 import 'package:lms_pptik/src/data/models/materi_model/module.dart';
+import 'package:lms_pptik/src/domain/usecase/mods/mod_assign/mod_assign.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
+import 'package:lms_pptik/src/presentation/blocs/mods/mod_assign/mod_assign_bloc.dart';
 
 import '../../data/models/materi_model/date_model.dart';
 import '../../data/models/materi_model/materi_model.dart';
 import '../../utils/helper/function_helper/function_helper.dart';
+import '../blocs/mods/mod_state.dart';
+import 'mods/assignment_detail.dart';
 
 class MateriDetailPage extends StatefulWidget {
   const MateriDetailPage(
@@ -98,7 +103,15 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      children: [buildModTile(index)],
+                      children: [
+                        if (widget.materis[index].modules != null)
+                          if (widget.materis[index].modules!.isNotEmpty)
+                            buildModTile(index)
+                          else
+                            const Center(
+                              child: Text('Tidak ada modul'),
+                            )
+                      ],
                     ),
                     const SizedBox(height: 10),
                   ],
@@ -125,14 +138,35 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
           case 'lesson':
             return LessonTile(mod: mod);
           case 'resource':
-            return ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: mod.contents!.length,
-                itemBuilder: (context, index) {
-                  final content = mod.contents![index];
-                  return ResourceTile(content: content, mod: mod);
-                });
+            if (mod.contents != null) {
+              return ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: mod.contents!.length,
+                  itemBuilder: (context, index) {
+                    final content = mod.contents![index];
+                    return ResourceTile(content: content, mod: mod);
+                  });
+            } else {
+              return Card(
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: mod.modicon != null
+                          ? SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: SvgPicture.asset('assets/img/file.svg'))
+                          : const Icon(Icons.file_copy, size: 40),
+                      title: Text(mod.name!.decodeHtml()),
+                    ),
+                    if (mod.availabilityinfo != null)
+                      Html(data: mod.availabilityinfo)
+                  ],
+                ),
+              );
+            }
+
           case 'quiz':
             return QuizTile(mod: mod);
           case 'label':
@@ -168,17 +202,17 @@ class WorkshopTile extends StatelessWidget {
               onTap: () {
                 log(mod.uservisible!.toString());
               },
-              leading: Icon(
-                Icons.people_alt_rounded,
-                size: 40,
-                color: mod.uservisible! == true
-                    ? Colors.red.shade400
-                    : Colors.grey,
-              ),
+              leading:
+                  Icon(Icons.people_alt_rounded, size: 40, color: Colors.green),
               title: Text(
                 mod.name!.decodeHtml(),
               ),
-              trailing: !mod.uservisible! ? const Icon(Icons.lock) : null,
+              trailing: !mod.uservisible!
+                  ? const Icon(
+                      Icons.lock,
+                      color: Colors.red,
+                    )
+                  : null,
               subtitle: !mod.uservisible!
                   ? null
                   : SizedBox(
@@ -224,6 +258,8 @@ class WorkshopTile extends StatelessWidget {
                               ),
                             ],
                           ),
+                      if (mod.availabilityinfo != null)
+                        Html(data: mod.availabilityinfo)
                     ],
                   )
                 : const SizedBox()
@@ -313,28 +349,25 @@ class QuizTile extends StatelessWidget {
         Card(
           child: InkWell(
             onTap: mod.uservisible! == true ? () {} : null,
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                children: [
-                  ListTile(
-                    trailing: mod.uservisible! == true
-                        ? const SizedBox()
-                        : const Icon(Icons.lock, color: Colors.red),
-                    leading: const Icon(
-                      Icons.task,
-                      size: 40,
-                      color: Colors.cyan,
-                    ),
-                    title: Text(
-                      mod.name!.decodeHtml(),
-                    ),
+            child: Column(
+              children: [
+                ListTile(
+                  trailing: mod.uservisible! == true
+                      ? const SizedBox()
+                      : const Icon(Icons.lock, color: Colors.red),
+                  leading: const Icon(
+                    Icons.task,
+                    size: 40,
+                    color: Colors.cyan,
                   ),
-                  Column(
+                  title: Text(
+                    mod.name!.decodeHtml(),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                  child: Column(
                     children: [
                       if (mod.dates!.isNotEmpty)
                         for (DateModel date in mod.dates!)
@@ -364,9 +397,9 @@ class QuizTile extends StatelessWidget {
                             ],
                           ),
                     ],
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
         ),
@@ -536,82 +569,132 @@ class AssignmentTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ListTile(
-            onTap: () {},
-            leading: const Icon(
-              Icons.assignment,
-              size: 40,
-              color: Colors.amber,
+        child: InkWell(
+      onTap: mod.uservisible! == true
+          ? () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return AssignmentDetail(
+                      assignmentId: mod.id!, instanceId: mod.instance!);
+                },
+              ));
+            }
+          : null,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              trailing: mod.uservisible! == true
+                  ? null
+                  : Icon(Icons.lock, color: Colors.red),
+              subtitle: mod.completiondata!.details!.isNotEmpty
+                  ? Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.start,
+                      alignment: WrapAlignment.start,
+                      children: mod.completiondata?.details?.map((e) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5),
+                              child: Chip(
+                                padding: EdgeInsets.zero,
+                                labelStyle: const TextStyle(fontSize: 12),
+                                backgroundColor: e.rulevalue!.status == 1
+                                    ? Colors.green.withOpacity(0.2)
+                                    : Colors.red.withOpacity(0.2),
+                                label: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    e.rulevalue!.status == 1
+                                        ? const Icon(Icons.check, size: 16)
+                                        : const Icon(Icons.close, size: 16),
+                                    const SizedBox(width: 5),
+                                    Text(e.rulevalue!.description!),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }).toList() ??
+                          [],
+                    )
+                  : null,
+              leading: const Icon(
+                Icons.assignment,
+                size: 40,
+                color: Colors.amber,
+              ),
+              title: Text(
+                mod.name!.decodeHtml(),
+              ),
             ),
-            title: Text(
-              mod.name!.decodeHtml(),
-            ),
-          ),
-          mod.description != null
-              ? Html(data: mod.description!)
-              : const SizedBox(),
-          Column(
-            children: [
-              if (mod.dates!.isNotEmpty)
-                for (DateModel date in mod.dates!)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.calendar_month, size: 20),
-                        Text.rich(
-                          TextSpan(
-                            text: date.label!,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium!
-                                .copyWith(fontWeight: FontWeight.w600),
-                            children: [
-                              TextSpan(
-                                style: Theme.of(context).textTheme.labelMedium,
-                                text: DateTime.fromMillisecondsSinceEpoch(
-                                        date.timestamp! * 1000)
-                                    .toString()
-                                    .formatDate(),
-                              )
-                            ],
+            mod.description != null
+                ? Html(data: mod.description!)
+                : const SizedBox(),
+            Column(
+              children: [
+                if (mod.dates!.isNotEmpty)
+                  for (DateModel date in mod.dates!)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.calendar_month, size: 20),
+                          Text.rich(
+                            TextSpan(
+                              text: date.label!,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .copyWith(fontWeight: FontWeight.w600),
+                              children: [
+                                TextSpan(
+                                  style:
+                                      Theme.of(context).textTheme.labelMedium,
+                                  text: DateTime.fromMillisecondsSinceEpoch(
+                                          date.timestamp! * 1000)
+                                      .toString()
+                                      .formatDate(),
+                                )
+                              ],
+                            ),
                           ),
+                        ],
+                      ),
+                    ),
+                if (mod.uservisible! == true)
+                  if (mod.completiondata!.details!.isEmpty)
+                    if (mod.completiondata!.state == 1)
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.only(bottom: 10),
+                        width: double.infinity,
+                        child: FilledButton.tonalIcon(
+                          icon: const Icon(Icons.check),
+                          onPressed: () {},
+                          label: const Text('Selesai'),
                         ),
-                      ],
-                    ),
-                  ),
-              if (mod.completiondata!.state == 1)
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  margin: const EdgeInsets.only(bottom: 10),
-                  width: double.infinity,
-                  child: FilledButton.tonalIcon(
-                    icon: const Icon(Icons.check),
-                    onPressed: () {},
-                    label: const Text('Selesai'),
-                  ),
-                )
-              else
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  margin: const EdgeInsets.only(bottom: 10),
-                  width: double.infinity,
-                  child: OutlinedButton(
-                    style: FilledButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      side: BorderSide(color: Theme.of(context).primaryColor),
-                    ),
-                    onPressed: () {},
-                    child: const Text('Tandai Selesai'),
-                  ),
-                ),
-            ],
-          )
-        ],
+                      )
+                    else
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.only(bottom: 10),
+                        width: double.infinity,
+                        child: OutlinedButton(
+                          style: FilledButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            side: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          onPressed: () {},
+                          child: const Text('Tandai Selesai'),
+                        ),
+                      ),
+              ],
+            )
+          ],
+        ),
       ),
-    );
+    ));
   }
 }
