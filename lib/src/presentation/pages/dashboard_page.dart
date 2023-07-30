@@ -67,6 +67,8 @@ class _MainPageState extends State<DashboardPage> {
           .add(const ChatEvent.getUnreadMessageCount());
       BlocProvider.of<GetNotificationCountBloc>(context)
           .add(const NotificationEvent.getNotificationCount());
+      BlocProvider.of<GetConversationsBloc>(context)
+          .add(const ChatEvent.getConversations());
     });
     super.initState();
   }
