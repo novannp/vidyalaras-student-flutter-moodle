@@ -82,6 +82,7 @@ void main() {
         BlocProvider(create: (context) => di.locator<ViewResourceBloc>()),
         BlocProvider(create: (context) => di.locator<UploadFileBloc>()),
         BlocProvider(create: (context) => di.locator<UpdatePictureBloc>()),
+        BlocProvider(create: (context) => di.locator<SubmitSubmissionBloc>()),
       ],
       child: const LmsPPTIK(),
     ),

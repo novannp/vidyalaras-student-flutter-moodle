@@ -45,8 +45,8 @@ class _AssignmentPageState extends State<AssignmentPage> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return AssignmentDetail(
-                              assignmentId: assignment.cmid!,
-                              instanceId: assignment.id!);
+                              moduleId: assignment.cmid!,
+                              assignmentId: assignment.id!);
                         }));
                       },
                       trailing: const Icon(

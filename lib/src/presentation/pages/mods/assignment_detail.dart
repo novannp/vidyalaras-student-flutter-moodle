@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lms_pptik/src/presentation/pages/mods/submission_page.dart';
 
 import '../../../extensions/string_extension.dart';
 import '../../../extensions/int_extension.dart';
@@ -16,12 +17,12 @@ import '../../blocs/mods/mod_state.dart';
 class AssignmentDetail extends StatefulWidget {
   const AssignmentDetail({
     super.key,
+    required this.moduleId,
     required this.assignmentId,
-    required this.instanceId,
   });
 
+  final int moduleId;
   final int assignmentId;
-  final int instanceId;
 
   @override
   State<AssignmentDetail> createState() => _AssignmentDetailState();
@@ -32,7 +33,7 @@ class _AssignmentDetailState extends State<AssignmentDetail> {
   void initState() {
     Future.microtask(() {
       BlocProvider.of<GetSubmissionStatusBloc>(context)
-          .add(ModAssignEvent.getSubmissionStatus(widget.instanceId));
+          .add(ModAssignEvent.getSubmissionStatus(widget.assignmentId));
     });
     super.initState();
   }
@@ -46,7 +47,7 @@ class _AssignmentDetailState extends State<AssignmentDetail> {
           loaded: (data) {
             data as List<AssignmentModel>;
             assignment = data.firstWhere(
-                (element) => element.cmid == widget.assignmentId,
+                (element) => element.cmid == widget.moduleId,
                 orElse: () => AssignmentModel());
           },
         );
@@ -223,6 +224,43 @@ class _AssignmentDetailState extends State<AssignmentDetail> {
                                     )
                                 else
                                   const Text('Tidak ada file submission'),
+                            const SizedBox(height: 20),
+                            if (submissionStatus
+                                    .lastattempt?.submission?.status !=
+                                'submitted')
+                              SizedBox(
+                                width: double.infinity,
+                                child: FilledButton.icon(
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return SubmissionPage(
+                                          assignment: assignment!,
+                                        );
+                                      },
+                                    ));
+                                  },
+                                  icon: const Icon(Icons.send),
+                                  label: const Text('Kirim tugas'),
+                                ),
+                              ),
+                            if (submissionStatus.lastattempt?.canedit == true)
+                              SizedBox(
+                                width: double.infinity,
+                                child: FilledButton.icon(
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return SubmissionPage(
+                                          assignment: assignment!,
+                                        );
+                                      },
+                                    ));
+                                  },
+                                  icon: const Icon(Icons.send),
+                                  label: const Text('Kirim Ulang'),
+                                ),
+                              ),
                             // ListView.builder(
                             //   shrinkWrap: true,
                             //   physics: const NeverScrollableScrollPhysics(),

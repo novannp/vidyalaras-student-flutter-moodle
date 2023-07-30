@@ -575,7 +575,7 @@ class AssignmentTile extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
                   return AssignmentDetail(
-                      assignmentId: mod.id!, instanceId: mod.instance!);
+                      moduleId: mod.id!, assignmentId: mod.instance!);
                 },
               ));
             }

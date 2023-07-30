@@ -47,3 +47,22 @@ class GetSubmissionStatusBloc extends Bloc<ModAssignEvent, ModState> {
     });
   }
 }
+
+class SubmitSubmissionBloc extends Bloc<ModAssignEvent, ModState> {
+  final SubmitSubmission _submitSubmission;
+
+  SubmitSubmissionBloc(this._submitSubmission) : super(ModState.initial()) {
+    on<ModAssignEvent>((event, emit) async {
+      await event.whenOrNull(
+        submitSubmission: (assignId, itemId) async {
+          emit(const ModState.loading());
+          final result = await _submitSubmission.execute(assignId, itemId);
+          result.fold(
+            (failure) => emit(ModState.error(failure.message)),
+            (result) => emit(ModState.loaded(result)),
+          );
+        },
+      );
+    });
+  }
+}

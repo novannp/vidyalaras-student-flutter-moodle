@@ -14,6 +14,7 @@ import '../blocs/course/course_bloc.dart';
 import '../blocs/dropdown_course/dropdown_course_cubit.dart';
 import '../blocs/user/user_bloc.dart';
 import '../components/course_card.dart';
+import '../components/remove_glow.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -237,204 +238,210 @@ class _MainPageState extends State<DashboardPage> {
                 .add(const CourseEvent.getFilteredCourse("all"));
           });
         },
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              TextField(
-                readOnly: true,
-                onTap: () {
-                  GoRouter.of(context).pushNamed('search');
-                },
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.zero,
-                  prefixIcon: const Icon(Icons.search),
-                  hintText: 'Cari Kelas',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(10),
+        child: ScrollConfiguration(
+          behavior: RemoveGlow(),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                TextField(
+                  readOnly: true,
+                  onTap: () {
+                    GoRouter.of(context).pushNamed('search');
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.zero,
+                    prefixIcon: const Icon(Icons.search),
+                    hintText: 'Cari Kelas',
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'Baru Saja Diakses',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                const SizedBox(height: 20),
+                const Text(
+                  'Baru Saja Diakses',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              BlocBuilder<GetRecentCourseBloc, CourseState>(
-                builder: (context, state) {
-                  return state.maybeWhen(loaded: (data) {
-                    data as List<CourseModel>;
-                    return SizedBox(
-                      height: 120,
-                      width: size.width - 42,
-                      child: ListView.builder(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: data.length,
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              borderRadius: BorderRadius.circular(20),
-                              onTap: () {
-                                GoRouter.of(context).pushNamed('course_detail',
-                                    extra: data[index]);
-                              },
-                              child: Card(
-                                child: Container(
-                                  height: 120,
-                                  width: size.width - 70,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        width: 30,
-                                        height: double.infinity,
-                                        color: flatColor[index % 5],
-                                        child: const Icon(Icons.book,
-                                            color: Colors.white),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              data[index]
-                                                  .fullname!
-                                                  .decodeHtml(),
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                // color: Colors.white,
-                                              ),
-                                            ),
-                                            Text(data[index].coursecategory!),
-                                            const Spacer(),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                  height: 20,
-                                                  width: 20,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    value: (data[index]
-                                                            .progress!
-                                                            .toDouble() /
-                                                        100),
-                                                  ),
-                                                ),
-                                                const SizedBox(width: 10),
-                                                Text(
-                                                    '${data[index].progress}% Selesai')
-                                              ],
-                                            )
-                                          ],
+                const SizedBox(height: 20),
+                BlocBuilder<GetRecentCourseBloc, CourseState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(loaded: (data) {
+                      data as List<CourseModel>;
+                      return SizedBox(
+                        height: 120,
+                        width: size.width - 42,
+                        child: ListView.builder(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: data.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                borderRadius: BorderRadius.circular(20),
+                                onTap: () {
+                                  GoRouter.of(context).pushNamed(
+                                      'course_detail',
+                                      extra: data[index]);
+                                },
+                                child: Card(
+                                  child: Container(
+                                    height: 120,
+                                    width: size.width - 70,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 30,
+                                          height: double.infinity,
+                                          color: flatColor[index % 5],
+                                          child: const Icon(Icons.book,
+                                              color: Colors.white),
                                         ),
-                                      ),
-                                    ],
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                data[index]
+                                                    .fullname!
+                                                    .decodeHtml(),
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  // color: Colors.white,
+                                                ),
+                                              ),
+                                              Text(data[index].coursecategory!),
+                                              const Spacer(),
+                                              Row(
+                                                children: [
+                                                  SizedBox(
+                                                    height: 20,
+                                                    width: 20,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      value: (data[index]
+                                                              .progress!
+                                                              .toDouble() /
+                                                          100),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: 10),
+                                                  Text(
+                                                      '${data[index].progress}% Selesai')
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          }),
+                              );
+                            }),
+                      );
+                    }, orElse: () {
+                      return const Center(child: Text('Kelas tidak ada'));
+                    });
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Kelas Saya',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    BlocBuilder<DropdownCourseCubit, String>(
+                      builder: (context, state) {
+                        return DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            borderRadius: BorderRadius.circular(10),
+                            hint: const Text('Semua Kelas'),
+                            value: state,
+                            style: Theme.of(context).textTheme.bodySmall,
+                            items: _items.map((e) {
+                              return DropdownMenuItem(
+                                value: e['value'],
+                                child: Text(e['text']),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              BlocProvider.of<GetFilteredCourseBloc>(context)
+                                  .add(
+                                CourseEvent.getFilteredCourse(
+                                  value.toString(),
+                                ),
+                              );
+                              BlocProvider.of<DropdownCourseCubit>(context)
+                                  .changeCategory(value.toString());
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                BlocBuilder<GetFilteredCourseBloc, CourseState>(
+                    builder: (context, state) {
+                  return state.maybeWhen(loaded: (data) {
+                    data as List<CourseModel>;
+                    if (data.isEmpty) {
+                      return const Center(child: Text('Kelas tidak ada'));
+                    }
+                    return Column(
+                      children: data.map(
+                        (course) {
+                          return CourseCard(
+                            course: course,
+                            onTap: () {
+                              GoRouter.of(context).pushNamed(
+                                'course_detail',
+                                extra: course,
+                              );
+                            },
+                            showMenu: true,
+                          );
+                        },
+                      ).toList(),
+                    );
+                  }, loading: () {
+                    return const Center(
+                      child: Text('Memuat kelas...'),
                     );
                   }, orElse: () {
                     return const Center(child: Text('Kelas tidak ada'));
                   });
-                },
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Kelas Saya',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  BlocBuilder<DropdownCourseCubit, String>(
-                    builder: (context, state) {
-                      return DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                          borderRadius: BorderRadius.circular(10),
-                          hint: const Text('Semua Kelas'),
-                          value: state,
-                          style: Theme.of(context).textTheme.bodySmall,
-                          items: _items.map((e) {
-                            return DropdownMenuItem(
-                              value: e['value'],
-                              child: Text(e['text']),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            BlocProvider.of<GetFilteredCourseBloc>(context).add(
-                              CourseEvent.getFilteredCourse(
-                                value.toString(),
-                              ),
-                            );
-                            BlocProvider.of<DropdownCourseCubit>(context)
-                                .changeCategory(value.toString());
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              BlocBuilder<GetFilteredCourseBloc, CourseState>(
-                  builder: (context, state) {
-                return state.maybeWhen(loaded: (data) {
-                  data as List<CourseModel>;
-                  if (data.isEmpty) {
-                    return const Center(child: Text('Kelas tidak ada'));
-                  }
-                  return Column(
-                    children: data.map(
-                      (course) {
-                        return CourseCard(
-                          course: course,
-                          onTap: () {
-                            GoRouter.of(context).pushNamed(
-                              'course_detail',
-                              extra: course,
-                            );
-                          },
-                          showMenu: true,
-                        );
-                      },
-                    ).toList(),
-                  );
-                }, loading: () {
-                  return const Center(
-                    child: Text('Memuat kelas...'),
-                  );
-                }, orElse: () {
-                  return const Center(child: Text('Kelas tidak ada'));
-                });
-              })
-            ],
+                })
+              ],
+            ),
           ),
         ),
       ),

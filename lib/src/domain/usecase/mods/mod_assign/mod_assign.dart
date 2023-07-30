@@ -6,5 +6,5 @@ import '../../../../data/repositories/mods/mods.dart';
 import '../../../../utils/failures.dart';
 
 part 'get_assignment_list.dart';
-
 part 'get_submission_status.dart';
+part 'submit_submission.dart';

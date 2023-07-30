@@ -20,18 +20,21 @@ mixin _$ModAssignEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) getAssignmentList,
     required TResult Function(int assignId) getSubmissionStatus,
+    required TResult Function(int assignId, int itemId) submitSubmission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? getAssignmentList,
     TResult? Function(int assignId)? getSubmissionStatus,
+    TResult? Function(int assignId, int itemId)? submitSubmission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? getAssignmentList,
     TResult Function(int assignId)? getSubmissionStatus,
+    TResult Function(int assignId, int itemId)? submitSubmission,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$ModAssignEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAssignmentList value) getAssignmentList,
     required TResult Function(_GetSubmissionStatus value) getSubmissionStatus,
+    required TResult Function(_SubmitSubmission value) submitSubmission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAssignmentList value)? getAssignmentList,
     TResult? Function(_GetSubmissionStatus value)? getSubmissionStatus,
+    TResult? Function(_SubmitSubmission value)? submitSubmission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAssignmentList value)? getAssignmentList,
     TResult Function(_GetSubmissionStatus value)? getSubmissionStatus,
+    TResult Function(_SubmitSubmission value)? submitSubmission,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,6 +148,7 @@ class _$_GetAssignmentList implements _GetAssignmentList {
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) getAssignmentList,
     required TResult Function(int assignId) getSubmissionStatus,
+    required TResult Function(int assignId, int itemId) submitSubmission,
   }) {
     return getAssignmentList(courseId);
   }
@@ -151,6 +158,7 @@ class _$_GetAssignmentList implements _GetAssignmentList {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? getAssignmentList,
     TResult? Function(int assignId)? getSubmissionStatus,
+    TResult? Function(int assignId, int itemId)? submitSubmission,
   }) {
     return getAssignmentList?.call(courseId);
   }
@@ -160,6 +168,7 @@ class _$_GetAssignmentList implements _GetAssignmentList {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? getAssignmentList,
     TResult Function(int assignId)? getSubmissionStatus,
+    TResult Function(int assignId, int itemId)? submitSubmission,
     required TResult orElse(),
   }) {
     if (getAssignmentList != null) {
@@ -173,6 +182,7 @@ class _$_GetAssignmentList implements _GetAssignmentList {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAssignmentList value) getAssignmentList,
     required TResult Function(_GetSubmissionStatus value) getSubmissionStatus,
+    required TResult Function(_SubmitSubmission value) submitSubmission,
   }) {
     return getAssignmentList(this);
   }
@@ -182,6 +192,7 @@ class _$_GetAssignmentList implements _GetAssignmentList {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAssignmentList value)? getAssignmentList,
     TResult? Function(_GetSubmissionStatus value)? getSubmissionStatus,
+    TResult? Function(_SubmitSubmission value)? submitSubmission,
   }) {
     return getAssignmentList?.call(this);
   }
@@ -191,6 +202,7 @@ class _$_GetAssignmentList implements _GetAssignmentList {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAssignmentList value)? getAssignmentList,
     TResult Function(_GetSubmissionStatus value)? getSubmissionStatus,
+    TResult Function(_SubmitSubmission value)? submitSubmission,
     required TResult orElse(),
   }) {
     if (getAssignmentList != null) {
@@ -277,6 +289,7 @@ class _$_GetSubmissionStatus implements _GetSubmissionStatus {
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) getAssignmentList,
     required TResult Function(int assignId) getSubmissionStatus,
+    required TResult Function(int assignId, int itemId) submitSubmission,
   }) {
     return getSubmissionStatus(assignId);
   }
@@ -286,6 +299,7 @@ class _$_GetSubmissionStatus implements _GetSubmissionStatus {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? getAssignmentList,
     TResult? Function(int assignId)? getSubmissionStatus,
+    TResult? Function(int assignId, int itemId)? submitSubmission,
   }) {
     return getSubmissionStatus?.call(assignId);
   }
@@ -295,6 +309,7 @@ class _$_GetSubmissionStatus implements _GetSubmissionStatus {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? getAssignmentList,
     TResult Function(int assignId)? getSubmissionStatus,
+    TResult Function(int assignId, int itemId)? submitSubmission,
     required TResult orElse(),
   }) {
     if (getSubmissionStatus != null) {
@@ -308,6 +323,7 @@ class _$_GetSubmissionStatus implements _GetSubmissionStatus {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAssignmentList value) getAssignmentList,
     required TResult Function(_GetSubmissionStatus value) getSubmissionStatus,
+    required TResult Function(_SubmitSubmission value) submitSubmission,
   }) {
     return getSubmissionStatus(this);
   }
@@ -317,6 +333,7 @@ class _$_GetSubmissionStatus implements _GetSubmissionStatus {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAssignmentList value)? getAssignmentList,
     TResult? Function(_GetSubmissionStatus value)? getSubmissionStatus,
+    TResult? Function(_SubmitSubmission value)? submitSubmission,
   }) {
     return getSubmissionStatus?.call(this);
   }
@@ -326,6 +343,7 @@ class _$_GetSubmissionStatus implements _GetSubmissionStatus {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAssignmentList value)? getAssignmentList,
     TResult Function(_GetSubmissionStatus value)? getSubmissionStatus,
+    TResult Function(_SubmitSubmission value)? submitSubmission,
     required TResult orElse(),
   }) {
     if (getSubmissionStatus != null) {
@@ -342,5 +360,155 @@ abstract class _GetSubmissionStatus implements ModAssignEvent {
   int get assignId;
   @JsonKey(ignore: true)
   _$$_GetSubmissionStatusCopyWith<_$_GetSubmissionStatus> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SubmitSubmissionCopyWith<$Res> {
+  factory _$$_SubmitSubmissionCopyWith(
+          _$_SubmitSubmission value, $Res Function(_$_SubmitSubmission) then) =
+      __$$_SubmitSubmissionCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int assignId, int itemId});
+}
+
+/// @nodoc
+class __$$_SubmitSubmissionCopyWithImpl<$Res>
+    extends _$ModAssignEventCopyWithImpl<$Res, _$_SubmitSubmission>
+    implements _$$_SubmitSubmissionCopyWith<$Res> {
+  __$$_SubmitSubmissionCopyWithImpl(
+      _$_SubmitSubmission _value, $Res Function(_$_SubmitSubmission) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? assignId = null,
+    Object? itemId = null,
+  }) {
+    return _then(_$_SubmitSubmission(
+      null == assignId
+          ? _value.assignId
+          : assignId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == itemId
+          ? _value.itemId
+          : itemId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SubmitSubmission implements _SubmitSubmission {
+  const _$_SubmitSubmission(this.assignId, this.itemId);
+
+  @override
+  final int assignId;
+  @override
+  final int itemId;
+
+  @override
+  String toString() {
+    return 'ModAssignEvent.submitSubmission(assignId: $assignId, itemId: $itemId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SubmitSubmission &&
+            (identical(other.assignId, assignId) ||
+                other.assignId == assignId) &&
+            (identical(other.itemId, itemId) || other.itemId == itemId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, assignId, itemId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SubmitSubmissionCopyWith<_$_SubmitSubmission> get copyWith =>
+      __$$_SubmitSubmissionCopyWithImpl<_$_SubmitSubmission>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int courseId) getAssignmentList,
+    required TResult Function(int assignId) getSubmissionStatus,
+    required TResult Function(int assignId, int itemId) submitSubmission,
+  }) {
+    return submitSubmission(assignId, itemId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int courseId)? getAssignmentList,
+    TResult? Function(int assignId)? getSubmissionStatus,
+    TResult? Function(int assignId, int itemId)? submitSubmission,
+  }) {
+    return submitSubmission?.call(assignId, itemId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int courseId)? getAssignmentList,
+    TResult Function(int assignId)? getSubmissionStatus,
+    TResult Function(int assignId, int itemId)? submitSubmission,
+    required TResult orElse(),
+  }) {
+    if (submitSubmission != null) {
+      return submitSubmission(assignId, itemId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAssignmentList value) getAssignmentList,
+    required TResult Function(_GetSubmissionStatus value) getSubmissionStatus,
+    required TResult Function(_SubmitSubmission value) submitSubmission,
+  }) {
+    return submitSubmission(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAssignmentList value)? getAssignmentList,
+    TResult? Function(_GetSubmissionStatus value)? getSubmissionStatus,
+    TResult? Function(_SubmitSubmission value)? submitSubmission,
+  }) {
+    return submitSubmission?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAssignmentList value)? getAssignmentList,
+    TResult Function(_GetSubmissionStatus value)? getSubmissionStatus,
+    TResult Function(_SubmitSubmission value)? submitSubmission,
+    required TResult orElse(),
+  }) {
+    if (submitSubmission != null) {
+      return submitSubmission(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SubmitSubmission implements ModAssignEvent {
+  const factory _SubmitSubmission(final int assignId, final int itemId) =
+      _$_SubmitSubmission;
+
+  int get assignId;
+  int get itemId;
+  @JsonKey(ignore: true)
+  _$$_SubmitSubmissionCopyWith<_$_SubmitSubmission> get copyWith =>
       throw _privateConstructorUsedError;
 }
