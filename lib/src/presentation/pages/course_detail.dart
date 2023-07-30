@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lms_pptik/src/data/models/materi_model.dart';
 import 'package:lms_pptik/src/data/models/user_model.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
 
 import '../../data/models/course_model.dart';
-import '../../data/models/user_grade_model/usergrade.dart';
+import '../../data/models/materi_model/materi_model.dart';
+import '../../data/models/user_grade_model/user_grade_model.dart';
 import '../blocs/course/course_bloc.dart';
 
 class CourseDetailPage extends StatefulWidget {

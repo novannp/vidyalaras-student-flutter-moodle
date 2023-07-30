@@ -38,5 +38,4 @@ class FunctionHelper {
         date1.month == date2.month &&
         date1.day == date2.day;
   }
-
 }

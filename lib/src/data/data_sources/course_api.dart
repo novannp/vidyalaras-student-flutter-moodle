@@ -5,8 +5,8 @@ import 'package:lms_pptik/src/utils/exceptions.dart';
 
 import '../../utils/endpoints.dart';
 import '../models/course_model.dart';
-import '../models/materi_model.dart';
-import '../models/user_grade_model/usergrade.dart';
+import '../models/materi_model/materi_model.dart';
+import '../models/user_grade_model/user_grade_model.dart';
 import '../models/user_model.dart';
 
 abstract class CourseApi {

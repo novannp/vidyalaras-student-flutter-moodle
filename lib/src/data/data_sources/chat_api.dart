@@ -30,14 +30,13 @@ abstract class ChatApi {
   Future<MemberModel> getMemberInfo(
       String token, int referenceUserId, int memberId);
 
-  Future<ConversationModel> getConversationsBetweenUser(String token, int userId, int otheruserid);
+  Future<ConversationModel> getConversationsBetweenUser(
+      String token, int userId, int otheruserid);
 
-  Future setConversationFavorite(
-      String token, int userId, int conversations);
-  Future unsetConversationFavorite(
-      String token, int userId, int conversations);
+  Future setConversationFavorite(String token, int userId, int conversations);
+  Future unsetConversationFavorite(String token, int userId, int conversations);
 
-  Future deleteConversation(
+  Future<bool> deleteConversation(
       String token, int userId, int conversationIds);
 }
 
@@ -190,7 +189,7 @@ class ChatApiImpl implements ChatApi {
   }
 
   @override
-  Future deleteConversation(
+  Future<bool> deleteConversation(
       String token, int userId, int conversationIds) async {
     Uri url = Uri.https(
       Endpoints.baseUrl,
@@ -215,8 +214,8 @@ class ChatApiImpl implements ChatApi {
   }
 
   @override
-  Future setConversationFavorite(
-      String token, int userId, int conversations)async {
+  Future<bool> setConversationFavorite(
+      String token, int userId, int conversations) async {
     Uri url = Uri.https(
       Endpoints.baseUrl,
       Endpoints.rest,
@@ -231,10 +230,7 @@ class ChatApiImpl implements ChatApi {
       ),
     );
 
-    print(url);
-
     final response = await client.get(url);
-    print(response.body);
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -243,7 +239,8 @@ class ChatApiImpl implements ChatApi {
   }
 
   @override
-  Future<ConversationModel> getConversationsBetweenUser(String token, int userId, int otheruserid)async {
+  Future<ConversationModel> getConversationsBetweenUser(
+      String token, int userId, int otheruserid) async {
     Uri url = Uri.https(
       Endpoints.baseUrl,
       Endpoints.rest,
@@ -254,18 +251,17 @@ class ChatApiImpl implements ChatApi {
         "userid": userId,
         "otheruserid": otheruserid,
         "includecontactrequests": 0,
-        "includeprivacyinfo" : 0,
+        "includeprivacyinfo": 0,
       }.map(
-            (key, value) => MapEntry(key, value.toString()),
+        (key, value) => MapEntry(key, value.toString()),
       ),
     );
 
     final response = await client.get(url);
-    print(response.body);
     final message = jsonDecode(response.body)['message'];
     if (message != "Conversation does not exist") {
-      final ConversationModel data = ConversationModel.fromJson(jsonDecode(response.body));
-      print(data);
+      final ConversationModel data =
+          ConversationModel.fromJson(jsonDecode(response.body));
       return data;
     } else {
       throw ServerException();
@@ -273,7 +269,8 @@ class ChatApiImpl implements ChatApi {
   }
 
   @override
-  Future unsetConversationFavorite(String token, int userId, int conversations) async{
+  Future unsetConversationFavorite(
+      String token, int userId, int conversations) async {
     Uri url = Uri.https(
       Endpoints.baseUrl,
       Endpoints.rest,
@@ -284,18 +281,15 @@ class ChatApiImpl implements ChatApi {
         "userid": userId,
         "conversations[0]": conversations,
       }.map(
-            (key, value) => MapEntry(key, value.toString()),
+        (key, value) => MapEntry(key, value.toString()),
       ),
     );
-    print(url);
 
     final response = await client.get(url);
-    print(response.body);
     if (response.statusCode == 200) {
       return true;
     } else {
       return false;
     }
   }
-
 }

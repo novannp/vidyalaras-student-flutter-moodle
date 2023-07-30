@@ -121,13 +121,14 @@ class SetConversationsFavoriteBloc extends Bloc<ChatEvent, ChatState> {
         emit(const ChatState.loading());
         final result = await _setConversationsFavorite.execute(conversations);
         result.fold(
-              (failure) => emit(ChatState.error(failure.message)),
-              (status) => emit(ChatState.loaded(status)),
+          (failure) => emit(ChatState.error(failure.message)),
+          (status) => emit(ChatState.loaded(status)),
         );
       });
     });
   }
 }
+
 class UnsetConversationsFavoriteBloc extends Bloc<ChatEvent, ChatState> {
   final UnsetConversationsFavorite _unsetConversationsFavorite;
 
@@ -138,8 +139,8 @@ class UnsetConversationsFavoriteBloc extends Bloc<ChatEvent, ChatState> {
         emit(const ChatState.loading());
         final result = await _unsetConversationsFavorite.execute(conversations);
         result.fold(
-              (failure) => emit(ChatState.error(failure.message)),
-              (status) => emit(ChatState.loaded(status)),
+          (failure) => emit(ChatState.error(failure.message)),
+          (status) => emit(ChatState.loaded(status)),
         );
       });
     });

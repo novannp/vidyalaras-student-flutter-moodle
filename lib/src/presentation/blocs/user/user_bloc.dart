@@ -3,8 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lms_pptik/src/domain/usecase/user/update_picture.dart';
 import 'package:lms_pptik/src/domain/usecase/user/user.dart';
 
-import '../../../data/models/user_model.dart';
-
 part 'user_event.dart';
 part 'user_state.dart';
 part 'user_bloc.freezed.dart';

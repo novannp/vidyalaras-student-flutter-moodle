@@ -1,4 +1,4 @@
-class Content {
+class ContentModel {
   String? type;
   String? filename;
   String? filepath;
@@ -13,7 +13,7 @@ class Content {
   String? author;
   String? license;
 
-  Content({
+  ContentModel({
     this.type,
     this.filename,
     this.filepath,
@@ -31,10 +31,10 @@ class Content {
 
   @override
   String toString() {
-    return 'Content(type: $type, filename: $filename, filepath: $filepath, filesize: $filesize, fileurl: $fileurl, timecreated: $timecreated, timemodified: $timemodified, sortorder: $sortorder, mimetype: $mimetype, isexternalfile: $isexternalfile, userid: $userid, author: $author, license: $license)';
+    return 'ContentModel(type: $type, filename: $filename, filepath: $filepath, filesize: $filesize, fileurl: $fileurl, timecreated: $timecreated, timemodified: $timemodified, sortorder: $sortorder, mimetype: $mimetype, isexternalfile: $isexternalfile, userid: $userid, author: $author, license: $license)';
   }
 
-  factory Content.fromJson(Map<String, dynamic> json) => Content(
+  factory ContentModel.fromJson(Map<String, dynamic> json) => ContentModel(
         type: json['type'] as String?,
         filename: json['filename'] as String?,
         filepath: json['filepath'] as String?,

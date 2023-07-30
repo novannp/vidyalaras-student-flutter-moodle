@@ -10,8 +10,12 @@ class ChatEvent with _$ChatEvent {
       _SendInstantMessage;
   const factory ChatEvent.resetMessage() = _ResetMessage;
   const factory ChatEvent.getUnreadMessageCount() = _GetUnreadMessageCount;
-  const factory ChatEvent.setConversationFavorite(int conversations) = _SetFavoriteConversations;
-  const factory ChatEvent.unsetConversationFavorite(int conversations) = _UnsetFavoriteConversations;
-  const factory ChatEvent.deleteConversation(int conversationIds) = _DeleteConversation;
-  const factory ChatEvent.getConversationBetweenUser(int otherUserId) = _GetConversationBetweenUser;
+  const factory ChatEvent.setConversationFavorite(int conversations) =
+      _SetFavoriteConversations;
+  const factory ChatEvent.unsetConversationFavorite(int conversations) =
+      _UnsetFavoriteConversations;
+  const factory ChatEvent.deleteConversation(int conversationIds) =
+      _DeleteConversation;
+  const factory ChatEvent.getConversationBetweenUser(int otherUserId) =
+      _GetConversationBetweenUser;
 }

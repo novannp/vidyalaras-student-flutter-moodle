@@ -8,7 +8,6 @@ import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/upload/upload_file_bloc.dart';
 
-import '../../data/models/item_model.dart';
 import '../../data/models/user_model.dart';
 import '../../utils/constant.dart';
 import '../blocs/user/user_bloc.dart';
@@ -358,27 +357,23 @@ class MyProfileScreen extends StatefulWidget {
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
   Future<XFile?> pickImage() async {
-    final ImagePicker _picker = ImagePicker();
+    final ImagePicker picker = ImagePicker();
     XFile? pickedFile;
 
     try {
-      pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    } catch (e) {
-      print('Error picking image: $e');
-    }
+      pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    } catch (e) {}
 
     return pickedFile;
   }
 
   Future<XFile?> captureImage() async {
-    final ImagePicker _picker = ImagePicker();
+    final ImagePicker picker = ImagePicker();
     XFile? pickedFile;
 
     try {
-      pickedFile = await _picker.pickImage(source: ImageSource.camera);
-    } catch (e) {
-      print('Error picking image: $e');
-    }
+      pickedFile = await picker.pickImage(source: ImageSource.camera);
+    } catch (e) {}
 
     return pickedFile;
   }

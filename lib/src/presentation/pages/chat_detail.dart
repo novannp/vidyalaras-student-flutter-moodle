@@ -32,7 +32,7 @@ class ChatDetailPage extends StatefulWidget {
 class _ChatDetailPageState extends State<ChatDetailPage> {
   late ScrollController _scrollController;
   late TextEditingController _messageController;
-  List<Message>? _messages = [];
+  List<Message>? messages = [];
 
   late Timer timer;
 
@@ -197,7 +197,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   return state.maybeWhen(
                     loaded: (data) {
                       data as ChatModel;
-                      _messages = data.messages as List<Message>;
+                      messages = data.messages as List<Message>;
                       if (data.messages!.isEmpty) {
                         const Center(
                           child: Text('Belum ada pesan'),
@@ -283,9 +283,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         title: Text(
             data.isfavourite! ? "Hapus dari favorit" : 'Tambahkan ke favorit'),
         onTap: () {
-          print(data.isfavourite!);
           if (data.isfavourite!) {
-            print("UNSET");
             context
                 .read<UnsetConversationsFavoriteBloc>()
                 .add(ChatEvent.unsetConversationFavorite(data.id!));

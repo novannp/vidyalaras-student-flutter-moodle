@@ -53,9 +53,9 @@ class _AssignmentPageState extends State<AssignmentPage> {
                       onTap: () {
                         buildAssignmentDetail(assignment);
                       },
-                      trailing: Text(
-                        '${assignment.grade ?? '-'} ',
-                        style: const TextStyle(color: Colors.green),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 20,
                       ),
                       leading: const Icon(
                         Icons.assignment,
