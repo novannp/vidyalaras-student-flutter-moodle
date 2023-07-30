@@ -91,7 +91,18 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       child: Scaffold(
         appBar: AppBar(
           actions: [
-            BlocBuilder<GetConversationBetweenUserBloc, ChatState>(
+            BlocConsumer<GetConversationBetweenUserBloc, ChatState>(
+              listener: (context, state) {
+                state.maybeWhen(
+                  loaded: (data) {
+                    data as ConversationModel;
+                    context
+                        .read<GetConversationMessageBloc>()
+                        .add(ChatEvent.getConversationMessage(data.id!));
+                  },
+                  orElse: () {},
+                );
+              },
               builder: (context, state) {
                 return state.maybeWhen(loaded: (data) {
                   data as ConversationModel;
@@ -286,7 +297,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         },
       ),
     );
-
   }
 
   BlocConsumer<DeleteConversationBloc, ChatState> _removeOption(
