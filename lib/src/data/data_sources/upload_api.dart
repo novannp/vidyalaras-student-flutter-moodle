@@ -19,12 +19,12 @@ class UploadApiImpl implements UploadApi {
     Uri url =
         Uri.parse('https://lms.pptik.id/webservice/upload.php?token=$token');
     final request = MultipartRequest('POST', url);
-    for (File file in files) {
+    for (int i = 0; i < files.length; i++) {
       final httpFile = MultipartFile(
-        'file',
-        file.readAsBytes().asStream(),
-        file.lengthSync(),
-        filename: file.path.split('/').last,
+        'file_$i',
+        files[i].readAsBytes().asStream(),
+        files[i].lengthSync(),
+        filename: files[i].path.split('/').last,
       );
       request.files.add(httpFile);
     }
@@ -33,7 +33,6 @@ class UploadApiImpl implements UploadApi {
     // Get response data from Server
     if (response.statusCode == 200) {
       final responseData = await response.stream.bytesToString();
-      log('Response Data: $responseData');
       final result = jsonDecode(responseData) as List;
       return result
           .map<ItemModel>(
