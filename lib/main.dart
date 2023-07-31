@@ -14,7 +14,6 @@ import 'package:lms_pptik/src/presentation/blocs/upload/upload_file_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/user/user_bloc.dart';
 import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
 
-import 'package:lms_pptik/src/utils/observer.dart';
 import 'app.dart';
 import 'injection.dart' as di;
 import 'src/presentation/blocs/chat/chat_bloc.dart';

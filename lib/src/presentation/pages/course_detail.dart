@@ -14,6 +14,7 @@ import '../../data/models/user_grade_model/user_grade_model.dart';
 import '../blocs/course/course_bloc.dart';
 import '../blocs/mods/mod_assign/mod_assign_bloc.dart';
 import '../blocs/mods/mod_state.dart';
+import 'materi_detail_page.dart';
 
 class CourseDetailPage extends StatefulWidget {
   const CourseDetailPage({super.key, required this.course});
@@ -485,11 +486,18 @@ class _CourseDetailPageState extends State<CourseDetailPage>
             itemBuilder: (context, index) {
               return ListTile(
                 onTap: () {
-                  GoRouter.of(context).pushNamed('materi_detail', extra: {
-                    'materi': materi,
-                    'selectedIndex': index,
-                    'courseId': widget.course.id
-                  });
+                  showModalBottomSheet(
+                      enableDrag: true,
+                      useSafeArea: true,
+                      showDragHandle: true,
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) {
+                        return MateriDetailPage(
+                          selectedIndex: index,
+                          courseId: widget.course.id!,
+                        );
+                      });
                 },
                 leading: Icon(
                   Icons.book,

@@ -13,6 +13,7 @@ import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 import '../../data/models/materi_model/date_model.dart';
 import '../../data/models/materi_model/materi_model.dart';
 import '../../utils/helper/function_helper/function_helper.dart';
+import '../blocs/mods/mod_resource/mod_resource_bloc.dart';
 import '../components/remove_glow.dart';
 import 'mods/assignment_detail.dart';
 
@@ -28,129 +29,11 @@ class MateriDetailPage extends StatefulWidget {
 }
 
 class _MateriDetailPageState extends State<MateriDetailPage> {
-  late PageController _pageController;
-  int _currentIndex = 0;
-
+  late final ScrollController _scrollController;
   @override
-  void initState() {
-    _pageController = PageController(initialPage: widget.selectedIndex);
+  initState() {
     super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<GetMateriBloc, CourseState>(
-      builder: (context, state) {
-        return Scaffold(
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: FilledButton(
-                    onPressed: () {
-                      _pageController.previousPage(
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.ease);
-                    },
-                    child: const Icon(Icons.arrow_back_ios),
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Expanded(
-                  child: FilledButton(
-                    onPressed: () {
-                      _pageController.nextPage(
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.ease);
-                    },
-                    child: const Icon(Icons.arrow_forward_ios),
-                  ),
-                )
-              ],
-            ),
-          ),
-          appBar: AppBar(
-            title: Text(state.whenOrNull(
-                  loaded: (data) {
-                    data as List<MateriModel>;
-                    return data[_currentIndex].name!.decodeHtml();
-                  },
-                ) ??
-                '-'),
-          ),
-          body: PageView.builder(
-              onPageChanged: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: state.whenOrNull(
-                    loaded: (data) {
-                      data as List<MateriModel>;
-                      return data.length;
-                    },
-                  ) ??
-                  0,
-              controller: _pageController,
-              itemBuilder: (context, index) {
-                return Scaffold(
-                  body: RefreshIndicator(
-                    onRefresh: () {
-                      return Future.delayed(const Duration(seconds: 1), () {
-                        context
-                            .read<GetMateriBloc>()
-                            .add(CourseEvent.getMateri(widget.courseId));
-                      });
-                    },
-                    child: ScrollConfiguration(
-                      behavior: RemoveGlow(),
-                      child: SingleChildScrollView(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          child: state.whenOrNull(
-                            loaded: (data) {
-                              data as List<MateriModel>;
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  data[index].summary != null
-                                      ? Html(data: data[index].summary)
-                                      : const SizedBox(),
-                                  ExpansionTile(
-                                    initiallyExpanded: true,
-                                    title: const Text(
-                                      'Modul',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    children: [
-                                      if (data[index].modules != null)
-                                        if (data[index].modules!.isNotEmpty)
-                                          buildModTile(data[index])
-                                        else
-                                          const Center(
-                                            child: Text('Tidak ada modul'),
-                                          )
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                                ],
-                              );
-                            },
-                          )),
-                    ),
-                  ),
-                );
-              }),
-        );
-      },
-    );
+    _scrollController = ScrollController();
   }
 
   Widget buildModTile(MateriModel materi) {
@@ -185,8 +68,8 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: mod.contents!.length,
-                  itemBuilder: (context, index) {
-                    final content = mod.contents![index];
+                  itemBuilder: (context, selectedIndex) {
+                    final content = mod.contents![selectedIndex];
                     return ResourceTile(content: content, mod: mod);
                   });
             } else {
@@ -220,6 +103,61 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
           default:
         }
         return null;
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<GetMateriBloc, CourseState>(
+      builder: (context, state) {
+        return DraggableScrollableSheet(
+            expand: false,
+            builder: (context, controller) {
+              return SingleChildScrollView(
+                controller: controller,
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: state.whenOrNull(
+                      loaded: (data) {
+                        data as List<MateriModel>;
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            data[widget.selectedIndex].summary != null
+                                ? Html(data: data[widget.selectedIndex].summary)
+                                : const SizedBox(),
+                            ExpansionTile(
+                              initiallyExpanded: true,
+                              title: const Text(
+                                'Modul',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              children: [
+                                if (data[widget.selectedIndex].modules != null)
+                                  if (data[widget.selectedIndex]
+                                      .modules!
+                                      .isNotEmpty)
+                                    buildModTile(data[widget.selectedIndex])
+                                  else
+                                    const Center(
+                                      child: Text('Tidak ada modul'),
+                                    )
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                          ],
+                        );
+                      },
+                    ) ??
+                    SizedBox(),
+              );
+            });
       },
     );
   }
@@ -467,12 +405,15 @@ class ResourceTile extends StatelessWidget {
     return Card(
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
             subtitle: Text('${content.filesize?.formatFileSize() ?? '-'} '),
             trailing: IconButton.filled(
                 onPressed: () {
-                  // context.read<ViewResourceBloc>().add(ModResourceEvent.viewResource(mod.c));
+                  context
+                      .read<ViewResourceBloc>()
+                      .add(ModResourceEvent.viewResource(mod.instance!));
                   FunctionHelper.downloadFileHandler(
                       context,
                       content.filename ?? '',
@@ -490,28 +431,58 @@ class ResourceTile extends StatelessWidget {
               mod.name!.decodeHtml(),
             ),
           ),
-          if (mod.completiondata != null)
-            if (mod.completiondata!.state == 1)
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                margin: const EdgeInsets.only(bottom: 10),
-                width: double.infinity,
-                child: FilledButton.tonalIcon(
-                  icon: const Icon(Icons.check),
-                  onPressed: () {},
-                  label: const Text('Selesai'),
+          if (mod.completiondata!.details!.isNotEmpty)
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.start,
+              alignment: WrapAlignment.start,
+              runAlignment: WrapAlignment.start,
+              children: mod.completiondata?.details?.map((e) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Chip(
+                        padding: EdgeInsets.zero,
+                        labelStyle: const TextStyle(fontSize: 12),
+                        backgroundColor: e.rulevalue!.status == 1
+                            ? Colors.green.withOpacity(0.2)
+                            : Colors.red.withOpacity(0.2),
+                        label: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            e.rulevalue!.status == 1
+                                ? const Icon(Icons.check, size: 16)
+                                : const Icon(Icons.close, size: 16),
+                            const SizedBox(width: 5),
+                            Text(e.rulevalue!.description!),
+                          ],
+                        ),
+                      ),
+                    );
+                  }).toList() ??
+                  [],
+            ),
+          if (mod.uservisible == false)
+            if (mod.completiondata != null)
+              if (mod.completiondata!.state == 1)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: double.infinity,
+                  child: FilledButton.tonalIcon(
+                    icon: const Icon(Icons.check),
+                    onPressed: () {},
+                    label: const Text('Selesai'),
+                  ),
+                )
+              else
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.only(bottom: 10),
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    child: const Text('Tandai Selesai'),
+                  ),
                 ),
-              )
-            else
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                margin: const EdgeInsets.only(bottom: 10),
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: () {},
-                  child: const Text('Tandai Selesai'),
-                ),
-              ),
         ],
       ),
     );
@@ -631,7 +602,7 @@ class AssignmentTile extends StatelessWidget {
             ListTile(
               trailing: mod.uservisible! == true
                   ? null
-                  : Icon(Icons.lock, color: Colors.red),
+                  : const Icon(Icons.lock, color: Colors.red),
               subtitle: mod.completiondata!.details!.isNotEmpty
                   ? Wrap(
                       crossAxisAlignment: WrapCrossAlignment.start,
@@ -705,34 +676,33 @@ class AssignmentTile extends StatelessWidget {
                         ],
                       ),
                     ),
-                if (mod.uservisible! == true)
-                  if (mod.completiondata!.details!.isEmpty)
-                    if (mod.completiondata!.state == 1)
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        margin: const EdgeInsets.only(bottom: 10),
-                        width: double.infinity,
-                        child: FilledButton.tonalIcon(
-                          icon: const Icon(Icons.check),
-                          onPressed: () {},
-                          label: const Text('Selesai'),
-                        ),
-                      )
-                    else
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        margin: const EdgeInsets.only(bottom: 10),
-                        width: double.infinity,
-                        child: OutlinedButton(
-                          style: FilledButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            side: BorderSide(
-                                color: Theme.of(context).primaryColor),
-                          ),
-                          onPressed: () {},
-                          child: const Text('Tandai Selesai'),
-                        ),
+                if (mod.completiondata!.details!.isEmpty)
+                  if (mod.completiondata!.state == 1)
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      margin: const EdgeInsets.only(bottom: 10),
+                      width: double.infinity,
+                      child: FilledButton.tonalIcon(
+                        icon: const Icon(Icons.check),
+                        onPressed: () {},
+                        label: const Text('Selesai'),
                       ),
+                    )
+                  else
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      margin: const EdgeInsets.only(bottom: 10),
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        style: FilledButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          side:
+                              BorderSide(color: Theme.of(context).primaryColor),
+                        ),
+                        onPressed: () {},
+                        child: const Text('Tandai Selesai'),
+                      ),
+                    ),
               ],
             )
           ],
