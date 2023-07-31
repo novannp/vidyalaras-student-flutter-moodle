@@ -74,6 +74,8 @@ void init() {
   locator.registerFactory(() => UnsetConversationsFavoriteBloc(locator()));
   locator.registerFactory(() => GetConversationBetweenUserBloc(locator()));
   locator.registerFactory(() => DeleteConversationBloc(locator()));
+  locator.registerFactory(() => BlockUserBloc(locator()));
+  locator.registerFactory(() => UnblockUserBloc(locator()));
   locator.registerFactory(() => AuthLogoutBloc(locator()));
   locator.registerFactory(() => GetUnreadMessageCountBloc(locator()));
   locator.registerFactory(() => GetNotificationsBloc(locator()));
@@ -122,6 +124,8 @@ void init() {
   locator.registerFactory(() => UnsetConversationsFavorite(locator()));
   locator.registerFactory(() => GetConversationsBetweenUser(locator()));
   locator.registerFactory(() => DeleteConversation(locator()));
+  locator.registerFactory(() => BlockUser(locator()));
+  locator.registerFactory(() => UnblockUser(locator()));
 
   // NOTIFICATION
   locator.registerFactory(() => GetNotifications(locator()));

@@ -34,10 +34,13 @@ abstract class ChatApi {
       String token, int userId, int otheruserid);
 
   Future setConversationFavorite(String token, int userId, int conversations);
+
   Future unsetConversationFavorite(String token, int userId, int conversations);
 
-  Future<bool> deleteConversation(
-      String token, int userId, int conversationIds);
+  Future deleteConversation(String token, int userId, int conversationIds);
+
+  Future blockUser(String token, int userId, int blockedUserId);
+  Future unblockUser(String token, int userId, int blockedUserId);
 }
 
 class ChatApiImpl implements ChatApi {
@@ -189,7 +192,7 @@ class ChatApiImpl implements ChatApi {
   }
 
   @override
-  Future<bool> deleteConversation(
+  Future deleteConversation(
       String token, int userId, int conversationIds) async {
     Uri url = Uri.https(
       Endpoints.baseUrl,
@@ -214,7 +217,7 @@ class ChatApiImpl implements ChatApi {
   }
 
   @override
-  Future<bool> setConversationFavorite(
+  Future setConversationFavorite(
       String token, int userId, int conversations) async {
     Uri url = Uri.https(
       Endpoints.baseUrl,
@@ -230,7 +233,10 @@ class ChatApiImpl implements ChatApi {
       ),
     );
 
+    print(url);
+
     final response = await client.get(url);
+    print(response.body);
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -258,10 +264,12 @@ class ChatApiImpl implements ChatApi {
     );
 
     final response = await client.get(url);
+    print(response.body);
     final message = jsonDecode(response.body)['message'];
     if (message != "Conversation does not exist") {
       final ConversationModel data =
           ConversationModel.fromJson(jsonDecode(response.body));
+      print(data);
       return data;
     } else {
       throw ServerException();
@@ -284,12 +292,67 @@ class ChatApiImpl implements ChatApi {
         (key, value) => MapEntry(key, value.toString()),
       ),
     );
+    print(url);
 
     final response = await client.get(url);
+    print(response.body);
     if (response.statusCode == 200) {
       return true;
     } else {
       return false;
     }
   }
-}
+
+  @override
+  Future blockUser(String token, int userId, int blockedUserId) async{
+    Uri url = Uri.https(
+      Endpoints.baseUrl,
+      Endpoints.rest,
+      {
+        "wstoken": token,
+        "wsfunction": "core_message_block_user",
+        "moodlewsrestformat": "json",
+        "userid": userId,
+        "blockeduserid" : blockedUserId,
+      }.map(
+            (key, value) => MapEntry(key, value.toString()),
+      ),
+    );
+    print(url);
+
+    final response = await client.get(url);
+    print(response.body);
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  Future unblockUser(String token, int userId, int unblockUserId)async {
+    Uri url = Uri.https(
+      Endpoints.baseUrl,
+      Endpoints.rest,
+      {
+        "wstoken": token,
+        "wsfunction": "core_message_unblock_user",
+        "moodlewsrestformat": "json",
+        "userid": userId,
+        "unblockeduserid" : unblockUserId,
+      }.map(
+            (key, value) => MapEntry(key, value.toString()),
+      ),
+    );
+    print(url);
+
+    final response = await client.get(url);
+    print(response.body);
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  }
+

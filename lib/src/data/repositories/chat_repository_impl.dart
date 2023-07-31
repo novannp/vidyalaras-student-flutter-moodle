@@ -97,12 +97,39 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> deleteConversations(int conversationIds) async {
+  Future<Either<Failure, bool>> deleteConversations(int conversationIds)async {
     try {
       final token = await storage.read('token');
       final userId = await storage.read('userId');
-      final result = await chatApiImpl.deleteConversation(
-          token, int.parse(userId), conversationIds);
+      final result = await chatApiImpl.deleteConversation(token, int.parse(userId), conversationIds);
+      return const Right(true);
+    } on SocketException {
+      return const Left(ConnectionFailure("Tidak ada koneksi internet"));
+    } on ServerException {
+      return const Left(ServerFailure("Terjadi kesalahan pada server"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> setFavoriteConversations(int conversations)async {
+    try {
+      final token = await storage.read('token');
+      final userId = await storage.read('userId');
+      final result = await chatApiImpl.setConversationFavorite(token, int.parse(userId), conversations);
+      return const Right(true);
+    } on SocketException {
+      return const Left(ConnectionFailure("Tidak ada koneksi internet"));
+    } on ServerException {
+      return const Left(ServerFailure("Terjadi kesalahan pada server"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> unsetFavoriteConversations(int conversations)async {
+    try {
+      final token = await storage.read('token');
+      final userId = await storage.read('userId');
+      final result = await chatApiImpl.unsetConversationFavorite(token, int.parse(userId), conversations);
       return Right(result);
     } on SocketException {
       return const Left(ConnectionFailure("Tidak ada koneksi internet"));
@@ -112,13 +139,11 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> setFavoriteConversations(
-      int conversations) async {
+  Future<Either<Failure, ConversationModel>> getConversationsBetweenUser(int otheruserid)async {
     try {
       final token = await storage.read('token');
       final userId = await storage.read('userId');
-      final result = await chatApiImpl.setConversationFavorite(
-          token, int.parse(userId), conversations);
+      final result = await chatApiImpl.getConversationsBetweenUser(token, int.parse(userId), otheruserid);
       return Right(result);
     } on SocketException {
       return const Left(ConnectionFailure("Tidak ada koneksi internet"));
@@ -128,13 +153,11 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> unsetFavoriteConversations(
-      int conversations) async {
+  Future<Either<Failure, bool>> blockUser(int blockedUserId)async {
     try {
       final token = await storage.read('token');
       final userId = await storage.read('userId');
-      final result = await chatApiImpl.unsetConversationFavorite(
-          token, int.parse(userId), conversations);
+      final result = await chatApiImpl.blockUser(token, int.parse(userId), blockedUserId);
       return Right(result);
     } on SocketException {
       return const Left(ConnectionFailure("Tidak ada koneksi internet"));
@@ -144,13 +167,11 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
-  Future<Either<Failure, ConversationModel>> getConversationsBetweenUser(
-      int otheruserid) async {
+  Future<Either<Failure, bool>> unblockUser(int unblockUserId)async {
     try {
       final token = await storage.read('token');
       final userId = await storage.read('userId');
-      final result = await chatApiImpl.getConversationsBetweenUser(
-          token, int.parse(userId), otheruserid);
+      final result = await chatApiImpl.unblockUser(token, int.parse(userId), unblockUserId);
       return Right(result);
     } on SocketException {
       return const Left(ConnectionFailure("Tidak ada koneksi internet"));
@@ -158,4 +179,9 @@ class ChatRepositoryImpl implements ChatRepository {
       return const Left(ServerFailure("Terjadi kesalahan pada server"));
     }
   }
+
+
+
+
+
 }

@@ -165,6 +165,39 @@ class DeleteConversationBloc extends Bloc<ChatEvent, ChatState> {
   }
 }
 
+class BlockUserBloc extends Bloc<ChatEvent, ChatState> {
+  final BlockUser _blockUser;
+
+  BlockUserBloc(this._blockUser) : super(const ChatState.initial()) {
+    on<ChatEvent>((event, emit) async {
+      await event.whenOrNull(blockUser: (blockedUserId) async {
+        emit(const ChatState.loading());
+        final result = await _blockUser.execute(blockedUserId);
+        result.fold(
+          (failure) => emit(ChatState.error(failure.message)),
+          (status) => emit(ChatState.loaded(status)),
+        );
+      });
+    });
+  }
+}
+class UnblockUserBloc extends Bloc<ChatEvent, ChatState> {
+  final UnblockUser _unblockUser;
+
+  UnblockUserBloc(this._unblockUser) : super(const ChatState.initial()) {
+    on<ChatEvent>((event, emit) async {
+      await event.whenOrNull(unblockUser: (unblockUserId) async {
+        emit(const ChatState.loading());
+        final result = await _unblockUser.execute(unblockUserId);
+        result.fold(
+          (failure) => emit(ChatState.error(failure.message)),
+          (status) => emit(ChatState.loaded(status)),
+        );
+      });
+    });
+  }
+}
+
 class GetConversationBetweenUserBloc extends Bloc<ChatEvent, ChatState> {
   final GetConversationsBetweenUser _getConversationsBetweenUser;
 

@@ -19,4 +19,6 @@ abstract class ChatRepository {
   Future<Either<Failure, ConversationModel>> getConversationsBetweenUser(
       int otheruserid);
   Future<Either<Failure, bool>> deleteConversations(int conversationIds);
+  Future<Either<Failure, bool>> blockUser(int blockedUserId);
+  Future<Either<Failure, bool>> unblockUser(int unblockUserId);
 }

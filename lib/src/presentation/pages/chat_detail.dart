@@ -32,7 +32,7 @@ class ChatDetailPage extends StatefulWidget {
 class _ChatDetailPageState extends State<ChatDetailPage> {
   late ScrollController _scrollController;
   late TextEditingController _messageController;
-  List<Message>? messages = [];
+  List<Message>? _messages = [];
 
   late Timer timer;
 
@@ -91,18 +91,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       child: Scaffold(
         appBar: AppBar(
           actions: [
-            BlocConsumer<GetConversationBetweenUserBloc, ChatState>(
-              listener: (context, state) {
-                state.maybeWhen(
-                  loaded: (data) {
-                    data as ConversationModel;
-                    context
-                        .read<GetConversationMessageBloc>()
-                        .add(ChatEvent.getConversationMessage(data.id!));
-                  },
-                  orElse: () {},
-                );
-              },
+            BlocBuilder<GetConversationBetweenUserBloc, ChatState>(
               builder: (context, state) {
                 return state.maybeWhen(loaded: (data) {
                   data as ConversationModel;
@@ -120,13 +109,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                                 children: [
                                   _favoriteOption(data),
                                   _removeOption(data),
-                                  const ListTile(
-                                    leading: Icon(Icons.block),
-                                    title: Text('Blokir'),
-                                  ),
-                                  const ListTile(
-                                    leading: Icon(Icons.person_add),
-                                    title: Text('Tambahkan ke kontak'),
+                                  _blockOption(data),
+                                  ListTile(
+                                    leading: const Icon(Icons.person_add),
+                                    title: const Text('Tambahkan ke kontak'),
+                                    onTap: () => Navigator.of(context).pop(),
                                   ),
                                 ],
                               ),
@@ -197,7 +184,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   return state.maybeWhen(
                     loaded: (data) {
                       data as ChatModel;
-                      messages = data.messages as List<Message>;
+                      _messages = data.messages as List<Message>;
                       if (data.messages!.isEmpty) {
                         const Center(
                           child: Text('Belum ada pesan'),
@@ -237,6 +224,72 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
             buildMessageTextField(context),
           ],
         ),
+      ),
+    );
+  }
+
+  MultiBlocListener _blockOption(ConversationModel data) {
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<BlockUserBloc, ChatState>(listener: (context, state) {
+          state.whenOrNull(loaded: (status) {
+            print("BLOCK");
+            context.pop();
+            context.pop();
+            showSnackbar(context, "Block pengguna ", isWarning: true);
+
+            context
+                .read<GetConversationBetweenUserBloc>()
+                .add(ChatEvent.getConversationBetweenUser(widget.memberId));
+          });
+        }),
+        BlocListener<UnblockUserBloc, ChatState>(listener: (context, state) {
+          print("UNBLOCK");
+
+          context.pop();
+          context.pop();
+          showSnackbar(context, "Berhasil Unblock pengguna");
+          context
+              .read<GetConversationBetweenUserBloc>()
+              .add(ChatEvent.getConversationBetweenUser(widget.memberId));
+        })
+      ],
+      child: ListTile(
+        leading: data.members![0].isblocked!
+            ? const Icon(Icons.check_circle_outline)
+            : const Icon(Icons.block),
+        title: Text(data.members![0].isblocked! ? "Unblock" : "Block"),
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                    title: Text(
+                        "Yakin ${data.members![0].isblocked! ? "unblock" : "block"} pengguna ini?"),
+                    actions: [
+                      OutlinedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("Kembali")),
+                      ElevatedButton(
+                          onPressed: () {
+                            print(data.members![0].isblocked!);
+                            if (data.members![0].isblocked!) {
+                              context
+                                  .read<UnblockUserBloc>()
+                                  .add(ChatEvent.unblockUser(widget.memberId));
+                            } else {
+                              context
+                                  .read<BlockUserBloc>()
+                                  .add(ChatEvent.blockUser(widget.memberId));
+                            }
+                          },
+                          child: Text(data.members![0].isblocked!
+                              ? "Unblock"
+                              : "Block"))
+                    ],
+                  ));
+        },
       ),
     );
   }
