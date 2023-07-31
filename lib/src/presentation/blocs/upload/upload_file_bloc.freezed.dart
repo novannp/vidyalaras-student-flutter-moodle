@@ -16,20 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UploadFileEvent {
-  File get file => throw _privateConstructorUsedError;
+  List<File> get file => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(File file) uploadFile,
+    required TResult Function(List<File> file) uploadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(File file)? uploadFile,
+    TResult? Function(List<File> file)? uploadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(File file)? uploadFile,
+    TResult Function(List<File> file)? uploadFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $UploadFileEventCopyWith<$Res> {
           UploadFileEvent value, $Res Function(UploadFileEvent) then) =
       _$UploadFileEventCopyWithImpl<$Res, UploadFileEvent>;
   @useResult
-  $Res call({File file});
+  $Res call({List<File> file});
 }
 
 /// @nodoc
@@ -83,7 +83,7 @@ class _$UploadFileEventCopyWithImpl<$Res, $Val extends UploadFileEvent>
       file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
-              as File,
+              as List<File>,
     ) as $Val);
   }
 }
@@ -96,7 +96,7 @@ abstract class _$$_UploadFileCopyWith<$Res>
       __$$_UploadFileCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({File file});
+  $Res call({List<File> file});
 }
 
 /// @nodoc
@@ -114,9 +114,9 @@ class __$$_UploadFileCopyWithImpl<$Res>
   }) {
     return _then(_$_UploadFile(
       null == file
-          ? _value.file
+          ? _value._file
           : file // ignore: cast_nullable_to_non_nullable
-              as File,
+              as List<File>,
     ));
   }
 }
@@ -124,10 +124,15 @@ class __$$_UploadFileCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UploadFile implements _UploadFile {
-  const _$_UploadFile(this.file);
+  const _$_UploadFile(final List<File> file) : _file = file;
 
+  final List<File> _file;
   @override
-  final File file;
+  List<File> get file {
+    if (_file is EqualUnmodifiableListView) return _file;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_file);
+  }
 
   @override
   String toString() {
@@ -139,11 +144,12 @@ class _$_UploadFile implements _UploadFile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UploadFile &&
-            (identical(other.file, file) || other.file == file));
+            const DeepCollectionEquality().equals(other._file, _file));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, file);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_file));
 
   @JsonKey(ignore: true)
   @override
@@ -154,7 +160,7 @@ class _$_UploadFile implements _UploadFile {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(File file) uploadFile,
+    required TResult Function(List<File> file) uploadFile,
   }) {
     return uploadFile(file);
   }
@@ -162,7 +168,7 @@ class _$_UploadFile implements _UploadFile {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(File file)? uploadFile,
+    TResult? Function(List<File> file)? uploadFile,
   }) {
     return uploadFile?.call(file);
   }
@@ -170,7 +176,7 @@ class _$_UploadFile implements _UploadFile {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(File file)? uploadFile,
+    TResult Function(List<File> file)? uploadFile,
     required TResult orElse(),
   }) {
     if (uploadFile != null) {
@@ -209,10 +215,10 @@ class _$_UploadFile implements _UploadFile {
 }
 
 abstract class _UploadFile implements UploadFileEvent {
-  const factory _UploadFile(final File file) = _$_UploadFile;
+  const factory _UploadFile(final List<File> file) = _$_UploadFile;
 
   @override
-  File get file;
+  List<File> get file;
   @override
   @JsonKey(ignore: true)
   _$$_UploadFileCopyWith<_$_UploadFile> get copyWith =>

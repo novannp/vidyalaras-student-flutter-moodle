@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:lms_pptik/src/data/models/course_model.dart';
 
-import '../../data/models/materi_model.dart';
-import '../../data/models/user_grade_model/usergrade.dart';
+import '../../data/models/materi_model/materi_model.dart';
+import '../../data/models/user_grade_model/user_grade_model.dart';
 import '../../data/models/user_model.dart';
 import '../../utils/failures.dart';
 

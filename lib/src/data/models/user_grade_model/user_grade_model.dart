@@ -1,4 +1,4 @@
-import 'gradeitem.dart';
+import 'grade_item.dart';
 
 class UserGradeModel {
   int? courseid;

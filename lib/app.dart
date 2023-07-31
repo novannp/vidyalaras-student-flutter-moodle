@@ -21,6 +21,7 @@ class LmsPPTIK extends StatelessWidget {
             SfGlobalLocalizations.delegate
           ],
           supportedLocales: const [Locale('id')],
+
           locale: const Locale('id'),
           debugShowCheckedModeBanner: false,
           themeMode: state ? ThemeMode.dark : ThemeMode.light,
@@ -40,12 +41,15 @@ class LmsPPTIK extends StatelessWidget {
             surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
             blendLevel: 7,
             subThemesData: const FlexSubThemesData(
+              chipRadius: 20,
+              outlinedButtonRadius: 10,
               filledButtonRadius: 10,
               blendOnLevel: 10,
               blendOnColors: false,
               useTextTheme: true,
             ),
             visualDensity: FlexColorScheme.comfortablePlatformDensity,
+
             // tabBarStyle: FlexTabBarStyle.forBackground,
 
             // To use the Playground font, add GoogleFonts package and uncomment
@@ -66,6 +70,8 @@ class LmsPPTIK extends StatelessWidget {
             surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
             blendLevel: 13,
             subThemesData: const FlexSubThemesData(
+              chipRadius: 20,
+              outlinedButtonRadius: 10,
               blendOnLevel: 20,
               useTextTheme: true,
             ),

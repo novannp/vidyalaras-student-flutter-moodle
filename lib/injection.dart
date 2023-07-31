@@ -84,7 +84,10 @@ void init() {
   locator.registerFactory(() => ViewResourceBloc(locator()));
   locator.registerFactory(() => UploadFileBloc(locator()));
   locator.registerFactory(() => UpdatePictureBloc(locator()));
+  locator.registerFactory(() => SubmitSubmissionBloc(locator()));
+
   //USECASE
+
   // AUTH
   locator.registerFactory(() => Login(locator()));
   locator.registerFactory(() => Logout(locator()));
@@ -127,6 +130,7 @@ void init() {
   // MOD ASSIGN
   locator.registerFactory(() => GetAssignmentList(locator()));
   locator.registerFactory(() => GetSubmissionStatus(locator()));
+  locator.registerFactory(() => SubmitSubmission(locator()));
 
   // MOD RESOURCE
   locator.registerFactory(() => GetResourceByCourse(locator()));

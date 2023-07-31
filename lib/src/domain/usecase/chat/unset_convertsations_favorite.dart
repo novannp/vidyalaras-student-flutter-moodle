@@ -1,4 +1,5 @@
 part of 'chat.dart';
+
 class UnsetConversationsFavorite {
   final ChatRepositoryImpl chatRepositoryImpl;
 

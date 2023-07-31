@@ -8,7 +8,6 @@ import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/upload/upload_file_bloc.dart';
 
-import '../../data/models/item_model.dart';
 import '../../data/models/user_model.dart';
 import '../../utils/constant.dart';
 import '../blocs/user/user_bloc.dart';
@@ -358,27 +357,23 @@ class MyProfileScreen extends StatefulWidget {
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
   Future<XFile?> pickImage() async {
-    final ImagePicker _picker = ImagePicker();
+    final ImagePicker picker = ImagePicker();
     XFile? pickedFile;
 
     try {
-      pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    } catch (e) {
-      print('Error picking image: $e');
-    }
+      pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    } catch (e) {}
 
     return pickedFile;
   }
 
   Future<XFile?> captureImage() async {
-    final ImagePicker _picker = ImagePicker();
+    final ImagePicker picker = ImagePicker();
     XFile? pickedFile;
 
     try {
-      pickedFile = await _picker.pickImage(source: ImageSource.camera);
-    } catch (e) {
-      print('Error picking image: $e');
-    }
+      pickedFile = await picker.pickImage(source: ImageSource.camera);
+    } catch (e) {}
 
     return pickedFile;
   }
@@ -487,7 +482,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                               context
                                                   .read<UploadFileBloc>()
                                                   .add(UploadFileEvent
-                                                      .uploadFile(file));
+                                                      .uploadFile([file]));
                                             }
                                           });
                                         },
@@ -495,76 +490,19 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                         title: const Text('Pilih dari galeri'),
                                       ),
                                     ),
-                                    MultiBlocListener(
-                                      listeners: [
-                                        BlocListener<UploadFileBloc,
-                                            UploadFileState>(
-                                          listener: (context, state) {
-                                            state.whenOrNull(
-                                              loading: () {
-                                                showDialog(
-                                                    barrierDismissible: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return const AlertDialog(
-                                                        content: Text(
-                                                            'Sedang mengunggah foto...'),
-                                                      );
-                                                    });
-                                              },
-                                              loaded: (data) {
-                                                context
-                                                    .read<UpdatePictureBloc>()
-                                                    .add(
-                                                        UserEvent.updatePicture(
-                                                            data[0].itemid!));
-                                              },
-                                            );
-                                          },
-                                        ),
-                                        BlocListener<UpdatePictureBloc,
-                                            UserState>(
-                                          listener: (context, state) {
-                                            state.whenOrNull(
-                                              loading: () {
-                                                showDialog(
-                                                    barrierDismissible: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return const AlertDialog(
-                                                        content: Text(
-                                                            'Menyimpan perubahan....'),
-                                                      );
-                                                    });
-                                              },
-                                              loaded: (data) {
-                                                Navigator.pop(context);
-                                                context
-                                                    .read<GetCurrentUserBloc>()
-                                                    .add(const UserEvent
-                                                        .getCurrenctUser());
-                                                Navigator.pop(context);
-                                                Navigator.of(context).pop();
-                                              },
-                                            );
-                                          },
-                                        )
-                                      ],
-                                      child: ListTile(
-                                        onTap: () async {
-                                          captureImage().then((value) {
-                                            if (value != null) {
-                                              File file = File(value.path);
-                                              context
-                                                  .read<UploadFileBloc>()
-                                                  .add(UploadFileEvent
-                                                      .uploadFile(file));
-                                            }
-                                          });
-                                        },
-                                        leading: const Icon(Icons.camera),
-                                        title: const Text('Buka kamera'),
-                                      ),
+                                    ListTile(
+                                      onTap: () async {
+                                        captureImage().then((value) {
+                                          if (value != null) {
+                                            File file = File(value.path);
+                                            context.read<UploadFileBloc>().add(
+                                                UploadFileEvent.uploadFile(
+                                                    [file]));
+                                          }
+                                        });
+                                      },
+                                      leading: const Icon(Icons.camera),
+                                      title: const Text('Buka kamera'),
                                     ),
                                   ],
                                 );

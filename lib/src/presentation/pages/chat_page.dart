@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -20,23 +18,17 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  late Timer _timer;
   List<ConversationModel> _previousConversations = [];
 
   @override
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
-    _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
-      BlocProvider.of<GetConversationsBloc>(context)
-          .add(const ChatEvent.getConversations());
-    });
     super.initState();
   }
 
   @override
   dispose() {
     _tabController.dispose();
-    _timer.cancel();
     super.dispose();
   }
 

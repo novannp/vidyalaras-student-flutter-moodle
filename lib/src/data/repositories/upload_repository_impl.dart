@@ -15,10 +15,10 @@ class UploadRepositoryImpl implements UploadRepository {
 
   UploadRepositoryImpl(this.uploadApiImpl, this.storage);
   @override
-  Future<Either<Failure, List<ItemModel>>> uploadFile(File file) async {
+  Future<Either<Failure, List<ItemModel>>> uploadFile(List<File> files) async {
     try {
       final token = await storage.read('token');
-      final result = await uploadApiImpl.uploadFile(token, file);
+      final result = await uploadApiImpl.uploadFile(token, files);
       return Right(result);
     } on SocketException {
       return const Left(ConnectionFailure('Tidak ada koneksi internet'));

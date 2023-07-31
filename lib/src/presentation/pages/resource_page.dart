@@ -69,10 +69,9 @@ class _ResourcePageState extends State<ResourcePage> {
                       ),
                       children: [
                         ListView.separated(
-                            separatorBuilder: (context, index) => Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  child: const Divider(),
+                            separatorBuilder: (context, index) => const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  child: Divider(),
                                 ),
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),

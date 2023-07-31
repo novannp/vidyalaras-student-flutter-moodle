@@ -34,4 +34,19 @@ class ModAssignRepositoryImpl implements ModAssignRepository {
       return const Left(ServerFailure("Terjadi kesalahan pada server"));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> submitSubmission(
+      int assignId, int itemId) async {
+    try {
+      final token = await storage.read('token');
+      final result =
+          await modAssignApiImpl.submitSubmission(token, assignId, itemId);
+      return Right(result);
+    } on SocketException {
+      return const Left(ConnectionFailure("Tidak ada koneksi internet"));
+    } on ServerException {
+      return const Left(ServerFailure("Terjadi kesalahan pada server"));
+    }
+  }
 }

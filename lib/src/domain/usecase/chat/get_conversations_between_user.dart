@@ -1,4 +1,4 @@
-part of'chat.dart';
+part of 'chat.dart';
 
 class GetConversationsBetweenUser {
   final ChatRepositoryImpl chatRepositoryImpl;
