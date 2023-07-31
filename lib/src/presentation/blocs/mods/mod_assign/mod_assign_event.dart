@@ -9,4 +9,5 @@ class ModAssignEvent with _$ModAssignEvent {
       _GetSubmissionStatus;
   const factory ModAssignEvent.submitSubmission(int assignId, int itemId) =
       _SubmitSubmission;
+  const factory ModAssignEvent.viewSubmission(int assignId) = _ViewSubmission;
 }

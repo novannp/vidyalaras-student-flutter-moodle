@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lms_pptik/src/data/models/assignment/config.dart';
 import 'package:lms_pptik/src/domain/usecase/mods/mod_assign/mod_assign.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
@@ -68,6 +69,7 @@ class _AssignmentUploadPageState extends State<SubmissionPage> {
                 );
                 context.read<GetSubmissionStatusBloc>().add(
                     ModAssignEvent.getSubmissionStatus(widget.assignment.id!));
+
                 Navigator.pop(context);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(

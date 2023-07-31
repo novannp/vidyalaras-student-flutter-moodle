@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 import 'package:lms_pptik/src/presentation/pages/mods/submission_page.dart';
 
 import '../../../extensions/string_extension.dart';
@@ -19,8 +20,10 @@ class AssignmentDetail extends StatefulWidget {
     super.key,
     required this.moduleId,
     required this.assignmentId,
+    required this.courseId,
   });
 
+  final int courseId;
   final int moduleId;
   final int assignmentId;
 
@@ -29,11 +32,14 @@ class AssignmentDetail extends StatefulWidget {
 }
 
 class _AssignmentDetailState extends State<AssignmentDetail> {
+  AssignmentModel? assignment;
   @override
   void initState() {
     Future.microtask(() {
       BlocProvider.of<GetSubmissionStatusBloc>(context)
           .add(ModAssignEvent.getSubmissionStatus(widget.assignmentId));
+      BlocProvider.of<ViewAssignmentBloc>(context)
+          .add(ModAssignEvent.viewSubmission(widget.assignmentId));
     });
     super.initState();
   }
@@ -42,7 +48,6 @@ class _AssignmentDetailState extends State<AssignmentDetail> {
   Widget build(BuildContext context) {
     return BlocBuilder<GetAssignmentListBloc, ModState>(
       builder: (context, state) {
-        AssignmentModel? assignment;
         state.whenOrNull(
           loaded: (data) {
             data as List<AssignmentModel>;

@@ -58,12 +58,15 @@ void main() {
           create: (context) => di.locator<GetMemberInfoBloc>(),
         ),
         BlocProvider(create: (context) => di.locator<SendInstantMessageBloc>()),
-        BlocProvider(create: (context) => di.locator<GetConversationBetweenUserBloc>()),
-        BlocProvider(create: (context) => di.locator<SetConversationsFavoriteBloc>()),
-        BlocProvider(create: (context) => di.locator<UnsetConversationsFavoriteBloc>()),
-        BlocProvider(create: (context)=>di.locator<DeleteConversationBloc>()),
-        BlocProvider(create: (context)=>di.locator<BlockUserBloc>()),
-        BlocProvider(create: (context)=>di.locator<UnblockUserBloc>()),
+        BlocProvider(
+            create: (context) => di.locator<GetConversationBetweenUserBloc>()),
+        BlocProvider(
+            create: (context) => di.locator<SetConversationsFavoriteBloc>()),
+        BlocProvider(
+            create: (context) => di.locator<UnsetConversationsFavoriteBloc>()),
+        BlocProvider(create: (context) => di.locator<DeleteConversationBloc>()),
+        BlocProvider(create: (context) => di.locator<BlockUserBloc>()),
+        BlocProvider(create: (context) => di.locator<UnblockUserBloc>()),
         BlocProvider(
           create: (context) => di.locator<AuthLogoutBloc>(),
         ),
@@ -81,6 +84,8 @@ void main() {
         BlocProvider(create: (context) => di.locator<ViewResourceBloc>()),
         BlocProvider(create: (context) => di.locator<UploadFileBloc>()),
         BlocProvider(create: (context) => di.locator<UpdatePictureBloc>()),
+        BlocProvider(create: (context) => di.locator<SubmitSubmissionBloc>()),
+        BlocProvider(create: (context) => di.locator<ViewAssignmentBloc>()),
       ],
       child: const LmsPPTIK(),
     ),

@@ -11,6 +11,7 @@ abstract class ModAssignRepository {
   Future<Either<Failure, SubmissionStatusModel>> getSubmissionStatus(
       int assignId);
   Future<Either<Failure, bool>> submitSubmission(int assignId, int itemId);
+  Future<Either<Failure, bool>> viewAssignment(int assignId);
 }
 
 abstract class ModResourceRepository {

@@ -6,23 +6,22 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:lms_pptik/src/data/models/materi_model/content.dart';
 import 'package:lms_pptik/src/data/models/materi_model/module.dart';
-import 'package:lms_pptik/src/domain/usecase/mods/mod_assign/mod_assign.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
-import 'package:lms_pptik/src/presentation/blocs/mods/mod_assign/mod_assign_bloc.dart';
+import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 
 import '../../data/models/materi_model/date_model.dart';
 import '../../data/models/materi_model/materi_model.dart';
 import '../../utils/helper/function_helper/function_helper.dart';
-import '../blocs/mods/mod_state.dart';
+import '../components/remove_glow.dart';
 import 'mods/assignment_detail.dart';
 
 class MateriDetailPage extends StatefulWidget {
   const MateriDetailPage(
-      {super.key, required this.materis, required this.selectedIndex});
+      {super.key, required this.selectedIndex, required this.courseId});
 
   final int selectedIndex;
-  final List<MateriModel> materis;
+  final int courseId;
 
   @override
   State<MateriDetailPage> createState() => _MateriDetailPageState();
@@ -40,103 +39,146 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: FilledButton(
-                onPressed: () {
-                  _pageController.previousPage(
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.ease);
-                },
-                child: const Icon(Icons.arrow_back_ios),
-              ),
-            ),
-            const SizedBox(width: 20),
-            Expanded(
-              child: FilledButton(
-                onPressed: () {
-                  _pageController.nextPage(
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.ease);
-                },
-                child: const Icon(Icons.arrow_forward_ios),
-              ),
-            )
-          ],
-        ),
-      ),
-      appBar: AppBar(
-        title: Text(widget.materis[_currentIndex].name!.decodeHtml()),
-      ),
-      body: PageView.builder(
-          onPageChanged: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: widget.materis.length,
-          controller: _pageController,
-          itemBuilder: (context, index) {
-            return Scaffold(
-              body: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    widget.materis[index].summary != null
-                        ? Html(data: widget.materis[index].summary)
-                        : const SizedBox(),
-                    ExpansionTile(
-                      initiallyExpanded: true,
-                      title: const Text(
-                        'Modul',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      children: [
-                        if (widget.materis[index].modules != null)
-                          if (widget.materis[index].modules!.isNotEmpty)
-                            buildModTile(index)
-                          else
-                            const Center(
-                              child: Text('Tidak ada modul'),
-                            )
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                  ],
+    return BlocBuilder<GetMateriBloc, CourseState>(
+      builder: (context, state) {
+        return Scaffold(
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: FilledButton(
+                    onPressed: () {
+                      _pageController.previousPage(
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.ease);
+                    },
+                    child: const Icon(Icons.arrow_back_ios),
+                  ),
                 ),
-              ),
-            );
-          }),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: FilledButton(
+                    onPressed: () {
+                      _pageController.nextPage(
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.ease);
+                    },
+                    child: const Icon(Icons.arrow_forward_ios),
+                  ),
+                )
+              ],
+            ),
+          ),
+          appBar: AppBar(
+            title: Text(state.whenOrNull(
+                  loaded: (data) {
+                    data as List<MateriModel>;
+                    return data[_currentIndex].name!.decodeHtml();
+                  },
+                ) ??
+                '-'),
+          ),
+          body: PageView.builder(
+              onPageChanged: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: state.whenOrNull(
+                    loaded: (data) {
+                      data as List<MateriModel>;
+                      return data.length;
+                    },
+                  ) ??
+                  0,
+              controller: _pageController,
+              itemBuilder: (context, index) {
+                return Scaffold(
+                  body: RefreshIndicator(
+                    onRefresh: () {
+                      return Future.delayed(const Duration(seconds: 1), () {
+                        context
+                            .read<GetMateriBloc>()
+                            .add(CourseEvent.getMateri(widget.courseId));
+                      });
+                    },
+                    child: ScrollConfiguration(
+                      behavior: RemoveGlow(),
+                      child: SingleChildScrollView(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          child: state.whenOrNull(
+                            loaded: (data) {
+                              data as List<MateriModel>;
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  data[index].summary != null
+                                      ? Html(data: data[index].summary)
+                                      : const SizedBox(),
+                                  ExpansionTile(
+                                    initiallyExpanded: true,
+                                    title: const Text(
+                                      'Modul',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    children: [
+                                      if (data[index].modules != null)
+                                        if (data[index].modules!.isNotEmpty)
+                                          buildModTile(data[index])
+                                        else
+                                          const Center(
+                                            child: Text('Tidak ada modul'),
+                                          )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                ],
+                              );
+                            },
+                          )),
+                    ),
+                  ),
+                );
+              }),
+        );
+      },
     );
   }
 
-  Widget buildModTile(int index) {
+  Widget buildModTile(MateriModel materi) {
     return ListView.separated(
       separatorBuilder: (context, i) => const Divider(),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: widget.materis[index].modules!.length,
+      itemCount: materi.modules!.length,
       itemBuilder: (context, i) {
-        final mod = widget.materis[index].modules![i];
+        final mod = materi.modules![i];
         switch (mod.modname) {
           case 'assign':
-            return AssignmentTile(mod: mod);
+            return AssignmentTile(mod: mod, courseId: widget.courseId);
           case 'forum':
             return ForumTile(mod: mod);
           case 'lesson':
             return LessonTile(mod: mod);
+          case 'page':
+            return Card(
+              child: ListTile(
+                leading: const Icon(
+                  Icons.pages,
+                  size: 40,
+                  color: Colors.blue,
+                ),
+                title: Text(mod.name!.decodeHtml()),
+              ),
+            );
           case 'resource':
             if (mod.contents != null) {
               return ListView.builder(
@@ -202,8 +244,8 @@ class WorkshopTile extends StatelessWidget {
               onTap: () {
                 log(mod.uservisible!.toString());
               },
-              leading:
-                  Icon(Icons.people_alt_rounded, size: 40, color: Colors.green),
+              leading: const Icon(Icons.people_alt_rounded,
+                  size: 40, color: Colors.green),
               title: Text(
                 mod.name!.decodeHtml(),
               ),
@@ -559,12 +601,10 @@ class ForumTile extends StatelessWidget {
 }
 
 class AssignmentTile extends StatelessWidget {
-  const AssignmentTile({
-    super.key,
-    required this.mod,
-  });
+  const AssignmentTile({super.key, required this.mod, required this.courseId});
 
   final Module mod;
+  final int courseId;
 
   @override
   Widget build(BuildContext context) {
@@ -575,7 +615,10 @@ class AssignmentTile extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(
                 builder: (context) {
                   return AssignmentDetail(
-                      moduleId: mod.id!, assignmentId: mod.instance!);
+                    moduleId: mod.id!,
+                    assignmentId: mod.instance!,
+                    courseId: courseId,
+                  );
                 },
               ));
             }

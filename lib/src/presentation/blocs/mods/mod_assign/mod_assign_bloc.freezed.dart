@@ -21,6 +21,7 @@ mixin _$ModAssignEvent {
     required TResult Function(int courseId) getAssignmentList,
     required TResult Function(int assignId) getSubmissionStatus,
     required TResult Function(int assignId, int itemId) submitSubmission,
+    required TResult Function(int assignId) viewSubmission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$ModAssignEvent {
     TResult? Function(int courseId)? getAssignmentList,
     TResult? Function(int assignId)? getSubmissionStatus,
     TResult? Function(int assignId, int itemId)? submitSubmission,
+    TResult? Function(int assignId)? viewSubmission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$ModAssignEvent {
     TResult Function(int courseId)? getAssignmentList,
     TResult Function(int assignId)? getSubmissionStatus,
     TResult Function(int assignId, int itemId)? submitSubmission,
+    TResult Function(int assignId)? viewSubmission,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$ModAssignEvent {
     required TResult Function(_GetAssignmentList value) getAssignmentList,
     required TResult Function(_GetSubmissionStatus value) getSubmissionStatus,
     required TResult Function(_SubmitSubmission value) submitSubmission,
+    required TResult Function(_ViewSubmission value) viewSubmission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$ModAssignEvent {
     TResult? Function(_GetAssignmentList value)? getAssignmentList,
     TResult? Function(_GetSubmissionStatus value)? getSubmissionStatus,
     TResult? Function(_SubmitSubmission value)? submitSubmission,
+    TResult? Function(_ViewSubmission value)? viewSubmission,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$ModAssignEvent {
     TResult Function(_GetAssignmentList value)? getAssignmentList,
     TResult Function(_GetSubmissionStatus value)? getSubmissionStatus,
     TResult Function(_SubmitSubmission value)? submitSubmission,
+    TResult Function(_ViewSubmission value)? viewSubmission,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -149,6 +155,7 @@ class _$_GetAssignmentList implements _GetAssignmentList {
     required TResult Function(int courseId) getAssignmentList,
     required TResult Function(int assignId) getSubmissionStatus,
     required TResult Function(int assignId, int itemId) submitSubmission,
+    required TResult Function(int assignId) viewSubmission,
   }) {
     return getAssignmentList(courseId);
   }
@@ -159,6 +166,7 @@ class _$_GetAssignmentList implements _GetAssignmentList {
     TResult? Function(int courseId)? getAssignmentList,
     TResult? Function(int assignId)? getSubmissionStatus,
     TResult? Function(int assignId, int itemId)? submitSubmission,
+    TResult? Function(int assignId)? viewSubmission,
   }) {
     return getAssignmentList?.call(courseId);
   }
@@ -169,6 +177,7 @@ class _$_GetAssignmentList implements _GetAssignmentList {
     TResult Function(int courseId)? getAssignmentList,
     TResult Function(int assignId)? getSubmissionStatus,
     TResult Function(int assignId, int itemId)? submitSubmission,
+    TResult Function(int assignId)? viewSubmission,
     required TResult orElse(),
   }) {
     if (getAssignmentList != null) {
@@ -183,6 +192,7 @@ class _$_GetAssignmentList implements _GetAssignmentList {
     required TResult Function(_GetAssignmentList value) getAssignmentList,
     required TResult Function(_GetSubmissionStatus value) getSubmissionStatus,
     required TResult Function(_SubmitSubmission value) submitSubmission,
+    required TResult Function(_ViewSubmission value) viewSubmission,
   }) {
     return getAssignmentList(this);
   }
@@ -193,6 +203,7 @@ class _$_GetAssignmentList implements _GetAssignmentList {
     TResult? Function(_GetAssignmentList value)? getAssignmentList,
     TResult? Function(_GetSubmissionStatus value)? getSubmissionStatus,
     TResult? Function(_SubmitSubmission value)? submitSubmission,
+    TResult? Function(_ViewSubmission value)? viewSubmission,
   }) {
     return getAssignmentList?.call(this);
   }
@@ -203,6 +214,7 @@ class _$_GetAssignmentList implements _GetAssignmentList {
     TResult Function(_GetAssignmentList value)? getAssignmentList,
     TResult Function(_GetSubmissionStatus value)? getSubmissionStatus,
     TResult Function(_SubmitSubmission value)? submitSubmission,
+    TResult Function(_ViewSubmission value)? viewSubmission,
     required TResult orElse(),
   }) {
     if (getAssignmentList != null) {
@@ -290,6 +302,7 @@ class _$_GetSubmissionStatus implements _GetSubmissionStatus {
     required TResult Function(int courseId) getAssignmentList,
     required TResult Function(int assignId) getSubmissionStatus,
     required TResult Function(int assignId, int itemId) submitSubmission,
+    required TResult Function(int assignId) viewSubmission,
   }) {
     return getSubmissionStatus(assignId);
   }
@@ -300,6 +313,7 @@ class _$_GetSubmissionStatus implements _GetSubmissionStatus {
     TResult? Function(int courseId)? getAssignmentList,
     TResult? Function(int assignId)? getSubmissionStatus,
     TResult? Function(int assignId, int itemId)? submitSubmission,
+    TResult? Function(int assignId)? viewSubmission,
   }) {
     return getSubmissionStatus?.call(assignId);
   }
@@ -310,6 +324,7 @@ class _$_GetSubmissionStatus implements _GetSubmissionStatus {
     TResult Function(int courseId)? getAssignmentList,
     TResult Function(int assignId)? getSubmissionStatus,
     TResult Function(int assignId, int itemId)? submitSubmission,
+    TResult Function(int assignId)? viewSubmission,
     required TResult orElse(),
   }) {
     if (getSubmissionStatus != null) {
@@ -324,6 +339,7 @@ class _$_GetSubmissionStatus implements _GetSubmissionStatus {
     required TResult Function(_GetAssignmentList value) getAssignmentList,
     required TResult Function(_GetSubmissionStatus value) getSubmissionStatus,
     required TResult Function(_SubmitSubmission value) submitSubmission,
+    required TResult Function(_ViewSubmission value) viewSubmission,
   }) {
     return getSubmissionStatus(this);
   }
@@ -334,6 +350,7 @@ class _$_GetSubmissionStatus implements _GetSubmissionStatus {
     TResult? Function(_GetAssignmentList value)? getAssignmentList,
     TResult? Function(_GetSubmissionStatus value)? getSubmissionStatus,
     TResult? Function(_SubmitSubmission value)? submitSubmission,
+    TResult? Function(_ViewSubmission value)? viewSubmission,
   }) {
     return getSubmissionStatus?.call(this);
   }
@@ -344,6 +361,7 @@ class _$_GetSubmissionStatus implements _GetSubmissionStatus {
     TResult Function(_GetAssignmentList value)? getAssignmentList,
     TResult Function(_GetSubmissionStatus value)? getSubmissionStatus,
     TResult Function(_SubmitSubmission value)? submitSubmission,
+    TResult Function(_ViewSubmission value)? viewSubmission,
     required TResult orElse(),
   }) {
     if (getSubmissionStatus != null) {
@@ -439,6 +457,7 @@ class _$_SubmitSubmission implements _SubmitSubmission {
     required TResult Function(int courseId) getAssignmentList,
     required TResult Function(int assignId) getSubmissionStatus,
     required TResult Function(int assignId, int itemId) submitSubmission,
+    required TResult Function(int assignId) viewSubmission,
   }) {
     return submitSubmission(assignId, itemId);
   }
@@ -449,6 +468,7 @@ class _$_SubmitSubmission implements _SubmitSubmission {
     TResult? Function(int courseId)? getAssignmentList,
     TResult? Function(int assignId)? getSubmissionStatus,
     TResult? Function(int assignId, int itemId)? submitSubmission,
+    TResult? Function(int assignId)? viewSubmission,
   }) {
     return submitSubmission?.call(assignId, itemId);
   }
@@ -459,6 +479,7 @@ class _$_SubmitSubmission implements _SubmitSubmission {
     TResult Function(int courseId)? getAssignmentList,
     TResult Function(int assignId)? getSubmissionStatus,
     TResult Function(int assignId, int itemId)? submitSubmission,
+    TResult Function(int assignId)? viewSubmission,
     required TResult orElse(),
   }) {
     if (submitSubmission != null) {
@@ -473,6 +494,7 @@ class _$_SubmitSubmission implements _SubmitSubmission {
     required TResult Function(_GetAssignmentList value) getAssignmentList,
     required TResult Function(_GetSubmissionStatus value) getSubmissionStatus,
     required TResult Function(_SubmitSubmission value) submitSubmission,
+    required TResult Function(_ViewSubmission value) viewSubmission,
   }) {
     return submitSubmission(this);
   }
@@ -483,6 +505,7 @@ class _$_SubmitSubmission implements _SubmitSubmission {
     TResult? Function(_GetAssignmentList value)? getAssignmentList,
     TResult? Function(_GetSubmissionStatus value)? getSubmissionStatus,
     TResult? Function(_SubmitSubmission value)? submitSubmission,
+    TResult? Function(_ViewSubmission value)? viewSubmission,
   }) {
     return submitSubmission?.call(this);
   }
@@ -493,6 +516,7 @@ class _$_SubmitSubmission implements _SubmitSubmission {
     TResult Function(_GetAssignmentList value)? getAssignmentList,
     TResult Function(_GetSubmissionStatus value)? getSubmissionStatus,
     TResult Function(_SubmitSubmission value)? submitSubmission,
+    TResult Function(_ViewSubmission value)? viewSubmission,
     required TResult orElse(),
   }) {
     if (submitSubmission != null) {
@@ -510,5 +534,151 @@ abstract class _SubmitSubmission implements ModAssignEvent {
   int get itemId;
   @JsonKey(ignore: true)
   _$$_SubmitSubmissionCopyWith<_$_SubmitSubmission> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ViewSubmissionCopyWith<$Res> {
+  factory _$$_ViewSubmissionCopyWith(
+          _$_ViewSubmission value, $Res Function(_$_ViewSubmission) then) =
+      __$$_ViewSubmissionCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int assignId});
+}
+
+/// @nodoc
+class __$$_ViewSubmissionCopyWithImpl<$Res>
+    extends _$ModAssignEventCopyWithImpl<$Res, _$_ViewSubmission>
+    implements _$$_ViewSubmissionCopyWith<$Res> {
+  __$$_ViewSubmissionCopyWithImpl(
+      _$_ViewSubmission _value, $Res Function(_$_ViewSubmission) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? assignId = null,
+  }) {
+    return _then(_$_ViewSubmission(
+      null == assignId
+          ? _value.assignId
+          : assignId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ViewSubmission implements _ViewSubmission {
+  const _$_ViewSubmission(this.assignId);
+
+  @override
+  final int assignId;
+
+  @override
+  String toString() {
+    return 'ModAssignEvent.viewSubmission(assignId: $assignId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ViewSubmission &&
+            (identical(other.assignId, assignId) ||
+                other.assignId == assignId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, assignId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ViewSubmissionCopyWith<_$_ViewSubmission> get copyWith =>
+      __$$_ViewSubmissionCopyWithImpl<_$_ViewSubmission>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int courseId) getAssignmentList,
+    required TResult Function(int assignId) getSubmissionStatus,
+    required TResult Function(int assignId, int itemId) submitSubmission,
+    required TResult Function(int assignId) viewSubmission,
+  }) {
+    return viewSubmission(assignId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int courseId)? getAssignmentList,
+    TResult? Function(int assignId)? getSubmissionStatus,
+    TResult? Function(int assignId, int itemId)? submitSubmission,
+    TResult? Function(int assignId)? viewSubmission,
+  }) {
+    return viewSubmission?.call(assignId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int courseId)? getAssignmentList,
+    TResult Function(int assignId)? getSubmissionStatus,
+    TResult Function(int assignId, int itemId)? submitSubmission,
+    TResult Function(int assignId)? viewSubmission,
+    required TResult orElse(),
+  }) {
+    if (viewSubmission != null) {
+      return viewSubmission(assignId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAssignmentList value) getAssignmentList,
+    required TResult Function(_GetSubmissionStatus value) getSubmissionStatus,
+    required TResult Function(_SubmitSubmission value) submitSubmission,
+    required TResult Function(_ViewSubmission value) viewSubmission,
+  }) {
+    return viewSubmission(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAssignmentList value)? getAssignmentList,
+    TResult? Function(_GetSubmissionStatus value)? getSubmissionStatus,
+    TResult? Function(_SubmitSubmission value)? submitSubmission,
+    TResult? Function(_ViewSubmission value)? viewSubmission,
+  }) {
+    return viewSubmission?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAssignmentList value)? getAssignmentList,
+    TResult Function(_GetSubmissionStatus value)? getSubmissionStatus,
+    TResult Function(_SubmitSubmission value)? submitSubmission,
+    TResult Function(_ViewSubmission value)? viewSubmission,
+    required TResult orElse(),
+  }) {
+    if (viewSubmission != null) {
+      return viewSubmission(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ViewSubmission implements ModAssignEvent {
+  const factory _ViewSubmission(final int assignId) = _$_ViewSubmission;
+
+  int get assignId;
+  @JsonKey(ignore: true)
+  _$$_ViewSubmissionCopyWith<_$_ViewSubmission> get copyWith =>
       throw _privateConstructorUsedError;
 }

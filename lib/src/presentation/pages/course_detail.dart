@@ -13,6 +13,7 @@ import '../../data/models/materi_model/materi_model.dart';
 import '../../data/models/user_grade_model/user_grade_model.dart';
 import '../blocs/course/course_bloc.dart';
 import '../blocs/mods/mod_assign/mod_assign_bloc.dart';
+import '../blocs/mods/mod_state.dart';
 
 class CourseDetailPage extends StatefulWidget {
   const CourseDetailPage({super.key, required this.course});
@@ -56,303 +57,322 @@ class _CourseDetailPageState extends State<CourseDetailPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-              showDragHandle: true,
-              context: context,
-              builder: (context) {
-                return Wrap(
-                  children: [
-                    ListTile(
-                      onTap: () {
-                        GoRouter.of(context)
-                            .pushNamed('assignment', extra: widget.course.id);
-                      },
-                      leading: const Icon(Icons.book, color: Colors.pink),
-                      title: const Text('Assignment'),
-                    ),
-                    ListTile(
-                      onTap: () {
-                        GoRouter.of(context)
-                            .pushNamed('resource', extra: widget.course);
-                      },
-                      leading: const Icon(
-                        Icons.file_copy_rounded,
-                        color: Colors.lightGreen,
-                      ),
-                      title: const Text('File'),
-                    ),
-                    const ListTile(
-                      leading: Icon(
-                        Icons.people,
-                        color: Colors.amber,
-                      ),
-                      title: Text('Forum'),
-                    ),
-                    const ListTile(
-                      leading: Icon(
-                        Icons.menu_book_rounded,
-                        color: Colors.deepOrangeAccent,
-                      ),
-                      title: Text('Pembelajaran'),
-                    ),
-                    const ListTile(
-                      leading: Icon(Icons.quiz_outlined,
-                          color: Colors.deepPurpleAccent),
-                      title: Text('Kuis'),
-                    ),
-                    const ListTile(
-                      leading: Icon(
-                        Icons.school,
-                        color: Colors.lightBlue,
-                      ),
-                      title: Text('Workshop'),
-                    ),
-                  ],
-                );
-              });
-        },
-        child: const Icon(Icons.list),
-      ),
-      appBar: AppBar(
-        title: Text(
-          widget.course.fullname!.decodeHtml(),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              showModalBottomSheet(
-                showDragHandle: true,
-                context: context,
-                builder: (context) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .primaryContainer,
-                              ),
-                              child: const Icon(Icons.school, size: 40),
-                            ),
-                            const SizedBox(width: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.course.fullname!.decodeHtml(),
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium,
-                                ),
-                                Chip(
-                                  label: Text(widget.course.coursecategory!),
-                                  backgroundColor: Theme.of(context)
-                                      .colorScheme
-                                      .secondaryContainer,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  labelStyle: const TextStyle(
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                const SizedBox(height: 2),
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      height: 8,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: LinearProgressIndicator(
-                                          value: widget.course.progress! / 100,
-                                          backgroundColor: Theme.of(context)
-                                              .colorScheme
-                                              .primaryContainer
-                                              .withOpacity(0.5),
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                            Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Text(
-                                      '${widget.course.progress!.toStringAsFixed(0)}%',
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        const Text(
-                          'Tanggal Mulai Kursus',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          widget.course.startdate!.toDate(),
-                        ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          'Pengajar',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        BlocBuilder<GetEnrolledUserBloc, CourseState>(
-                          builder: (context, state) {
-                            return state.maybeWhen(loaded: (data) {
-                              data as List<UserModel>;
-                              final teachers = data.where((element) {
-                                return element.roles!.any((role) =>
-                                    role.shortname == 'editingteacher');
-                              }).toList();
-                              return ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: teachers.length,
-                                  itemBuilder: (context, index) {
-                                    final teacher = teachers[index];
-                                    return ListTile(
-                                      leading: CircleAvatar(
-                                        backgroundImage:
-                                            NetworkImage(teacher.avatar!),
-                                      ),
-                                      title: Text(
-                                        teacher.name!.decodeHtml(),
-                                      ),
-                                      subtitle: Text(teacher.email!),
-                                      trailing: IconButton.filledTonal(
-                                        onPressed: () {
-                                          GoRouter.of(context).pushNamed(
-                                            'chat_detail',
-                                            extra: {
-                                              'memberId': teacher.id,
-                                            },
-                                          );
-                                        },
-                                        icon: const Icon(Icons.message_rounded),
-                                      ),
-                                    );
-                                  });
-                            }, orElse: () {
-                              return const SizedBox();
-                            });
-                          },
-                        )
-                      ],
-                    ),
-                  );
-                },
-              );
+      floatingActionButton: buildMenuButton(context),
+      appBar: buildAppBar(context),
+      body: BlocListener<SubmitSubmissionBloc, ModState>(
+        listener: (context, state) {
+          state.whenOrNull(
+            loaded: (data) {
+              context
+                  .read<GetMateriBloc>()
+                  .add(CourseEvent.getMateri(widget.course.id!));
+              context
+                  .read<GetAssignmentListBloc>()
+                  .add(ModAssignEvent.getAssignmentList(widget.course.id!));
             },
-            icon: const Icon(Icons.info_outline),
-          )
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                  ),
-                  child: const Icon(Icons.school),
-                ),
-                const SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.course.fullname!.decodeHtml(),
-                      style: Theme.of(context).textTheme.titleMedium,
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Theme.of(context).colorScheme.primaryContainer,
                     ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          height: 8,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: LinearProgressIndicator(
-                              value: widget.course.progress! / 100,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .primaryContainer
-                                  .withOpacity(0.5),
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Theme.of(context).colorScheme.primary,
+                    child: const Icon(Icons.school),
+                  ),
+                  const SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.course.fullname!.decodeHtml(),
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            height: 8,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: LinearProgressIndicator(
+                                value: widget.course.progress! / 100,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .primaryContainer
+                                    .withOpacity(0.5),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Theme.of(context).colorScheme.primary,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          '${widget.course.progress!.toStringAsFixed(0)}%',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ],
-                    )
+                          const SizedBox(width: 10),
+                          Text(
+                            '${widget.course.progress!.toStringAsFixed(0)}%',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                child: TabBar(
+                  labelPadding: const EdgeInsets.symmetric(vertical: 6),
+                  isScrollable: false,
+                  labelStyle: Theme.of(context).textTheme.bodySmall,
+                  labelColor: Theme.of(context).colorScheme.primary,
+                  unselectedLabelColor: Theme.of(context).colorScheme.secondary,
+                  indicatorPadding: const EdgeInsets.symmetric(
+                    horizontal: 30,
+                  ),
+                  controller: _tabController,
+                  tabs: const [
+                    Text('Materi'),
+                    Text('Peserta'),
+                    Text('Kompetensi'),
+                    Text('Nilai')
                   ],
-                )
-              ],
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              child: TabBar(
-                labelPadding: const EdgeInsets.symmetric(vertical: 6),
-                isScrollable: false,
-                labelStyle: Theme.of(context).textTheme.bodySmall,
-                labelColor: Theme.of(context).colorScheme.primary,
-                unselectedLabelColor: Theme.of(context).colorScheme.secondary,
-                indicatorPadding: const EdgeInsets.symmetric(
-                  horizontal: 30,
                 ),
-                controller: _tabController,
-                tabs: const [
-                  Text('Materi'),
-                  Text('Peserta'),
-                  Text('Kompetensi'),
-                  Text('Nilai')
-                ],
               ),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  buildMateriList(),
-                  buildEnrolledUser(),
-                  const Text('Kompetensi'),
-                  buildGradeList()
-                ],
+              const SizedBox(height: 20),
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    buildMateriList(),
+                    buildEnrolledUser(),
+                    const Text('Kompetensi'),
+                    buildGradeList()
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      title: Text(
+        widget.course.fullname!.decodeHtml(),
+      ),
+      actions: [
+        IconButton(
+          onPressed: () {
+            showModalBottomSheet(
+              showDragHandle: true,
+              context: context,
+              builder: (context) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
+                            ),
+                            child: const Icon(Icons.school, size: 40),
+                          ),
+                          const SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.course.fullname!.decodeHtml(),
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              Chip(
+                                label: Text(widget.course.coursecategory!),
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                labelStyle: const TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.5,
+                                    height: 8,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: LinearProgressIndicator(
+                                        value: widget.course.progress! / 100,
+                                        backgroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .primaryContainer
+                                            .withOpacity(0.5),
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          Theme.of(context).colorScheme.primary,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    '${widget.course.progress!.toStringAsFixed(0)}%',
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'Tanggal Mulai Kursus',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        widget.course.startdate!.toDate(),
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Pengajar',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      BlocBuilder<GetEnrolledUserBloc, CourseState>(
+                        builder: (context, state) {
+                          return state.maybeWhen(loaded: (data) {
+                            data as List<UserModel>;
+                            final teachers = data.where((element) {
+                              return element.roles!.any(
+                                  (role) => role.shortname == 'editingteacher');
+                            }).toList();
+                            return ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: teachers.length,
+                                itemBuilder: (context, index) {
+                                  final teacher = teachers[index];
+                                  return ListTile(
+                                    leading: CircleAvatar(
+                                      backgroundImage:
+                                          NetworkImage(teacher.avatar!),
+                                    ),
+                                    title: Text(
+                                      teacher.name!.decodeHtml(),
+                                    ),
+                                    subtitle: Text(teacher.email!),
+                                    trailing: IconButton.filledTonal(
+                                      onPressed: () {
+                                        GoRouter.of(context).pushNamed(
+                                          'chat_detail',
+                                          extra: {
+                                            'memberId': teacher.id,
+                                          },
+                                        );
+                                      },
+                                      icon: const Icon(Icons.message_rounded),
+                                    ),
+                                  );
+                                });
+                          }, orElse: () {
+                            return const SizedBox();
+                          });
+                        },
+                      )
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+          icon: const Icon(Icons.info_outline),
+        )
+      ],
+    );
+  }
+
+  FloatingActionButton buildMenuButton(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        showModalBottomSheet(
+            showDragHandle: true,
+            context: context,
+            builder: (context) {
+              return Wrap(
+                children: [
+                  ListTile(
+                    onTap: () {
+                      GoRouter.of(context)
+                          .pushNamed('assignment', extra: widget.course.id);
+                    },
+                    leading: const Icon(Icons.book, color: Colors.pink),
+                    title: const Text('Assignment'),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      GoRouter.of(context)
+                          .pushNamed('resource', extra: widget.course);
+                    },
+                    leading: const Icon(
+                      Icons.file_copy_rounded,
+                      color: Colors.lightGreen,
+                    ),
+                    title: const Text('File'),
+                  ),
+                  const ListTile(
+                    leading: Icon(
+                      Icons.people,
+                      color: Colors.amber,
+                    ),
+                    title: Text('Forum'),
+                  ),
+                  const ListTile(
+                    leading: Icon(
+                      Icons.menu_book_rounded,
+                      color: Colors.deepOrangeAccent,
+                    ),
+                    title: Text('Pembelajaran'),
+                  ),
+                  const ListTile(
+                    leading: Icon(Icons.quiz_outlined,
+                        color: Colors.deepPurpleAccent),
+                    title: Text('Kuis'),
+                  ),
+                  const ListTile(
+                    leading: Icon(
+                      Icons.school,
+                      color: Colors.lightBlue,
+                    ),
+                    title: Text('Workshop'),
+                  ),
+                ],
+              );
+            });
+      },
+      child: const Icon(Icons.list),
     );
   }
 
@@ -468,6 +488,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                   GoRouter.of(context).pushNamed('materi_detail', extra: {
                     'materi': materi,
                     'selectedIndex': index,
+                    'courseId': widget.course.id
                   });
                 },
                 leading: Icon(

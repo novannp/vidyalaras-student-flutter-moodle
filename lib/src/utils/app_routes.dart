@@ -149,8 +149,8 @@ class AppRoutes {
 
                   return MaterialPage(
                     child: MateriDetailPage(
-                      materis: materis['materi'],
                       selectedIndex: materis['selectedIndex'],
+                      courseId: materis['courseId'],
                     ),
                   );
                 },

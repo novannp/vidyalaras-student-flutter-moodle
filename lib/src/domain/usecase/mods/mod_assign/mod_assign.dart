@@ -8,3 +8,4 @@ import '../../../../utils/failures.dart';
 part 'get_assignment_list.dart';
 part 'get_submission_status.dart';
 part 'submit_submission.dart';
+part 'view_assignment.dart';
