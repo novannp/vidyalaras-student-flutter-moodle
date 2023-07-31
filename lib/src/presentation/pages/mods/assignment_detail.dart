@@ -244,7 +244,10 @@ class _AssignmentDetailState extends State<AssignmentDetail> {
                                   label: const Text('Kirim tugas'),
                                 ),
                               ),
-                            if (submissionStatus.lastattempt?.canedit == true)
+                            if (submissionStatus.lastattempt?.canedit == true &&
+                                submissionStatus
+                                        .lastattempt?.submission?.status ==
+                                    'submitted')
                               SizedBox(
                                 width: double.infinity,
                                 child: FilledButton.icon(
