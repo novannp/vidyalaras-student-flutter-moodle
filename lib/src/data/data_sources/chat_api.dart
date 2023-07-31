@@ -233,10 +233,7 @@ class ChatApiImpl implements ChatApi {
       ),
     );
 
-    print(url);
-
     final response = await client.get(url);
-    print(response.body);
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -264,12 +261,10 @@ class ChatApiImpl implements ChatApi {
     );
 
     final response = await client.get(url);
-    print(response.body);
     final message = jsonDecode(response.body)['message'];
     if (message != "Conversation does not exist") {
       final ConversationModel data =
           ConversationModel.fromJson(jsonDecode(response.body));
-      print(data);
       return data;
     } else {
       throw ServerException();
@@ -292,10 +287,8 @@ class ChatApiImpl implements ChatApi {
         (key, value) => MapEntry(key, value.toString()),
       ),
     );
-    print(url);
 
     final response = await client.get(url);
-    print(response.body);
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -304,7 +297,7 @@ class ChatApiImpl implements ChatApi {
   }
 
   @override
-  Future blockUser(String token, int userId, int blockedUserId) async{
+  Future blockUser(String token, int userId, int blockedUserId) async {
     Uri url = Uri.https(
       Endpoints.baseUrl,
       Endpoints.rest,
@@ -313,15 +306,13 @@ class ChatApiImpl implements ChatApi {
         "wsfunction": "core_message_block_user",
         "moodlewsrestformat": "json",
         "userid": userId,
-        "blockeduserid" : blockedUserId,
+        "blockeduserid": blockedUserId,
       }.map(
-            (key, value) => MapEntry(key, value.toString()),
+        (key, value) => MapEntry(key, value.toString()),
       ),
     );
-    print(url);
 
     final response = await client.get(url);
-    print(response.body);
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -330,7 +321,7 @@ class ChatApiImpl implements ChatApi {
   }
 
   @override
-  Future unblockUser(String token, int userId, int unblockUserId)async {
+  Future unblockUser(String token, int userId, int unblockUserId) async {
     Uri url = Uri.https(
       Endpoints.baseUrl,
       Endpoints.rest,
@@ -339,20 +330,17 @@ class ChatApiImpl implements ChatApi {
         "wsfunction": "core_message_unblock_user",
         "moodlewsrestformat": "json",
         "userid": userId,
-        "unblockeduserid" : unblockUserId,
+        "unblockeduserid": unblockUserId,
       }.map(
-            (key, value) => MapEntry(key, value.toString()),
+        (key, value) => MapEntry(key, value.toString()),
       ),
     );
-    print(url);
 
     final response = await client.get(url);
-    print(response.body);
     if (response.statusCode == 200) {
       return true;
     } else {
       return false;
     }
   }
-  }
-
+}

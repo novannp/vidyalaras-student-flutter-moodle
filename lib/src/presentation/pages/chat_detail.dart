@@ -233,7 +233,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       listeners: [
         BlocListener<BlockUserBloc, ChatState>(listener: (context, state) {
           state.whenOrNull(loaded: (status) {
-            print("BLOCK");
             context.pop();
             context.pop();
             showSnackbar(context, "Block pengguna ", isWarning: true);
@@ -244,8 +243,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
           });
         }),
         BlocListener<UnblockUserBloc, ChatState>(listener: (context, state) {
-          print("UNBLOCK");
-
           context.pop();
           context.pop();
           showSnackbar(context, "Berhasil Unblock pengguna");
@@ -273,7 +270,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                           child: const Text("Kembali")),
                       ElevatedButton(
                           onPressed: () {
-                            print(data.members![0].isblocked!);
                             if (data.members![0].isblocked!) {
                               context
                                   .read<UnblockUserBloc>()

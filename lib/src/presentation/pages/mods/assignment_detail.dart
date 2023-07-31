@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 import 'package:lms_pptik/src/presentation/pages/mods/submission_page.dart';
 
 import '../../../extensions/string_extension.dart';

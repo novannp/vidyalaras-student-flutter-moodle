@@ -14,7 +14,6 @@ import '../../data/models/materi_model/date_model.dart';
 import '../../data/models/materi_model/materi_model.dart';
 import '../../utils/helper/function_helper/function_helper.dart';
 import '../blocs/mods/mod_resource/mod_resource_bloc.dart';
-import '../components/remove_glow.dart';
 import 'mods/assignment_detail.dart';
 
 class MateriDetailPage extends StatefulWidget {
@@ -685,33 +684,34 @@ class AssignmentTile extends StatelessWidget {
                         ],
                       ),
                     ),
-                if (mod.completiondata!.details!.isEmpty)
-                  if (mod.completiondata!.state == 1)
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: double.infinity,
-                      child: FilledButton.tonalIcon(
-                        icon: const Icon(Icons.check),
-                        onPressed: () {},
-                        label: const Text('Selesai'),
-                      ),
-                    )
-                  else
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      margin: const EdgeInsets.only(bottom: 10),
-                      width: double.infinity,
-                      child: OutlinedButton(
-                        style: FilledButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          side:
-                              BorderSide(color: Theme.of(context).primaryColor),
+                if (mod.uservisible! == true)
+                  if (mod.completiondata!.details!.isEmpty)
+                    if (mod.completiondata!.state == 1)
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.only(bottom: 10),
+                        width: double.infinity,
+                        child: FilledButton.tonalIcon(
+                          icon: const Icon(Icons.check),
+                          onPressed: () {},
+                          label: const Text('Selesai'),
                         ),
-                        onPressed: () {},
-                        child: const Text('Tandai Selesai'),
+                      )
+                    else
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.only(bottom: 10),
+                        width: double.infinity,
+                        child: OutlinedButton(
+                          style: FilledButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            side: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          onPressed: () {},
+                          child: const Text('Tandai Selesai'),
+                        ),
                       ),
-                    ),
               ],
             )
           ],
