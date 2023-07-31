@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 import 'package:lms_pptik/src/utils/exceptions.dart';
 
 import '../../utils/endpoints.dart';
-import '../models/user_model.dart';
+import '../models/user_model/user_model.dart';
 
 abstract class UserApi {
   Future<UserModel> getUser(String useername, String token);

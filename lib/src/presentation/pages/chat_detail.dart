@@ -13,7 +13,7 @@ import 'package:lms_pptik/src/presentation/components/snackbar.dart';
 
 import '../../data/models/chat_model/chat_model.dart';
 import '../../data/models/chat_model/message.dart';
-import '../../data/models/user_model.dart';
+import '../../data/models/user_model/user_model.dart';
 import '../../utils/helper/function_helper/function_helper.dart';
 import '../blocs/chat/chat_bloc.dart';
 import '../components/bubble_chat.dart';

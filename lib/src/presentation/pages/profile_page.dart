@@ -8,7 +8,7 @@ import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/upload/upload_file_bloc.dart';
 
-import '../../data/models/user_model.dart';
+import '../../data/models/user_model/user_model.dart';
 import '../../utils/constant.dart';
 import '../blocs/user/user_bloc.dart';
 import '../components/course_card.dart';
@@ -44,7 +44,7 @@ class ProfilePage extends StatelessWidget {
                           },
                           loaded: (user) {
                             user as UserModel;
-                            return NetworkImage(user.avatar!);
+                            return NetworkImage(user.profileimageurl!);
                           },
                           orElse: () {
                             return null;
@@ -62,7 +62,7 @@ class ProfilePage extends StatelessWidget {
                               },
                               loaded: (user) {
                                 user as UserModel;
-                                return user.name!;
+                                return user.fullname!;
                               },
                               orElse: () {
                                 return "User";
@@ -400,7 +400,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         },
                         loaded: (user) {
                           user as UserModel;
-                          return NetworkImage(user.avatar!);
+                          return NetworkImage(user.profileimageurl!);
                         },
                         orElse: () {
                           return null;
@@ -530,7 +530,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     },
                     loaded: (user) {
                       user as UserModel;
-                      return user.name!;
+                      return user.fullname!;
                     },
                     orElse: () {
                       return "User";
@@ -591,7 +591,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           },
                           loaded: (user) {
                             user as UserModel;
-                            return user.name!;
+                            return user.fullname!;
                           },
                           orElse: () {
                             return "User";

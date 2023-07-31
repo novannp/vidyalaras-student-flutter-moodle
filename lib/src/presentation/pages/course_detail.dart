@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lms_pptik/src/data/models/user_model.dart';
+
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
 
 import '../../data/models/course_model.dart';
 import '../../data/models/materi_model/materi_model.dart';
 import '../../data/models/user_grade_model/user_grade_model.dart';
+import '../../data/models/user_model/user_model.dart';
 import '../blocs/course/course_bloc.dart';
 import '../blocs/mods/mod_assign/mod_assign_bloc.dart';
 import '../blocs/mods/mod_state.dart';
@@ -278,11 +279,11 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                                   final teacher = teachers[index];
                                   return ListTile(
                                     leading: CircleAvatar(
-                                      backgroundImage:
-                                          NetworkImage(teacher.avatar!),
+                                      backgroundImage: NetworkImage(
+                                          teacher.profileimageurl!),
                                     ),
                                     title: Text(
-                                      teacher.name!.decodeHtml(),
+                                      teacher.fullname!.decodeHtml(),
                                     ),
                                     subtitle: Text(teacher.email!),
                                     trailing: IconButton.filledTonal(
@@ -550,11 +551,11 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                               CircleAvatar(
                                 radius: 30,
                                 backgroundImage:
-                                    NetworkImage(user[index].avatar!),
+                                    NetworkImage(user[index].profileimageurl!),
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                user[index].name ?? '',
+                                user[index].fullname ?? '',
                                 style: Theme.of(context)
                                     .textTheme
                                     .displaySmall!
@@ -573,11 +574,11 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                                     : 'Teacher',
                                 style: Theme.of(context).textTheme.titleSmall,
                               ),
-                              for (Group group in user[index].groups!)
-                                Text(
-                                  group.name ?? '-',
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                )
+                              // for (Group group in user[index].groups!)
+                              //   Text(
+                              //     group.name ?? '-',
+                              //     style: Theme.of(context).textTheme.titleSmall,
+                              //   )
                             ],
                           ),
                           actions: [
@@ -606,11 +607,12 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                     });
               },
               subtitle: Text(user[index].email ?? ''),
-              leading: user[index].avatar == null
+              leading: user[index].profileimageurl == null
                   ? const CircleAvatar()
                   : CircleAvatar(
-                      backgroundImage: NetworkImage(user[index].avatar!)),
-              title: Text(user[index].name!.decodeHtml()),
+                      backgroundImage:
+                          NetworkImage(user[index].profileimageurl!)),
+              title: Text(user[index].fullname!.decodeHtml()),
             );
           },
         );

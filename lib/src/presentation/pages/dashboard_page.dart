@@ -3,12 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lms_pptik/src/data/models/user_model.dart';
+
 import 'package:lms_pptik/src/extensions/string_extension.dart';
 import 'package:lms_pptik/src/presentation/blocs/notification/notification_bloc.dart';
 import 'package:lms_pptik/src/utils/constant.dart';
 
 import '../../data/models/course_model.dart';
+import '../../data/models/user_model/user_model.dart';
 import '../blocs/chat/chat_bloc.dart';
 import '../blocs/course/course_bloc.dart';
 import '../blocs/dropdown_course/dropdown_course_cubit.dart';
@@ -57,8 +58,10 @@ class _MainPageState extends State<DashboardPage> {
     Future.microtask(() {
       BlocProvider.of<GetCurrentUserBloc>(context)
           .add(const UserEvent.getCurrenctUser());
+
       BlocProvider.of<GetRecentCourseBloc>(context)
           .add(const CourseEvent.getRecentCourse());
+
       BlocProvider.of<GetFilteredCourseBloc>(context)
           .add(const CourseEvent.getFilteredCourse("all"));
     });
@@ -178,7 +181,7 @@ class _MainPageState extends State<DashboardPage> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      user.name!,
+                      user.fullname!,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontSize: 16,
@@ -211,7 +214,7 @@ class _MainPageState extends State<DashboardPage> {
                 return Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(user.avatar!),
+                    backgroundImage: NetworkImage(user.profileimageurl!),
                   ),
                 );
               },

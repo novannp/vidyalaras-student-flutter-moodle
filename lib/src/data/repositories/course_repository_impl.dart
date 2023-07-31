@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:lms_pptik/src/data/models/course_model.dart';
-import 'package:lms_pptik/src/data/models/user_model.dart';
 import 'package:lms_pptik/src/domain/repositories/course_repository.dart';
 import 'package:lms_pptik/src/utils/exceptions.dart';
 import 'package:lms_pptik/src/utils/failures.dart';
@@ -11,6 +10,7 @@ import '../../utils/helper/secure_storage/secure_storage.dart';
 import '../data_sources/course_api.dart';
 import '../models/materi_model/materi_model.dart';
 import '../models/user_grade_model/user_grade_model.dart';
+import '../models/user_model/user_model.dart';
 
 class CourseRepositoryImpl implements CourseRepository {
   final CourseApiImpl courseApiImpl;

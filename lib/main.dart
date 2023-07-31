@@ -13,6 +13,8 @@ import 'package:lms_pptik/src/presentation/blocs/mods/mod_resource/mod_resource_
 import 'package:lms_pptik/src/presentation/blocs/upload/upload_file_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/user/user_bloc.dart';
 import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'app.dart';
 import 'injection.dart' as di;
@@ -20,8 +22,12 @@ import 'src/presentation/blocs/chat/chat_bloc.dart';
 import 'src/presentation/blocs/mods/mod_assign/mod_assign_bloc.dart';
 import 'src/presentation/blocs/notification/notification_bloc.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
 
   di.init();
   di.locator<NotificationPlugin>().init();

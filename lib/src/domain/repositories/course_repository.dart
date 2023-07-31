@@ -3,7 +3,7 @@ import 'package:lms_pptik/src/data/models/course_model.dart';
 
 import '../../data/models/materi_model/materi_model.dart';
 import '../../data/models/user_grade_model/user_grade_model.dart';
-import '../../data/models/user_model.dart';
+import '../../data/models/user_model/user_model.dart';
 import '../../utils/failures.dart';
 
 abstract class CourseRepository {

@@ -181,6 +181,7 @@ class BlockUserBloc extends Bloc<ChatEvent, ChatState> {
     });
   }
 }
+
 class UnblockUserBloc extends Bloc<ChatEvent, ChatState> {
   final UnblockUser _unblockUser;
 

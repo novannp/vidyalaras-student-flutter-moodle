@@ -1,11 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:lms_pptik/src/domain/usecase/user/update_picture.dart';
 import 'package:lms_pptik/src/domain/usecase/user/user.dart';
+
+import '../../../data/models/user_model/user_model.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
 part 'user_bloc.freezed.dart';
+// part 'user_bloc.g.dart';
 
 class GetCurrentUserBloc extends Bloc<UserEvent, UserState> {
   final GetCurrentUser _getCurrentUser;
