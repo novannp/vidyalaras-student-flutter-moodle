@@ -126,6 +126,15 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           mainAxisSize: MainAxisSize.max,
                           children: [
+                            Text(
+                              data[widget.selectedIndex].name!.decodeHtml(),
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const Divider(),
+                            const SizedBox(height: 10),
                             data[widget.selectedIndex].summary != null
                                 ? Html(data: data[widget.selectedIndex].summary)
                                 : const SizedBox(),
@@ -155,7 +164,7 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                         );
                       },
                     ) ??
-                    SizedBox(),
+                    const SizedBox(),
               );
             });
       },
