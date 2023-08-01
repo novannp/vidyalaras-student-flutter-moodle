@@ -88,47 +88,59 @@ class _QuotesSettingsPageState extends State<QuotesSettingsPage> {
                   },
                 ),
               ),
-              ListTile(
-                leading: const Icon(Icons.av_timer),
-                title: const Text('Frekuensi Notifikasi'),
-                trailing: DropdownButton(
-                    hint: const Text('Pilih Frekuensi'),
-                    value: frequency,
-                    items: const [
-                      DropdownMenuItem(
-                        value: 3,
-                        child: Text('3 jam sekali'),
-                      ),
-                      DropdownMenuItem(value: 6, child: Text('6 jam sekali')),
-                      DropdownMenuItem(value: 12, child: Text('12 jam sekali')),
-                      DropdownMenuItem(value: 24, child: Text('24 jam sekali')),
-                    ],
-                    onChanged: (value) {
-                      context
-                          .read<QuoteSettingCubit>()
-                          .setFrequency(value as int);
-                      setState(() {});
-                    }),
+              Visibility(
+                visible: isEnabled,
+                child: ListTile(
+                  leading: const Icon(Icons.av_timer),
+                  title: const Text('Frekuensi Notifikasi'),
+                  trailing: DropdownButton(
+                      hint: const Text('Pilih Frekuensi'),
+                      value: frequency,
+                      items: const [
+                        DropdownMenuItem(
+                          value: 1,
+                          child: Text('1 jam sekali'),
+                        ),
+                        DropdownMenuItem(
+                          value: 3,
+                          child: Text('3 jam sekali'),
+                        ),
+                        DropdownMenuItem(value: 6, child: Text('6 jam sekali')),
+                        DropdownMenuItem(
+                            value: 12, child: Text('12 jam sekali')),
+                        DropdownMenuItem(
+                            value: 24, child: Text('24 jam sekali')),
+                      ],
+                      onChanged: (value) {
+                        context
+                            .read<QuoteSettingCubit>()
+                            .setFrequency(value as int);
+                        setState(() {});
+                      }),
+                ),
               ),
-              ListTile(
-                title: const Text('Jenis Quote'),
-                leading: const Icon(Icons.format_quote_sharp),
-                trailing: BlocBuilder<GetTagsBloc, List<TagModel>>(
-                  builder: (context, state) {
-                    return DropdownButton<String>(
-                        hint: const Text('Pilih Jenis Quote'),
-                        items: state.map((e) {
-                          return DropdownMenuItem(
-                            value: e.name,
-                            child: Text(e.name!),
-                          );
-                        }).toList(),
-                        value: tag,
-                        onChanged: (value) {
-                          context.read<QuoteSettingCubit>().setTag(value!);
-                          setState(() {});
-                        });
-                  },
+              Visibility(
+                visible: isEnabled,
+                child: ListTile(
+                  title: const Text('Jenis Quote'),
+                  leading: const Icon(Icons.format_quote_sharp),
+                  trailing: BlocBuilder<GetTagsBloc, List<TagModel>>(
+                    builder: (context, state) {
+                      return DropdownButton<String>(
+                          hint: const Text('Pilih Jenis Quote'),
+                          items: state.map((e) {
+                            return DropdownMenuItem(
+                              value: e.name,
+                              child: Text(e.name!),
+                            );
+                          }).toList(),
+                          value: tag,
+                          onChanged: (value) {
+                            context.read<QuoteSettingCubit>().setTag(value!);
+                            setState(() {});
+                          });
+                    },
+                  ),
                 ),
               )
             ],

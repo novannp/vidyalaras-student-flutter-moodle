@@ -96,7 +96,7 @@ void init() {
 
   locator.registerFactory(() => GetQuoteBloc(locator()));
   locator.registerFactory(() => GetTagsBloc(locator()));
-  locator.registerFactory(() => QuoteSettingCubit(locator()));
+  locator.registerFactory(() => QuoteSettingCubit());
 
   //USECASE
 

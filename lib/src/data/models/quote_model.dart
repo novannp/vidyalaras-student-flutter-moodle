@@ -2,7 +2,7 @@ class QuoteModel {
   String? id;
   String? author;
   String? content;
-  List<String>? tags;
+  List<dynamic>? tags;
   String? authorSlug;
   int? length;
   String? dateAdded;
@@ -28,7 +28,7 @@ class QuoteModel {
         id: json['_id'] as String?,
         author: json['author'] as String?,
         content: json['content'] as String?,
-        tags: json['tags'] as List<String>?,
+        tags: json['tags'] as List<dynamic>?,
         authorSlug: json['authorSlug'] as String?,
         length: json['length'] as int?,
         dateAdded: json['dateAdded'] as String?,

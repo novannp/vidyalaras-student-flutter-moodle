@@ -18,7 +18,8 @@ class QuoteApiImpl implements QuoteApi {
 
   @override
   Future<QuoteModel> getQuoteByTag(String tag) async {
-    final url = Uri.https('https://api.quotable.io/', 'random', {'tags': tag});
+    final url = Uri.https(
+        'api.quotable.io', 'random', {'tags': tag, 'maxLength': '100'});
     final response = await SslPinningHelper.client.get(url);
 
     if (response.statusCode == 200) {

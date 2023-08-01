@@ -1,10 +1,13 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'dart:isolate';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lms_pptik/injection.dart' as di;
 import 'package:lms_pptik/src/data/data_sources/quote_api.dart';
 import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
 import 'package:lms_pptik/src/utils/helper/secure_storage/secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final ReceivePort port = ReceivePort();
 
@@ -27,15 +30,16 @@ class BackgroundServiceHelper {
 
   @pragma('vm:entry-point')
   static void callback() async {
-    final storage = StorageHelper();
-    final isEnable = await storage.read('isEnable');
-    final tag = await storage.read('tag');
-    final NotificationPlugin notificationService = NotificationPlugin();
-    if (isEnable == "true" || isEnable == true) {
-      var result = await QuoteApiImpl().getQuoteByTag(tag);
-      await notificationService.showQuoteNotification(result);
-    }
+    final prefs = await SharedPreferences.getInstance();
 
+    log('THIS IS FROM CALLBACK');
+    final tag = prefs.getString('tag');
+    final result = await QuoteApiImpl().getQuoteByTag(tag!);
+
+    final NotificationPlugin notificationService = NotificationPlugin();
+    await notificationService.showQuoteNotification(result);
+
+    // Send a message to the main isolate to signal task completion
     _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);
     _uiSendPort?.send(null);
   }

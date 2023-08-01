@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PermissionPage extends StatefulWidget {
@@ -11,6 +12,14 @@ class PermissionPage extends StatefulWidget {
 class _PermissionPageState extends State<PermissionPage> {
   Future<void> requestPermission() async {
     await Permission.manageExternalStorage.request();
+    await Permission.mediaLibrary.request();
+    await Permission.scheduleExactAlarm.request();
+    if (await Permission.manageExternalStorage.isGranted &&
+        await Permission.mediaLibrary.isGranted &&
+        await Permission.scheduleExactAlarm.isGranted) {
+      if (!mounted) return;
+      context.goNamed('login');
+    }
   }
 
   @override

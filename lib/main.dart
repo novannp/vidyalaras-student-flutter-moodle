@@ -1,3 +1,5 @@
+import 'dart:developer';
+import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
@@ -31,7 +33,12 @@ import 'src/presentation/blocs/notification/notification_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DartPluginRegistrant.ensureInitialized();
+
+// Be sure to annotate your callback function to avoid issues in release mode on Flutter >= 3.3.0
+
   di.init();
+  BackgroundServiceHelper().initializeIsolate();
+  await AndroidAlarmManager.initialize();
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
@@ -42,13 +49,7 @@ void main() async {
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()!
       .requestPermission();
-  // Start Isolate for background service
 
-  BackgroundServiceHelper().initializeIsolate();
-
-  await AndroidAlarmManager.initialize();
-
-  // Bloc.observer = MyGlobalObserver();
   runApp(
     MultiBlocProvider(
       providers: [
