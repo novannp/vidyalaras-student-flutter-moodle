@@ -31,10 +31,10 @@ import 'src/presentation/blocs/notification/notification_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DartPluginRegistrant.ensureInitialized();
+  di.init();
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
-  di.init();
   di.locator<NotificationPlugin>().init();
   di
       .locator<NotificationPlugin>()

@@ -4,14 +4,13 @@ import 'package:open_file/open_file.dart';
 import '../../../data/models/quote_model.dart';
 
 class NotificationPlugin {
-  static final NotificationPlugin _notificationPlugin =
-      NotificationPlugin._internal();
+  static NotificationPlugin? _instance;
 
-  factory NotificationPlugin() {
-    return _notificationPlugin;
+  factory NotificationPlugin() => _instance ?? NotificationPlugin._internal();
+
+  NotificationPlugin._internal() {
+    _instance = this;
   }
-
-  NotificationPlugin._internal();
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
