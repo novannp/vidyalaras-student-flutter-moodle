@@ -32,7 +32,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DartPluginRegistrant.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: await getTemporaryDirectory(),
+    storageDirectory: await getApplicationDocumentsDirectory(),
   );
   di.init();
   di.locator<NotificationPlugin>().init();
