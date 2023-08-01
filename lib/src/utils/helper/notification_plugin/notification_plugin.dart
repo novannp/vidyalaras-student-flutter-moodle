@@ -1,6 +1,8 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:open_file/open_file.dart';
 
+import '../../../data/models/quote_model.dart';
+
 class NotificationPlugin {
   static final NotificationPlugin _notificationPlugin =
       NotificationPlugin._internal();
@@ -47,6 +49,25 @@ class NotificationPlugin {
       0,
       'Hallo! $name',
       'Selamat datang di LMS PPTIK',
+      const NotificationDetails(android: androidNotificationDetails),
+    );
+  }
+
+  Future<void> showQuoteNotification(QuoteModel quote) async {
+    const AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+      '19',
+      'Quote',
+      category: AndroidNotificationCategory.event,
+      importance: Importance.high,
+      priority: Priority.high,
+      sound: RawResourceAndroidNotificationSound('welcome'),
+      onlyAlertOnce: true,
+    );
+    await flutterLocalNotificationsPlugin.show(
+      19,
+      quote.author,
+      quote.content,
       const NotificationDetails(android: androidNotificationDetails),
     );
   }

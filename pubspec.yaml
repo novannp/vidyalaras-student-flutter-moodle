@@ -61,6 +61,7 @@ dependencies:
   image_picker: ^1.0.1
   path_provider: ^2.0.15
   hydrated_bloc: ^9.1.2
+  android_alarm_manager_plus: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -91,6 +92,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/img/
+    - assets/certificates/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

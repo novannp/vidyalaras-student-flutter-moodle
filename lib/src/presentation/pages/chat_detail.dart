@@ -44,11 +44,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
 
   @override
   initState() {
-    Future.microtask(
-      () => context.read<GetConversationBetweenUserBloc>().add(
+    Future.microtask(() {
+      context.read<GetConversationBetweenUserBloc>().add(
             ChatEvent.getConversationBetweenUser(widget.memberId),
-          ),
-    );
+          );
+    });
     _messageController = TextEditingController();
     _scrollController = ScrollController();
     if (widget.conversationId != null) {

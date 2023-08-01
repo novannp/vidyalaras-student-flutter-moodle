@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:developer';
+import 'dart:isolate';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,16 +18,28 @@ import '../blocs/dropdown_course/dropdown_course_cubit.dart';
 import '../blocs/user/user_bloc.dart';
 import '../components/course_card.dart';
 import '../components/remove_glow.dart';
+import 'package:lms_pptik/injection.dart' as di;
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
 
   @override
-  State<DashboardPage> createState() => _MainPageState();
+  State<DashboardPage> createState() => _DashboardPage();
 }
 
-class _MainPageState extends State<DashboardPage> {
-  late final Timer _timer;
+class IsolateModel {
+  BuildContext context;
+  SendPort sendPort;
+  IsolateModel(this.context, this.sendPort);
+}
+
+class _DashboardPage extends State<DashboardPage> {
+  static void runTimer(IsolateModel isolateModel) {
+    Timer.periodic(const Duration(seconds: 2), (timer) {
+      BlocProvider.of<GetUnreadMessageCountBloc>(isolateModel.context)
+          .add(const ChatEvent.getUnreadMessageCount());
+    });
+  }
 
   int _previousMessageCount = 0;
   int _previousNotificationCount = 0;
@@ -56,6 +70,12 @@ class _MainPageState extends State<DashboardPage> {
   @override
   void initState() {
     Future.microtask(() {
+      BlocProvider.of<GetNotificationCountBloc>(context)
+          .add(const NotificationEvent.getNotificationCount());
+      BlocProvider.of<GetConversationsBloc>(context)
+          .add(const ChatEvent.getConversations());
+      BlocProvider.of<GetUnreadMessageCountBloc>(context)
+          .add(const ChatEvent.getUnreadMessageCount());
       BlocProvider.of<GetCurrentUserBloc>(context)
           .add(const UserEvent.getCurrenctUser());
 
@@ -66,20 +86,11 @@ class _MainPageState extends State<DashboardPage> {
           .add(const CourseEvent.getFilteredCourse("all"));
     });
 
-    _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
-      BlocProvider.of<GetUnreadMessageCountBloc>(context)
-          .add(const ChatEvent.getUnreadMessageCount());
-      BlocProvider.of<GetNotificationCountBloc>(context)
-          .add(const NotificationEvent.getNotificationCount());
-      BlocProvider.of<GetConversationsBloc>(context)
-          .add(const ChatEvent.getConversations());
-    });
     super.initState();
   }
 
   @override
   void dispose() {
-    _timer.cancel();
     super.dispose();
   }
 
@@ -239,6 +250,12 @@ class _MainPageState extends State<DashboardPage> {
                 .add(const CourseEvent.getRecentCourse());
             BlocProvider.of<GetFilteredCourseBloc>(context)
                 .add(const CourseEvent.getFilteredCourse("all"));
+            BlocProvider.of<GetNotificationCountBloc>(context)
+                .add(const NotificationEvent.getNotificationCount());
+            BlocProvider.of<GetConversationsBloc>(context)
+                .add(const ChatEvent.getConversations());
+            BlocProvider.of<GetUnreadMessageCountBloc>(context)
+                .add(const ChatEvent.getUnreadMessageCount());
           });
         },
         child: ScrollConfiguration(

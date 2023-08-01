@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lms_pptik/src/presentation/blocs/cubit/dark_mode_cubit.dart';
+import 'package:lms_pptik/src/presentation/blocs/dark_mode/dark_mode_cubit.dart';
 import 'package:lms_pptik/src/utils/app_routes.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
