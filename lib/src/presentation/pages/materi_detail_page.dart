@@ -93,6 +93,27 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
           case 'workshop':
             return WorkshopTile(mod: mod);
           default:
+            return ListTile(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text(mod.name!.decodeHtml()),
+                        content: const Text('Modul ini belum didukung'),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'))
+                        ],
+                      );
+                    });
+              },
+              leading: const Icon(Icons.bookmarks_rounded),
+              title: Text(mod.name!.decodeHtml()),
+            );
         }
         return null;
       },

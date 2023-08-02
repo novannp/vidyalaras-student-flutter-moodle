@@ -32,7 +32,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
 
   @override
   initState() {
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     Future.microtask(() {
       context
           .read<GetMateriBloc>()
