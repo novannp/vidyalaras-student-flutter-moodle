@@ -77,6 +77,8 @@ class ModAssignApiImpl implements ModAssignApi {
       log('LOG SUBMIT SUBMISSION $result');
       if (result.isEmpty) {
         return true;
+      } else if (result[0]['warningcode'] == 'couldnotsavesubmission') {
+        throw NotFoundException(result[0]['item']);
       }
       return false;
     } else {

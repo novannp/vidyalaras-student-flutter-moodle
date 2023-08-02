@@ -47,6 +47,12 @@ class ModAssignRepositoryImpl implements ModAssignRepository {
       return const Left(ConnectionFailure("Tidak ada koneksi internet"));
     } on ServerException {
       return const Left(ServerFailure("Terjadi kesalahan pada server"));
+    } catch (e) {
+      if (e is NotFoundException) {
+        return Left(ServerFailure(e.message!));
+      } else {
+        return const Left(ServerFailure("Terjadi kesalahan pada server"));
+      }
     }
   }
 

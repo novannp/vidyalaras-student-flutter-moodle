@@ -56,6 +56,13 @@ class _AssignmentUploadPageState extends State<SubmissionPage> {
       body: BlocListener<SubmitSubmissionBloc, ModState>(
         listener: (context, state) {
           state.whenOrNull(
+            error: (message) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(message),
+                ),
+              );
+            },
             loaded: (data) {
               data as bool;
               if (data == true) {
@@ -144,6 +151,11 @@ class _AssignmentUploadPageState extends State<SubmissionPage> {
               BlocListener<UploadFileBloc, UploadFileState>(
                 listener: (context, state) {
                   state.whenOrNull(
+                    error: (message) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(message)),
+                      );
+                    },
                     loaded: (data) {
                       Navigator.pop(context, data);
 
