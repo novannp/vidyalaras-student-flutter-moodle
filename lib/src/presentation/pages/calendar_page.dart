@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/presentation/blocs/calendar/calendar_bloc.dart';
 import 'package:lms_pptik/src/presentation/pages/add_event_screen.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import 'dart:math' as math;
 import '../../data/models/event_model.dart';
 import '../components/remove_glow.dart';
 
@@ -109,7 +111,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   onRefresh: () {
                     BlocProvider.of<GetEventBloc>(context)
                         .add(const CalendarEvent.getAllEvent());
-                    return Future.delayed(Duration(seconds: 1));
+                    return Future.delayed(const Duration(seconds: 1));
                   },
                   child: ScrollConfiguration(
                     behavior: RemoveGlow(),
@@ -133,26 +135,69 @@ class _CalendarPageState extends State<CalendarPage> {
                             CalendarView.schedule
                           ],
                           headerHeight: 60,
+                          showTodayButton: true,
+                          showNavigationArrow: true,
                           onTap: (details) {
-                            List<dynamic> appointment =
+                            List<dynamic> appointments =
                                 details.appointments as List<dynamic>;
                             DateTime date = details.date!;
-                            CalendarElement element = details.targetElement;
-                            showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  EventModel event = appointment[0];
-                                  return Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(appointment[0].name),
-                                      Text(event.sequence.toString())
-                                    ],
-                                  );
-                                });
-                          },
-                          onViewChanged: (ViewChangedDetails details) {
-                            List<DateTime> dates = details.visibleDates;
+                            String element = details.targetElement.name;
+                            if (appointments.isNotEmpty) {
+                              showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  showDragHandle: true,
+                                  context: context,
+                                  builder: (context) {
+                                    EventModel event = appointments[0];
+
+                                    if (element == 'calendarCell') {
+                                      return buildCalenderCellEvents(
+                                          appointments);
+                                    }
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          const Text(
+                                            'Acara Hari Ini',
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const Divider(),
+                                          ListTile(
+                                            trailing: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                IconButton(
+                                                    onPressed: () {},
+                                                    icon: Icon(Icons.edit)),
+                                                IconButton(
+                                                    onPressed: () {},
+                                                    icon: Icon(
+                                                      Icons.delete,
+                                                      color: Colors.red,
+                                                    )),
+                                              ],
+                                            ),
+                                            leading: Icon(
+                                              Icons.event,
+                                              color: event.background,
+                                            ),
+                                            title: Text(event.name!),
+                                            subtitle: Text(event.description!),
+                                          ),
+                                          Text(event.description!)
+                                        ],
+                                      ),
+                                    );
+                                  });
+                            }
                           },
                           headerStyle: const CalendarHeaderStyle(
                             textStyle: TextStyle(fontSize: 18),
@@ -194,6 +239,54 @@ class _CalendarPageState extends State<CalendarPage> {
       ),
     );
   }
+
+  Padding buildCalenderCellEvents(List<dynamic> appointments) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text(
+            'Daftar Acara',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const Divider(),
+          ListView.builder(
+              shrinkWrap: true,
+              itemCount: appointments.length,
+              itemBuilder: (context, index) {
+                final appointment = appointments[index] as EventModel;
+                return ExpansionTile(
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            )),
+                      ],
+                    ),
+                    subtitle: Text(
+                        '${DateFormat('yyyy-MM-dd HH:mm').format(appointment.timestart!.toDateTime())} - ${DateFormat('yyyy-MM-dd HH:mm').format(appointment.timestart!.toDateTime().add(Duration(seconds: appointment.timeduration!)))}'),
+                    expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                    leading: const Icon(Icons.event),
+                    title: Text(appointment.name!),
+                    children: [
+                      const SizedBox(height: 10),
+                      Text(appointment.description!)
+                    ]);
+              })
+        ],
+      ),
+    );
+  }
 }
 
 class EventsDataSource extends CalendarDataSource {
@@ -222,11 +315,28 @@ class EventsDataSource extends CalendarDataSource {
 
   @override
   Color getColor(int index) {
-    return Colors.blue.shade900;
+    return Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+        .withOpacity(1.0);
   }
 
   @override
   String getSubject(int index) {
     return appointments![index].name;
   }
+
+  @override
+  Object? convertAppointmentToObject(
+      Object? customData, Appointment appointment) {
+    return _Event(appointment.subject, appointment.startTime,
+        appointment.endTime, appointment.color);
+  }
+}
+
+class _Event {
+  String eventName;
+  DateTime startData;
+  DateTime endDate;
+  Color background;
+
+  _Event(this.eventName, this.startData, this.endDate, this.background);
 }
