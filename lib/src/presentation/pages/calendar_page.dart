@@ -6,6 +6,7 @@ import 'package:lms_pptik/src/presentation/pages/add_event_screen.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../data/models/event_model.dart';
+import '../components/remove_glow.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
@@ -104,41 +105,83 @@ class _CalendarPageState extends State<CalendarPage> {
                   ),
               loaded: (data) {
                 data as List<EventModel>;
-                return SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: SfCalendar(
-                    cellEndPadding: 5,
-                    allowAppointmentResize: true,
-                    allowedViews: const [
-                      CalendarView.schedule,
-                      CalendarView.month,
-                    ],
-                    headerHeight: 60,
-                    onTap: (detail) {},
-                    headerStyle: const CalendarHeaderStyle(
-                      textStyle: TextStyle(fontSize: 18),
-                    ),
-                    controller: _calendarController,
-                    dataSource: EventsDataSource(data),
-                    view: CalendarView.month,
-                    initialDisplayDate: DateTime.now(),
-                    showDatePickerButton: true,
-                    showCurrentTimeIndicator: true,
-                    todayHighlightColor: Theme.of(context).primaryColor,
-                    monthViewSettings: const MonthViewSettings(
-                      agendaStyle: AgendaStyle(
-                        appointmentTextStyle: TextStyle(
-                          color: Colors.white,
+                return RefreshIndicator(
+                  onRefresh: () {
+                    BlocProvider.of<GetEventBloc>(context)
+                        .add(const CalendarEvent.getAllEvent());
+                    return Future.delayed(Duration(seconds: 1));
+                  },
+                  child: ScrollConfiguration(
+                    behavior: RemoveGlow(),
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        child: SfCalendar(
+                          viewNavigationMode: ViewNavigationMode.snap,
+                          allowViewNavigation: true,
+                          cellEndPadding: 5,
+                          allowAppointmentResize: true,
+                          allowedViews: const [
+                            CalendarView.day,
+                            CalendarView.week,
+                            CalendarView.workWeek,
+                            CalendarView.timelineDay,
+                            CalendarView.timelineWeek,
+                            CalendarView.timelineWorkWeek,
+                            CalendarView.month,
+                            CalendarView.schedule
+                          ],
+                          headerHeight: 60,
+                          onTap: (details) {
+                            List<dynamic> appointment =
+                                details.appointments as List<dynamic>;
+                            DateTime date = details.date!;
+                            CalendarElement element = details.targetElement;
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  EventModel event = appointment[0];
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(appointment[0].name),
+                                      Text(event.sequence.toString())
+                                    ],
+                                  );
+                                });
+                          },
+                          onViewChanged: (ViewChangedDetails details) {
+                            List<DateTime> dates = details.visibleDates;
+                          },
+                          headerStyle: const CalendarHeaderStyle(
+                            textStyle: TextStyle(fontSize: 18),
+                          ),
+                          controller: _calendarController,
+                          dataSource: EventsDataSource(data),
+                          view: CalendarView.month,
+                          initialDisplayDate: DateTime.now(),
+                          showDatePickerButton: true,
+                          showCurrentTimeIndicator: true,
+                          todayHighlightColor: Theme.of(context).primaryColor,
+                          monthViewSettings: const MonthViewSettings(
+                            agendaStyle: AgendaStyle(
+                              appointmentTextStyle: TextStyle(
+                                color: Colors.white,
+                              ),
+                              dateTextStyle: TextStyle(fontSize: 12),
+                            ),
+                            agendaItemHeight: 40,
+                            showAgenda: true,
+                            appointmentDisplayMode:
+                                MonthAppointmentDisplayMode.indicator,
+                          ),
+                          scheduleViewMonthHeaderBuilder:
+                              scheduleHeaderViewBuilder,
+                          scheduleViewSettings: const ScheduleViewSettings(),
                         ),
-                        dateTextStyle: TextStyle(fontSize: 12),
                       ),
-                      agendaItemHeight: 40,
-                      showAgenda: true,
-                      appointmentDisplayMode:
-                          MonthAppointmentDisplayMode.appointment,
                     ),
-                    scheduleViewMonthHeaderBuilder: scheduleHeaderViewBuilder,
-                    scheduleViewSettings: const ScheduleViewSettings(),
                   ),
                 );
               },

@@ -97,6 +97,8 @@ void init() {
   locator.registerFactory(() => GetQuoteBloc(locator()));
   locator.registerFactory(() => GetTagsBloc(locator()));
   locator.registerFactory(() => QuoteSettingCubit());
+  locator.registerFactory(() => AddEventBloc(locator()));
+  locator.registerFactory(() => DeleteEventBloc(locator()));
 
   //USECASE
 
@@ -114,6 +116,8 @@ void init() {
 
   // CALENDAR EVENT
   locator.registerFactory(() => GetAllEvent(locator()));
+  locator.registerFactory(() => AddEvent(locator()));
+  locator.registerFactory(() => DeleteEvent(locator()));
 
   // COURSE
   locator.registerFactory(() => GetRecentCourse(locator()));

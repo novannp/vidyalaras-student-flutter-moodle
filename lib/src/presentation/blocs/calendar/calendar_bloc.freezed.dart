@@ -19,32 +19,44 @@ mixin _$CalendarEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAllEvent,
+    required TResult Function(EventModel event, int repeat) addEvent,
+    required TResult Function(int eventId, bool deleteAllRepeated) deleteEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAllEvent,
+    TResult? Function(EventModel event, int repeat)? addEvent,
+    TResult? Function(int eventId, bool deleteAllRepeated)? deleteEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAllEvent,
+    TResult Function(EventModel event, int repeat)? addEvent,
+    TResult Function(int eventId, bool deleteAllRepeated)? deleteEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAllEvent value) getAllEvent,
+    required TResult Function(_AddEvent value) addEvent,
+    required TResult Function(_UpdateEvent value) deleteEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAllEvent value)? getAllEvent,
+    TResult? Function(_AddEvent value)? addEvent,
+    TResult? Function(_UpdateEvent value)? deleteEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAllEvent value)? getAllEvent,
+    TResult Function(_AddEvent value)? addEvent,
+    TResult Function(_UpdateEvent value)? deleteEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +119,8 @@ class _$_GetAllEvent implements _GetAllEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAllEvent,
+    required TResult Function(EventModel event, int repeat) addEvent,
+    required TResult Function(int eventId, bool deleteAllRepeated) deleteEvent,
   }) {
     return getAllEvent();
   }
@@ -115,6 +129,8 @@ class _$_GetAllEvent implements _GetAllEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAllEvent,
+    TResult? Function(EventModel event, int repeat)? addEvent,
+    TResult? Function(int eventId, bool deleteAllRepeated)? deleteEvent,
   }) {
     return getAllEvent?.call();
   }
@@ -123,6 +139,8 @@ class _$_GetAllEvent implements _GetAllEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAllEvent,
+    TResult Function(EventModel event, int repeat)? addEvent,
+    TResult Function(int eventId, bool deleteAllRepeated)? deleteEvent,
     required TResult orElse(),
   }) {
     if (getAllEvent != null) {
@@ -135,6 +153,8 @@ class _$_GetAllEvent implements _GetAllEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAllEvent value) getAllEvent,
+    required TResult Function(_AddEvent value) addEvent,
+    required TResult Function(_UpdateEvent value) deleteEvent,
   }) {
     return getAllEvent(this);
   }
@@ -143,6 +163,8 @@ class _$_GetAllEvent implements _GetAllEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAllEvent value)? getAllEvent,
+    TResult? Function(_AddEvent value)? addEvent,
+    TResult? Function(_UpdateEvent value)? deleteEvent,
   }) {
     return getAllEvent?.call(this);
   }
@@ -151,6 +173,8 @@ class _$_GetAllEvent implements _GetAllEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAllEvent value)? getAllEvent,
+    TResult Function(_AddEvent value)? addEvent,
+    TResult Function(_UpdateEvent value)? deleteEvent,
     required TResult orElse(),
   }) {
     if (getAllEvent != null) {
@@ -162,6 +186,306 @@ class _$_GetAllEvent implements _GetAllEvent {
 
 abstract class _GetAllEvent implements CalendarEvent {
   const factory _GetAllEvent() = _$_GetAllEvent;
+}
+
+/// @nodoc
+abstract class _$$_AddEventCopyWith<$Res> {
+  factory _$$_AddEventCopyWith(
+          _$_AddEvent value, $Res Function(_$_AddEvent) then) =
+      __$$_AddEventCopyWithImpl<$Res>;
+  @useResult
+  $Res call({EventModel event, int repeat});
+}
+
+/// @nodoc
+class __$$_AddEventCopyWithImpl<$Res>
+    extends _$CalendarEventCopyWithImpl<$Res, _$_AddEvent>
+    implements _$$_AddEventCopyWith<$Res> {
+  __$$_AddEventCopyWithImpl(
+      _$_AddEvent _value, $Res Function(_$_AddEvent) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? event = freezed,
+    Object? repeat = null,
+  }) {
+    return _then(_$_AddEvent(
+      freezed == event
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as EventModel,
+      null == repeat
+          ? _value.repeat
+          : repeat // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AddEvent implements _AddEvent {
+  const _$_AddEvent(this.event, this.repeat);
+
+  @override
+  final EventModel event;
+  @override
+  final int repeat;
+
+  @override
+  String toString() {
+    return 'CalendarEvent.addEvent(event: $event, repeat: $repeat)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AddEvent &&
+            const DeepCollectionEquality().equals(other.event, event) &&
+            (identical(other.repeat, repeat) || other.repeat == repeat));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(event), repeat);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AddEventCopyWith<_$_AddEvent> get copyWith =>
+      __$$_AddEventCopyWithImpl<_$_AddEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAllEvent,
+    required TResult Function(EventModel event, int repeat) addEvent,
+    required TResult Function(int eventId, bool deleteAllRepeated) deleteEvent,
+  }) {
+    return addEvent(event, repeat);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAllEvent,
+    TResult? Function(EventModel event, int repeat)? addEvent,
+    TResult? Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+  }) {
+    return addEvent?.call(event, repeat);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAllEvent,
+    TResult Function(EventModel event, int repeat)? addEvent,
+    TResult Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+    required TResult orElse(),
+  }) {
+    if (addEvent != null) {
+      return addEvent(event, repeat);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAllEvent value) getAllEvent,
+    required TResult Function(_AddEvent value) addEvent,
+    required TResult Function(_UpdateEvent value) deleteEvent,
+  }) {
+    return addEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAllEvent value)? getAllEvent,
+    TResult? Function(_AddEvent value)? addEvent,
+    TResult? Function(_UpdateEvent value)? deleteEvent,
+  }) {
+    return addEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAllEvent value)? getAllEvent,
+    TResult Function(_AddEvent value)? addEvent,
+    TResult Function(_UpdateEvent value)? deleteEvent,
+    required TResult orElse(),
+  }) {
+    if (addEvent != null) {
+      return addEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddEvent implements CalendarEvent {
+  const factory _AddEvent(final EventModel event, final int repeat) =
+      _$_AddEvent;
+
+  EventModel get event;
+  int get repeat;
+  @JsonKey(ignore: true)
+  _$$_AddEventCopyWith<_$_AddEvent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UpdateEventCopyWith<$Res> {
+  factory _$$_UpdateEventCopyWith(
+          _$_UpdateEvent value, $Res Function(_$_UpdateEvent) then) =
+      __$$_UpdateEventCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int eventId, bool deleteAllRepeated});
+}
+
+/// @nodoc
+class __$$_UpdateEventCopyWithImpl<$Res>
+    extends _$CalendarEventCopyWithImpl<$Res, _$_UpdateEvent>
+    implements _$$_UpdateEventCopyWith<$Res> {
+  __$$_UpdateEventCopyWithImpl(
+      _$_UpdateEvent _value, $Res Function(_$_UpdateEvent) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventId = null,
+    Object? deleteAllRepeated = null,
+  }) {
+    return _then(_$_UpdateEvent(
+      null == eventId
+          ? _value.eventId
+          : eventId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == deleteAllRepeated
+          ? _value.deleteAllRepeated
+          : deleteAllRepeated // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateEvent implements _UpdateEvent {
+  const _$_UpdateEvent(this.eventId, this.deleteAllRepeated);
+
+  @override
+  final int eventId;
+  @override
+  final bool deleteAllRepeated;
+
+  @override
+  String toString() {
+    return 'CalendarEvent.deleteEvent(eventId: $eventId, deleteAllRepeated: $deleteAllRepeated)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateEvent &&
+            (identical(other.eventId, eventId) || other.eventId == eventId) &&
+            (identical(other.deleteAllRepeated, deleteAllRepeated) ||
+                other.deleteAllRepeated == deleteAllRepeated));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, eventId, deleteAllRepeated);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateEventCopyWith<_$_UpdateEvent> get copyWith =>
+      __$$_UpdateEventCopyWithImpl<_$_UpdateEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAllEvent,
+    required TResult Function(EventModel event, int repeat) addEvent,
+    required TResult Function(int eventId, bool deleteAllRepeated) deleteEvent,
+  }) {
+    return deleteEvent(eventId, deleteAllRepeated);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAllEvent,
+    TResult? Function(EventModel event, int repeat)? addEvent,
+    TResult? Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+  }) {
+    return deleteEvent?.call(eventId, deleteAllRepeated);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAllEvent,
+    TResult Function(EventModel event, int repeat)? addEvent,
+    TResult Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+    required TResult orElse(),
+  }) {
+    if (deleteEvent != null) {
+      return deleteEvent(eventId, deleteAllRepeated);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAllEvent value) getAllEvent,
+    required TResult Function(_AddEvent value) addEvent,
+    required TResult Function(_UpdateEvent value) deleteEvent,
+  }) {
+    return deleteEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAllEvent value)? getAllEvent,
+    TResult? Function(_AddEvent value)? addEvent,
+    TResult? Function(_UpdateEvent value)? deleteEvent,
+  }) {
+    return deleteEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAllEvent value)? getAllEvent,
+    TResult Function(_AddEvent value)? addEvent,
+    TResult Function(_UpdateEvent value)? deleteEvent,
+    required TResult orElse(),
+  }) {
+    if (deleteEvent != null) {
+      return deleteEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateEvent implements CalendarEvent {
+  const factory _UpdateEvent(final int eventId, final bool deleteAllRepeated) =
+      _$_UpdateEvent;
+
+  int get eventId;
+  bool get deleteAllRepeated;
+  @JsonKey(ignore: true)
+  _$$_UpdateEventCopyWith<_$_UpdateEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

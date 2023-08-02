@@ -26,4 +26,32 @@ class CalendarRepositoryImpl implements CalendarRepository {
       return const Left(ServerFailure('Server sedang bermasalah'));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> addEvent(EventModel event, int repeat) async {
+    try {
+      final token = await storage.read('token');
+      final result = await calendarApi.addEvent(token, event, repeat);
+      return Right(result);
+    } on SocketException {
+      return const Left(ServerFailure('Tidak ada koneksi internet'));
+    } on ServerException {
+      return const Left(ServerFailure('Server sedang bermasalah'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> deleteEvent(
+      int eventId, bool deleteAllRepeated) async {
+    try {
+      final token = await storage.read('token');
+      final result =
+          await calendarApi.deleteEvent(token, eventId, deleteAllRepeated);
+      return Right(result);
+    } on SocketException {
+      return const Left(ServerFailure('Tidak ada koneksi internet'));
+    } on ServerException {
+      return const Left(ServerFailure('Server sedang bermasalah'));
+    }
+  }
 }

@@ -106,6 +106,8 @@ void main() async {
         BlocProvider(create: (context) => di.locator<GetQuoteBloc>()),
         BlocProvider(create: (context) => di.locator<GetTagsBloc>()),
         BlocProvider(create: (context) => di.locator<QuoteSettingCubit>()),
+        BlocProvider(create: (context) => di.locator<AddEventBloc>()),
+        BlocProvider(create: (context) => di.locator<DeleteEventBloc>()),
       ],
       child: const LmsPPTIK(),
     ),

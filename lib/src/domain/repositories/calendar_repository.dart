@@ -5,4 +5,7 @@ import '../../utils/failures.dart';
 
 abstract class CalendarRepository {
   Future<Either<Failure, List<EventModel>>> getAllEvent();
+  Future<Either<Failure, bool>> addEvent(EventModel event, int repeat);
+  Future<Either<Failure, bool>> deleteEvent(
+      int eventId, bool deleteAllRepeated);
 }

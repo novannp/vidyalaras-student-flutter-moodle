@@ -1,12 +1,8 @@
 import 'dart:developer';
 import 'dart:ui';
 import 'dart:isolate';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:lms_pptik/injection.dart' as di;
 import 'package:lms_pptik/src/data/data_sources/quote_api.dart';
 import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
-import 'package:lms_pptik/src/utils/helper/secure_storage/secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final ReceivePort port = ReceivePort();
