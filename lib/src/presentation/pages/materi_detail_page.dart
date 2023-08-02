@@ -13,8 +13,47 @@ import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 import '../../data/models/materi_model/date_model.dart';
 import '../../data/models/materi_model/materi_model.dart';
 import '../../utils/helper/function_helper/function_helper.dart';
+import '../blocs/completion/completion_bloc.dart';
 import '../blocs/mods/mod_resource/mod_resource_bloc.dart';
 import 'mods/assignment_detail.dart';
+
+class CompletionButton extends StatelessWidget {
+  const CompletionButton({super.key, required this.mod});
+  final Module mod;
+  @override
+  Widget build(BuildContext context) {
+    if (mod.completiondata!.state == 1) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.only(bottom: 10),
+        width: double.infinity,
+        child: FilledButton.tonalIcon(
+          icon: const Icon(Icons.check),
+          onPressed: () {
+            context
+                .read<SelfCompletionBloc>()
+                .add(CompletionEvent.selfCompletion(mod.id!, 0));
+          },
+          label: const Text('Selesai'),
+        ),
+      );
+    } else {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.only(bottom: 10),
+        width: double.infinity,
+        child: OutlinedButton(
+          onPressed: () {
+            context
+                .read<SelfCompletionBloc>()
+                .add(CompletionEvent.selfCompletion(mod.id!, 1));
+          },
+          child: const Text('Tandai Selesai'),
+        ),
+      );
+    }
+  }
+}
 
 class MateriDetailPage extends StatefulWidget {
   const MateriDetailPage(
@@ -123,65 +162,76 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetMateriBloc, CourseState>(
-      builder: (context, state) {
-        return DraggableScrollableSheet(
-            expand: false,
-            builder: (context, controller) {
-              return SingleChildScrollView(
-                controller: controller,
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: state.whenOrNull(
-                      loaded: (data) {
-                        data as List<MateriModel>;
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              data[widget.selectedIndex].name!.decodeHtml(),
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const Divider(),
-                            const SizedBox(height: 10),
-                            data[widget.selectedIndex].summary != null
-                                ? Html(data: data[widget.selectedIndex].summary)
-                                : const SizedBox(),
-                            ExpansionTile(
-                              initiallyExpanded: true,
-                              title: const Text(
-                                'Modul',
-                                style: TextStyle(
-                                  fontSize: 16,
+    return BlocListener<SelfCompletionBloc, CompletionState>(
+      listener: (context, state) {
+        state.whenOrNull(loaded: (data) {
+          context
+              .read<GetMateriBloc>()
+              .add(CourseEvent.getMateri(widget.courseId));
+        });
+      },
+      child: BlocBuilder<GetMateriBloc, CourseState>(
+        builder: (context, state) {
+          return DraggableScrollableSheet(
+              expand: false,
+              builder: (context, controller) {
+                return SingleChildScrollView(
+                  controller: controller,
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: state.whenOrNull(
+                        loaded: (data) {
+                          data as List<MateriModel>;
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                data[widget.selectedIndex].name!.decodeHtml(),
+                                style: const TextStyle(
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              children: [
-                                if (data[widget.selectedIndex].modules != null)
-                                  if (data[widget.selectedIndex]
-                                      .modules!
-                                      .isNotEmpty)
-                                    buildModTile(data[widget.selectedIndex])
-                                  else
-                                    const Center(
-                                      child: Text('Tidak ada modul'),
-                                    )
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                          ],
-                        );
-                      },
-                    ) ??
-                    const SizedBox(),
-              );
-            });
-      },
+                              const Divider(),
+                              const SizedBox(height: 10),
+                              data[widget.selectedIndex].summary != null
+                                  ? Html(
+                                      data: data[widget.selectedIndex].summary)
+                                  : const SizedBox(),
+                              ExpansionTile(
+                                initiallyExpanded: true,
+                                title: const Text(
+                                  'Modul',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                children: [
+                                  if (data[widget.selectedIndex].modules !=
+                                      null)
+                                    if (data[widget.selectedIndex]
+                                        .modules!
+                                        .isNotEmpty)
+                                      buildModTile(data[widget.selectedIndex])
+                                    else
+                                      const Center(
+                                        child: Text('Tidak ada modul'),
+                                      )
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                            ],
+                          );
+                        },
+                      ) ??
+                      const SizedBox(),
+                );
+              });
+        },
+      ),
     );
   }
 }
@@ -202,34 +252,22 @@ class WorkshopTile extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-              onTap: () {
-                log(mod.uservisible!.toString());
-              },
-              leading: const Icon(Icons.people_alt_rounded,
-                  size: 40, color: Colors.green),
-              title: Text(
-                mod.name!.decodeHtml(),
-              ),
-              trailing: !mod.uservisible!
-                  ? const Icon(
-                      Icons.lock,
-                      color: Colors.red,
-                    )
-                  : null,
-              subtitle: !mod.uservisible!
-                  ? null
-                  : SizedBox(
-                      height: 25,
-                      width: 100,
-                      child: OutlinedButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Tandai Selesai',
-                          style: Theme.of(context).textTheme.labelSmall,
-                        ),
-                      ),
-                    ),
-            ),
+                onTap: () {
+                  log(mod.uservisible!.toString());
+                },
+                leading: const Icon(Icons.people_alt_rounded,
+                    size: 40, color: Colors.green),
+                title: Text(
+                  mod.name!.decodeHtml(),
+                ),
+                trailing: !mod.uservisible!
+                    ? const Icon(
+                        Icons.lock,
+                        color: Colors.red,
+                      )
+                    : null,
+                subtitle:
+                    !mod.uservisible! ? null : CompletionButton(mod: mod)),
             const SizedBox(height: 8),
             mod.dates!.isNotEmpty
                 ? Column(
@@ -309,27 +347,7 @@ class LabelTile extends StatelessWidget {
               mod.name!.decodeHtml(),
             ),
             const SizedBox(height: 8),
-            if (mod.completiondata!.state == 1)
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                margin: const EdgeInsets.only(bottom: 10),
-                width: double.infinity,
-                child: FilledButton.tonalIcon(
-                  icon: const Icon(Icons.check),
-                  onPressed: () {},
-                  label: const Text('Selesai'),
-                ),
-              )
-            else
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                margin: const EdgeInsets.only(bottom: 10),
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: () {},
-                  child: const Text('Tandai Selesai'),
-                ),
-              ),
+            CompletionButton(mod: mod)
           ],
         ),
       ),
@@ -484,28 +502,7 @@ class ResourceTile extends StatelessWidget {
                   [],
             ),
           if (mod.uservisible == false)
-            if (mod.completiondata != null)
-              if (mod.completiondata!.state == 1)
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  margin: const EdgeInsets.only(bottom: 10),
-                  width: double.infinity,
-                  child: FilledButton.tonalIcon(
-                    icon: const Icon(Icons.check),
-                    onPressed: () {},
-                    label: const Text('Selesai'),
-                  ),
-                )
-              else
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  margin: const EdgeInsets.only(bottom: 10),
-                  width: double.infinity,
-                  child: OutlinedButton(
-                    onPressed: () {},
-                    child: const Text('Tandai Selesai'),
-                  ),
-                ),
+            if (mod.completiondata != null) CompletionButton(mod: mod)
         ],
       ),
     );
@@ -541,31 +538,7 @@ class LessonTile extends StatelessWidget {
               mod.name!.decodeHtml(),
             ),
           ),
-          if (mod.completiondata!.state == 1)
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              margin: const EdgeInsets.only(bottom: 10),
-              width: double.infinity,
-              child: FilledButton.tonalIcon(
-                icon: const Icon(Icons.check),
-                onPressed: () {},
-                label: const Text('Selesai'),
-              ),
-            )
-          else
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              margin: const EdgeInsets.only(bottom: 10),
-              width: double.infinity,
-              child: OutlinedButton(
-                style: FilledButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  side: BorderSide(color: Theme.of(context).primaryColor),
-                ),
-                onPressed: () {},
-                child: const Text('Tandai Selesai'),
-              ),
-            ),
+          CompletionButton(mod: mod)
         ],
       ),
     );
@@ -701,32 +674,7 @@ class AssignmentTile extends StatelessWidget {
                     ),
                 if (mod.uservisible! == true)
                   if (mod.completiondata!.details!.isEmpty)
-                    if (mod.completiondata!.state == 1)
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        margin: const EdgeInsets.only(bottom: 10),
-                        width: double.infinity,
-                        child: FilledButton.tonalIcon(
-                          icon: const Icon(Icons.check),
-                          onPressed: () {},
-                          label: const Text('Selesai'),
-                        ),
-                      )
-                    else
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        margin: const EdgeInsets.only(bottom: 10),
-                        width: double.infinity,
-                        child: OutlinedButton(
-                          style: FilledButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            side: BorderSide(
-                                color: Theme.of(context).primaryColor),
-                          ),
-                          onPressed: () {},
-                          child: const Text('Tandai Selesai'),
-                        ),
-                      ),
+                    CompletionButton(mod: mod)
               ],
             )
           ],

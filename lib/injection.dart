@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:lms_pptik/src/data/data_sources/completion_api.dart';
 import 'package:lms_pptik/src/data/data_sources/notification_api.dart';
 import 'package:lms_pptik/src/data/data_sources/quote_api.dart';
 import 'package:lms_pptik/src/data/data_sources/upload_api.dart';
@@ -11,12 +12,14 @@ import 'package:lms_pptik/src/data/repositories/course_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/quote_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/upload_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/user_repository_impl.dart';
+import 'package:lms_pptik/src/domain/usecase/completion/completion.dart';
 import 'package:lms_pptik/src/domain/usecase/mods/mod_resource/mod_resource.dart';
 import 'package:lms_pptik/src/domain/usecase/quote/quote.dart';
 import 'package:lms_pptik/src/domain/usecase/user/update_picture.dart';
 import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/badge/badge_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/calendar/calendar_bloc.dart';
+import 'package:lms_pptik/src/presentation/blocs/completion/completion_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/dark_mode/dark_mode_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/dropdown_course/dropdown_course_cubit.dart';
@@ -35,6 +38,7 @@ import 'src/data/data_sources/chat_api.dart';
 import 'src/data/data_sources/course_api.dart';
 import 'src/data/data_sources/mod_apis/mod_apis.dart';
 import 'src/data/data_sources/user_api.dart';
+import 'src/data/repositories/completion_repository_impl.dart';
 import 'src/data/repositories/mods/mods.dart';
 import 'src/data/repositories/notification_repository_impl.dart';
 import 'src/domain/usecase/auth/auth.dart';
@@ -100,8 +104,7 @@ void init() {
   locator.registerFactory(() => AddEventBloc(locator()));
   locator.registerFactory(() => DeleteEventBloc(locator()));
   locator.registerFactory(() => MarkAllNotificationsAsReadBloc(locator()));
-
-  //USECASE
+  locator.registerFactory(() => SelfCompletionBloc(locator())); //USECASE
 
   // AUTH
   locator.registerFactory(() => Login(locator()));
@@ -164,6 +167,9 @@ void init() {
   locator.registerFactory(() => GetQuote(locator()));
   locator.registerFactory(() => GetTags(locator()));
 
+  // COMPLETION
+  locator.registerFactory(() => SelfCompletion(locator()));
+
   // REPOSITORIES
   locator.registerLazySingleton(() => AuthRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(
@@ -184,6 +190,8 @@ void init() {
   locator
       .registerLazySingleton(() => UploadRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(() => QuoteRepositoryImpl(locator()));
+  locator.registerLazySingleton(
+      () => CompletionRepositoryImpl(locator(), locator()));
 
   // API
   locator.registerLazySingleton(() => AuthApiImpl(locator()));
@@ -197,6 +205,7 @@ void init() {
   locator.registerLazySingleton(() => ModResourceApiImpl(locator()));
   locator.registerLazySingleton(() => UploadApiImpl(locator()));
   locator.registerLazySingleton(() => QuoteApiImpl());
+  locator.registerLazySingleton(() => CompletionApiImpl(locator()));
 
   // HTTP
   locator.registerLazySingleton(() => HttpHelper.client);

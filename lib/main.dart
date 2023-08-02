@@ -10,6 +10,7 @@ import 'package:lms_pptik/src/presentation/blocs/auth/auth_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/badge/badge_bloc.dart';
 
 import 'package:lms_pptik/src/presentation/blocs/calendar/calendar_bloc.dart';
+import 'package:lms_pptik/src/presentation/blocs/completion/completion_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/dark_mode/dark_mode_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/dropdown_course/dropdown_course_cubit.dart';
@@ -109,7 +110,8 @@ void main() async {
         BlocProvider(create: (context) => di.locator<AddEventBloc>()),
         BlocProvider(create: (context) => di.locator<DeleteEventBloc>()),
         BlocProvider(
-            create: (context) => di.locator<MarkAllNotificationsAsReadBloc>())
+            create: (context) => di.locator<MarkAllNotificationsAsReadBloc>()),
+        BlocProvider(create: (context) => di.locator<SelfCompletionBloc>()),
       ],
       child: const LmsPPTIK(),
     ),
