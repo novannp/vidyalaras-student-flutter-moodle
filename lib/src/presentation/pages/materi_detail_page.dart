@@ -28,13 +28,6 @@ class MateriDetailPage extends StatefulWidget {
 }
 
 class _MateriDetailPageState extends State<MateriDetailPage> {
-  late final ScrollController _scrollController;
-  @override
-  initState() {
-    super.initState();
-    _scrollController = ScrollController();
-  }
-
   Widget buildModTile(MateriModel materi) {
     return ListView.separated(
       separatorBuilder: (context, i) => const Divider(),
