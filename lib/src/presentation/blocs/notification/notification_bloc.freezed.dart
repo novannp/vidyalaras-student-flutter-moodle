@@ -20,18 +20,21 @@ mixin _$NotificationEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() getNotifications,
     required TResult Function() getNotificationCount,
+    required TResult Function() markAllNotificationsAsRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getNotifications,
     TResult? Function()? getNotificationCount,
+    TResult? Function()? markAllNotificationsAsRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getNotifications,
     TResult Function()? getNotificationCount,
+    TResult Function()? markAllNotificationsAsRead,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,24 @@ mixin _$NotificationEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetNotifications value) getNotifications,
     required TResult Function(_GetNotificationCount value) getNotificationCount,
+    required TResult Function(_MarkAllNotificationsAsRead value)
+        markAllNotificationsAsRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetNotifications value)? getNotifications,
     TResult? Function(_GetNotificationCount value)? getNotificationCount,
+    TResult? Function(_MarkAllNotificationsAsRead value)?
+        markAllNotificationsAsRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetNotifications value)? getNotifications,
     TResult Function(_GetNotificationCount value)? getNotificationCount,
+    TResult Function(_MarkAllNotificationsAsRead value)?
+        markAllNotificationsAsRead,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +123,7 @@ class _$_GetNotifications implements _GetNotifications {
   TResult when<TResult extends Object?>({
     required TResult Function() getNotifications,
     required TResult Function() getNotificationCount,
+    required TResult Function() markAllNotificationsAsRead,
   }) {
     return getNotifications();
   }
@@ -123,6 +133,7 @@ class _$_GetNotifications implements _GetNotifications {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getNotifications,
     TResult? Function()? getNotificationCount,
+    TResult? Function()? markAllNotificationsAsRead,
   }) {
     return getNotifications?.call();
   }
@@ -132,6 +143,7 @@ class _$_GetNotifications implements _GetNotifications {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getNotifications,
     TResult Function()? getNotificationCount,
+    TResult Function()? markAllNotificationsAsRead,
     required TResult orElse(),
   }) {
     if (getNotifications != null) {
@@ -145,6 +157,8 @@ class _$_GetNotifications implements _GetNotifications {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetNotifications value) getNotifications,
     required TResult Function(_GetNotificationCount value) getNotificationCount,
+    required TResult Function(_MarkAllNotificationsAsRead value)
+        markAllNotificationsAsRead,
   }) {
     return getNotifications(this);
   }
@@ -154,6 +168,8 @@ class _$_GetNotifications implements _GetNotifications {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetNotifications value)? getNotifications,
     TResult? Function(_GetNotificationCount value)? getNotificationCount,
+    TResult? Function(_MarkAllNotificationsAsRead value)?
+        markAllNotificationsAsRead,
   }) {
     return getNotifications?.call(this);
   }
@@ -163,6 +179,8 @@ class _$_GetNotifications implements _GetNotifications {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetNotifications value)? getNotifications,
     TResult Function(_GetNotificationCount value)? getNotificationCount,
+    TResult Function(_MarkAllNotificationsAsRead value)?
+        markAllNotificationsAsRead,
     required TResult orElse(),
   }) {
     if (getNotifications != null) {
@@ -216,6 +234,7 @@ class _$_GetNotificationCount implements _GetNotificationCount {
   TResult when<TResult extends Object?>({
     required TResult Function() getNotifications,
     required TResult Function() getNotificationCount,
+    required TResult Function() markAllNotificationsAsRead,
   }) {
     return getNotificationCount();
   }
@@ -225,6 +244,7 @@ class _$_GetNotificationCount implements _GetNotificationCount {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getNotifications,
     TResult? Function()? getNotificationCount,
+    TResult? Function()? markAllNotificationsAsRead,
   }) {
     return getNotificationCount?.call();
   }
@@ -234,6 +254,7 @@ class _$_GetNotificationCount implements _GetNotificationCount {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getNotifications,
     TResult Function()? getNotificationCount,
+    TResult Function()? markAllNotificationsAsRead,
     required TResult orElse(),
   }) {
     if (getNotificationCount != null) {
@@ -247,6 +268,8 @@ class _$_GetNotificationCount implements _GetNotificationCount {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetNotifications value) getNotifications,
     required TResult Function(_GetNotificationCount value) getNotificationCount,
+    required TResult Function(_MarkAllNotificationsAsRead value)
+        markAllNotificationsAsRead,
   }) {
     return getNotificationCount(this);
   }
@@ -256,6 +279,8 @@ class _$_GetNotificationCount implements _GetNotificationCount {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetNotifications value)? getNotifications,
     TResult? Function(_GetNotificationCount value)? getNotificationCount,
+    TResult? Function(_MarkAllNotificationsAsRead value)?
+        markAllNotificationsAsRead,
   }) {
     return getNotificationCount?.call(this);
   }
@@ -265,6 +290,8 @@ class _$_GetNotificationCount implements _GetNotificationCount {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetNotifications value)? getNotifications,
     TResult Function(_GetNotificationCount value)? getNotificationCount,
+    TResult Function(_MarkAllNotificationsAsRead value)?
+        markAllNotificationsAsRead,
     required TResult orElse(),
   }) {
     if (getNotificationCount != null) {
@@ -276,6 +303,120 @@ class _$_GetNotificationCount implements _GetNotificationCount {
 
 abstract class _GetNotificationCount implements NotificationEvent {
   const factory _GetNotificationCount() = _$_GetNotificationCount;
+}
+
+/// @nodoc
+abstract class _$$_MarkAllNotificationsAsReadCopyWith<$Res> {
+  factory _$$_MarkAllNotificationsAsReadCopyWith(
+          _$_MarkAllNotificationsAsRead value,
+          $Res Function(_$_MarkAllNotificationsAsRead) then) =
+      __$$_MarkAllNotificationsAsReadCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_MarkAllNotificationsAsReadCopyWithImpl<$Res>
+    extends _$NotificationEventCopyWithImpl<$Res, _$_MarkAllNotificationsAsRead>
+    implements _$$_MarkAllNotificationsAsReadCopyWith<$Res> {
+  __$$_MarkAllNotificationsAsReadCopyWithImpl(
+      _$_MarkAllNotificationsAsRead _value,
+      $Res Function(_$_MarkAllNotificationsAsRead) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_MarkAllNotificationsAsRead implements _MarkAllNotificationsAsRead {
+  const _$_MarkAllNotificationsAsRead();
+
+  @override
+  String toString() {
+    return 'NotificationEvent.markAllNotificationsAsRead()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MarkAllNotificationsAsRead);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getNotifications,
+    required TResult Function() getNotificationCount,
+    required TResult Function() markAllNotificationsAsRead,
+  }) {
+    return markAllNotificationsAsRead();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getNotifications,
+    TResult? Function()? getNotificationCount,
+    TResult? Function()? markAllNotificationsAsRead,
+  }) {
+    return markAllNotificationsAsRead?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getNotifications,
+    TResult Function()? getNotificationCount,
+    TResult Function()? markAllNotificationsAsRead,
+    required TResult orElse(),
+  }) {
+    if (markAllNotificationsAsRead != null) {
+      return markAllNotificationsAsRead();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetNotifications value) getNotifications,
+    required TResult Function(_GetNotificationCount value) getNotificationCount,
+    required TResult Function(_MarkAllNotificationsAsRead value)
+        markAllNotificationsAsRead,
+  }) {
+    return markAllNotificationsAsRead(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetNotifications value)? getNotifications,
+    TResult? Function(_GetNotificationCount value)? getNotificationCount,
+    TResult? Function(_MarkAllNotificationsAsRead value)?
+        markAllNotificationsAsRead,
+  }) {
+    return markAllNotificationsAsRead?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetNotifications value)? getNotifications,
+    TResult Function(_GetNotificationCount value)? getNotificationCount,
+    TResult Function(_MarkAllNotificationsAsRead value)?
+        markAllNotificationsAsRead,
+    required TResult orElse(),
+  }) {
+    if (markAllNotificationsAsRead != null) {
+      return markAllNotificationsAsRead(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MarkAllNotificationsAsRead implements NotificationEvent {
+  const factory _MarkAllNotificationsAsRead() = _$_MarkAllNotificationsAsRead;
 }
 
 /// @nodoc

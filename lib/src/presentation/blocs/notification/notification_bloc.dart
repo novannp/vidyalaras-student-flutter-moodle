@@ -49,3 +49,24 @@ class GetNotificationCountBloc
     });
   }
 }
+
+class MarkAllNotificationsAsReadBloc
+    extends Bloc<NotificationEvent, NotificationState> {
+  final MarkAllNotificationsAsRead _markAllNotificationsAsRead;
+
+  MarkAllNotificationsAsReadBloc(this._markAllNotificationsAsRead)
+      : super(const NotificationState.initial()) {
+    on<NotificationEvent>((event, emit) async {
+      await event.whenOrNull(
+        markAllNotificationsAsRead: () async {
+          emit(const NotificationState.loading());
+          final notifications = await _markAllNotificationsAsRead.execute();
+          notifications.fold(
+            (failure) => emit(NotificationState.error(failure.message)),
+            (notifications) => emit(NotificationState.loaded(notifications)),
+          );
+        },
+      );
+    });
+  }
+}

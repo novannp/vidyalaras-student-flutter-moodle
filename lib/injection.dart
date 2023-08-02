@@ -99,6 +99,7 @@ void init() {
   locator.registerFactory(() => QuoteSettingCubit());
   locator.registerFactory(() => AddEventBloc(locator()));
   locator.registerFactory(() => DeleteEventBloc(locator()));
+  locator.registerFactory(() => MarkAllNotificationsAsReadBloc(locator()));
 
   //USECASE
 
@@ -144,6 +145,7 @@ void init() {
   // NOTIFICATION
   locator.registerFactory(() => GetNotifications(locator()));
   locator.registerFactory(() => GetNotificationCount(locator()));
+  locator.registerFactory(() => MarkAllNotificationsAsRead(locator()));
 
   // MOD ASSIGN
   locator.registerFactory(() => GetAssignmentList(locator()));

@@ -5,5 +5,5 @@ import '../../../data/repositories/notification_repository_impl.dart';
 import '../../../utils/failures.dart';
 
 part 'get_notifications.dart';
-
+part 'mark_all_notifications_as_read.dart';
 part 'get_notification_count.dart';

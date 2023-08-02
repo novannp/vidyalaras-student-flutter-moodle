@@ -208,11 +208,11 @@ class __$$_AddEventCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? event = freezed,
+    Object? event = null,
     Object? repeat = null,
   }) {
     return _then(_$_AddEvent(
-      freezed == event
+      null == event
           ? _value.event
           : event // ignore: cast_nullable_to_non_nullable
               as EventModel,
@@ -244,13 +244,12 @@ class _$_AddEvent implements _AddEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AddEvent &&
-            const DeepCollectionEquality().equals(other.event, event) &&
+            (identical(other.event, event) || other.event == event) &&
             (identical(other.repeat, repeat) || other.repeat == repeat));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(event), repeat);
+  int get hashCode => Object.hash(runtimeType, event, repeat);
 
   @JsonKey(ignore: true)
   @override

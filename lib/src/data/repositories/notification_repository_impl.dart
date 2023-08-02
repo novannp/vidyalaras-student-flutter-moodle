@@ -44,4 +44,19 @@ class NotificationRepositoryImpl implements NotificationRepository {
       return const Left(ServerFailure('Gagal mendapatkan notifikasi'));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> markAllNotificationAsRead() async {
+    try {
+      final token = await storageHelper.read('token');
+      final userId = await storageHelper.read('userId');
+      final result = await notificationApiImpl.markNotificationAsRead(
+          token, int.parse(userId));
+      return Right(result);
+    } on SocketException {
+      return const Left(ServerFailure('Tidak ada koneksi internet'));
+    } on ServerException {
+      return const Left(ServerFailure('Gagal mendapatkan notifikasi'));
+    }
+  }
 }

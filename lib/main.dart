@@ -108,6 +108,8 @@ void main() async {
         BlocProvider(create: (context) => di.locator<QuoteSettingCubit>()),
         BlocProvider(create: (context) => di.locator<AddEventBloc>()),
         BlocProvider(create: (context) => di.locator<DeleteEventBloc>()),
+        BlocProvider(
+            create: (context) => di.locator<MarkAllNotificationsAsReadBloc>())
       ],
       child: const LmsPPTIK(),
     ),

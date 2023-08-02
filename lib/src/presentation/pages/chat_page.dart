@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -19,16 +21,23 @@ class _ChatPageState extends State<ChatPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   List<ConversationModel> _previousConversations = [];
-
+  Timer? timer;
   @override
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
+    timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      context
+          .read<GetConversationsBloc>()
+          .add(const ChatEvent.getConversations());
+    });
     super.initState();
   }
 
   @override
   dispose() {
+    timer!.cancel();
     _tabController.dispose();
+
     super.dispose();
   }
 

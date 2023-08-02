@@ -34,19 +34,9 @@ class IsolateModel {
 }
 
 class _DashboardPage extends State<DashboardPage> {
-  static void runTimer(IsolateModel isolateModel) {
-    Timer.periodic(
-      const Duration(seconds: 2),
-      (timer) {
-        BlocProvider.of<GetUnreadMessageCountBloc>(isolateModel.context)
-            .add(const ChatEvent.getUnreadMessageCount());
-      },
-    );
-  }
-
   int _previousMessageCount = 0;
   int _previousNotificationCount = 0;
-
+  Timer? timer;
   final List _items = [
     {
       'text': 'Semua Kelas',
@@ -88,12 +78,19 @@ class _DashboardPage extends State<DashboardPage> {
       BlocProvider.of<GetFilteredCourseBloc>(context)
           .add(const CourseEvent.getFilteredCourse("all"));
     });
+    timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      BlocProvider.of<GetNotificationCountBloc>(context)
+          .add(const NotificationEvent.getNotificationCount());
 
+      BlocProvider.of<GetUnreadMessageCountBloc>(context)
+          .add(const ChatEvent.getUnreadMessageCount());
+    });
     super.initState();
   }
 
   @override
   void dispose() {
+    timer!.cancel();
     super.dispose();
   }
 

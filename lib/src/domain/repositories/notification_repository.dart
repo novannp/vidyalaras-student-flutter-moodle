@@ -7,4 +7,5 @@ abstract class NotificationRepository {
   Future<Either<Failure, List<NotificationModel>>> getNotifications();
 
   Future<Either<Failure, int>> getNotificationCount();
+  Future<Either<Failure, bool>> markAllNotificationAsRead();
 }

@@ -10,6 +10,8 @@ abstract class NotificationApi {
   Future<List<NotificationModel>> getNotifications(String token, String userId);
 
   Future<int> getNotificationCount(String token, int userId);
+
+  Future<bool> markNotificationAsRead(String token, int userID);
 }
 
 class NotificationApiImpl implements NotificationApi {
@@ -94,6 +96,32 @@ class NotificationApiImpl implements NotificationApi {
       }
       final notificationCount = data['unreadcount'] as int;
       return notificationCount;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<bool> markNotificationAsRead(String token, int userid) async {
+    Uri url = Uri.https(
+      Endpoints.baseUrl,
+      Endpoints.rest,
+      {
+        'wstoken': token,
+        'wsfunction': 'core_message_mark_all_notifications_as_read',
+        'moodlewsrestformat': 'json',
+        'useridto': userid.toString(),
+      }.map((key, value) => MapEntry(key, value.toString())),
+    );
+
+    final response = await client.post(url);
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data == true) {
+        return true;
+      }
+      return false;
     } else {
       throw ServerException();
     }
