@@ -35,10 +35,13 @@ class IsolateModel {
 
 class _DashboardPage extends State<DashboardPage> {
   static void runTimer(IsolateModel isolateModel) {
-    Timer.periodic(const Duration(seconds: 2), (timer) {
-      BlocProvider.of<GetUnreadMessageCountBloc>(isolateModel.context)
-          .add(const ChatEvent.getUnreadMessageCount());
-    });
+    Timer.periodic(
+      const Duration(seconds: 2),
+      (timer) {
+        BlocProvider.of<GetUnreadMessageCountBloc>(isolateModel.context)
+            .add(const ChatEvent.getUnreadMessageCount());
+      },
+    );
   }
 
   int _previousMessageCount = 0;
