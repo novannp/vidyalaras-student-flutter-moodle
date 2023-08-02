@@ -6,7 +6,7 @@ import 'package:lms_pptik/src/presentation/pages/materi_detail_page.dart';
 import 'package:lms_pptik/src/presentation/pages/permission_page.dart';
 import 'package:lms_pptik/src/presentation/pages/resource_page.dart';
 import 'package:lms_pptik/src/presentation/pages/search_page.dart';
-import 'package:lms_pptik/src/presentation/pages/settings_page.dart';
+import 'package:lms_pptik/src/presentation/pages/settings/settings_page.dart';
 
 import '../data/models/course_model.dart';
 import '../presentation/pages/assignment_page.dart';
