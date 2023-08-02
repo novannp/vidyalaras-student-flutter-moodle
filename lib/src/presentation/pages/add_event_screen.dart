@@ -72,7 +72,9 @@ class _AddEventScreenState extends State<AddEventScreen> {
                     timeduration: endDate,
                     timestart: startDate,
                   ),
-                  repeatWeek.isNotEmpty ? int.parse(repeatWeek) : 1));
+                  repeatWeek.isNotEmpty && repeatWeek != '0'
+                      ? int.parse(repeatWeek)
+                      : 1));
             }
           },
           icon: const Icon(Icons.save),
