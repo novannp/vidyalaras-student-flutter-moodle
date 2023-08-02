@@ -140,12 +140,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                     horizontal: 30,
                   ),
                   controller: _tabController,
-                  tabs: const [
-                    Text('Materi'),
-                    Text('Peserta'),
-                    Text('Kompetensi'),
-                    Text('Nilai')
-                  ],
+                  tabs: const [Text('Materi'), Text('Peserta'), Text('Nilai')],
                 ),
               ),
               const SizedBox(height: 20),
@@ -155,7 +150,6 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                   children: [
                     buildMateriList(),
                     buildEnrolledUser(),
-                    const Text('Kompetensi'),
                     buildGradeList()
                   ],
                 ),
