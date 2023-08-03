@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:isolate';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,9 +9,11 @@ import 'package:go_router/go_router.dart';
 
 import 'package:lms_pptik/src/extensions/string_extension.dart';
 import 'package:lms_pptik/src/presentation/blocs/notification/notification_bloc.dart';
+import 'package:lms_pptik/src/presentation/blocs/quote/quote_bloc.dart';
 import 'package:lms_pptik/src/utils/constant.dart';
 
 import '../../data/models/course_model.dart';
+import '../../data/models/quote_model.dart';
 import '../../data/models/user_model/user_model.dart';
 import '../blocs/chat/chat_bloc.dart';
 import '../blocs/course/course_bloc.dart';
@@ -37,6 +40,7 @@ class _DashboardPage extends State<DashboardPage> {
   int _previousMessageCount = 0;
   int _previousNotificationCount = 0;
   Timer? timer;
+  Timer? quoteTimer;
   final List _items = [
     {
       'text': 'Semua Kelas',
@@ -71,7 +75,8 @@ class _DashboardPage extends State<DashboardPage> {
           .add(const ChatEvent.getUnreadMessageCount());
       BlocProvider.of<GetCurrentUserBloc>(context)
           .add(const UserEvent.getCurrenctUser());
-
+      BlocProvider.of<GetQuoteBloc>(context)
+          .add(const QuoteEvent.getQuote('Education'));
       BlocProvider.of<GetRecentCourseBloc>(context)
           .add(const CourseEvent.getRecentCourse());
 
@@ -84,6 +89,11 @@ class _DashboardPage extends State<DashboardPage> {
 
       BlocProvider.of<GetUnreadMessageCountBloc>(context)
           .add(const ChatEvent.getUnreadMessageCount());
+    });
+
+    quoteTimer = Timer.periodic(const Duration(minutes: 15), (timer) {
+      BlocProvider.of<GetQuoteBloc>(context)
+          .add(const QuoteEvent.getQuote('Education'));
     });
     super.initState();
   }
@@ -266,31 +276,66 @@ class _DashboardPage extends State<DashboardPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 20),
-                TextField(
-                  readOnly: true,
-                  onTap: () {
-                    GoRouter.of(context).pushNamed('search');
-                  },
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.zero,
-                    prefixIcon: const Icon(Icons.search),
-                    hintText: 'Cari Kelas',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10),
+                const SizedBox(height: 10),
+                Hero(
+                  tag: 'jumbotron',
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                    child: Container(
+                      height: size.height * 0.18,
+                      width: size.width,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: const DecorationImage(
+                          image: NetworkImage('https://picsum.photos/600/200'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Center(
+                        child: BlocBuilder<GetQuoteBloc, QuoteState>(
+                          builder: (context, state) {
+                            return Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    state.whenOrNull(
+                                          loaded: (data) {
+                                            data as QuoteModel;
+                                            return data.content;
+                                          },
+                                        ) ??
+                                        '"Be yourself; everyone else is already taken."',
+                                    style: const TextStyle(
+                                      fontStyle: FontStyle.italic,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Text(
+                                    state.whenOrNull(
+                                          loaded: (data) {
+                                            data as QuoteModel;
+                                            return data.author;
+                                          },
+                                        ) ??
+                                        'Oscar Wilde',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     ),
                   ),
                 ),
