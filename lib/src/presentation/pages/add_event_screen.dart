@@ -112,6 +112,12 @@ class _AddEventScreenState extends State<AddEventScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Judul acara tidak boleh kosong';
+                    }
+                    return null;
+                  },
                   controller: _titleCtrl,
                   decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.edit_calendar_outlined),

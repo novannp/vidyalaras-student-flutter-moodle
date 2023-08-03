@@ -100,143 +100,160 @@ class _CalendarPageState extends State<CalendarPage> {
       appBar: AppBar(
         title: const Text('Kalender'),
       ),
-      body: BlocBuilder<GetEventBloc, CalendarState>(
-        builder: (context, state) {
-          return state.maybeWhen(
-              loading: () => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-              loaded: (data) {
-                data as List<EventModel>;
-                return RefreshIndicator(
-                  onRefresh: () {
-                    BlocProvider.of<GetEventBloc>(context)
-                        .add(const CalendarEvent.getAllEvent());
-                    return Future.delayed(const Duration(seconds: 1));
-                  },
-                  child: ScrollConfiguration(
-                    behavior: RemoveGlow(),
-                    child: SingleChildScrollView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height,
-                        child: SfCalendar(
-                          viewNavigationMode: ViewNavigationMode.snap,
-                          allowViewNavigation: true,
-                          cellEndPadding: 5,
-                          allowAppointmentResize: true,
-                          allowedViews: const [
-                            CalendarView.day,
-                            CalendarView.week,
-                            CalendarView.workWeek,
-                            CalendarView.timelineDay,
-                            CalendarView.timelineWeek,
-                            CalendarView.timelineWorkWeek,
-                            CalendarView.month,
-                            CalendarView.schedule
-                          ],
-                          headerHeight: 60,
-                          showTodayButton: true,
-                          showNavigationArrow: true,
-                          onTap: (details) {
-                            List<dynamic> appointments =
-                                details.appointments as List<dynamic>;
-                            DateTime date = details.date!;
-                            String element = details.targetElement.name;
-                            if (appointments.isNotEmpty) {
-                              showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  showDragHandle: true,
-                                  context: context,
-                                  builder: (context) {
-                                    EventModel event = appointments[0];
+      body: BlocListener<DeleteEventBloc, CalendarState>(
+        listener: (context, state) {
+          state.whenOrNull(loaded: (data) {
+            BlocProvider.of<GetEventBloc>(context)
+                .add(const CalendarEvent.getAllEvent());
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Berhasil Menghapus Acara'),
+            ));
+          }, error: (message) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(message),
+            ));
+          });
+        },
+        child: BlocBuilder<GetEventBloc, CalendarState>(
+          builder: (context, state) {
+            return state.maybeWhen(
+                loading: () => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                loaded: (data) {
+                  data as List<EventModel>;
+                  return RefreshIndicator(
+                    onRefresh: () {
+                      BlocProvider.of<GetEventBloc>(context)
+                          .add(const CalendarEvent.getAllEvent());
+                      return Future.delayed(const Duration(seconds: 1));
+                    },
+                    child: ScrollConfiguration(
+                      behavior: RemoveGlow(),
+                      child: SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height,
+                          child: SfCalendar(
+                            viewNavigationMode: ViewNavigationMode.snap,
+                            allowViewNavigation: true,
+                            cellEndPadding: 5,
+                            allowAppointmentResize: true,
+                            allowedViews: const [
+                              CalendarView.day,
+                              CalendarView.week,
+                              CalendarView.workWeek,
+                              CalendarView.timelineDay,
+                              CalendarView.timelineWeek,
+                              CalendarView.timelineWorkWeek,
+                              CalendarView.month,
+                              CalendarView.schedule
+                            ],
+                            headerHeight: 60,
+                            showTodayButton: true,
+                            showNavigationArrow: true,
+                            onTap: (details) {
+                              List<dynamic> appointments =
+                                  details.appointments as List<dynamic>;
+                              DateTime date = details.date!;
+                              String element = details.targetElement.name;
+                              if (appointments.isNotEmpty) {
+                                showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    showDragHandle: true,
+                                    context: context,
+                                    builder: (context) {
+                                      EventModel event = appointments[0];
 
-                                    if (element == 'calendarCell') {
-                                      return buildCalenderCellEvents(
-                                          appointments);
-                                    }
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          const Text(
-                                            'Acara Hari Ini',
-                                            style: TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.bold,
+                                      if (element == 'calendarCell') {
+                                        return buildCalenderCellEvents(
+                                            appointments);
+                                      }
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            const Text(
+                                              'Acara Hari Ini',
+                                              style: TextStyle(
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
-                                          ),
-                                          const Divider(),
-                                          ListTile(
-                                            trailing: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                IconButton(
-                                                    onPressed: () {},
-                                                    icon: Icon(Icons.edit)),
-                                                IconButton(
-                                                    onPressed: () {},
-                                                    icon: Icon(
-                                                      Icons.delete,
-                                                      color: Colors.red,
-                                                    )),
-                                              ],
+                                            const Divider(),
+                                            ListTile(
+                                              trailing: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  IconButton(
+                                                      onPressed: () {},
+                                                      icon: const Icon(
+                                                          Icons.edit)),
+                                                  IconButton(
+                                                      onPressed: () {},
+                                                      icon: const Icon(
+                                                        Icons.delete,
+                                                        color: Colors.red,
+                                                      )),
+                                                ],
+                                              ),
+                                              leading: Icon(
+                                                Icons.event,
+                                                color: event.background,
+                                              ),
+                                              title: Text(event.name!),
+                                              subtitle:
+                                                  Text(event.description!),
                                             ),
-                                            leading: Icon(
-                                              Icons.event,
-                                              color: event.background,
-                                            ),
-                                            title: Text(event.name!),
-                                            subtitle: Text(event.description!),
-                                          ),
-                                          Html(data: event.description!)
-                                        ],
-                                      ),
-                                    );
-                                  });
-                            }
-                          },
-                          headerStyle: const CalendarHeaderStyle(
-                            textStyle: TextStyle(fontSize: 18),
-                          ),
-                          controller: _calendarController,
-                          dataSource: EventsDataSource(data),
-                          view: CalendarView.month,
-                          initialDisplayDate: DateTime.now(),
-                          showDatePickerButton: true,
-                          showCurrentTimeIndicator: true,
-                          todayHighlightColor: Theme.of(context).primaryColor,
-                          monthViewSettings: const MonthViewSettings(
-                            agendaStyle: AgendaStyle(
-                              appointmentTextStyle: TextStyle(
-                                color: Colors.white,
-                              ),
-                              dateTextStyle: TextStyle(fontSize: 12),
+                                            Html(data: event.description!)
+                                          ],
+                                        ),
+                                      );
+                                    });
+                              }
+                            },
+                            headerStyle: const CalendarHeaderStyle(
+                              textStyle: TextStyle(fontSize: 18),
                             ),
-                            agendaItemHeight: 40,
-                            showAgenda: true,
-                            appointmentDisplayMode:
-                                MonthAppointmentDisplayMode.indicator,
+                            controller: _calendarController,
+                            dataSource: EventsDataSource(data),
+                            view: CalendarView.month,
+                            initialDisplayDate: DateTime.now(),
+                            showDatePickerButton: true,
+                            showCurrentTimeIndicator: true,
+                            todayHighlightColor: Theme.of(context).primaryColor,
+                            monthViewSettings: const MonthViewSettings(
+                              agendaStyle: AgendaStyle(
+                                appointmentTextStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                dateTextStyle: TextStyle(fontSize: 12),
+                              ),
+                              agendaItemHeight: 40,
+                              showAgenda: true,
+                              appointmentDisplayMode:
+                                  MonthAppointmentDisplayMode.indicator,
+                            ),
+                            scheduleViewMonthHeaderBuilder:
+                                scheduleHeaderViewBuilder,
+                            scheduleViewSettings: const ScheduleViewSettings(),
                           ),
-                          scheduleViewMonthHeaderBuilder:
-                              scheduleHeaderViewBuilder,
-                          scheduleViewSettings: const ScheduleViewSettings(),
                         ),
                       ),
                     ),
-                  ),
-                );
-              },
-              orElse: () {
-                return const Center(
-                  child: Text('Gagal memuat kalender'),
-                );
-              });
-        },
+                  );
+                },
+                orElse: () {
+                  return const Center(
+                    child: Text('Gagal memuat kalender'),
+                  );
+                });
+          },
+        ),
       ),
     );
   }
@@ -265,10 +282,45 @@ class _CalendarPageState extends State<CalendarPage> {
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
                         IconButton(
-                            onPressed: () {},
-                            icon: Icon(
+                            onPressed: () {}, icon: const Icon(Icons.edit)),
+                        IconButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      content: const Text(
+                                          'Hapus semua acara beserta turunannya?'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('Batal')),
+                                        TextButton(
+                                          onPressed: () {
+                                            context.read<DeleteEventBloc>().add(
+                                                CalendarEvent.deleteEvent(
+                                                    appointment.id!, false));
+                                          },
+                                          child: const Text(
+                                              'Hapus acara ini saja'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            context.read<DeleteEventBloc>().add(
+                                                CalendarEvent.deleteEvent(
+                                                    appointment.id!, true));
+                                          },
+                                          child: const Text(
+                                              'Hapus semua acara ini'),
+                                        )
+                                      ],
+                                    );
+                                  });
+                            },
+                            icon: const Icon(
                               Icons.delete,
                               color: Colors.red,
                             )),
