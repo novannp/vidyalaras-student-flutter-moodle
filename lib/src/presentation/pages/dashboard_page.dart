@@ -313,6 +313,7 @@ class _DashboardPage extends State<DashboardPage> {
                                               data as QuoteModel;
                                               return data.content;
                                             },
+                                            loading: () => '.....',
                                           ) ??
                                           '"Be yourself; everyone else is already taken."',
                                       style: const TextStyle(
@@ -323,13 +324,20 @@ class _DashboardPage extends State<DashboardPage> {
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
+                                    Text('-',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
+                                        ),
+                                        textAlign: TextAlign.center),
                                     Text(
-                                      state.whenOrNull(
-                                            loaded: (data) {
-                                              data as QuoteModel;
-                                              return data.author;
-                                            },
-                                          ) ??
+                                      state.whenOrNull(loaded: (data) {
+                                            data as QuoteModel;
+                                            return data.author;
+                                          }, loading: () {
+                                            return ' ';
+                                          }) ??
                                           'Oscar Wilde',
                                       style: const TextStyle(
                                         fontSize: 16,
