@@ -298,7 +298,10 @@ class _DashboardPage extends State<DashboardPage> {
                           builder: (context, state) {
                             return Container(
                               width: size.width,
-                              color: Colors.black.withOpacity(0.3),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.black.withOpacity(0.3),
+                              ),
                               child: Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Column(
