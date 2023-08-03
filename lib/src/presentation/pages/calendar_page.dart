@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:intl/intl.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/presentation/blocs/calendar/calendar_bloc.dart';
@@ -192,7 +193,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                             title: Text(event.name!),
                                             subtitle: Text(event.description!),
                                           ),
-                                          Text(event.description!)
+                                          Html(data: event.description!)
                                         ],
                                       ),
                                     );
@@ -280,7 +281,7 @@ class _CalendarPageState extends State<CalendarPage> {
                     title: Text(appointment.name!),
                     children: [
                       const SizedBox(height: 10),
-                      Text(appointment.description!)
+                      Html(data: appointment.description!)
                     ]);
               })
         ],
