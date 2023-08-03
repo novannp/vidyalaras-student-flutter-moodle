@@ -54,4 +54,19 @@ class CalendarRepositoryImpl implements CalendarRepository {
       return const Left(ServerFailure('Server sedang bermasalah'));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> exportEvents(String time) async {
+    try {
+      final token = await storage.read('token');
+      final userId = await storage.read('userId');
+      final result =
+          await calendarApi.exportEvents(token, int.parse(userId), time);
+      return Right(result);
+    } on SocketException {
+      return const Left(ServerFailure('Tidak ada koneksi internet'));
+    } on ServerException {
+      return const Left(ServerFailure('Server sedang bermasalah'));
+    }
+  }
 }

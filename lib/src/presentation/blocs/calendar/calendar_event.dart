@@ -7,4 +7,5 @@ class CalendarEvent with _$CalendarEvent {
       _AddEvent;
   const factory CalendarEvent.deleteEvent(int eventId, bool deleteAllRepeated) =
       _UpdateEvent;
+  const factory CalendarEvent.exportEvents(String time) = _ExportEvents;
 }

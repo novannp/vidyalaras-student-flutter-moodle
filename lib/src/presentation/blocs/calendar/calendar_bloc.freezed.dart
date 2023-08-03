@@ -21,6 +21,7 @@ mixin _$CalendarEvent {
     required TResult Function() getAllEvent,
     required TResult Function(EventModel event, int repeat) addEvent,
     required TResult Function(int eventId, bool deleteAllRepeated) deleteEvent,
+    required TResult Function(String time) exportEvents,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$CalendarEvent {
     TResult? Function()? getAllEvent,
     TResult? Function(EventModel event, int repeat)? addEvent,
     TResult? Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+    TResult? Function(String time)? exportEvents,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$CalendarEvent {
     TResult Function()? getAllEvent,
     TResult Function(EventModel event, int repeat)? addEvent,
     TResult Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+    TResult Function(String time)? exportEvents,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$CalendarEvent {
     required TResult Function(_GetAllEvent value) getAllEvent,
     required TResult Function(_AddEvent value) addEvent,
     required TResult Function(_UpdateEvent value) deleteEvent,
+    required TResult Function(_ExportEvents value) exportEvents,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$CalendarEvent {
     TResult? Function(_GetAllEvent value)? getAllEvent,
     TResult? Function(_AddEvent value)? addEvent,
     TResult? Function(_UpdateEvent value)? deleteEvent,
+    TResult? Function(_ExportEvents value)? exportEvents,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$CalendarEvent {
     TResult Function(_GetAllEvent value)? getAllEvent,
     TResult Function(_AddEvent value)? addEvent,
     TResult Function(_UpdateEvent value)? deleteEvent,
+    TResult Function(_ExportEvents value)? exportEvents,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,6 +127,7 @@ class _$_GetAllEvent implements _GetAllEvent {
     required TResult Function() getAllEvent,
     required TResult Function(EventModel event, int repeat) addEvent,
     required TResult Function(int eventId, bool deleteAllRepeated) deleteEvent,
+    required TResult Function(String time) exportEvents,
   }) {
     return getAllEvent();
   }
@@ -131,6 +138,7 @@ class _$_GetAllEvent implements _GetAllEvent {
     TResult? Function()? getAllEvent,
     TResult? Function(EventModel event, int repeat)? addEvent,
     TResult? Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+    TResult? Function(String time)? exportEvents,
   }) {
     return getAllEvent?.call();
   }
@@ -141,6 +149,7 @@ class _$_GetAllEvent implements _GetAllEvent {
     TResult Function()? getAllEvent,
     TResult Function(EventModel event, int repeat)? addEvent,
     TResult Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+    TResult Function(String time)? exportEvents,
     required TResult orElse(),
   }) {
     if (getAllEvent != null) {
@@ -155,6 +164,7 @@ class _$_GetAllEvent implements _GetAllEvent {
     required TResult Function(_GetAllEvent value) getAllEvent,
     required TResult Function(_AddEvent value) addEvent,
     required TResult Function(_UpdateEvent value) deleteEvent,
+    required TResult Function(_ExportEvents value) exportEvents,
   }) {
     return getAllEvent(this);
   }
@@ -165,6 +175,7 @@ class _$_GetAllEvent implements _GetAllEvent {
     TResult? Function(_GetAllEvent value)? getAllEvent,
     TResult? Function(_AddEvent value)? addEvent,
     TResult? Function(_UpdateEvent value)? deleteEvent,
+    TResult? Function(_ExportEvents value)? exportEvents,
   }) {
     return getAllEvent?.call(this);
   }
@@ -175,6 +186,7 @@ class _$_GetAllEvent implements _GetAllEvent {
     TResult Function(_GetAllEvent value)? getAllEvent,
     TResult Function(_AddEvent value)? addEvent,
     TResult Function(_UpdateEvent value)? deleteEvent,
+    TResult Function(_ExportEvents value)? exportEvents,
     required TResult orElse(),
   }) {
     if (getAllEvent != null) {
@@ -263,6 +275,7 @@ class _$_AddEvent implements _AddEvent {
     required TResult Function() getAllEvent,
     required TResult Function(EventModel event, int repeat) addEvent,
     required TResult Function(int eventId, bool deleteAllRepeated) deleteEvent,
+    required TResult Function(String time) exportEvents,
   }) {
     return addEvent(event, repeat);
   }
@@ -273,6 +286,7 @@ class _$_AddEvent implements _AddEvent {
     TResult? Function()? getAllEvent,
     TResult? Function(EventModel event, int repeat)? addEvent,
     TResult? Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+    TResult? Function(String time)? exportEvents,
   }) {
     return addEvent?.call(event, repeat);
   }
@@ -283,6 +297,7 @@ class _$_AddEvent implements _AddEvent {
     TResult Function()? getAllEvent,
     TResult Function(EventModel event, int repeat)? addEvent,
     TResult Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+    TResult Function(String time)? exportEvents,
     required TResult orElse(),
   }) {
     if (addEvent != null) {
@@ -297,6 +312,7 @@ class _$_AddEvent implements _AddEvent {
     required TResult Function(_GetAllEvent value) getAllEvent,
     required TResult Function(_AddEvent value) addEvent,
     required TResult Function(_UpdateEvent value) deleteEvent,
+    required TResult Function(_ExportEvents value) exportEvents,
   }) {
     return addEvent(this);
   }
@@ -307,6 +323,7 @@ class _$_AddEvent implements _AddEvent {
     TResult? Function(_GetAllEvent value)? getAllEvent,
     TResult? Function(_AddEvent value)? addEvent,
     TResult? Function(_UpdateEvent value)? deleteEvent,
+    TResult? Function(_ExportEvents value)? exportEvents,
   }) {
     return addEvent?.call(this);
   }
@@ -317,6 +334,7 @@ class _$_AddEvent implements _AddEvent {
     TResult Function(_GetAllEvent value)? getAllEvent,
     TResult Function(_AddEvent value)? addEvent,
     TResult Function(_UpdateEvent value)? deleteEvent,
+    TResult Function(_ExportEvents value)? exportEvents,
     required TResult orElse(),
   }) {
     if (addEvent != null) {
@@ -413,6 +431,7 @@ class _$_UpdateEvent implements _UpdateEvent {
     required TResult Function() getAllEvent,
     required TResult Function(EventModel event, int repeat) addEvent,
     required TResult Function(int eventId, bool deleteAllRepeated) deleteEvent,
+    required TResult Function(String time) exportEvents,
   }) {
     return deleteEvent(eventId, deleteAllRepeated);
   }
@@ -423,6 +442,7 @@ class _$_UpdateEvent implements _UpdateEvent {
     TResult? Function()? getAllEvent,
     TResult? Function(EventModel event, int repeat)? addEvent,
     TResult? Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+    TResult? Function(String time)? exportEvents,
   }) {
     return deleteEvent?.call(eventId, deleteAllRepeated);
   }
@@ -433,6 +453,7 @@ class _$_UpdateEvent implements _UpdateEvent {
     TResult Function()? getAllEvent,
     TResult Function(EventModel event, int repeat)? addEvent,
     TResult Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+    TResult Function(String time)? exportEvents,
     required TResult orElse(),
   }) {
     if (deleteEvent != null) {
@@ -447,6 +468,7 @@ class _$_UpdateEvent implements _UpdateEvent {
     required TResult Function(_GetAllEvent value) getAllEvent,
     required TResult Function(_AddEvent value) addEvent,
     required TResult Function(_UpdateEvent value) deleteEvent,
+    required TResult Function(_ExportEvents value) exportEvents,
   }) {
     return deleteEvent(this);
   }
@@ -457,6 +479,7 @@ class _$_UpdateEvent implements _UpdateEvent {
     TResult? Function(_GetAllEvent value)? getAllEvent,
     TResult? Function(_AddEvent value)? addEvent,
     TResult? Function(_UpdateEvent value)? deleteEvent,
+    TResult? Function(_ExportEvents value)? exportEvents,
   }) {
     return deleteEvent?.call(this);
   }
@@ -467,6 +490,7 @@ class _$_UpdateEvent implements _UpdateEvent {
     TResult Function(_GetAllEvent value)? getAllEvent,
     TResult Function(_AddEvent value)? addEvent,
     TResult Function(_UpdateEvent value)? deleteEvent,
+    TResult Function(_ExportEvents value)? exportEvents,
     required TResult orElse(),
   }) {
     if (deleteEvent != null) {
@@ -484,6 +508,151 @@ abstract class _UpdateEvent implements CalendarEvent {
   bool get deleteAllRepeated;
   @JsonKey(ignore: true)
   _$$_UpdateEventCopyWith<_$_UpdateEvent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ExportEventsCopyWith<$Res> {
+  factory _$$_ExportEventsCopyWith(
+          _$_ExportEvents value, $Res Function(_$_ExportEvents) then) =
+      __$$_ExportEventsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String time});
+}
+
+/// @nodoc
+class __$$_ExportEventsCopyWithImpl<$Res>
+    extends _$CalendarEventCopyWithImpl<$Res, _$_ExportEvents>
+    implements _$$_ExportEventsCopyWith<$Res> {
+  __$$_ExportEventsCopyWithImpl(
+      _$_ExportEvents _value, $Res Function(_$_ExportEvents) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? time = null,
+  }) {
+    return _then(_$_ExportEvents(
+      null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ExportEvents implements _ExportEvents {
+  const _$_ExportEvents(this.time);
+
+  @override
+  final String time;
+
+  @override
+  String toString() {
+    return 'CalendarEvent.exportEvents(time: $time)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ExportEvents &&
+            (identical(other.time, time) || other.time == time));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, time);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ExportEventsCopyWith<_$_ExportEvents> get copyWith =>
+      __$$_ExportEventsCopyWithImpl<_$_ExportEvents>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAllEvent,
+    required TResult Function(EventModel event, int repeat) addEvent,
+    required TResult Function(int eventId, bool deleteAllRepeated) deleteEvent,
+    required TResult Function(String time) exportEvents,
+  }) {
+    return exportEvents(time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAllEvent,
+    TResult? Function(EventModel event, int repeat)? addEvent,
+    TResult? Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+    TResult? Function(String time)? exportEvents,
+  }) {
+    return exportEvents?.call(time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAllEvent,
+    TResult Function(EventModel event, int repeat)? addEvent,
+    TResult Function(int eventId, bool deleteAllRepeated)? deleteEvent,
+    TResult Function(String time)? exportEvents,
+    required TResult orElse(),
+  }) {
+    if (exportEvents != null) {
+      return exportEvents(time);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAllEvent value) getAllEvent,
+    required TResult Function(_AddEvent value) addEvent,
+    required TResult Function(_UpdateEvent value) deleteEvent,
+    required TResult Function(_ExportEvents value) exportEvents,
+  }) {
+    return exportEvents(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAllEvent value)? getAllEvent,
+    TResult? Function(_AddEvent value)? addEvent,
+    TResult? Function(_UpdateEvent value)? deleteEvent,
+    TResult? Function(_ExportEvents value)? exportEvents,
+  }) {
+    return exportEvents?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAllEvent value)? getAllEvent,
+    TResult Function(_AddEvent value)? addEvent,
+    TResult Function(_UpdateEvent value)? deleteEvent,
+    TResult Function(_ExportEvents value)? exportEvents,
+    required TResult orElse(),
+  }) {
+    if (exportEvents != null) {
+      return exportEvents(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ExportEvents implements CalendarEvent {
+  const factory _ExportEvents(final String time) = _$_ExportEvents;
+
+  String get time;
+  @JsonKey(ignore: true)
+  _$$_ExportEventsCopyWith<_$_ExportEvents> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

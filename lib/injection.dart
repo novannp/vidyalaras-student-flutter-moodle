@@ -97,14 +97,16 @@ void init() {
   locator.registerFactory(() => UpdatePictureBloc(locator()));
   locator.registerFactory(() => SubmitSubmissionBloc(locator()));
   locator.registerFactory(() => ViewAssignmentBloc(locator()));
-
   locator.registerFactory(() => GetQuoteBloc(locator()));
   locator.registerFactory(() => GetTagsBloc(locator()));
   locator.registerFactory(() => QuoteSettingCubit());
   locator.registerFactory(() => AddEventBloc(locator()));
   locator.registerFactory(() => DeleteEventBloc(locator()));
   locator.registerFactory(() => MarkAllNotificationsAsReadBloc(locator()));
-  locator.registerFactory(() => SelfCompletionBloc(locator())); //USECASE
+  locator.registerFactory(() => SelfCompletionBloc(locator()));
+  locator.registerFactory(() => ExportEventsBloc(locator()));
+
+  //USECASE
 
   // AUTH
   locator.registerFactory(() => Login(locator()));
@@ -122,6 +124,7 @@ void init() {
   locator.registerFactory(() => GetAllEvent(locator()));
   locator.registerFactory(() => AddEvent(locator()));
   locator.registerFactory(() => DeleteEvent(locator()));
+  locator.registerFactory(() => ExportEvent(locator()));
 
   // COURSE
   locator.registerFactory(() => GetRecentCourse(locator()));

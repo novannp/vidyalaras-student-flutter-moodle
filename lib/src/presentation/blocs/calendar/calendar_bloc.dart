@@ -61,3 +61,21 @@ class DeleteEventBloc extends Bloc<CalendarEvent, CalendarState> {
     });
   }
 }
+
+class ExportEventsBloc extends Bloc<CalendarEvent, CalendarState> {
+  final ExportEvent _exportEvents;
+  ExportEventsBloc(this._exportEvents) : super(const CalendarState.initial()) {
+    on<CalendarEvent>((event, emit) async {
+      await event.whenOrNull(
+        exportEvents: (time) async {
+          emit(const CalendarState.loading());
+          final result = await _exportEvents.execute(time);
+          result.fold(
+            (l) => emit(CalendarState.error(l.message)),
+            (r) => emit(CalendarState.loaded(r)),
+          );
+        },
+      );
+    });
+  }
+}

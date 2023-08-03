@@ -8,4 +8,5 @@ abstract class CalendarRepository {
   Future<Either<Failure, bool>> addEvent(EventModel event, int repeat);
   Future<Either<Failure, bool>> deleteEvent(
       int eventId, bool deleteAllRepeated);
+  Future<Either<Failure, String>> exportEvents(String time);
 }

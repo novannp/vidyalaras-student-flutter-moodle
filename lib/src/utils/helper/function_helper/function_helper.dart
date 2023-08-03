@@ -33,6 +33,30 @@ class FunctionHelper {
     });
   }
 
+  static void downloadEventHandler(BuildContext context, String fileUrl) async {
+    final notif = di.locator<NotificationPlugin>();
+
+    final url = fileUrl;
+    FileDownloader.downloadFile(
+        url: url,
+        onProgress: (fileName, progress) async {
+          notif.showDownloadProgressNotification(
+            'Export events.ics',
+            progress.toInt(),
+          );
+        },
+        onDownloadCompleted: (path) {
+          notif.cancelNotification(20);
+          notif.downloadCompleted(path);
+        },
+        onDownloadError: (error) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Download error: $error')));
+        }).then((file) {
+      debugPrint('file path: ${file?.path}');
+    });
+  }
+
   static isSameDay(DateTime date1, DateTime date2) {
     return date1.year == date2.year &&
         date1.month == date2.month &&

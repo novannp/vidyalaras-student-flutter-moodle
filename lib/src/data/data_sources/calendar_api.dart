@@ -10,6 +10,7 @@ abstract class CalendarApi {
   Future<List<EventModel>> getAllEvent(String token);
   Future<bool> addEvent(String token, EventModel event, int repeat);
   Future<bool> deleteEvent(String token, int eventId, bool deleteAllRepeated);
+  Future<String> exportEvents(String token, int userid, String time);
 }
 
 class CalendarApiImpl implements CalendarApi {
@@ -80,6 +81,24 @@ class CalendarApiImpl implements CalendarApi {
         return true;
       }
       return false;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<String> exportEvents(String token, int userId, String time) async {
+    Uri url = Uri.https(Endpoints.baseUrl, Endpoints.rest, {
+      'wstoken': token,
+      'wsfunction': 'core_calendar_get_calendar_export_token',
+      'moodlewsrestformat': 'json',
+    });
+
+    final response = await client.get(url);
+
+    if (response.statusCode == 200) {
+      final result = jsonDecode(response.body)['token'];
+      return 'https://lms.pptik.id/calendar/export_execute.php?authtoken=$result&what=all&time=$time&userid=$userId';
     } else {
       throw ServerException();
     }

@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/presentation/blocs/calendar/calendar_bloc.dart';
 import 'package:lms_pptik/src/presentation/pages/add_event_screen.dart';
+import 'package:lms_pptik/src/presentation/pages/export_event_screen.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'dart:math' as math;
@@ -99,6 +100,21 @@ class _CalendarPageState extends State<CalendarPage> {
           icon: const Icon(Icons.add_alert_outlined)),
       appBar: AppBar(
         title: const Text('Kalender'),
+        actions: [
+          TextButton.icon(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      fullscreenDialog: true,
+                      builder: (context) {
+                        return const ExportEventScreen();
+                      }));
+            },
+            label: const Text('Export'),
+            icon: const Icon(Icons.upload_file),
+          ),
+        ],
       ),
       body: BlocListener<DeleteEventBloc, CalendarState>(
         listener: (context, state) {
