@@ -108,6 +108,9 @@ class _CalendarPageState extends State<CalendarPage> {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text('Berhasil Menghapus Acara'),
             ));
+            Navigator.pop(context);
+
+            Navigator.pop(context);
           }, error: (message) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(message),
@@ -186,21 +189,57 @@ class _CalendarPageState extends State<CalendarPage> {
                                             ),
                                             const Divider(),
                                             ListTile(
-                                              trailing: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  IconButton(
-                                                      onPressed: () {},
-                                                      icon: const Icon(
-                                                          Icons.edit)),
-                                                  IconButton(
-                                                      onPressed: () {},
-                                                      icon: const Icon(
-                                                        Icons.delete,
-                                                        color: Colors.red,
-                                                      )),
-                                                ],
-                                              ),
+                                              trailing: IconButton(
+                                                  onPressed: () {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return AlertDialog(
+                                                            content: const Text(
+                                                                'Hapus semua acara beserta turunannya?'),
+                                                            actions: [
+                                                              TextButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  },
+                                                                  child: const Text(
+                                                                      'Batal')),
+                                                              TextButton(
+                                                                onPressed: () {
+                                                                  context
+                                                                      .read<
+                                                                          DeleteEventBloc>()
+                                                                      .add(CalendarEvent.deleteEvent(
+                                                                          event
+                                                                              .id!,
+                                                                          false));
+                                                                },
+                                                                child: const Text(
+                                                                    'Hapus acara ini saja'),
+                                                              ),
+                                                              TextButton(
+                                                                onPressed: () {
+                                                                  context
+                                                                      .read<
+                                                                          DeleteEventBloc>()
+                                                                      .add(CalendarEvent.deleteEvent(
+                                                                          event
+                                                                              .id!,
+                                                                          true));
+                                                                },
+                                                                child: const Text(
+                                                                    'Hapus semua acara ini'),
+                                                              )
+                                                            ],
+                                                          );
+                                                        });
+                                                  },
+                                                  icon: const Icon(
+                                                    Icons.delete,
+                                                    color: Colors.red,
+                                                  )),
                                               leading: Icon(
                                                 Icons.event,
                                                 color: event.background,
@@ -279,53 +318,45 @@ class _CalendarPageState extends State<CalendarPage> {
               itemBuilder: (context, index) {
                 final appointment = appointments[index] as EventModel;
                 return ExpansionTile(
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.edit)),
-                        IconButton(
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      content: const Text(
-                                          'Hapus semua acara beserta turunannya?'),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: const Text('Batal')),
-                                        TextButton(
-                                          onPressed: () {
-                                            context.read<DeleteEventBloc>().add(
-                                                CalendarEvent.deleteEvent(
-                                                    appointment.id!, false));
-                                          },
-                                          child: const Text(
-                                              'Hapus acara ini saja'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            context.read<DeleteEventBloc>().add(
-                                                CalendarEvent.deleteEvent(
-                                                    appointment.id!, true));
-                                          },
-                                          child: const Text(
-                                              'Hapus semua acara ini'),
-                                        )
-                                      ],
-                                    );
-                                  });
-                            },
-                            icon: const Icon(
-                              Icons.delete,
-                              color: Colors.red,
-                            )),
-                      ],
-                    ),
+                    trailing: IconButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content: const Text(
+                                      'Hapus semua acara beserta turunannya?'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('Batal')),
+                                    TextButton(
+                                      onPressed: () {
+                                        context.read<DeleteEventBloc>().add(
+                                            CalendarEvent.deleteEvent(
+                                                appointment.id!, false));
+                                      },
+                                      child: const Text('Hapus acara ini saja'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        context.read<DeleteEventBloc>().add(
+                                            CalendarEvent.deleteEvent(
+                                                appointment.id!, true));
+                                      },
+                                      child:
+                                          const Text('Hapus semua acara ini'),
+                                    )
+                                  ],
+                                );
+                              });
+                        },
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        )),
                     subtitle: Text(
                         '${DateFormat('yyyy-MM-dd HH:mm').format(appointment.timestart!.toDateTime())} - ${DateFormat('yyyy-MM-dd HH:mm').format(appointment.timestart!.toDateTime().add(Duration(seconds: appointment.timeduration!)))}'),
                     expandedCrossAxisAlignment: CrossAxisAlignment.start,
