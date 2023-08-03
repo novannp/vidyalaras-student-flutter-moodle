@@ -266,6 +266,8 @@ class _DashboardPage extends State<DashboardPage> {
                 .add(const ChatEvent.getConversations());
             BlocProvider.of<GetUnreadMessageCountBloc>(context)
                 .add(const ChatEvent.getUnreadMessageCount());
+            BlocProvider.of<GetQuoteBloc>(context)
+                .add(const QuoteEvent.getQuote('Education'));
           });
         },
         child: ScrollConfiguration(
@@ -294,43 +296,46 @@ class _DashboardPage extends State<DashboardPage> {
                       child: Center(
                         child: BlocBuilder<GetQuoteBloc, QuoteState>(
                           builder: (context, state) {
-                            return Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    state.whenOrNull(
-                                          loaded: (data) {
-                                            data as QuoteModel;
-                                            return data.content;
-                                          },
-                                        ) ??
-                                        '"Be yourself; everyone else is already taken."',
-                                    style: const TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white,
+                            return Container(
+                              color: Colors.black.withOpacity(0.3),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      state.whenOrNull(
+                                            loaded: (data) {
+                                              data as QuoteModel;
+                                              return data.content;
+                                            },
+                                          ) ??
+                                          '"Be yourself; everyone else is already taken."',
+                                      style: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white,
+                                      ),
+                                      textAlign: TextAlign.center,
                                     ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Text(
-                                    state.whenOrNull(
-                                          loaded: (data) {
-                                            data as QuoteModel;
-                                            return data.author;
-                                          },
-                                        ) ??
-                                        'Oscar Wilde',
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white,
+                                    Text(
+                                      state.whenOrNull(
+                                            loaded: (data) {
+                                              data as QuoteModel;
+                                              return data.author;
+                                            },
+                                          ) ??
+                                          'Oscar Wilde',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                      ),
+                                      textAlign: TextAlign.center,
                                     ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             );
                           },
