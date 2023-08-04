@@ -61,15 +61,6 @@ class _ChatPageState extends State<ChatPage>
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.people,
-                  ),
-                  Text('Grup'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
                   Icon(Icons.star),
                   Text('Favorit'),
                 ],
@@ -80,9 +71,6 @@ class _ChatPageState extends State<ChatPage>
         body: TabBarView(
           children: [
             buildPrivateConversation(),
-            const Center(
-              child: Text('Grup'),
-            ),
             buildStarredConversation(),
           ],
         ),

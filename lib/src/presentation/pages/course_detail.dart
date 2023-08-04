@@ -325,7 +325,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                           .pushNamed('assignment', extra: widget.course.id);
                     },
                     leading: const Icon(Icons.book, color: Colors.pink),
-                    title: const Text('Assignment'),
+                    title: const Text('Tugas'),
                   ),
                   ListTile(
                     onTap: () {
