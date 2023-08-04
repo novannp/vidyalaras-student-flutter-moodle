@@ -4,4 +4,7 @@ part of 'mod_lesson_bloc.dart';
 class ModLessonEvent with _$ModLessonEvent {
   const factory ModLessonEvent.getLessonByCourse(int courseId) =
   _GetLessonByCourse;
+
+  const factory ModLessonEvent.getLesson(int lessonId) =
+  _GetLesson;
 }

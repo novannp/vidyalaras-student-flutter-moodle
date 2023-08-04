@@ -23,4 +23,5 @@ abstract class ModResourceRepository {
 
 abstract class ModLessonRepository{
   Future<Either<Failure,List<Lesson>>> getLessonByCourse(int courseId);
+  Future<Either<Failure,Lesson>> getLesson(int lessonId);
 }

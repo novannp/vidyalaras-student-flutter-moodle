@@ -2,6 +2,7 @@ part of 'mod_apis.dart';
 
 abstract class ModLessonApi{
   Future<List<Lesson>> getModLesson(String token, int courseId);
+  Future<Lesson> getLesson(String token, int lessonId);
 }
 
 class ModLessonApiImpl implements ModLessonApi{
@@ -31,6 +32,26 @@ class ModLessonApiImpl implements ModLessonApi{
         .toList();
     } else {
     throw ServerException();
+    }
+  }
+
+  @override
+  Future<Lesson> getLesson(String token, int lessonId)async {
+    Uri url = Uri.https(Endpoints.baseUrl, Endpoints.rest, {
+      'wstoken': token,
+      'wsfunction': 'mod_lesson_get_lesson',
+      'moodlewsrestformat': 'json',
+      'lessonid': lessonId.toString(),
+    });
+
+    final response = await client.get(url);
+    print(response.body);
+    if (response.statusCode == 200) {
+      final result = json.decode(response.body)['lesson'];
+      final lesson = Lesson.fromJson(result);
+      return lesson;
+    } else {
+      throw ServerException();
     }
   }
   

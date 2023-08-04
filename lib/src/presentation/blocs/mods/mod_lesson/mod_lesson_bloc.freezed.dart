@@ -16,42 +16,43 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ModLessonEvent {
-  int get courseId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) getLessonByCourse,
+    required TResult Function(int lessonId) getLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? getLessonByCourse,
+    TResult? Function(int lessonId)? getLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? getLessonByCourse,
+    TResult Function(int lessonId)? getLesson,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetLessonByCourse value) getLessonByCourse,
+    required TResult Function(_GetLesson value) getLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetLessonByCourse value)? getLessonByCourse,
+    TResult? Function(_GetLesson value)? getLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetLessonByCourse value)? getLessonByCourse,
+    TResult Function(_GetLesson value)? getLesson,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ModLessonEventCopyWith<ModLessonEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -60,8 +61,6 @@ abstract class $ModLessonEventCopyWith<$Res> {
   factory $ModLessonEventCopyWith(
           ModLessonEvent value, $Res Function(ModLessonEvent) then) =
       _$ModLessonEventCopyWithImpl<$Res, ModLessonEvent>;
-  @useResult
-  $Res call({int courseId});
 }
 
 /// @nodoc
@@ -73,28 +72,13 @@ class _$ModLessonEventCopyWithImpl<$Res, $Val extends ModLessonEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? courseId = null,
-  }) {
-    return _then(_value.copyWith(
-      courseId: null == courseId
-          ? _value.courseId
-          : courseId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_GetLessonByCourseCopyWith<$Res>
-    implements $ModLessonEventCopyWith<$Res> {
+abstract class _$$_GetLessonByCourseCopyWith<$Res> {
   factory _$$_GetLessonByCourseCopyWith(_$_GetLessonByCourse value,
           $Res Function(_$_GetLessonByCourse) then) =
       __$$_GetLessonByCourseCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({int courseId});
 }
@@ -157,6 +141,7 @@ class _$_GetLessonByCourse implements _GetLessonByCourse {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) getLessonByCourse,
+    required TResult Function(int lessonId) getLesson,
   }) {
     return getLessonByCourse(courseId);
   }
@@ -165,6 +150,7 @@ class _$_GetLessonByCourse implements _GetLessonByCourse {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? getLessonByCourse,
+    TResult? Function(int lessonId)? getLesson,
   }) {
     return getLessonByCourse?.call(courseId);
   }
@@ -173,6 +159,7 @@ class _$_GetLessonByCourse implements _GetLessonByCourse {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? getLessonByCourse,
+    TResult Function(int lessonId)? getLesson,
     required TResult orElse(),
   }) {
     if (getLessonByCourse != null) {
@@ -185,6 +172,7 @@ class _$_GetLessonByCourse implements _GetLessonByCourse {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetLessonByCourse value) getLessonByCourse,
+    required TResult Function(_GetLesson value) getLesson,
   }) {
     return getLessonByCourse(this);
   }
@@ -193,6 +181,7 @@ class _$_GetLessonByCourse implements _GetLessonByCourse {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetLessonByCourse value)? getLessonByCourse,
+    TResult? Function(_GetLesson value)? getLesson,
   }) {
     return getLessonByCourse?.call(this);
   }
@@ -201,6 +190,7 @@ class _$_GetLessonByCourse implements _GetLessonByCourse {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetLessonByCourse value)? getLessonByCourse,
+    TResult Function(_GetLesson value)? getLesson,
     required TResult orElse(),
   }) {
     if (getLessonByCourse != null) {
@@ -213,10 +203,142 @@ class _$_GetLessonByCourse implements _GetLessonByCourse {
 abstract class _GetLessonByCourse implements ModLessonEvent {
   const factory _GetLessonByCourse(final int courseId) = _$_GetLessonByCourse;
 
-  @override
   int get courseId;
-  @override
   @JsonKey(ignore: true)
   _$$_GetLessonByCourseCopyWith<_$_GetLessonByCourse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GetLessonCopyWith<$Res> {
+  factory _$$_GetLessonCopyWith(
+          _$_GetLesson value, $Res Function(_$_GetLesson) then) =
+      __$$_GetLessonCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int lessonId});
+}
+
+/// @nodoc
+class __$$_GetLessonCopyWithImpl<$Res>
+    extends _$ModLessonEventCopyWithImpl<$Res, _$_GetLesson>
+    implements _$$_GetLessonCopyWith<$Res> {
+  __$$_GetLessonCopyWithImpl(
+      _$_GetLesson _value, $Res Function(_$_GetLesson) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? lessonId = null,
+  }) {
+    return _then(_$_GetLesson(
+      null == lessonId
+          ? _value.lessonId
+          : lessonId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetLesson implements _GetLesson {
+  const _$_GetLesson(this.lessonId);
+
+  @override
+  final int lessonId;
+
+  @override
+  String toString() {
+    return 'ModLessonEvent.getLesson(lessonId: $lessonId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetLesson &&
+            (identical(other.lessonId, lessonId) ||
+                other.lessonId == lessonId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, lessonId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetLessonCopyWith<_$_GetLesson> get copyWith =>
+      __$$_GetLessonCopyWithImpl<_$_GetLesson>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int courseId) getLessonByCourse,
+    required TResult Function(int lessonId) getLesson,
+  }) {
+    return getLesson(lessonId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int courseId)? getLessonByCourse,
+    TResult? Function(int lessonId)? getLesson,
+  }) {
+    return getLesson?.call(lessonId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int courseId)? getLessonByCourse,
+    TResult Function(int lessonId)? getLesson,
+    required TResult orElse(),
+  }) {
+    if (getLesson != null) {
+      return getLesson(lessonId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetLessonByCourse value) getLessonByCourse,
+    required TResult Function(_GetLesson value) getLesson,
+  }) {
+    return getLesson(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetLessonByCourse value)? getLessonByCourse,
+    TResult? Function(_GetLesson value)? getLesson,
+  }) {
+    return getLesson?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetLessonByCourse value)? getLessonByCourse,
+    TResult Function(_GetLesson value)? getLesson,
+    required TResult orElse(),
+  }) {
+    if (getLesson != null) {
+      return getLesson(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetLesson implements ModLessonEvent {
+  const factory _GetLesson(final int lessonId) = _$_GetLesson;
+
+  int get lessonId;
+  @JsonKey(ignore: true)
+  _$$_GetLessonCopyWith<_$_GetLesson> get copyWith =>
       throw _privateConstructorUsedError;
 }

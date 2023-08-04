@@ -4,6 +4,7 @@ import 'package:lms_pptik/src/presentation/pages/chat_page.dart';
 import 'package:lms_pptik/src/presentation/pages/course_detail.dart';
 import 'package:lms_pptik/src/presentation/pages/lesson_page.dart';
 import 'package:lms_pptik/src/presentation/pages/materi_detail_page.dart';
+import 'package:lms_pptik/src/presentation/pages/mods/lesson_detail_page.dart';
 import 'package:lms_pptik/src/presentation/pages/permission_page.dart';
 import 'package:lms_pptik/src/presentation/pages/resource_page.dart';
 import 'package:lms_pptik/src/presentation/pages/search_page.dart';
@@ -128,7 +129,16 @@ class AppRoutes {
                             final courseId = state.extra as int;
                             return MaterialPage(
                                 child: LessonPage(courseId: courseId));
-                          })
+                          }, routes: [
+                            GoRoute(
+                              path: "detail-lesson",
+                              name: "detail-lesson",
+                              pageBuilder: (context, state){
+                                final lessonId = state.extra as int;
+                                return MaterialPage(child: LessonDetailPage(lessonId));
+                              }
+                            )
+                      ])
                     ]),
               ]),
           GoRoute(

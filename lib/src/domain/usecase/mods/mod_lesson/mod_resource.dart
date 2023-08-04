@@ -5,3 +5,4 @@ import '../../../../data/repositories/mods/mods.dart';
 import '../../../../utils/failures.dart';
 
 part 'get_lesson_by_course.dart';
+part 'get_lesson.dart';

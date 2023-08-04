@@ -19,4 +19,18 @@ class ModLessonRepositoryImpl implements ModLessonRepository{
       return const Left(ServerFailure("Terjadi kesalahan pada server"));
     }
   }
+
+  @override
+  Future<Either<Failure, Lesson>> getLesson(int lessonId)async {
+    try {
+      final token = await storage.read('token');
+      final result =
+          await _modLessonApi.getLesson(token, lessonId);
+      return Right(result);
+    } on SocketException {
+      return const Left(ConnectionFailure("Tidak ada koneksi internet"));
+    } on ServerException {
+      return const Left(ServerFailure("Terjadi kesalahan pada server"));
+    }
+  }
 }

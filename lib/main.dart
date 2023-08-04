@@ -105,7 +105,8 @@ void main() async {
             create: (_) => di.locator<MarkAllNotificationsAsReadBloc>()),
         BlocProvider(create: (_) => di.locator<SelfCompletionBloc>()),
         BlocProvider(create: (_) => di.locator<ExportEventsBloc>()),
-        BlocProvider(create: (_)=> di.locator<GetLessonByCourseBloc>())
+        BlocProvider(create: (_)=> di.locator<GetLessonByCourseBloc>()),
+        BlocProvider(create: (_)=> di.locator<GetLessonBloc>()),
       ],
       child: const LmsPPTIK(),
     ),

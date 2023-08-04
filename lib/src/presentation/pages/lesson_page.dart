@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lms_pptik/src/data/models/lesson_model/lesson.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
 import 'package:lms_pptik/src/presentation/blocs/mods/mod_lesson/mod_lesson_bloc.dart';
@@ -47,7 +48,9 @@ class _LessonPageState extends State<LessonPage> {
                   itemBuilder: (context, index) {
                     final lesson = lessons[index];
                     return ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        GoRouter.of(context).pushNamed('detail-lesson', extra: lesson.id);
+                      },
                       trailing: const Icon(
                         Icons.arrow_forward_ios_rounded,
                         size: 20,
