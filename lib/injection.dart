@@ -13,6 +13,7 @@ import 'package:lms_pptik/src/data/repositories/quote_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/upload_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/user_repository_impl.dart';
 import 'package:lms_pptik/src/domain/usecase/completion/completion.dart';
+import 'package:lms_pptik/src/domain/usecase/mods/mod_lesson/mod_resource.dart';
 import 'package:lms_pptik/src/domain/usecase/mods/mod_resource/mod_resource.dart';
 import 'package:lms_pptik/src/domain/usecase/quote/quote.dart';
 import 'package:lms_pptik/src/domain/usecase/user/update_picture.dart';
@@ -24,6 +25,7 @@ import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/dark_mode/dark_mode_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/dropdown_course/dropdown_course_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
+import 'package:lms_pptik/src/presentation/blocs/mods/mod_lesson/mod_lesson_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/mods/mod_resource/mod_resource_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/quote/quote_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/quote_setting/quote_setting_cubit.dart';
@@ -105,6 +107,7 @@ void init() {
   locator.registerFactory(() => MarkAllNotificationsAsReadBloc(locator()));
   locator.registerFactory(() => SelfCompletionBloc(locator()));
   locator.registerFactory(() => ExportEventsBloc(locator()));
+  locator.registerFactory(() => GetLessonByCourseBloc(locator()));
 
   //USECASE
 
@@ -163,6 +166,9 @@ void init() {
   locator.registerFactory(() => GetResourceByCourse(locator()));
   locator.registerFactory(() => ViewResource(locator()));
 
+  // MOD LESSON
+  locator.registerFactory(() => GetLessonByCourse(locator()));
+
   // UPLOAD
   locator.registerFactory(() => UploadFile(locator()));
 
@@ -176,25 +182,27 @@ void init() {
   // REPOSITORIES
   locator.registerLazySingleton(() => AuthRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(
-      () => UserRepositoryImpl(locator(), locator(), locator()));
+          () => UserRepositoryImpl(locator(), locator(), locator()));
   locator
       .registerLazySingleton(() => BadgeRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(
-      () => CalendarRepositoryImpl(locator(), locator()));
+          () => CalendarRepositoryImpl(locator(), locator()));
   locator
       .registerLazySingleton(() => CourseRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(() => ChatRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(
-      () => NotificationRepositoryImpl(locator(), locator()));
+          () => NotificationRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(
-      () => ModAssignRepositoryImpl(locator(), locator()));
+          () => ModAssignRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(
-      () => ModResourceRepositoryImpl(locator(), locator()));
+          () => ModResourceRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton(() =>
+      ModLessonRepositoryImpl(locator(), locator()));
   locator
       .registerLazySingleton(() => UploadRepositoryImpl(locator(), locator()));
   locator.registerLazySingleton(() => QuoteRepositoryImpl(locator()));
   locator.registerLazySingleton(
-      () => CompletionRepositoryImpl(locator(), locator()));
+          () => CompletionRepositoryImpl(locator(), locator()));
 
   // API
   locator.registerLazySingleton(() => AuthApiImpl(locator()));
@@ -206,6 +214,7 @@ void init() {
   locator.registerLazySingleton(() => NotificationApiImpl(locator()));
   locator.registerLazySingleton(() => ModAssignApiImpl(locator()));
   locator.registerLazySingleton(() => ModResourceApiImpl(locator()));
+  locator.registerLazySingleton(() => ModLessonApiImpl(locator()));
   locator.registerLazySingleton(() => UploadApiImpl(locator()));
   locator.registerLazySingleton(() => QuoteApiImpl());
   locator.registerLazySingleton(() => CompletionApiImpl(locator()));

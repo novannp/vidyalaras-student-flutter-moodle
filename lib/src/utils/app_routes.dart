@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lms_pptik/src/presentation/pages/chat_page.dart';
 import 'package:lms_pptik/src/presentation/pages/course_detail.dart';
+import 'package:lms_pptik/src/presentation/pages/lesson_page.dart';
 import 'package:lms_pptik/src/presentation/pages/materi_detail_page.dart';
 import 'package:lms_pptik/src/presentation/pages/permission_page.dart';
 import 'package:lms_pptik/src/presentation/pages/resource_page.dart';
@@ -119,6 +120,14 @@ class AppRoutes {
                                 course: course,
                               ),
                             );
+                          }),
+                      GoRoute(
+                          path: 'lesson',
+                          name: 'lesson',
+                          pageBuilder: (context, state) {
+                            final courseId = state.extra as int;
+                            return MaterialPage(
+                                child: LessonPage(courseId: courseId));
                           })
                     ]),
               ]),

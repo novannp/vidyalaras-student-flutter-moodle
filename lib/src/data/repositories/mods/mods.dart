@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:lms_pptik/src/data/models/lesson_model/lesson.dart';
 
 import '../../../domain/repositories/mods_repository.dart';
 import '../../../utils/exceptions.dart';
@@ -13,3 +14,4 @@ import '../../models/submission_status_model.dart';
 
 part 'mod_assign_repository_impl.dart';
 part 'mod_resource_repository_impl.dart';
+part 'mod_lesson_repository_impl.dart';

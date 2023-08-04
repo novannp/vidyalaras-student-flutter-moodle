@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
@@ -15,6 +13,7 @@ import 'package:lms_pptik/src/presentation/blocs/course/course_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/dark_mode/dark_mode_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/dropdown_course/dropdown_course_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/main_index/main_index_cubit.dart';
+import 'package:lms_pptik/src/presentation/blocs/mods/mod_lesson/mod_lesson_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/mods/mod_resource/mod_resource_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/quote/quote_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/quote_setting/quote_setting_cubit.dart';
@@ -106,6 +105,7 @@ void main() async {
             create: (_) => di.locator<MarkAllNotificationsAsReadBloc>()),
         BlocProvider(create: (_) => di.locator<SelfCompletionBloc>()),
         BlocProvider(create: (_) => di.locator<ExportEventsBloc>()),
+        BlocProvider(create: (_)=> di.locator<GetLessonByCourseBloc>())
       ],
       child: const LmsPPTIK(),
     ),

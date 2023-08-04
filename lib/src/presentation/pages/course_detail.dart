@@ -345,12 +345,15 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                     ),
                     title: Text('Forum'),
                   ),
-                  const ListTile(
-                    leading: Icon(
+                  ListTile(
+                    leading: const Icon(
                       Icons.menu_book_rounded,
                       color: Colors.deepOrangeAccent,
                     ),
-                    title: Text('Pembelajaran'),
+                    title: const Text('Pembelajaran'),
+                    onTap: (){
+                      GoRouter.of(context).pushNamed("lesson",extra: widget.course.id);
+                    },
                   ),
                   const ListTile(
                     leading: Icon(Icons.quiz_outlined,
