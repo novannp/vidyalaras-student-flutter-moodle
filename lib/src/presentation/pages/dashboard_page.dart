@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:isolate';
 import 'dart:ui';
 
@@ -21,7 +20,6 @@ import '../blocs/dropdown_course/dropdown_course_cubit.dart';
 import '../blocs/user/user_bloc.dart';
 import '../components/course_card.dart';
 import '../components/remove_glow.dart';
-import 'package:lms_pptik/injection.dart' as di;
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -284,7 +282,7 @@ class _DashboardPage extends State<DashboardPage> {
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                     child: Container(
-                      height: size.height * 0.18,
+                      height: size.height * 0.21,
                       width: size.width,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
