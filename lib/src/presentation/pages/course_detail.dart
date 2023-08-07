@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:lms_pptik/src/extensions/int_extension.dart';
 import 'package:lms_pptik/src/extensions/string_extension.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../data/models/course_model.dart';
 import '../../data/models/materi_model/materi_model.dart';
@@ -339,7 +340,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                   ListTile(
                     leading: const Icon(Icons.people, color: Colors.amber),
                     title: const Text('Forum'),
-                    onTap: () => _alertNotSupport(context),
+                    onTap: () => _alertNotSupport(context, "forum"),
                   ),
                   ListTile(
                     leading: const Icon(
@@ -356,13 +357,13 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                     leading: const Icon(Icons.quiz_outlined,
                         color: Colors.deepPurpleAccent),
                     title: const Text('Kuis'),
-                    onTap: () => _alertNotSupport(context),
+                    onTap: () => _alertNotSupport(context, "quiz"),
                   ),
                   ListTile(
                     leading: const Icon(Icons.school, color: Colors.lightBlue),
                     title: const Text('Workshop'),
                     onTap: () {
-                      _alertNotSupport(context);
+                      _alertNotSupport(context, "workshop");
                     },
                   ),
                 ],
@@ -373,19 +374,28 @@ class _CourseDetailPageState extends State<CourseDetailPage>
     );
   }
 
-  Future<dynamic> _alertNotSupport(BuildContext context) {
+  Future<dynamic> _alertNotSupport(BuildContext context, String endPoint) {
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: const Text("Info"),
-            content: const Text('Menu ini belum didukung'),
+            content: const Text('Aktivitas ini belum didukung, silahkan buka di browser'),
             actions: [
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('Kembali'))
+                  child: const Text('Kembali')),
+              ElevatedButton(
+                onPressed: () async {
+                  await launchUrlString(
+                      "https://lms.pptik.id/mod/$endPoint/index.php?id=${widget.course.id}");
+                  if(!context.mounted)return;
+                  Navigator.of(context).pop();
+                },
+                child: Text("Buka"),
+              ),
             ],
           );
         });

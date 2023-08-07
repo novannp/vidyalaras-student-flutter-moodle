@@ -68,7 +68,7 @@ class _LessonPageState extends State<LessonPage> {
                                           if(!mounted)return;
                                           Navigator.of(context).pop();
                                         },
-                                        child: const Text("Lanjut")),
+                                        child: const Text("Buka")),
                                   ],
                                 ));
                       },
