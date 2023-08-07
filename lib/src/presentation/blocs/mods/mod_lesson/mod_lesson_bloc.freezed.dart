@@ -20,18 +20,21 @@ mixin _$ModLessonEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) getLessonByCourse,
     required TResult Function(int lessonId) getLesson,
+    required TResult Function(int lessonId) getPagesLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? getLessonByCourse,
     TResult? Function(int lessonId)? getLesson,
+    TResult? Function(int lessonId)? getPagesLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? getLessonByCourse,
     TResult Function(int lessonId)? getLesson,
+    TResult Function(int lessonId)? getPagesLesson,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$ModLessonEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetLessonByCourse value) getLessonByCourse,
     required TResult Function(_GetLesson value) getLesson,
+    required TResult Function(_GetPagesLesson value) getPagesLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetLessonByCourse value)? getLessonByCourse,
     TResult? Function(_GetLesson value)? getLesson,
+    TResult? Function(_GetPagesLesson value)? getPagesLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetLessonByCourse value)? getLessonByCourse,
     TResult Function(_GetLesson value)? getLesson,
+    TResult Function(_GetPagesLesson value)? getPagesLesson,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,6 +148,7 @@ class _$_GetLessonByCourse implements _GetLessonByCourse {
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) getLessonByCourse,
     required TResult Function(int lessonId) getLesson,
+    required TResult Function(int lessonId) getPagesLesson,
   }) {
     return getLessonByCourse(courseId);
   }
@@ -151,6 +158,7 @@ class _$_GetLessonByCourse implements _GetLessonByCourse {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? getLessonByCourse,
     TResult? Function(int lessonId)? getLesson,
+    TResult? Function(int lessonId)? getPagesLesson,
   }) {
     return getLessonByCourse?.call(courseId);
   }
@@ -160,6 +168,7 @@ class _$_GetLessonByCourse implements _GetLessonByCourse {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? getLessonByCourse,
     TResult Function(int lessonId)? getLesson,
+    TResult Function(int lessonId)? getPagesLesson,
     required TResult orElse(),
   }) {
     if (getLessonByCourse != null) {
@@ -173,6 +182,7 @@ class _$_GetLessonByCourse implements _GetLessonByCourse {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetLessonByCourse value) getLessonByCourse,
     required TResult Function(_GetLesson value) getLesson,
+    required TResult Function(_GetPagesLesson value) getPagesLesson,
   }) {
     return getLessonByCourse(this);
   }
@@ -182,6 +192,7 @@ class _$_GetLessonByCourse implements _GetLessonByCourse {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetLessonByCourse value)? getLessonByCourse,
     TResult? Function(_GetLesson value)? getLesson,
+    TResult? Function(_GetPagesLesson value)? getPagesLesson,
   }) {
     return getLessonByCourse?.call(this);
   }
@@ -191,6 +202,7 @@ class _$_GetLessonByCourse implements _GetLessonByCourse {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetLessonByCourse value)? getLessonByCourse,
     TResult Function(_GetLesson value)? getLesson,
+    TResult Function(_GetPagesLesson value)? getPagesLesson,
     required TResult orElse(),
   }) {
     if (getLessonByCourse != null) {
@@ -276,6 +288,7 @@ class _$_GetLesson implements _GetLesson {
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) getLessonByCourse,
     required TResult Function(int lessonId) getLesson,
+    required TResult Function(int lessonId) getPagesLesson,
   }) {
     return getLesson(lessonId);
   }
@@ -285,6 +298,7 @@ class _$_GetLesson implements _GetLesson {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? getLessonByCourse,
     TResult? Function(int lessonId)? getLesson,
+    TResult? Function(int lessonId)? getPagesLesson,
   }) {
     return getLesson?.call(lessonId);
   }
@@ -294,6 +308,7 @@ class _$_GetLesson implements _GetLesson {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? getLessonByCourse,
     TResult Function(int lessonId)? getLesson,
+    TResult Function(int lessonId)? getPagesLesson,
     required TResult orElse(),
   }) {
     if (getLesson != null) {
@@ -307,6 +322,7 @@ class _$_GetLesson implements _GetLesson {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetLessonByCourse value) getLessonByCourse,
     required TResult Function(_GetLesson value) getLesson,
+    required TResult Function(_GetPagesLesson value) getPagesLesson,
   }) {
     return getLesson(this);
   }
@@ -316,6 +332,7 @@ class _$_GetLesson implements _GetLesson {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetLessonByCourse value)? getLessonByCourse,
     TResult? Function(_GetLesson value)? getLesson,
+    TResult? Function(_GetPagesLesson value)? getPagesLesson,
   }) {
     return getLesson?.call(this);
   }
@@ -325,6 +342,7 @@ class _$_GetLesson implements _GetLesson {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetLessonByCourse value)? getLessonByCourse,
     TResult Function(_GetLesson value)? getLesson,
+    TResult Function(_GetPagesLesson value)? getPagesLesson,
     required TResult orElse(),
   }) {
     if (getLesson != null) {
@@ -340,5 +358,145 @@ abstract class _GetLesson implements ModLessonEvent {
   int get lessonId;
   @JsonKey(ignore: true)
   _$$_GetLessonCopyWith<_$_GetLesson> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GetPagesLessonCopyWith<$Res> {
+  factory _$$_GetPagesLessonCopyWith(
+          _$_GetPagesLesson value, $Res Function(_$_GetPagesLesson) then) =
+      __$$_GetPagesLessonCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int lessonId});
+}
+
+/// @nodoc
+class __$$_GetPagesLessonCopyWithImpl<$Res>
+    extends _$ModLessonEventCopyWithImpl<$Res, _$_GetPagesLesson>
+    implements _$$_GetPagesLessonCopyWith<$Res> {
+  __$$_GetPagesLessonCopyWithImpl(
+      _$_GetPagesLesson _value, $Res Function(_$_GetPagesLesson) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? lessonId = null,
+  }) {
+    return _then(_$_GetPagesLesson(
+      null == lessonId
+          ? _value.lessonId
+          : lessonId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetPagesLesson implements _GetPagesLesson {
+  const _$_GetPagesLesson(this.lessonId);
+
+  @override
+  final int lessonId;
+
+  @override
+  String toString() {
+    return 'ModLessonEvent.getPagesLesson(lessonId: $lessonId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetPagesLesson &&
+            (identical(other.lessonId, lessonId) ||
+                other.lessonId == lessonId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, lessonId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetPagesLessonCopyWith<_$_GetPagesLesson> get copyWith =>
+      __$$_GetPagesLessonCopyWithImpl<_$_GetPagesLesson>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int courseId) getLessonByCourse,
+    required TResult Function(int lessonId) getLesson,
+    required TResult Function(int lessonId) getPagesLesson,
+  }) {
+    return getPagesLesson(lessonId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int courseId)? getLessonByCourse,
+    TResult? Function(int lessonId)? getLesson,
+    TResult? Function(int lessonId)? getPagesLesson,
+  }) {
+    return getPagesLesson?.call(lessonId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int courseId)? getLessonByCourse,
+    TResult Function(int lessonId)? getLesson,
+    TResult Function(int lessonId)? getPagesLesson,
+    required TResult orElse(),
+  }) {
+    if (getPagesLesson != null) {
+      return getPagesLesson(lessonId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetLessonByCourse value) getLessonByCourse,
+    required TResult Function(_GetLesson value) getLesson,
+    required TResult Function(_GetPagesLesson value) getPagesLesson,
+  }) {
+    return getPagesLesson(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetLessonByCourse value)? getLessonByCourse,
+    TResult? Function(_GetLesson value)? getLesson,
+    TResult? Function(_GetPagesLesson value)? getPagesLesson,
+  }) {
+    return getPagesLesson?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetLessonByCourse value)? getLessonByCourse,
+    TResult Function(_GetLesson value)? getLesson,
+    TResult Function(_GetPagesLesson value)? getPagesLesson,
+    required TResult orElse(),
+  }) {
+    if (getPagesLesson != null) {
+      return getPagesLesson(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetPagesLesson implements ModLessonEvent {
+  const factory _GetPagesLesson(final int lessonId) = _$_GetPagesLesson;
+
+  int get lessonId;
+  @JsonKey(ignore: true)
+  _$$_GetPagesLessonCopyWith<_$_GetPagesLesson> get copyWith =>
       throw _privateConstructorUsedError;
 }

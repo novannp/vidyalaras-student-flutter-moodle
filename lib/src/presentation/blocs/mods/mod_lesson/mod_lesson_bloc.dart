@@ -41,3 +41,20 @@ class GetLessonBloc extends Bloc<ModLessonEvent, ModState> {
     });
   }
 }
+
+class GetPagesLessonBloc extends Bloc<ModLessonEvent, ModState> {
+  final GetPagesLesson _getPagesLesson;
+
+  GetPagesLessonBloc(this._getPagesLesson) : super(const ModState.initial()) {
+    on<ModLessonEvent>((event, emit) async {
+      await event.whenOrNull(getPagesLesson: (lessonId) async {
+        emit(const ModState.loading());
+        final result = await _getPagesLesson.execute(lessonId);
+        result.fold(
+          (error) => emit(ModState.error(error.message)),
+          (data) => emit(ModState.loaded(data)),
+        );
+      });
+    });
+  }
+}

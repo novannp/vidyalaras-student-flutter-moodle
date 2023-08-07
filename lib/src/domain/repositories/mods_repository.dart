@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:lms_pptik/src/data/models/pages.dart';
 import 'package:lms_pptik/src/data/models/submission_status_model.dart';
 import 'package:lms_pptik/src/utils/failures.dart';
 
@@ -24,4 +25,5 @@ abstract class ModResourceRepository {
 abstract class ModLessonRepository{
   Future<Either<Failure,List<Lesson>>> getLessonByCourse(int courseId);
   Future<Either<Failure,Lesson>> getLesson(int lessonId);
+  Future<Either<Failure,List<PageLesson>>> getPages(int lessonId);
 }

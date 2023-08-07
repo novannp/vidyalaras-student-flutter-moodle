@@ -109,6 +109,7 @@ void init() {
   locator.registerFactory(() => ExportEventsBloc(locator()));
   locator.registerFactory(() => GetLessonByCourseBloc(locator()));
   locator.registerFactory(() => GetLessonBloc(locator()));
+  locator.registerFactory(() => GetPagesLessonBloc(locator()));
 
   //USECASE
 
@@ -170,6 +171,7 @@ void init() {
   // MOD LESSON
   locator.registerFactory(() => GetLessonByCourse(locator()));
   locator.registerFactory(() => GetLesson(locator()));
+  locator.registerFactory(() => GetPagesLesson(locator()));
 
   // UPLOAD
   locator.registerFactory(() => UploadFile(locator()));

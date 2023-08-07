@@ -19,6 +19,7 @@ import 'package:lms_pptik/src/presentation/blocs/quote/quote_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/quote_setting/quote_setting_cubit.dart';
 import 'package:lms_pptik/src/presentation/blocs/upload/upload_file_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/user/user_bloc.dart';
+import 'package:lms_pptik/src/presentation/pages/mods/lesson_detail_page.dart';
 import 'package:lms_pptik/src/utils/helper/background_service_helper/background_service_helper.dart';
 import 'package:lms_pptik/src/utils/helper/notification_plugin/notification_plugin.dart';
 import 'package:path_provider/path_provider.dart';
@@ -57,6 +58,7 @@ void main() async {
         BlocProvider(create: (_) => di.locator<AuthLoginBloc>()),
         BlocProvider(create: (_) => di.locator<GetCurrentUserBloc>()),
         BlocProvider(create: (_) => di.locator<MainIndexCubit>()),
+        BlocProvider(create: (_) => di.locator<PageIndexCubit>()),
         BlocProvider(create: (_) => di.locator<GetBadgeBloc>()),
         BlocProvider(create: (_) => di.locator<GetBadgeImageBloc>()),
         BlocProvider(create: (_) => di.locator<GetEventBloc>()),
@@ -107,6 +109,7 @@ void main() async {
         BlocProvider(create: (_) => di.locator<ExportEventsBloc>()),
         BlocProvider(create: (_)=> di.locator<GetLessonByCourseBloc>()),
         BlocProvider(create: (_)=> di.locator<GetLessonBloc>()),
+        BlocProvider(create: (_)=> di.locator<GetPagesLessonBloc>()),
       ],
       child: const LmsPPTIK(),
     ),

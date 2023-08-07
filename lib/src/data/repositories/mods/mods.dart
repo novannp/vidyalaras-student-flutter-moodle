@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:lms_pptik/src/data/models/lesson_model/lesson.dart';
+import 'package:lms_pptik/src/data/models/pages.dart';
 
 import '../../../domain/repositories/mods_repository.dart';
 import '../../../utils/exceptions.dart';
