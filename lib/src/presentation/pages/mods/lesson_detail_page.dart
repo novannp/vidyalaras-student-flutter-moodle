@@ -6,6 +6,8 @@ import 'package:lms_pptik/src/extensions/string_extension.dart';
 import 'package:lms_pptik/src/presentation/blocs/mods/mod_lesson/mod_lesson_bloc.dart';
 import 'package:lms_pptik/src/presentation/blocs/mods/mod_state.dart';
 
+import '../../../data/models/pages.dart';
+
 class LessonDetailPage extends StatefulWidget {
   final int lessonId;
 
@@ -22,6 +24,9 @@ class _LessonDetailPageState extends State<LessonDetailPage> {
       context
           .read<GetLessonBloc>()
           .add(ModLessonEvent.getLesson(widget.lessonId));
+      context
+          .read<GetPagesLessonBloc>()
+          .add(ModLessonEvent.getPagesLesson(widget.lessonId));
     });
     super.initState();
   }
@@ -40,17 +45,45 @@ class _LessonDetailPageState extends State<LessonDetailPage> {
               fontWeight: FontWeight.bold,
             ),
           )),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Divider(),
-                Html(data: data.intro!),
-                const Divider(),
-              ],
-            ),
+          body: Stack(
+            children: [
+              SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Divider(),
+                    Html(data: data.intro!),
+                    const Divider(),
+
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  padding: const EdgeInsets.all(15.0),
+                  child: BlocBuilder<GetPagesLessonBloc, ModState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(loaded: (pages) {
+                        pages as List<PageLesson>;
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(onPressed: (){},child: Text("${pages[0].page?.prevpageid}")),
+                            ElevatedButton(onPressed: (){},child: Text("${pages[0].page?.nextpageid}")),
+                          ],
+                        );
+                      }, orElse: () {
+                        return const SizedBox();
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
+
         );
       }, loading: () {
         return const Scaffold(
@@ -72,4 +105,11 @@ class _LessonDetailPageState extends State<LessonDetailPage> {
       });
     });
   }
+}
+
+class PageIndexCubit extends Cubit<int> {
+  PageIndexCubit() : super(0);
+
+  nextPage()=> emit(state + 1);
+  previousPage()=> emit(state -1);
 }
