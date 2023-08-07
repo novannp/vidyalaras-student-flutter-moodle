@@ -41,10 +41,7 @@ class _SplashPageState extends State<SplashPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Spacer(),
-            Image.asset(
-              'assets/img/app_icon.png',
-              height: 80,
-            ),
+            Image.asset('assets/img/app_icon-2.png', height: 120),
             const Spacer(),
             const Padding(
               padding: EdgeInsets.symmetric(

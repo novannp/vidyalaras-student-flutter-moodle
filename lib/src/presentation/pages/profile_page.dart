@@ -300,11 +300,11 @@ class ProfilePage extends StatelessWidget {
                     onTap: () {
                       showAboutDialog(
                         context: context,
-                        applicationName: 'LMS PPTIK',
+                        applicationName: 'Vidyalaras for Student',
                         applicationVersion: version,
                         children: [
                           const Text(
-                            'LMS PPTIK adalah platform pembelajaran untuk membantu proses belajar mengajar',
+                            'Vidyalaras for Student adalah platform pembelajaran untuk membantu proses belajar mengajar',
                           )
                         ],
                         applicationIcon: Card(
@@ -312,8 +312,8 @@ class ProfilePage extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Image.asset(
-                              'assets/img/app_icon.png',
-                              height: 30,
+                              'assets/img/app_icon-2.png',
+                              height: 60,
                             ),
                           ),
                         ),
