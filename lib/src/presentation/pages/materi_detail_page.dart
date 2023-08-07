@@ -19,7 +19,9 @@ import 'mods/assignment_detail.dart';
 
 class CompletionButton extends StatelessWidget {
   const CompletionButton({super.key, required this.mod});
+
   final Module mod;
+
   @override
   Widget build(BuildContext context) {
     if (mod.completiondata!.state == 1) {
@@ -110,9 +112,9 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                     ListTile(
                       leading: mod.modicon != null
                           ? SizedBox(
-                              height: 40,
-                              width: 40,
-                              child: SvgPicture.asset('assets/img/file.svg'))
+                          height: 40,
+                          width: 40,
+                          child: SvgPicture.asset('assets/img/file.svg'))
                           : const Icon(Icons.file_copy, size: 40),
                       title: Text(mod.name!.decodeHtml()),
                     ),
@@ -130,33 +132,38 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
           case 'wiki':
             return const WikiTile();
           case 'workshop':
-            return WorkshopTile(mod: mod);
+          ///TODO modul workshop belum tersedia
+          return WorkshopTile(mod: mod);
           default:
-            return Card(
-              child: ListTile(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text(mod.name!.decodeHtml()),
-                          content: const Text('Modul ini belum didukung'),
-                          actions: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('OK'))
-                          ],
-                        );
-                      });
-                },
-                leading: const Icon(Icons.bookmarks_rounded),
-                title: Text(mod.name!.decodeHtml()),
-              ),
-            );
+            return _dialogNoFound(context, mod);
         }
       },
+    );
+  }
+
+  Card _dialogNoFound(BuildContext context, Module mod) {
+    return Card(
+      child: ListTile(
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text(mod.name!.decodeHtml()),
+                  content: const Text('Modul ini belum didukung'),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('OK'))
+                  ],
+                );
+              });
+        },
+        leading: const Icon(Icons.bookmarks_rounded),
+        title: Text(mod.name!.decodeHtml()),
+      ),
     );
   }
 
@@ -180,53 +187,53 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: state.whenOrNull(
-                        loaded: (data) {
-                          data as List<MateriModel>;
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.max,
+                    loaded: (data) {
+                      data as List<MateriModel>;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            data[widget.selectedIndex].name!.decodeHtml(),
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const Divider(),
+                          const SizedBox(height: 10),
+                          data[widget.selectedIndex].summary != null
+                              ? Html(
+                              data: data[widget.selectedIndex].summary)
+                              : const SizedBox(),
+                          ExpansionTile(
+                            initiallyExpanded: true,
+                            title: const Text(
+                              'Modul',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             children: [
-                              Text(
-                                data[widget.selectedIndex].name!.decodeHtml(),
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const Divider(),
-                              const SizedBox(height: 10),
-                              data[widget.selectedIndex].summary != null
-                                  ? Html(
-                                      data: data[widget.selectedIndex].summary)
-                                  : const SizedBox(),
-                              ExpansionTile(
-                                initiallyExpanded: true,
-                                title: const Text(
-                                  'Modul',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                children: [
-                                  if (data[widget.selectedIndex].modules !=
-                                      null)
-                                    if (data[widget.selectedIndex]
-                                        .modules!
-                                        .isNotEmpty)
-                                      buildModTile(data[widget.selectedIndex])
-                                    else
-                                      const Center(
-                                        child: Text('Tidak ada modul'),
-                                      )
-                                ],
-                              ),
-                              const SizedBox(height: 10),
+                              if (data[widget.selectedIndex].modules !=
+                                  null)
+                                if (data[widget.selectedIndex]
+                                    .modules!
+                                    .isNotEmpty)
+                                  buildModTile(data[widget.selectedIndex])
+                                else
+                                  const Center(
+                                    child: Text('Tidak ada modul'),
+                                  )
                             ],
-                          );
-                        },
-                      ) ??
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      );
+                    },
+                  ) ??
                       const SizedBox(),
                 );
               });
@@ -254,6 +261,22 @@ class WorkshopTile extends StatelessWidget {
             ListTile(
                 onTap: () {
                   log(mod.uservisible!.toString());
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        /// TODO modul belum tersedia
+                        return AlertDialog(
+                          title: Text(mod.name!.decodeHtml()),
+                          content: const Text('Modul ini belum didukung'),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('OK'))
+                          ],
+                        );
+                      });
                 },
                 leading: const Icon(Icons.people_alt_rounded,
                     size: 40, color: Colors.green),
@@ -262,47 +285,49 @@ class WorkshopTile extends StatelessWidget {
                 ),
                 trailing: !mod.uservisible!
                     ? const Icon(
-                        Icons.lock,
-                        color: Colors.red,
-                      )
+                  Icons.lock,
+                  color: Colors.red,
+                )
                     : null,
                 subtitle:
-                    !mod.uservisible! ? null : CompletionButton(mod: mod)),
+                !mod.uservisible! ? null : CompletionButton(mod: mod)),
             const SizedBox(height: 8),
             mod.dates!.isNotEmpty
                 ? Column(
-                    children: [
-                      if (mod.dates!.isNotEmpty)
-                        for (DateModel date in mod.dates!)
-                          Row(
+              children: [
+                if (mod.dates!.isNotEmpty)
+                  for (DateModel date in mod.dates!)
+                    Row(
+                      children: [
+                        const Icon(Icons.calendar_month, size: 20),
+                        Text.rich(
+                          TextSpan(
+                            text: date.label!,
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .labelMedium!
+                                .copyWith(fontWeight: FontWeight.w600),
                             children: [
-                              const Icon(Icons.calendar_month, size: 20),
-                              Text.rich(
-                                TextSpan(
-                                  text: date.label!,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelMedium!
-                                      .copyWith(fontWeight: FontWeight.w600),
-                                  children: [
-                                    TextSpan(
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium,
-                                      text: DateTime.fromMillisecondsSinceEpoch(
-                                              date.timestamp! * 1000)
-                                          .toString()
-                                          .formatDate(),
-                                    )
-                                  ],
-                                ),
-                              ),
+                              TextSpan(
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .labelMedium,
+                                text: DateTime.fromMillisecondsSinceEpoch(
+                                    date.timestamp! * 1000)
+                                    .toString()
+                                    .formatDate(),
+                              )
                             ],
                           ),
-                      if (mod.availabilityinfo != null)
-                        Html(data: mod.availabilityinfo)
-                    ],
-                  )
+                        ),
+                      ],
+                    ),
+                if (mod.availabilityinfo != null)
+                  Html(data: mod.availabilityinfo)
+              ],
+            )
                 : const SizedBox()
           ],
         ),
@@ -387,7 +412,7 @@ class QuizTile extends StatelessWidget {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                  const EdgeInsets.only(left: 20, right: 20, bottom: 10),
                   child: Column(
                     children: [
                       if (mod.dates!.isNotEmpty)
@@ -398,17 +423,19 @@ class QuizTile extends StatelessWidget {
                               Text.rich(
                                 TextSpan(
                                   text: date.label!,
-                                  style: Theme.of(context)
+                                  style: Theme
+                                      .of(context)
                                       .textTheme
                                       .labelMedium!
                                       .copyWith(fontWeight: FontWeight.w600),
                                   children: [
                                     TextSpan(
-                                      style: Theme.of(context)
+                                      style: Theme
+                                          .of(context)
                                           .textTheme
                                           .labelMedium,
                                       text: DateTime.fromMillisecondsSinceEpoch(
-                                              date.timestamp! * 1000)
+                                          date.timestamp! * 1000)
                                           .toString()
                                           .formatDate(),
                                     )
@@ -464,9 +491,9 @@ class ResourceTile extends StatelessWidget {
                 icon: const Icon(Icons.download)),
             leading: mod.modicon != null
                 ? SizedBox(
-                    height: 40,
-                    width: 40,
-                    child: SvgPicture.asset('assets/img/file.svg'))
+                height: 40,
+                width: 40,
+                child: SvgPicture.asset('assets/img/file.svg'))
                 : const Icon(Icons.file_copy, size: 40),
             title: Text(
               mod.name!.decodeHtml(),
@@ -478,27 +505,27 @@ class ResourceTile extends StatelessWidget {
               alignment: WrapAlignment.start,
               runAlignment: WrapAlignment.start,
               children: mod.completiondata?.details?.map((e) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Chip(
-                        padding: EdgeInsets.zero,
-                        labelStyle: const TextStyle(fontSize: 12),
-                        backgroundColor: e.rulevalue!.status == 1
-                            ? Colors.green.withOpacity(0.2)
-                            : Colors.red.withOpacity(0.2),
-                        label: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            e.rulevalue!.status == 1
-                                ? const Icon(Icons.check, size: 16)
-                                : const Icon(Icons.close, size: 16),
-                            const SizedBox(width: 5),
-                            Text(e.rulevalue!.description!),
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList() ??
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Chip(
+                    padding: EdgeInsets.zero,
+                    labelStyle: const TextStyle(fontSize: 12),
+                    backgroundColor: e.rulevalue!.status == 1
+                        ? Colors.green.withOpacity(0.2)
+                        : Colors.red.withOpacity(0.2),
+                    label: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        e.rulevalue!.status == 1
+                            ? const Icon(Icons.check, size: 16)
+                            : const Icon(Icons.close, size: 16),
+                        const SizedBox(width: 5),
+                        Text(e.rulevalue!.description!),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList() ??
                   [],
             ),
           if (mod.uservisible == false)
@@ -526,13 +553,13 @@ class LessonTile extends StatelessWidget {
             onTap: () {},
             leading: mod.modicon != null
                 ? const SizedBox(
-                    height: 40,
-                    width: 40,
-                    child: Icon(
-                      Icons.play_lesson,
-                      size: 40,
-                      color: Colors.indigo,
-                    ))
+                height: 40,
+                width: 40,
+                child: Icon(
+                  Icons.play_lesson,
+                  size: 40,
+                  color: Colors.indigo,
+                ))
                 : const Icon(Icons.file_copy, size: 40),
             title: Text(
               mod.name!.decodeHtml(),
@@ -577,109 +604,113 @@ class AssignmentTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         child: InkWell(
-      onTap: mod.uservisible! == true
-          ? () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return AssignmentDetail(
-                    moduleId: mod.id!,
-                    assignmentId: mod.instance!,
-                    courseId: courseId,
-                  );
-                },
-              ));
-            }
-          : null,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 10),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              trailing: mod.uservisible! == true
-                  ? null
-                  : const Icon(Icons.lock, color: Colors.red),
-              subtitle: mod.completiondata!.details!.isNotEmpty
-                  ? Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.start,
-                      alignment: WrapAlignment.start,
-                      children: mod.completiondata?.details?.map((e) {
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5),
-                              child: Chip(
-                                padding: EdgeInsets.zero,
-                                labelStyle: const TextStyle(fontSize: 12),
-                                backgroundColor: e.rulevalue!.status == 1
-                                    ? Colors.green.withOpacity(0.2)
-                                    : Colors.red.withOpacity(0.2),
-                                label: Row(
-                                  mainAxisSize: MainAxisSize.min,
+          onTap: mod.uservisible! == true
+              ? () {
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) {
+                return AssignmentDetail(
+                  moduleId: mod.id!,
+                  assignmentId: mod.instance!,
+                  courseId: courseId,
+                );
+              },
+            ));
+          }
+              : null,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  trailing: mod.uservisible! == true
+                      ? null
+                      : const Icon(Icons.lock, color: Colors.red),
+                  subtitle: mod.completiondata!.details!.isNotEmpty
+                      ? Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    alignment: WrapAlignment.start,
+                    children: mod.completiondata?.details?.map((e) {
+                      return Padding(
+                        padding:
+                        const EdgeInsets.symmetric(horizontal: 5),
+                        child: Chip(
+                          padding: EdgeInsets.zero,
+                          labelStyle: const TextStyle(fontSize: 12),
+                          backgroundColor: e.rulevalue!.status == 1
+                              ? Colors.green.withOpacity(0.2)
+                              : Colors.red.withOpacity(0.2),
+                          label: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              e.rulevalue!.status == 1
+                                  ? const Icon(Icons.check, size: 16)
+                                  : const Icon(Icons.close, size: 16),
+                              const SizedBox(width: 5),
+                              Text(e.rulevalue!.description!),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList() ??
+                        [],
+                  )
+                      : null,
+                  leading: const Icon(
+                    Icons.assignment,
+                    size: 40,
+                    color: Colors.amber,
+                  ),
+                  title: Text(
+                    mod.name!.decodeHtml(),
+                  ),
+                ),
+                mod.description != null
+                    ? Html(data: mod.description!)
+                    : const SizedBox(),
+                Column(
+                  children: [
+                    if (mod.dates!.isNotEmpty)
+                      for (DateModel date in mod.dates!)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.calendar_month, size: 20),
+                              Text.rich(
+                                TextSpan(
+                                  text: date.label!,
+                                  style: Theme
+                                      .of(context)
+                                      .textTheme
+                                      .labelMedium!
+                                      .copyWith(fontWeight: FontWeight.w600),
                                   children: [
-                                    e.rulevalue!.status == 1
-                                        ? const Icon(Icons.check, size: 16)
-                                        : const Icon(Icons.close, size: 16),
-                                    const SizedBox(width: 5),
-                                    Text(e.rulevalue!.description!),
+                                    TextSpan(
+                                      style:
+                                      Theme
+                                          .of(context)
+                                          .textTheme
+                                          .labelMedium,
+                                      text: DateTime.fromMillisecondsSinceEpoch(
+                                          date.timestamp! * 1000)
+                                          .toString()
+                                          .formatDate(),
+                                    )
                                   ],
                                 ),
                               ),
-                            );
-                          }).toList() ??
-                          [],
-                    )
-                  : null,
-              leading: const Icon(
-                Icons.assignment,
-                size: 40,
-                color: Colors.amber,
-              ),
-              title: Text(
-                mod.name!.decodeHtml(),
-              ),
-            ),
-            mod.description != null
-                ? Html(data: mod.description!)
-                : const SizedBox(),
-            Column(
-              children: [
-                if (mod.dates!.isNotEmpty)
-                  for (DateModel date in mod.dates!)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.calendar_month, size: 20),
-                          Text.rich(
-                            TextSpan(
-                              text: date.label!,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelMedium!
-                                  .copyWith(fontWeight: FontWeight.w600),
-                              children: [
-                                TextSpan(
-                                  style:
-                                      Theme.of(context).textTheme.labelMedium,
-                                  text: DateTime.fromMillisecondsSinceEpoch(
-                                          date.timestamp! * 1000)
-                                      .toString()
-                                      .formatDate(),
-                                )
-                              ],
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                if (mod.uservisible! == true)
-                  if (mod.completiondata!.details!.isEmpty)
-                    CompletionButton(mod: mod)
+                        ),
+                    if (mod.uservisible! == true)
+                      if (mod.completiondata!.details!.isEmpty)
+                        CompletionButton(mod: mod)
+                  ],
+                )
               ],
-            )
-          ],
-        ),
-      ),
-    ));
+            ),
+          ),
+        ));
   }
 }

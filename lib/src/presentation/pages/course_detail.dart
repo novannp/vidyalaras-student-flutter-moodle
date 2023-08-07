@@ -332,18 +332,14 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                       GoRouter.of(context)
                           .pushNamed('resource', extra: widget.course);
                     },
-                    leading: const Icon(
-                      Icons.file_copy_rounded,
-                      color: Colors.lightGreen,
-                    ),
+                    leading: const Icon(Icons.file_copy_rounded,
+                        color: Colors.lightGreen),
                     title: const Text('File'),
                   ),
-                  const ListTile(
-                    leading: Icon(
-                      Icons.people,
-                      color: Colors.amber,
-                    ),
-                    title: Text('Forum'),
+                  ListTile(
+                    leading: const Icon(Icons.people, color: Colors.amber),
+                    title: const Text('Forum'),
+                    onTap: () => _alertNotSupport(context),
                   ),
                   ListTile(
                     leading: const Icon(
@@ -351,21 +347,23 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                       color: Colors.deepOrangeAccent,
                     ),
                     title: const Text('Pembelajaran'),
-                    onTap: (){
-                      GoRouter.of(context).pushNamed("lesson",extra: widget.course.id);
+                    onTap: () {
+                      GoRouter.of(context)
+                          .pushNamed("lesson", extra: widget.course.id);
                     },
                   ),
-                  const ListTile(
-                    leading: Icon(Icons.quiz_outlined,
+                  ListTile(
+                    leading: const Icon(Icons.quiz_outlined,
                         color: Colors.deepPurpleAccent),
-                    title: Text('Kuis'),
+                    title: const Text('Kuis'),
+                    onTap: () => _alertNotSupport(context),
                   ),
-                  const ListTile(
-                    leading: Icon(
-                      Icons.school,
-                      color: Colors.lightBlue,
-                    ),
-                    title: Text('Workshop'),
+                  ListTile(
+                    leading: const Icon(Icons.school, color: Colors.lightBlue),
+                    title: const Text('Workshop'),
+                    onTap: () {
+                      _alertNotSupport(context);
+                    },
                   ),
                 ],
               );
@@ -373,6 +371,24 @@ class _CourseDetailPageState extends State<CourseDetailPage>
       },
       child: const Icon(Icons.list),
     );
+  }
+
+  Future<dynamic> _alertNotSupport(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Info"),
+            content: const Text('Menu ini belum didukung'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Kembali'))
+            ],
+          );
+        });
   }
 
   BlocBuilder<GetUserGradeBloc, CourseState> buildGradeList() {
