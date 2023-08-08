@@ -4,7 +4,7 @@
    <img src="https://github.com/novannp/lms_pptik_flutter/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png">
 </p>
 
-LMS atau Learning Management System PPTIK adalah platform pembelajaran untuk membantu proses belajar mengajar yang
+Vidyalaras for Student adalah platform pembelajaran untuk membantu proses belajar mengajar untuk role student yang
 terintegrasi dengan https://lms.pptik.id.
 
 Note : Android Only, iOS not supported yet.
