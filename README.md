@@ -1,4 +1,4 @@
-# LMS PPTIK
+# Vidyalaras for Student
 
 <p align="center">
    <img src="https://github.com/novannp/lms_pptik_flutter/blob/master/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png">
