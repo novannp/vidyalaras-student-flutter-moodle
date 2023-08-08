@@ -13,11 +13,11 @@ Note : Android Only, iOS not supported yet.
 
 1. Clone this repository to your local
 
-   `git clone https://github.com/novannp/lms_pptik_flutter.git`
+   `git clone https://github.com/novannp/vidyalaras-student-flutter-moodle.git`
 
 2. Change directory to your local
 
-   `cd ./lms_pptik_flutter`
+   `cd ./vidyalaras-student-flutter-moodle`
 
 3. Get Dependencies of project
 
