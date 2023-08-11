@@ -78,6 +78,7 @@ dev_dependencies:
   freezed: ^2.4.1
   json_serializable: ^6.7.1
   change_app_package_name: ^1.1.0
+  mockito: ^5.4.2
   
 
 # For information on the generic Dart part of this file, see the
