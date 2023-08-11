@@ -47,7 +47,7 @@ class NotificationPlugin {
     await flutterLocalNotificationsPlugin.show(
       0,
       'Hallo! $name',
-      'Selamat datang di LMS PPTIK',
+      'Selamat datang di Vidyalaras Student',
       const NotificationDetails(android: androidNotificationDetails),
     );
   }
