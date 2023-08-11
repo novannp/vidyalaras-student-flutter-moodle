@@ -1,7 +1,7 @@
 part of 'notification.dart';
 
 class MarkAllNotificationsAsRead {
-  final NotificationRepositoryImpl _notificationRepositoryImpl;
+  final NotificationRepository _notificationRepositoryImpl;
 
   MarkAllNotificationsAsRead(this._notificationRepositoryImpl);
 

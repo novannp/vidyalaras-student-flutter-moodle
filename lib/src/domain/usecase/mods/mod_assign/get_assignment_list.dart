@@ -1,7 +1,7 @@
 part of 'mod_assign.dart';
 
 class GetAssignmentList {
-  final ModAssignRepositoryImpl _modAssignmentRepositoryImpl;
+  final ModAssignRepository _modAssignmentRepositoryImpl;
 
   GetAssignmentList(this._modAssignmentRepositoryImpl);
 

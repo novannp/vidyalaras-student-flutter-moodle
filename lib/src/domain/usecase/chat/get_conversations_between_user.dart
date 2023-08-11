@@ -1,7 +1,7 @@
 part of 'chat.dart';
 
 class GetConversationsBetweenUser {
-  final ChatRepositoryImpl chatRepositoryImpl;
+  final ChatRepository chatRepositoryImpl;
 
   GetConversationsBetweenUser(this.chatRepositoryImpl);
 

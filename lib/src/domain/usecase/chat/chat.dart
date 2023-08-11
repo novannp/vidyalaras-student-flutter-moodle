@@ -3,8 +3,8 @@ import '../../../data/models/chat_model/chat_model.dart';
 import '../../../data/models/chat_model/send_message_model.dart';
 import '../../../data/models/conversation_model/conversation.dart';
 import '../../../data/models/member_model.dart';
-import '../../../data/repositories/chat_repository_impl.dart';
 import '../../../utils/failures.dart';
+import '../../repositories/chat_repository.dart';
 
 part 'get_conversation_message.dart';
 part 'get_conversations.dart';

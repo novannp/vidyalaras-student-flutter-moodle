@@ -1,7 +1,7 @@
 part of 'course.dart';
 
 class GetUserGrade {
-  final CourseRepositoryImpl _courseRepositoryImpl;
+  final CourseRepository _courseRepositoryImpl;
 
   GetUserGrade(this._courseRepositoryImpl);
 

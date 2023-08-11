@@ -12,6 +12,17 @@ import 'package:lms_pptik/src/data/repositories/course_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/quote_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/upload_repository_impl.dart';
 import 'package:lms_pptik/src/data/repositories/user_repository_impl.dart';
+import 'package:lms_pptik/src/domain/repositories/auth_repository.dart';
+import 'package:lms_pptik/src/domain/repositories/badge_repository.dart';
+import 'package:lms_pptik/src/domain/repositories/calendar_repository.dart';
+import 'package:lms_pptik/src/domain/repositories/chat_repository.dart';
+import 'package:lms_pptik/src/domain/repositories/completion_repository.dart';
+import 'package:lms_pptik/src/domain/repositories/course_repository.dart';
+import 'package:lms_pptik/src/domain/repositories/mods_repository.dart';
+import 'package:lms_pptik/src/domain/repositories/notification_repository.dart';
+import 'package:lms_pptik/src/domain/repositories/quote_repository.dart';
+import 'package:lms_pptik/src/domain/repositories/upload_repository.dart';
+import 'package:lms_pptik/src/domain/repositories/user_repository.dart';
 import 'package:lms_pptik/src/domain/usecase/completion/completion.dart';
 import 'package:lms_pptik/src/domain/usecase/mods/mod_lesson/mod_resource.dart';
 import 'package:lms_pptik/src/domain/usecase/mods/mod_resource/mod_resource.dart';
@@ -184,29 +195,32 @@ void init() {
   locator.registerFactory(() => SelfCompletion(locator()));
 
   // REPOSITORIES
-  locator.registerLazySingleton(() => AuthRepositoryImpl(locator(), locator()));
-  locator.registerLazySingleton(
-          () => UserRepositoryImpl(locator(), locator(), locator()));
-  locator
-      .registerLazySingleton(() => BadgeRepositoryImpl(locator(), locator()));
-  locator.registerLazySingleton(
-          () => CalendarRepositoryImpl(locator(), locator()));
-  locator
-      .registerLazySingleton(() => CourseRepositoryImpl(locator(), locator()));
-  locator.registerLazySingleton(() => ChatRepositoryImpl(locator(), locator()));
-  locator.registerLazySingleton(
-          () => NotificationRepositoryImpl(locator(), locator()));
-  locator.registerLazySingleton(
-          () => ModAssignRepositoryImpl(locator(), locator()));
-  locator.registerLazySingleton(
-          () => ModResourceRepositoryImpl(locator(), locator()));
-  locator.registerLazySingleton(() =>
-      ModLessonRepositoryImpl(locator(), locator()));
-  locator
-      .registerLazySingleton(() => UploadRepositoryImpl(locator(), locator()));
-  locator.registerLazySingleton(() => QuoteRepositoryImpl(locator()));
-  locator.registerLazySingleton(
-          () => CompletionRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton<UserRepository>(
+      () => UserRepositoryImpl(locator(), locator(), locator()));
+  locator.registerLazySingleton<BadgeRepository>(
+      () => BadgeRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton<CalendarRepository>(
+      () => CalendarRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton<CourseRepository>(
+      () => CourseRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton<ChatRepository>(
+      () => ChatRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton<NotificationRepository>(
+      () => NotificationRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton<ModAssignRepository>(
+      () => ModAssignRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton<ModResourceRepository>(
+      () => ModResourceRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton<ModLessonRepository>(
+      () => ModLessonRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton<UploadRepository>(
+      () => UploadRepositoryImpl(locator(), locator()));
+  locator.registerLazySingleton<QuoteRepository>(
+      () => QuoteRepositoryImpl(locator()));
+  locator.registerLazySingleton<CompletionRepository>(
+      () => CompletionRepositoryImpl(locator(), locator()));
 
   // API
   locator.registerLazySingleton(() => AuthApiImpl(locator()));

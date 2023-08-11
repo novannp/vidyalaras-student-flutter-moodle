@@ -1,7 +1,7 @@
 part of 'mod_resource.dart';
 
 class ViewResource {
-  final ModResourceRepositoryImpl _resourceRepositoryImpl;
+  final ModResourceRepository _resourceRepositoryImpl;
 
   ViewResource(this._resourceRepositoryImpl);
 

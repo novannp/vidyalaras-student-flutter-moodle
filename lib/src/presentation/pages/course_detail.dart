@@ -380,7 +380,8 @@ class _CourseDetailPageState extends State<CourseDetailPage>
         builder: (context) {
           return AlertDialog(
             title: const Text("Info"),
-            content: const Text('Aktivitas ini belum didukung, silahkan buka di browser'),
+            content: const Text(
+                'Aktivitas ini belum didukung, silahkan buka di browser'),
             actions: [
               TextButton(
                   onPressed: () {
@@ -391,10 +392,10 @@ class _CourseDetailPageState extends State<CourseDetailPage>
                 onPressed: () async {
                   await launchUrlString(
                       "https://lms.pptik.id/mod/$endPoint/index.php?id=${widget.course.id}");
-                  if(!context.mounted)return;
+                  if (context.mounted) return;
                   Navigator.of(context).pop();
                 },
-                child: Text("Buka"),
+                child: const Text("Buka"),
               ),
             ],
           );

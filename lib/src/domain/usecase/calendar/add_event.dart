@@ -1,7 +1,7 @@
 part of 'calendar.dart';
 
 class AddEvent {
-  final CalendarRepositoryImpl _calendarRepository;
+  final CalendarRepository _calendarRepository;
 
   AddEvent(this._calendarRepository);
 

@@ -1,7 +1,7 @@
 part of 'course.dart';
 
 class GetEnrolledUser {
-  final CourseRepositoryImpl _courseRepositoryImpl;
+  final CourseRepository _courseRepositoryImpl;
 
   GetEnrolledUser(this._courseRepositoryImpl);
 

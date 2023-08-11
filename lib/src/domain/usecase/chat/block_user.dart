@@ -1,7 +1,7 @@
 part of 'chat.dart';
 
 class BlockUser {
-  final ChatRepositoryImpl chatRepositoryImpl;
+  final ChatRepository chatRepositoryImpl;
 
   BlockUser(this.chatRepositoryImpl);
 

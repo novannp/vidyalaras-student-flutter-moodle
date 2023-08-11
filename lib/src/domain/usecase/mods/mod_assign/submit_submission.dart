@@ -1,7 +1,7 @@
 part of 'mod_assign.dart';
 
 class SubmitSubmission {
-  final ModAssignRepositoryImpl _modAssignmentRepositoryImpl;
+  final ModAssignRepository _modAssignmentRepositoryImpl;
 
   SubmitSubmission(this._modAssignmentRepositoryImpl);
 

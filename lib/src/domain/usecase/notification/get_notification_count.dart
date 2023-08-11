@@ -1,7 +1,7 @@
 part of 'notification.dart';
 
 class GetNotificationCount {
-  final NotificationRepositoryImpl _notificationRepository;
+  final NotificationRepository _notificationRepository;
 
   GetNotificationCount(this._notificationRepository);
 

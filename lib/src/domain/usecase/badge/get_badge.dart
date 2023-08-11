@@ -1,7 +1,7 @@
 part of 'badge.dart';
 
 class GetBadge {
-  final BadgeRepositoryImpl _badgeRepository;
+  final BadgeRepository _badgeRepository;
 
   GetBadge(this._badgeRepository);
 

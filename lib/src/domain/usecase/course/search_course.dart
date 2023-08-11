@@ -1,7 +1,7 @@
 part of 'course.dart';
 
 class SearchCourse {
-  final CourseRepositoryImpl courseRepositoryImpl;
+  final CourseRepository courseRepositoryImpl;
 
   SearchCourse(this.courseRepositoryImpl);
 

@@ -1,7 +1,7 @@
 part of 'chat.dart';
 
 class SendInstantMessage {
-  final ChatRepositoryImpl _chatRepositoryImpl;
+  final ChatRepository _chatRepositoryImpl;
 
   SendInstantMessage(this._chatRepositoryImpl);
 

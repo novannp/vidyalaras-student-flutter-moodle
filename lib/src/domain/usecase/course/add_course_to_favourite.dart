@@ -1,7 +1,7 @@
 part of 'course.dart';
 
 class AddCourseToFavourite {
-  final CourseRepositoryImpl _courseRepositoryImpl;
+  final CourseRepository _courseRepositoryImpl;
 
   AddCourseToFavourite(this._courseRepositoryImpl);
 

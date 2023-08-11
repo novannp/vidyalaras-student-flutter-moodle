@@ -1,7 +1,7 @@
 part of 'chat.dart';
 
 class SetConversationsFavorite {
-  final ChatRepositoryImpl chatRepositoryImpl;
+  final ChatRepository chatRepositoryImpl;
 
   SetConversationsFavorite(this.chatRepositoryImpl);
 

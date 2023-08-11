@@ -1,7 +1,7 @@
 part of 'quote.dart';
 
 class GetTags {
-  final QuoteRepositoryImpl _quoteRepositoryImpl;
+  final QuoteRepository _quoteRepositoryImpl;
 
   GetTags(this._quoteRepositoryImpl);
 

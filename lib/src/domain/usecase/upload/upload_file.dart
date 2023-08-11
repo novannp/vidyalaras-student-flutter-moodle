@@ -2,11 +2,12 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:lms_pptik/src/data/models/item_model.dart';
-import 'package:lms_pptik/src/data/repositories/upload_repository_impl.dart';
 import 'package:lms_pptik/src/utils/failures.dart';
 
+import '../../repositories/upload_repository.dart';
+
 class UploadFile {
-  final UploadRepositoryImpl uploadRepositoryImpl;
+  final UploadRepository uploadRepositoryImpl;
 
   UploadFile(this.uploadRepositoryImpl);
 

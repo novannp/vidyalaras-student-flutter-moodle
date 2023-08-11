@@ -1,7 +1,7 @@
 part of 'calendar.dart';
 
 class ExportEvent {
-  final CalendarRepositoryImpl _calendarRepository;
+  final CalendarRepository _calendarRepository;
 
   ExportEvent(this._calendarRepository);
 

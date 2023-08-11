@@ -1,7 +1,7 @@
 part of 'calendar.dart';
 
 class GetAllEvent {
-  final CalendarRepositoryImpl _calendarRepositoryImpl;
+  final CalendarRepository _calendarRepositoryImpl;
 
   GetAllEvent(this._calendarRepositoryImpl);
 

@@ -1,7 +1,7 @@
 part of 'auth.dart';
 
 class Login {
-  final AuthRepositoryImpl authRepositoryImpl;
+  final AuthRepository authRepositoryImpl;
 
   Login(this.authRepositoryImpl);
 

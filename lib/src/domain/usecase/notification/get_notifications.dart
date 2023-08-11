@@ -1,7 +1,7 @@
 part of 'notification.dart';
 
 class GetNotifications {
-  final NotificationRepositoryImpl _notificationRepositoryImpl;
+  final NotificationRepository _notificationRepositoryImpl;
 
   GetNotifications(this._notificationRepositoryImpl);
 

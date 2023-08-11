@@ -1,7 +1,7 @@
 part of 'course.dart';
 
 class GetMateri {
-  final CourseRepositoryImpl courseRepositoryImpl;
+  final CourseRepository courseRepositoryImpl;
 
   GetMateri(this.courseRepositoryImpl);
 

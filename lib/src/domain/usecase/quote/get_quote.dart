@@ -1,7 +1,7 @@
 part of 'quote.dart';
 
 class GetQuote {
-  final QuoteRepositoryImpl _quoteRepositoryImpl;
+  final QuoteRepository _quoteRepositoryImpl;
 
   GetQuote(this._quoteRepositoryImpl);
 

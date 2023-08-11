@@ -1,7 +1,7 @@
 part of 'mod_resource.dart';
 
 class GetResourceByCourse {
-  final ModResourceRepositoryImpl _resourceRepositoryImpl;
+  final ModResourceRepository _resourceRepositoryImpl;
 
   GetResourceByCourse(this._resourceRepositoryImpl);
 

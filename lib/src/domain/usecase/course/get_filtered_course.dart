@@ -1,7 +1,7 @@
 part of 'course.dart';
 
 class GetFilteredCourse {
-  final CourseRepositoryImpl courseRepositoryImpl;
+  final CourseRepository courseRepositoryImpl;
 
   GetFilteredCourse(this.courseRepositoryImpl);
 

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -151,7 +149,6 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<SelfCompletionBloc, CompletionState>(
@@ -231,7 +228,8 @@ class _MateriDetailPageState extends State<MateriDetailPage> {
 class WorkshopTile extends StatelessWidget {
   const WorkshopTile({
     super.key,
-    required this.mod, required this.courseId,
+    required this.mod,
+    required this.courseId,
   });
 
   final Module mod;
@@ -362,9 +360,11 @@ class QuizTile extends StatelessWidget {
       children: [
         Card(
           child: InkWell(
-            onTap: mod.uservisible! == true ? () {
-              _showDialogNotSupport(context, mod);
-            } : null,
+            onTap: mod.uservisible! == true
+                ? () {
+                    _showDialogNotSupport(context, mod);
+                  }
+                : null,
             child: Column(
               children: [
                 ListTile(
@@ -507,7 +507,8 @@ class ResourceTile extends StatelessWidget {
 class LessonTile extends StatelessWidget {
   const LessonTile({
     super.key,
-    required this.mod, required this.courseId,
+    required this.mod,
+    required this.courseId,
   });
 
   final Module mod;
@@ -546,7 +547,8 @@ class LessonTile extends StatelessWidget {
 class ForumTile extends StatelessWidget {
   const ForumTile({
     super.key,
-    required this.mod, required this.courseId,
+    required this.mod,
+    required this.courseId,
   });
 
   final Module mod;
@@ -685,13 +687,14 @@ class AssignmentTile extends StatelessWidget {
   }
 }
 
-_showDialogNotSupport(BuildContext context, Module mod){
+_showDialogNotSupport(BuildContext context, Module mod) {
   showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: const Text("Info"),
-          content: const Text('Aktivitas ini belum didukung, silahkan buka di browser'),
+          content: const Text(
+              'Aktivitas ini belum didukung, silahkan buka di browser'),
           actions: [
             TextButton(
                 onPressed: () {
@@ -700,10 +703,11 @@ _showDialogNotSupport(BuildContext context, Module mod){
                 child: const Text('Kembali')),
             ElevatedButton(
               onPressed: () async {
-                print("https://lms.pptik.id/mod/${mod.modname}/view.php?id=${mod.id}");
+                print(
+                    "https://lms.pptik.id/mod/${mod.modname}/view.php?id=${mod.id}");
                 await launchUrlString(
                     "https://lms.pptik.id/mod/${mod.modname}/view.php?id=${mod.id}");
-                if(!context.mounted)return;
+                if (context.mounted) return;
                 Navigator.of(context).pop();
               },
               child: Text("Buka"),

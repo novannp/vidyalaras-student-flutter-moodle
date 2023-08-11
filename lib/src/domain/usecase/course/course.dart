@@ -4,8 +4,8 @@ import '../../../data/models/course_model.dart';
 import '../../../data/models/materi_model/materi_model.dart';
 import '../../../data/models/user_grade_model/user_grade_model.dart';
 import '../../../data/models/user_model/user_model.dart';
-import '../../../data/repositories/course_repository_impl.dart';
 import '../../../utils/failures.dart';
+import '../../repositories/course_repository.dart';
 
 part 'add_course_to_favourite.dart';
 

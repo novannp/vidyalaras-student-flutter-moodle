@@ -1,7 +1,7 @@
 part of 'chat.dart';
 
 class GetMemberInfo {
-  final ChatRepositoryImpl chatRepositoryImpl;
+  final ChatRepository chatRepositoryImpl;
 
   GetMemberInfo(this.chatRepositoryImpl);
 

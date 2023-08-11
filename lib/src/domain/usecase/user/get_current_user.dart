@@ -1,7 +1,7 @@
 part of 'user.dart';
 
 class GetCurrentUser {
-  final UserRepositoryImpl _userRepository;
+  final UserRepository _userRepository;
 
   GetCurrentUser(this._userRepository);
 

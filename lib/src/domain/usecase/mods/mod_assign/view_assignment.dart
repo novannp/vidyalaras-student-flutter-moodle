@@ -1,7 +1,7 @@
 part of 'mod_assign.dart';
 
 class ViewAssignment {
-  final ModAssignRepositoryImpl modAssignRepositoryImpl;
+  final ModAssignRepository modAssignRepositoryImpl;
 
   ViewAssignment(this.modAssignRepositoryImpl);
 

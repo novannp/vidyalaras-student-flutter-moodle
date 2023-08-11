@@ -1,7 +1,7 @@
 part of 'chat.dart';
 
 class DeleteConversation {
-  final ChatRepositoryImpl chatRepositoryImpl;
+  final ChatRepository chatRepositoryImpl;
 
   DeleteConversation(this.chatRepositoryImpl);
 

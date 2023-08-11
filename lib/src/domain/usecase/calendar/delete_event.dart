@@ -1,7 +1,7 @@
 part of 'calendar.dart';
 
 class DeleteEvent {
-  final CalendarRepositoryImpl _calendarRepository;
+  final CalendarRepository _calendarRepository;
 
   DeleteEvent(this._calendarRepository);
 

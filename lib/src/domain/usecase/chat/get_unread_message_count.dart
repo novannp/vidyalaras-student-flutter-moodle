@@ -1,7 +1,7 @@
 part of 'chat.dart';
 
 class GetUnreadMessageCount {
-  final ChatRepositoryImpl chatRepositoryImpl;
+  final ChatRepository chatRepositoryImpl;
 
   GetUnreadMessageCount(this.chatRepositoryImpl);
 

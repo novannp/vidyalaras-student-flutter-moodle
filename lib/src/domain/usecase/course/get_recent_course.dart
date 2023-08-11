@@ -1,7 +1,7 @@
 part of 'course.dart';
 
 class GetRecentCourse {
-  final CourseRepositoryImpl courseRepositoryImpl;
+  final CourseRepository courseRepositoryImpl;
 
   GetRecentCourse(this.courseRepositoryImpl);
 
